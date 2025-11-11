@@ -1,0 +1,161 @@
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": [],
+    "copyFormatting": "none",
+    "copyOnSelect": false,
+    "defaultProfile": "{7b7b4491-252e-5160-8c97-a30b21f626c3}",
+    "keybindings": 
+    [
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "ctrl+c"
+        },
+        {
+            "id": "Terminal.FindText",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "Terminal.PasteFromClipboard",
+            "keys": "ctrl+v"
+        },
+        {
+            "id": "Terminal.DuplicatePaneAuto",
+            "keys": "alt+shift+d"
+        }
+    ],
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": 
+    {
+        "defaults": 
+        {
+	    "colorScheme": "Vague",
+            "font": 
+            {
+                "face": "AdwaitaMono Nerd Font"
+            }
+        },
+        "list": 
+        [
+            {
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "experimental.retroTerminalEffect": false,
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell",
+                "opacity": 68,
+                "useAcrylic": true
+            },
+            {
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": false,
+                "name": "Command Prompt"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": false,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "hidden": true,
+                "name": "Ubuntu",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "colorScheme": "Vague",
+                "cursorShape": "filledBox",
+                "font": 
+                {
+                    "face": "AdwaitaMono Nerd Font",
+                    "size": 18
+                },
+                "guid": "{7b7b4491-252e-5160-8c97-a30b21f626c3}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "opacity": 100,
+                "source": "Microsoft.WSL"
+            }
+        ]
+    },
+    "schemes": 
+    [
+        {
+            "background": "#2A1F1D",
+            "black": "#573D26",
+            "blue": "#5A86AD",
+            "brightBlack": "#9B6C4A",
+            "brightBlue": "#B8D3ED",
+            "brightCyan": "#93CFD7",
+            "brightGreen": "#95D8BA",
+            "brightPurple": "#D19ECB",
+            "brightRed": "#E84627",
+            "brightWhite": "#FFF9D5",
+            "brightYellow": "#D0D150",
+            "cursorColor": "#573D26",
+            "cyan": "#74A6AD",
+            "foreground": "#E0DBB7",
+            "green": "#6BA18A",
+            "name": "BirdsOfParadise",
+            "purple": "#AC80A6",
+            "red": "#BE2D26",
+            "selectionBackground": "#563C27",
+            "white": "#E0DBB7",
+            "yellow": "#E99D2A"
+        },
+        {
+            "background": "#14161B",
+            "black": "#07080D",
+            "blue": "#A6DBFF",
+            "brightBlack": "#4F5258",
+            "brightBlue": "#A6DBFF",
+            "brightCyan": "#8CF8F7",
+            "brightGreen": "#B3F6C0",
+            "brightPurple": "#FFCAFF",
+            "brightRed": "#FFC0B9",
+            "brightWhite": "#EEF1F8",
+            "brightYellow": "#FCE094",
+            "cursorColor": "#9B9EA4",
+            "cyan": "#8CF8F7",
+            "foreground": "#E0E2EA",
+            "green": "#B3F6C0",
+            "name": "NvimDark",
+            "purple": "#FFCAFF",
+            "red": "#FFC0B9",
+            "selectionBackground": "#4F5258",
+            "white": "#EEF1F8",
+            "yellow": "#FCE094"
+        },
+        {
+            "background": "#141415",
+            "black": "#1C1C24",
+            "blue": "#6E94B2",
+            "brightBlack": "#606079",
+            "brightBlue": "#7E98E8",
+            "brightCyan": "#90A0B5",
+            "brightGreen": "#B4D4CF",
+            "brightPurple": "#AEAED1",
+            "brightRed": "#E8B589",
+            "brightWhite": "#E0E2EA",
+            "brightYellow": "#F3BE7C",
+            "cursorColor": "#878787",
+            "cyan": "#9BB4BC",
+            "foreground": "#CDCDCD",
+            "green": "#7FA563",
+            "name": "Vague",
+            "purple": "#BB9DBD",
+            "red": "#D8647E",
+            "selectionBackground": "#333738",
+            "white": "#CDCDCD",
+            "yellow": "#E0A363"
+        }
+    ],
+    "themes": []
+}
