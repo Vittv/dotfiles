@@ -12,6 +12,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- better text wrap
+-- vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+
+
 require("vimoptions")
 require("lazy").setup({
   spec = {
