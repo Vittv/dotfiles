@@ -2,7 +2,7 @@ local theme_config = require("config.theme")
 
 return {
   {
-    "vague-theme/vague.nvim", 
+    "vague-theme/vague.nvim",
     lazy = false,
     name = "vague",
     priority = 1000,
@@ -11,6 +11,7 @@ return {
         require("vague").setup({
           -- Vague custom configs
           transparent = true,
+          italic = false,
         })
         vim.cmd.colorscheme "vague"
       end
