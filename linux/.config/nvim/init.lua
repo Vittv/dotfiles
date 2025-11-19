@@ -17,6 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.opt.linebreak = true
 vim.opt.breakindent = true
 
+vim.o.winborder = "rounded"
 require("vimoptions")
 require("lazy").setup({
   spec = {

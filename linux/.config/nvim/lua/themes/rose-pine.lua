@@ -10,7 +10,7 @@ return {
         dark_variant = "main",
         disable_italic = true,
         styles = {
-          transparency = true,
+          transparency = false,
         }
       })
       vim.cmd.colorscheme "rose-pine" 

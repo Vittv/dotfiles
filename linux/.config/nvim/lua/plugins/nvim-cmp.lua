@@ -47,7 +47,14 @@ return {
         { name = "buffer" }, -- text within current buffer
         { name = "path" }, -- file system paths
       }),
-
+      
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered({
+          border = "rounded",
+          winhighlight = "Normal:CmpPmenu,FloatBorder:CmpPmenuBorder"
+        }),
+      },
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
         format = lspkind.cmp_format({
