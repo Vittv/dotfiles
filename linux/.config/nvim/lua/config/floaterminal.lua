@@ -84,10 +84,25 @@ vim.keymap.set("t", "<leader>tt", function()
   end
 end, { desc = "close floating terminal" })
 
--- Close terminal with Esc Esc from within it
+-- Close terminal with Esc Esc from within it (terminal-mode)
 vim.keymap.set("t", "<Esc><Esc>", function()
   if state.win and vim.api.nvim_win_is_valid(state.win) then
     vim.api.nvim_win_hide(state.win)
     state.win = nil
   end
 end, { desc = "close terminal" })
+
+-- FIX: Clicking terminal switches it into NORMAL MODE in terminal buffer.
+-- So <Esc><Esc> must also work in normal mode for this buffer.
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function(args)
+    local buf = args.buf
+    vim.keymap.set("n", "<Esc><Esc>", function()
+      if state.win and vim.api.nvim_win_is_valid(state.win) then
+        vim.api.nvim_win_hide(state.win)
+        state.win = nil
+      end
+    end, { buffer = buf, desc = "close terminal (normal mode)" })
+  end,
+})
+

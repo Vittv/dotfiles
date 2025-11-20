@@ -12,6 +12,8 @@ return {
           -- Vague custom configs
           transparent = true,
           italic = false,
+
+          bold = false,
         })
         vim.cmd.colorscheme "vague"
       end
