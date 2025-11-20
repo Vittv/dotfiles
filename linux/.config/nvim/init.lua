@@ -26,6 +26,7 @@ require("lazy").setup({
     { import = "themes" },
   },
 })
+require("config.floaterminal")
 -- In case you'd want to try that local theme,
 -- Uncomment the following line:
 -- vim.cmd.colorscheme("vaguevscode")

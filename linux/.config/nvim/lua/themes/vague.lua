@@ -10,7 +10,7 @@ return {
       if theme_config.colorscheme_name == "vague" then
         require("vague").setup({
           -- Vague custom configs
-          transparent = false,
+          transparent = true,
           italic = false,
         })
         vim.cmd.colorscheme "vague"

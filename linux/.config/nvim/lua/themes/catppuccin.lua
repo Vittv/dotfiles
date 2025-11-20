@@ -12,9 +12,9 @@ return {
     config = function()
       if theme_config.colorscheme_name == "catppuccin" then
       require("catppuccin").setup({
-        transparent_background = false,
+        transparent_background = true,
         -- mocha, macchiato, frappe, latte
-        flavour = "macchiato",
+        flavour = "mocha",
           custom_highlights = function(colors)
             return {
               -- ["@constant"] = { fg = colors.blue },
