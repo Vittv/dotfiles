@@ -18,6 +18,7 @@ vim.opt.linebreak = true
 vim.opt.breakindent = true
 
 vim.o.winborder = "rounded"
+require("config.options")
 require("vimoptions")
 require("lazy").setup({
   spec = {
@@ -27,6 +28,7 @@ require("lazy").setup({
   },
 })
 require("config.floaterminal")
+vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 -- In case you'd want to try that local theme,
 -- Uncomment the following line:
 -- vim.cmd.colorscheme("vaguevscode")

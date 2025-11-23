@@ -19,8 +19,8 @@ return {
             return {
               -- ["@constant"] = { fg = colors.blue },
               -- ["@constant.builtin"] = { fg = colors.blue },
-              -- ["@string"] = { fg = colors.lavender},
-              ["@variable.builtin"] = { fg = colors.lavender },
+              ["@string"] = { fg = colors.flamingo },
+              ["@variable.builtin"] = { fg = colors.flamingo },
             }
           end,
         })
