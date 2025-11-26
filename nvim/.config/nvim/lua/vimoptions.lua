@@ -9,6 +9,20 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
 
+-- Clipboard provider
+vim.g.clipboard = {
+  name = "WlClipboard",
+  copy = {
+    ["+"]  = "wl-copy",
+    ["*"]  = "wl-copy",
+  },
+  paste = {
+    ["+"] = "wl-paste --no-newline",
+    ["*"] = "wl-paste --no-newline",
+  },
+  cache_enabled = 0,
+}
+
 -- Keymaps
 vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
 local map = vim.api.nvim_set_keymap
