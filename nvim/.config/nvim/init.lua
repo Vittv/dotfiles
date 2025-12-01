@@ -17,6 +17,10 @@ vim.opt.rtp:prepend(lazypath)
 vim.opt.linebreak = true
 vim.opt.breakindent = true
 
+-- tmux color fix
+vim.opt.termguicolors = true
+
+-- make all windows rounded
 vim.o.winborder = "rounded"
 require("config.options")
 require("vimoptions")

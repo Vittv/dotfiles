@@ -10,6 +10,10 @@ vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
 
 -- Clipboard provider
+-- If on Windows just install win32yank inside WSL
+
+-- Wayland
+--[[
 vim.g.clipboard = {
   name = "WlClipboard",
   copy = {
@@ -22,6 +26,7 @@ vim.g.clipboard = {
   },
   cache_enabled = 0,
 }
+]]--
 
 -- Keymaps
 vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
