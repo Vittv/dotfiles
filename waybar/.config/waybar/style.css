@@ -1,0 +1,128 @@
+@import "mocha.css";
+
+* {
+    font-family: "AdwaitaMono", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    background-color: shade(@base, 0.9);
+    border-bottom: 2px solid alpha(@crust, 0.3);
+}
+
+#workspaces {
+  margin: 0 5px;
+  padding: 0;
+}
+
+#workspaces button {
+  padding: 0px 10px;
+  margin: 8px 2px;
+  border-radius: 50%;
+  background-color: inherit;
+  color: @lavender;
+  transition: 0.3s ease;
+}
+
+#workspaces button.active {
+  background-color: @pink;  
+  color: @base;
+}
+
+#workspaces button:hover {
+  background-color: @lavender;
+  color: @base;
+}
+
+#window {
+    color: @lavender;
+}
+
+#custom-cpu-temp {
+  padding: 4px 16px;
+  background-color: @lavender;
+  color: @base;
+  margin: 8px 0;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+#custom-cpu-temp:hover {
+  background-color: shade(@lavender, 1.1);
+}
+
+#custom-gpu-temp {
+  padding: 4px 12px;
+  background-color: @pink;
+  color: @base;
+  margin: 8px 0;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+#custom-gpu-temp:hover {
+  background-color: shade(@pink, 1.1);
+}
+
+#network {
+    padding: 4px 12px;
+    background-color: @green;
+    color: @base;
+    margin: 8px 0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+#network:hover {
+    background-color: shade(@green, 1.1);
+}
+
+#pulseaudio {
+    padding: 4px 12px;
+    background-color: @yellow;
+    color: @base;
+    margin: 8px 0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+#pulseaudio:hover {
+    background-color: shade(@yellow, 1.1);
+}
+
+#clock {
+    padding: 4px 12px;
+    background-color: inherit;
+    color: @subtext1;
+    margin: 8px 0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+#clock:hover {
+    background-color: @surface0;
+}
+
+#tray { 
+    padding: 4px 12px;
+    margin: 8px 0;
+    background-color: @blue;
+    border-radius: 10px;
+}
+
+#custom-power {
+    padding: 4px 12px;
+    background-color: @red;
+    color: @base;
+    margin: 8px 8px 8px 0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+#custom-power:hover {
+    background-color: shade(@red, 1.1);
+}
