@@ -9,7 +9,8 @@ return {
         "cssls",
         "tailwindcss",
         "svelte",
-        "lua_ls",
+       -- "lua_ls",
+        "emmylua_ls",
         "emmet_ls",
         "pyright",
         "bashls"
