@@ -1,7 +1,7 @@
 @import "mocha.css";
 
 * {
-    font-family: "AdwaitaMono", sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 14px;
     font-weight: 700;
     border: none;
@@ -39,6 +39,14 @@ window#waybar {
 
 #window {
     color: @lavender;
+}
+
+#custom-cpu-temp,
+#custom-gpu-temp,
+#network,
+#pulseaudio,
+#custom-power {
+  font-family: "AdwaitaMono Nerd Font", sans-serif;
 }
 
 #custom-cpu-temp {
@@ -94,13 +102,14 @@ window#waybar {
 }
 
 #clock {
+    font-family: "Inter";
     padding: 4px 12px;
     background-color: inherit;
     color: @subtext1;
     margin: 8px 0;
     border-radius: 10px;
     transition: all 0.3s ease;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 #clock:hover {
