@@ -1,33 +1,39 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 35,
+    "height": 40,
     "spacing": 10,
     "reload_style_on_change": true,
     
     "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["custom/cpu-temp", "custom/gpu-temp", "network", "pulseaudio", "tray", "custom/power"],
+    "modules-center": ["custom/clock"],
+    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "network", "pulseaudio", "custom/power"],
     
     "hyprland/workspaces": {
-        "format": "{name}",
+        "format": "{icon}",
+        "format-icons": {
+            "1": "1", "2": "2", "3": "3", "4": "4", "5": "5",
+            "6": "6", "7": "7", "8": "8", "9": "9", "10": "10",
+            "active": "●",
+            "default": "{name}"
+        },
         "on-click": "activate",
         "all-outputs": true,
         "persistent-workspaces": {
-          "*": [1, 2, 3, 4]
+            "*": [1, 2, 3, 4]
         }
     },
 
     "custom/cpu-temp": {
         "exec": "sensors | grep 'Tctl:' | awk '{print int($2)}' | tr -d '+°C'",
-        "format": "CPU {}°C",
+        "format": "󰍛 {}°C",
         "interval": 5
     },
 
     "custom/gpu-temp": {
         "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",  // For NVIDIA
         // "exec": "cat /sys/class/drm/card0/device/hwmon/hwmon*/temp1_input | awk '{print $1/1000}'",  // For AMD
-        "format": "GPU {}°C",
+        "format": "󰾲 {}°C",
         "interval": 5,
         "return-type": ""
     },
@@ -40,9 +46,9 @@
     },
 
     "network": {
-        "format-wifi": "󰤨 {ipaddr}",
-        "format-ethernet": "󰈀 {ipaddr}",
-        "format-disconnected": "󰤮 disconnected",
+        "format-wifi": "󰤨",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰤮",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
         "tooltip-format-ethernet": "{ipaddr}/{cidr}",
         "tooltip-format-disconnected": "Disconnected",
@@ -51,20 +57,20 @@
     
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-muted": "󰝟 {volume}%",
+        "format-muted": "{volume}%",
         "format-icons": {
-            "default": ["󰕿", "󰖀", "󰕾"]
+            "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
     },
-    
-    "clock": {
-        "format": "   {:%b %d  •  %I:%M %p} ",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+
+    "custom/clock": {
+      "exec": "~/.config/waybar/scripts/clock.sh",
+      "interval": 30,
     },
     
     "custom/power": {
-        "format": "0",
+        "format": "",
         "tooltip": false,
         "on-click": "wlogout"
     }
