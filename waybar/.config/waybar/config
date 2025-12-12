@@ -67,6 +67,7 @@
     "custom/clock": {
       "exec": "~/.config/waybar/scripts/clock.sh",
       "interval": 30,
+      "on-click": "gnome-calendar"
     },
     
     "custom/power": {
