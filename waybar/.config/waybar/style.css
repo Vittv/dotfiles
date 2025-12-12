@@ -8,21 +8,33 @@
 }
 
 window#waybar {
-    background-color: shade(@base, 0.9);
-}
-
-#workspaces { 
-    margin-left: 12px;
+    border-radius: 10px;
+    background-color: shade(@base, 0.8);
 }
 
 #workspaces button {
+    margin: 8px 2px;
     padding: 0 4px;
-    color: @subtext0;
-    transition: all 0.6s linear;
+    border-radius: 50%;
+    background-color: @flamingo;
+    color: @base;
+    transition: all 0.2s ease-in;
 }
 
 #workspaces button.active {
-    color: @text;
+    color: @base;
+    background-color: @pink;
+    border-radius: 10px;
+    padding: 0 24px;
+}
+
+#workspaces button.active + button {
+  background-color: @lavender;
+}
+
+#workspaces button:hover {
+    border-radius: 10px;
+    padding: 0 24px;
 }
 
 #window {
@@ -36,21 +48,34 @@ window#waybar {
 #custom-power,
 #tray {
   font-family: "JetBrainsMono Nerd Font", sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   color: @text;
-  /* padding: 2px 4px; */
-  margin: 8px 0;
+  /* background-color: shade(@surface0, 0.9); */
+  padding: 2px 4px;
+  margin: 6px 0;
   transition: all 0.3s ease;
+  /* border: 2px solid white; */
   border-radius: 10px;
+}
+
+#custom-cpu-temp:hover,
+#custom-gpu-temp:hover,
+#network:hover,
+#pulseaudio:hover,
+#custom-power:hover,
+#custom-clock:hover, 
+#custom-spotify:hover {
+  background-color: shade(@surface0, 0.9);
+  padding: 2px 16px;
 }
 
 #custom-clock {
     font-family: "SFMono Nerd Font Mono", sans-serif;
     font-weight: 700;
     padding: 2px 4px;
-    background-color: inherit;
-    color: @text;
+    color: @rosewater;
     margin: 8px 0;
+    margin-left: 16px;
     border-radius: 10px;
     transition: all 0.3s ease;
     font-size: 14px;
@@ -60,34 +85,52 @@ window#waybar {
     background-color: @surface0;
 }
 
+#custom-spotify {
+  font-family: "FiraCode Nerd Font";
+  font-weight: 700;
+  color: @lavender;
+  padding: 2px 4px;
+  margin: 6px 0;
+  margin-left: 8px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
 #custom-power {
+    color: shade(@red, 1.1);
+    border-color: @red;
+
     margin-right: 16px;
+    padding-right: 12px;
+    padding-left: 9px;
 }
 
-#custom-cpu-temp:hover {
-    color: @blue;
+#pulseaudio {
+  color: shade(@yellow, 1.1);
+  border-color: @yellow;
 }
 
-#custom-gpu-temp:hover {
-    color: @pink;
-}
-
-#network:hover {
-    color: @green;
-}
-
-#pulseaudio:hover {
-    color: @yellow;
-}
-
-#custom-power:hover {
-    color: @red;
+#network {
+  color: @green;
+  border-color: @green;
 }
 
 #custom-gpu-temp {
   font-size: 16px;
+  color: @pink;
+  border-color: @pink;
 }
 
 #custom-cpu-temp {
   font-size: 16px;
+  color: @blue;
+  border-color: @blue;
 }
+
+#tray {
+  color: @flamingo;
+  border-color: @flamingo;
+  padding: 2px 12px;
+}
+
+
