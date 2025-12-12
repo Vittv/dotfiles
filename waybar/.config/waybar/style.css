@@ -18,11 +18,11 @@ window#waybar {
 #workspaces button {
     padding: 0 4px;
     color: @subtext0;
-    transition: all 0.3s ease;
+    transition: all 0.6s linear;
 }
 
 #workspaces button.active {
-    color: @yellow;
+    color: @text;
 }
 
 #window {
@@ -36,8 +36,9 @@ window#waybar {
 #custom-power,
 #tray {
   font-family: "JetBrainsMono Nerd Font", sans-serif;
+  font-weight: 600;
   color: @text;
-  padding: 2px 4px;
+  /* padding: 2px 4px; */
   margin: 8px 0;
   transition: all 0.3s ease;
   border-radius: 10px;
@@ -81,4 +82,12 @@ window#waybar {
 
 #custom-power:hover {
     color: @red;
+}
+
+#custom-gpu-temp {
+  font-size: 16px;
+}
+
+#custom-cpu-temp {
+  font-size: 16px;
 }

@@ -14,7 +14,7 @@
         "format-icons": {
             "1": "1", "2": "2", "3": "3", "4": "4", "5": "5",
             "6": "6", "7": "7", "8": "8", "9": "9", "10": "10",
-            "active": "●",
+            "active": "■",
             "default": "{name}"
         },
         "on-click": "activate",
@@ -26,14 +26,16 @@
 
     "custom/cpu-temp": {
         "exec": "sensors | grep 'Tctl:' | awk '{print int($2)}' | tr -d '+°C'",
-        "format": "󰍛 {}°C",
+        "format": "󰍛 ",
+        "tooltip-format": "CPU {}°C",
         "interval": 5
     },
 
     "custom/gpu-temp": {
         "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",  // For NVIDIA
         // "exec": "cat /sys/class/drm/card0/device/hwmon/hwmon*/temp1_input | awk '{print $1/1000}'",  // For AMD
-        "format": "󰾲 {}°C",
+        "format": "󰾲 ",
+        "tooltip-format": "GPU {}°C",
         "interval": 5,
         "return-type": ""
     },
@@ -46,21 +48,22 @@
     },
 
     "network": {
-        "format-wifi": "󰤨",
-        "format-ethernet": "󰈀",
-        "format-disconnected": "󰤮",
+        "format-wifi": "󰤨 ",
+        "format-ethernet": "󰈀 ",
+        "format-disconnected": "󰤮 ",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
-        "tooltip-format-ethernet": "{ipaddr}/{cidr}",
+        "tooltip-format-ethernet": "Connected {ipaddr}/{cidr}",
         "tooltip-format-disconnected": "Disconnected",
         "on-click": "nm-connection-editor"
     },
     
     "pulseaudio": {
-        "format": "{icon} {volume}%",
+        "format": "{icon} ",
         "format-muted": "{volume}%",
         "format-icons": {
             "default": ["", "", ""]
         },
+        "tooltip-format": "{volume}%",
         "on-click": "pavucontrol"
     },
 
