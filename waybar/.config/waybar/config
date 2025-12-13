@@ -10,7 +10,7 @@
     
     "modules-left": ["custom/power", "hyprland/workspaces"],
     "modules-center": ["custom/clock"],
-    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "network", "pulseaudio", "custom/menu"],
+    "modules-right": ["tray", "custom/spotify", "custom/system-temp", "bluetooth", "network", "pulseaudio", "custom/menu"],
     
     "hyprland/workspaces": {
         "format": "{name}",
@@ -19,6 +19,15 @@
         "persistent-workspaces": {
             "*": [1, 2]
         }
+    },
+  
+    "custom/system-temp": {
+        "exec": "cpu=$(sensors | grep 'Tctl:' | awk '{print int($2)}' | tr -d '+°C'); gpu=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits); echo \"CPU ${cpu}°C  GPU ${gpu}°C\"",
+        "format": "󰍛 ",
+        "tooltip-format": "{}",
+        "interval": 5,
+        "cursor": true,
+        "on-click": "gnome-system-monitor"
     },
 
     "custom/cpu-temp": {
@@ -41,10 +50,17 @@
       "icon-size": 20,
       "spacing": 10,
     },
+    
+    "bluetooth": {
+        "format": " 󰂯 ",
+        "format-disabled": " 󰂲 ",
+        "format-connected": " 󰂱 ",
+        "on-click": "blueman-manager",
+    },
 
     "network": {
-        "format-wifi": "󰤨 wifi",
-        "format-ethernet": "󰈀 et",
+        "format-wifi": "󰤨 ",
+        "format-ethernet": "󰈀 ",
         "format-disconnected": "󰤮 ",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
         "tooltip-format-ethernet": "Connected {ipaddr}/{cidr} ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
@@ -53,7 +69,7 @@
     },
     
     "pulseaudio": {
-        "format": "{icon} {volume}%",
+        "format": "{icon} ",
         "format-muted": "{volume}%",
         "format-icons": {
             "default": ["", "", ""]
@@ -76,9 +92,11 @@
 
     "custom/spotify": {
         "format": "♫ {}",
+        "tooltip": true,
         "max-length": 20,
         "interval": 1,
-        "exec": "playerctl -p spotify volume 2>/dev/null | awk '{printf \"%.0f%% \", $1*100}' && playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null | sed 's/&/&amp;/g; s/</&lt;/g; s/>/&gt;/g' || echo ''",
+        "return-type": "json",
+        "exec": "vol=$(playerctl -p spotify volume 2>/dev/null | awk '{printf \"%.0f%%\", $1*100}'); info=$(playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null | sed 's/\"/\\\\\"/g'); echo \"{\\\"text\\\":\\\"$vol\\\",\\\"tooltip\\\":\\\"$vol $info\\\"}\" || echo '{\"text\":\"\",\"tooltip\":\"\"}'",
         "exec-if": "playerctl -p spotify status 2>/dev/null",
         "on-click": "playerctl -p spotify next",
         "on-click-right": "playerctl -p spotify previous",
@@ -86,9 +104,10 @@
         "on-scroll-up": "playerctl -p spotify volume 0.05+",
         "on-scroll-down": "playerctl -p spotify volume 0.05-"
     },
-
+    
     "custom/menu": {
       "format": "󰂚 ",
-      "on-click": "swaync-client -t -sw"
+      "on-click": "swaync-client -t -sw",
+      "tooltip-format": "Control Panel"
     }
-}
+},
