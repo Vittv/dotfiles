@@ -12,7 +12,7 @@ configuration {
     display-run: "";
     display-window: "";
     drun-display-format: "{name}";
-    font: "AdwaitaMono Nerd Font 14";
+    font: "AdwaitaMono Nerd Font SemiBold 14";
     terminal: "kitty";
 }
 
@@ -20,6 +20,7 @@ configuration {
     /* Use system colors */
     background-color: transparent;
     text-color: @fg;
+    handle-color: @accent;
 }
 
 window {
@@ -97,6 +98,12 @@ element-text {
     background-color: transparent;
     text-color: inherit;
     vertical-align: 0.5;
+}
+
+scrollbar {
+    background-color: @bg-alt;
+    handle-color: @accent;
+    border-color: @bg-selected;
 }
 
 /* Import system theme colors */
