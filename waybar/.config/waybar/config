@@ -10,10 +10,10 @@
     
     "modules-left": ["custom/power", "hyprland/workspaces"],
     "modules-center": ["custom/clock"],
-    "modules-right": ["tray", "custom/spotify", "custom/system-temp", "bluetooth", "network", "pulseaudio", "custom/menu"],
+    "modules-right": ["tray", "custom/spotify", "custom/system-temp", "bluetooth", "network", "custom/microphone", "pulseaudio", "custom/menu"],
     
     "hyprland/workspaces": {
-        "format": "{name}",
+        "format": "●",
         "on-click": "activate",
         "all-outputs": true,
         "persistent-workspaces": {
@@ -70,12 +70,22 @@
     
     "pulseaudio": {
         "format": "{icon} ",
-        "format-muted": "{volume}%",
+        "format-muted": " ",
         "format-icons": {
             "default": ["", "", ""]
         },
         "tooltip-format": "{volume}%",
         "on-click": "pavucontrol"
+    },
+
+    "custom/microphone": {
+        "format": "{}",
+        "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"󰍭\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"󰍬\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
+        "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+8 waybar",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 8,
+        "tooltip": true
     },
 
     "custom/clock": {

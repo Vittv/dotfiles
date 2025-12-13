@@ -16,20 +16,21 @@ window#waybar {
     margin: 8px 2px;
     padding: 0 4px;
     border-radius: 50%;
-    background-color: @flamingo;
-    color: transparent;
-    transition: all 0.2s ease-in;
+    /* background-color: @flamingo; */
+    /* color: transparent; */
+    color: @flamingo;
+    transition: all 0.1s ease-out;
 }
 
 #workspaces button.active {
-    color: @base;
+    color: transparent;
     background-color: @pink;
     border-radius: 10px;
     padding: 0 16px;
 }
 
 #workspaces button.active + button {
-  background-color: @lavender;
+  color: @lavender;
 }
 
 #workspaces button:hover {
@@ -97,9 +98,19 @@ window#waybar {
 }
 
 #pulseaudio {
-  margin-left: 4px;
+  margin-left: 6px;
   color: shade(@yellow, 1.1);
   border-color: @yellow;
+}
+
+#custom-microphone {
+  color: white;
+  font-size: 18px;
+  margin-left: 6px;
+}
+
+#custom-microphone.muted {
+  color: @red;
 }
 
 #network {
