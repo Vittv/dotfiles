@@ -17,7 +17,7 @@ window#waybar {
     padding: 0 4px;
     border-radius: 50%;
     background-color: @flamingo;
-    color: @base;
+    color: transparent;
     transition: all 0.2s ease-in;
 }
 
@@ -25,7 +25,7 @@ window#waybar {
     color: @base;
     background-color: @pink;
     border-radius: 10px;
-    padding: 0 24px;
+    padding: 0 16px;
 }
 
 #workspaces button.active + button {
@@ -45,7 +45,6 @@ window#waybar {
 #custom-gpu-temp,
 #network,
 #pulseaudio,
-#custom-power,
 #tray {
   font-family: "JetBrainsMono Nerd Font", sans-serif;
   font-weight: 700;
@@ -62,7 +61,6 @@ window#waybar {
 #custom-gpu-temp:hover,
 #network:hover,
 #pulseaudio:hover,
-#custom-power:hover,
 #custom-clock:hover, 
 #custom-spotify:hover {
   background-color: shade(@surface0, 0.9);
@@ -70,8 +68,8 @@ window#waybar {
 }
 
 #custom-clock {
-    font-family: "SFMono Nerd Font Mono", sans-serif;
-    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
     padding: 2px 4px;
     color: @rosewater;
     margin: 8px 0;
@@ -97,12 +95,11 @@ window#waybar {
 }
 
 #custom-power {
-    color: shade(@red, 1.1);
-    border-color: @red;
+    color: @rosewater;
 
-    margin-right: 16px;
-    padding-right: 12px;
-    padding-left: 9px;
+    margin-left: 16px;
+    padding-left: 12px;
+    padding-right: 9px;
 }
 
 #pulseaudio {
@@ -111,7 +108,7 @@ window#waybar {
 }
 
 #network {
-  color: @green;
+  color: shade(@green, 1.1);
   border-color: @green;
 }
 
@@ -123,7 +120,7 @@ window#waybar {
 
 #custom-cpu-temp {
   font-size: 16px;
-  color: @blue;
+  color: shade(@blue, 1.1);
   border-color: @blue;
 }
 
@@ -133,4 +130,11 @@ window#waybar {
   padding: 2px 12px;
 }
 
+#custom-menu {
+    font-size: 16px;
+    color: @rosewater;
 
+    margin-right: 16px;
+    padding-right: 12px;
+    padding-left: 9px;
+}
