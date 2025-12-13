@@ -100,20 +100,20 @@
         "on-click": "wlogout"
     },
 
-    "custom/spotify": {
-        "format": "♫ {}",
-        "tooltip": true,
-        "max-length": 20,
-        "interval": 1,
-        "return-type": "json",
-        "exec": "vol=$(playerctl -p spotify volume 2>/dev/null | awk '{printf \"%.0f%%\", $1*100}'); info=$(playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null | sed 's/\"/\\\\\"/g'); echo \"{\\\"text\\\":\\\"$vol\\\",\\\"tooltip\\\":\\\"$vol $info\\\"}\" || echo '{\"text\":\"\",\"tooltip\":\"\"}'",
-        "exec-if": "playerctl -p spotify status 2>/dev/null",
-        "on-click": "playerctl -p spotify next",
-        "on-click-right": "playerctl -p spotify previous",
-        "on-click-middle": "playerctl -p spotify play-pause",
-        "on-scroll-up": "playerctl -p spotify volume 0.05+",
-        "on-scroll-down": "playerctl -p spotify volume 0.05-"
-    },
+"custom/spotify": {
+    "format": "{}",
+    "tooltip": true,
+    "max-length": 20,
+    "interval": 1,
+    "return-type": "json",
+    "exec": "status=$(playerctl -p spotify status 2>/dev/null); vol=$(playerctl -p spotify volume 2>/dev/null | awk '{printf \"%.0f%%\", $1*100}'); info=$(playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null | sed 's/\"/\\\\\"/g'); icon='♫'; [[ \"$status\" == \"Paused\" ]] && icon='⏸'; echo \"{\\\"text\\\":\\\"$icon $vol\\\",\\\"tooltip\\\":\\\"$vol $status: $info\\\"}\" || echo '{\"text\":\"\",\"tooltip\":\"\"}'",
+    "exec-if": "playerctl -p spotify status 2>/dev/null",
+    "on-click": "playerctl -p spotify next",
+    "on-click-right": "playerctl -p spotify previous",
+    "on-click-middle": "playerctl -p spotify play-pause",
+    "on-scroll-up": "playerctl -p spotify volume 0.05+",
+    "on-scroll-down": "playerctl -p spotify volume 0.05-"
+},
     
     "custom/menu": {
       "format": "󰂚 ",
