@@ -35,8 +35,19 @@ window#waybar {
 
 #workspaces button:hover {
     border-radius: 10px;
-    padding: 0 24px;
-    color: @base;
+    padding: 0 16px;
+    color: transparent;
+    background-color: @flamingo;
+}
+
+#workspaces button.active:hover {
+  color: transparent;
+  background-color: @pink;
+}
+
+#workspaces button.active + button:hover {
+  color: transparent;
+  background-color: @lavender;
 }
 
 #window {
@@ -85,32 +96,47 @@ window#waybar {
 }
 
 #bluetooth {
-  color: shade(@blue, 1.1);
+  color: @sky;
   font-size: 18px;
 }
 
 #custom-power {
-    color: @text;
+    color: @red;
 
-    margin-left: 16px;
-    padding-left: 12px;
-    padding-right: 9px;
+    margin-right: 16px;
+    padding-right: 12px;
 }
 
 #pulseaudio {
   margin-left: 6px;
-  color: shade(@yellow, 1.1);
+  color: @yellow;
   border-color: @yellow;
 }
 
 #custom-microphone {
-  color: white;
-  font-size: 18px;
-  margin-left: 6px;
+  color: @base;
+  font-size: 22px;
+  margin: 6px 0;
+  padding: 0 7px;
+  background-color: @flamingo;
+  border-radius: 50%;
+  margin-left: 16px;
+  transition: all 0.2s ease;
 }
 
 #custom-microphone.muted {
-  color: @red;
+  color: @pink;
+  background-color: @surface2;
+}
+
+#custom-microphone:hover {
+  color: @pink;
+  background-color: @surface2;
+}
+
+#custom-microphone.muted:hover {
+  color: @base;
+  background-color: @flamingo;
 }
 
 #network {
@@ -138,11 +164,8 @@ window#waybar {
 
 #custom-menu {
     font-size: 18px;
-    color: @text;
-
-    margin-right: 16px;
-    padding-right: 12px;
-    padding-left: 9px;
+    color: @blue;
+    margin-left: 8px;
 }
 
 #custom-system-temp {

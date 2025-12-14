@@ -8,9 +8,9 @@
     "spacing": 10,
     "reload_style_on_change": true,
     
-    "modules-left": ["custom/power", "hyprland/workspaces"],
+    "modules-left": ["custom/microphone", "hyprland/workspaces"],
     "modules-center": ["custom/clock"],
-    "modules-right": ["tray", "custom/spotify", "custom/system-temp", "bluetooth", "network", "custom/microphone", "pulseaudio", "custom/menu"],
+    "modules-right": ["tray", "custom/spotify", "custom/system-temp", "bluetooth", "network", "pulseaudio", "custom/menu", "custom/power"],
     
     "hyprland/workspaces": {
         "format": "●",
@@ -18,7 +18,8 @@
         "all-outputs": true,
         "persistent-workspaces": {
             "*": [1, 2]
-        }
+        },
+        "cursor": true
     },
   
     "custom/system-temp": {
