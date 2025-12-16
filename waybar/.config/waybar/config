@@ -2,18 +2,29 @@
     "layer": "top",
     "position": "top",
     "margin-top": 6,
-    "margin-right": 8,
     "margin-left": 8,
-    "height": 40,
-    "spacing": 10,
+    "margin-right": 8,
+    "spacing": 16,
     "reload_style_on_change": true,
-    
     "modules-left": ["custom/microphone", "hyprland/workspaces"],
-    "modules-center": ["custom/clock"],
-    "modules-right": ["tray", "custom/spotify", "custom/system-temp", "bluetooth", "network", "pulseaudio", "custom/menu", "custom/power"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "custom/spotify", "custom/system-temp", "bluetooth", "network", "pulseaudio", "custom/power"],
     
     "hyprland/workspaces": {
-        "format": "●",
+        "format": "{icon}",
+        "format-icons": {
+          "1": "1",
+          "2": "2",
+          "3": "3",
+          "4": "4",
+          "5": "5",
+          "6": "6",
+          "7": "7",
+          "8": "8",
+          "9": "9",
+          "10": "10",
+          "active": "■"
+        },
         "on-click": "activate",
         "all-outputs": true,
         "persistent-workspaces": {
@@ -21,7 +32,7 @@
         },
         "cursor": true
     },
-  
+
     "custom/system-temp": {
         "exec": "cpu=$(sensors | grep 'Tctl:' | awk '{print int($2)}' | tr -d '+°C'); gpu=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits); echo \"CPU ${cpu}°C  GPU ${gpu}°C\"",
         "format": "󰍛 ",
@@ -70,13 +81,14 @@
     },
     
     "pulseaudio": {
-        "format": "{icon} ",
-        "format-muted": " ",
+        "format": "{icon} {volume}%",
+        "format-muted": " muted",
         "format-icons": {
             "default": ["", "", ""]
         },
         "tooltip-format": "{volume}%",
-        "on-click": "pavucontrol"
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-right": "pavucontrol"
     },
 
     "custom/microphone": {
@@ -88,33 +100,41 @@
         "signal": 8,
         "tooltip": true
     },
+ 
+    "clock": {
+        "format": "{:%b %d  %I:%M %p}",
+        "tooltip-format": "<span size='15000'><tt>{calendar}</tt></span>",
+        "calendar": {
+            "mode": "month",
+            "format": {
+                "months": "<span color='#F5C2E7'>{}</span>",
+                "weekdays": "<span color='#89B4FA'>{}</span>",
+                "days": "<span color='#CDD6F4'>{}</span>",
+                "today": "<span color='#F9E2AF'>{}</span>",
+            }
+        },
+        "on-click": "swaync-client -t -sw",
+    },  
 
-    "custom/clock": {
-      "exec": "~/.config/waybar/scripts/clock.sh",
-      "interval": 30,
-      "on-click": "gnome-calendar"
-    },
-    
     "custom/power": {
         "format": "",
         "tooltip": false,
         "on-click": "wlogout"
     },
 
-"custom/spotify": {
-    "format": "{}",
-    "tooltip": true,
-    "max-length": 20,
-    "interval": 1,
-    "return-type": "json",
-    "exec": "status=$(playerctl -p spotify status 2>/dev/null); vol=$(playerctl -p spotify volume 2>/dev/null | awk '{printf \"%.0f%%\", $1*100}'); info=$(playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null | sed 's/\"/\\\\\"/g'); icon='♫'; [[ \"$status\" == \"Paused\" ]] && icon='⏸'; echo \"{\\\"text\\\":\\\"$icon $vol\\\",\\\"tooltip\\\":\\\"$vol $status: $info\\\"}\" || echo '{\"text\":\"\",\"tooltip\":\"\"}'",
-    "exec-if": "playerctl -p spotify status 2>/dev/null",
-    "on-click": "playerctl -p spotify next",
-    "on-click-right": "playerctl -p spotify previous",
-    "on-click-middle": "playerctl -p spotify play-pause",
-    "on-scroll-up": "playerctl -p spotify volume 0.05+",
-    "on-scroll-down": "playerctl -p spotify volume 0.05-"
-},
+    "custom/spotify": {
+      "format": "{}",
+      "max-length": 20,
+      "interval": 1,
+      "return-type": "json",
+      "exec": "status=$(playerctl -p spotify status 2>/dev/null); vol=$(playerctl -p spotify volume 2>/dev/null | awk '{printf \"%.0f%%\", $1*100}'); info=$(playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null | sed 's/\"/\\\\\"/g' | sed 's/&/&amp;/g' | sed 's/</&lt;/g' | sed 's/>/&gt;/g'); icon='󰓇'; [[ \"$status\" == \"Paused\" ]] && icon='⏸'; echo \"{\\\"text\\\":\\\"$icon $vol $info\\\",\\\"tooltip\\\":\\\"$status\\\"}\" || echo '{\"text\":\"\",\"tooltip\":\"\"}'",
+      "exec-if": "playerctl -p spotify status 2>/dev/null",
+      "on-click": "playerctl -p spotify next",
+      "on-click-right": "playerctl -p spotify previous",
+      "on-click-middle": "playerctl -p spotify play-pause",
+      "on-scroll-up": "playerctl -p spotify volume 0.05+",
+      "on-scroll-down": "playerctl -p spotify volume 0.05-"
+    },
     
     "custom/menu": {
       "format": "󰂚 ",

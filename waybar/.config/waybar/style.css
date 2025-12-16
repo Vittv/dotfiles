@@ -1,53 +1,27 @@
 @import "mocha.css";
 
 * {
-    font-family: "Inter", sans-serif;
+    font-family: "Inter";
     font-weight: 500;
-    border: none;
-    border-radius: 0;
 }
 
 window#waybar {
-    border-radius: 10px;
     background-color: @base;
+    border-radius: 10px;
+}
+
+#workspaces button label {
+  font-family: "SF Pro Rounded";
+  font-weight: 600;
 }
 
 #workspaces button {
-    margin: 8px 2px;
-    padding: 0 4px;
-    border-radius: 50%;
-    /* background-color: @flamingo; */
-    /* color: transparent; */
-    color: @flamingo;
-    transition: all 0.1s ease-out;
+  color: @text;
+  transition: all 0.1s ease;
 }
 
 #workspaces button.active {
-    color: transparent;
-    background-color: @pink;
-    border-radius: 10px;
-    padding: 0 16px;
-}
-
-#workspaces button.active + button {
-  color: @lavender;
-}
-
-#workspaces button:hover {
-    border-radius: 10px;
-    padding: 0 16px;
-    color: transparent;
-    background-color: @flamingo;
-}
-
-#workspaces button.active:hover {
-  color: transparent;
-  background-color: @pink;
-}
-
-#workspaces button.active + button:hover {
-  color: transparent;
-  background-color: @lavender;
+    color: @pink;
 }
 
 #window {
@@ -85,7 +59,7 @@ window#waybar {
 }
 
 #custom-spotify {
-  font-family: "Inter";
+  font-family: "SF Pro Rounded";
   font-weight: 500;
   color: @lavender;
   padding: 2px 4px;
@@ -96,31 +70,27 @@ window#waybar {
 }
 
 #bluetooth {
-  color: @sky;
+  color: @lavender;
   font-size: 18px;
 }
 
 #custom-power {
     color: @red;
-
-    margin-right: 16px;
-    padding-right: 12px;
+    margin-right: 22px;
 }
 
 #pulseaudio {
-  margin-left: 6px;
   color: @yellow;
-  border-color: @yellow;
 }
 
 #custom-microphone {
   color: @base;
-  font-size: 22px;
-  margin: 6px 0;
-  padding: 0 7px;
+  font-size: 18px;
   background-color: @flamingo;
-  border-radius: 50%;
-  margin-left: 16px;
+  border-radius: 5px;
+  padding: 0 20px;
+  margin: 6px 0;
+  margin-left: 6px;
   transition: all 0.2s ease;
 }
 
@@ -140,27 +110,25 @@ window#waybar {
 }
 
 #network {
-  color: @green;
-  border-color: @green;
-}
-
-#custom-gpu-temp {
-  font-size: 16px;
   color: @pink;
-  border-color: @pink;
 }
 
-#custom-cpu-temp {
-  font-size: 16px;
-  color: shade(@blue, 1.1);
-  border-color: @blue;
-}
+/* #custom-gpu-temp { */
+/*   font-size: 16px; */
+/*   color: @pink; */
+/*   border-color: @pink; */
+/* } */
+/**/
+/* #custom-cpu-temp { */
+/*   font-size: 16px; */
+/*   color: shade(@blue, 1.1); */
+/*   border-color: @blue; */
+/* } */
 
-#tray {
-  color: @flamingo;
-  border-color: @flamingo;
-  padding: 2px 12px;
-}
+/* #tray { */
+/*   color: @flamingo; */
+/*   border-color: @flamingo; */
+/* } */
 
 #custom-menu {
     font-size: 18px;
@@ -170,7 +138,7 @@ window#waybar {
 
 #custom-system-temp {
   font-size: 20px;
-  color: @pink;
+  color: shade(@blue, 1.1);
   margin-right: -8px;
 }
 
@@ -186,4 +154,11 @@ tooltip label {
   color: @text;
   padding: 8px;
   font-size: 16px;
+}
+
+#clock {
+  color: @text;
+  font-family: "SF Pro Rounded";
+  font-weight: 500;
+  font-size: 14px;
 }
