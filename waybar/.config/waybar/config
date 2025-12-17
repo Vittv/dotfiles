@@ -39,7 +39,7 @@
     },
 
     "custom/mudfish": {
-      "exec": "if pgrep -x 'mudfish.sh' > /dev/null 2>&1; then echo '{\"text\":\"󰱓 ON\", \"tooltip\":\"Mudfish VPN is ON\", \"class\":\"on\"}'; else echo '{\"text\":\"󰱓 OFF\", \"tooltip\":\"Mudfish VPN is OFF\", \"class\":\"off\"}'; fi",
+      "exec": "if pgrep -x 'mudfish.sh' > /dev/null 2>&1; then echo '{\"text\":\"󰱓 ON\", \"tooltip\":\"Mudfish VPN is ON\", \"class\":\"on\"}'; else echo '{\"text\":\"󰲛 OFF\", \"tooltip\":\"Mudfish VPN is OFF\", \"class\":\"off\"}'; fi",
       "interval": 5,
       "format": "{}",
       "on-click": "zen-browser --new-window http://127.0.0.1:8282/",

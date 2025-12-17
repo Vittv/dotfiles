@@ -64,7 +64,7 @@ window#waybar {
 }
 
 #custom-spotify {
-  color: shade(@mauve, 1.1);
+  color: @blue;
   transition: all 0.3s ease;
 }
 
@@ -95,15 +95,15 @@ window#waybar {
 }
 
 #custom-microphone.muted {
-  color: @blue;
+  color: @mauve;
 }
 
 #custom-microphone:hover {
-  color: @blue;
+  color: @mauve;
 }
 
 #custom-microphone.muted:hover {
-  color: @yellow;
+  color: @pink;
 }
 
 #network {
@@ -112,7 +112,7 @@ window#waybar {
 
 #custom-menu {
     font-size: 22px;
-    color: @rosewater;
+    color: white;
     margin-left: 10px;
 }
 
@@ -143,12 +143,13 @@ tooltip label {
 
 #clock {
   color: @pink;
+  margin-right: 10px;
 }
 
 #custom-mudfish.on {
-  color: @yellow;
+  color: @sky;
 }
 
 #custom-mudfish.off {
-  color: @blue;
+  color: @yellow;
 }
