@@ -4,38 +4,52 @@
     "margin-top": 6,
     "margin-left": 8,
     "margin-right": 8,
-    "spacing": 16,
+    "spacing": 10,
     "reload_style_on_change": true,
-    "modules-left": ["custom/microphone", "hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["tray", "custom/spotify", "custom/system-temp", "bluetooth", "network", "pulseaudio", "custom/power"],
-    
+    "modules-left": ["custom/menu", "custom/microphone", "custom/mudfish", "custom/spotify"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["tray", "custom/system-temp", "bluetooth", "network", "pulseaudio", "clock"],
+   
+    "custom/menu": {
+      "format": "󰣇",
+      "on-click": "wlogout",
+      "tooltip-format": "Control Panel"
+    },
+
     "hyprland/workspaces": {
         "format": "{icon}",
         "format-icons": {
-          "1": "1",
-          "2": "2",
-          "3": "3",
-          "4": "4",
-          "5": "5",
-          "6": "6",
+          "1": "",
+          "2": "",
+          "3": "󰖟",
+          "4": "",
+          "5": "",
+          "6": "",
           "7": "7",
           "8": "8",
           "9": "9",
-          "10": "10",
-          "active": "■"
+          "10": "10"
         },
         "on-click": "activate",
         "all-outputs": true,
         "persistent-workspaces": {
-            "*": [1, 2]
+            "*": [1, 2, 3, 4, 5, 6]
         },
         "cursor": true
     },
 
+    "custom/mudfish": {
+      "exec": "if pgrep -x 'mudfish.sh' > /dev/null 2>&1; then echo '{\"text\":\"󰱓 ON\", \"tooltip\":\"Mudfish VPN is ON\", \"class\":\"on\"}'; else echo '{\"text\":\"󰱓 OFF\", \"tooltip\":\"Mudfish VPN is OFF\", \"class\":\"off\"}'; fi",
+      "interval": 5,
+      "format": "{}",
+      "on-click": "zen-browser --new-window http://127.0.0.1:8282/",
+      "tooltip": true,
+      "return-type": "json"
+    },
+
     "custom/system-temp": {
-        "exec": "cpu=$(sensors | grep 'Tctl:' | awk '{print int($2)}' | tr -d '+°C'); gpu=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits); echo \"CPU ${cpu}°C  GPU ${gpu}°C\"",
-        "format": "󰍛 ",
+        "exec": "cpu=$(sensors | grep 'Tctl:' | awk '{print int($2)}' | tr -d '+°C'); gpu=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits); echo \" CPU ${cpu}°C - GPU ${gpu}°C\"",
+        "format": "󰍛",
         "tooltip-format": "{}",
         "interval": 5,
         "cursor": true,
@@ -64,16 +78,18 @@
     },
     
     "bluetooth": {
-        "format": " 󰂯 ",
-        "format-disabled": " 󰂲 ",
-        "format-connected": " 󰂱 ",
-        "on-click": "blueman-manager",
+      "format": "󰂯",
+      "format-disabled": "󰂲",
+      "format-connected": "󰂱",
+      "tooltip-format": "Bluetooth: {status}",
+      "tooltip-format-connected": "Connected to {device_alias}",
+      "on-click": "blueman-manager",
     },
 
     "network": {
-        "format-wifi": "󰤨 ",
-        "format-ethernet": "󰈀 ",
-        "format-disconnected": "󰤮 ",
+        "format-wifi": "󰤨",
+        "format-ethernet": "",
+        "format-disconnected": "󰤮 dc",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
         "tooltip-format-ethernet": "Connected {ipaddr}/{cidr} ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
         "tooltip-format-disconnected": "Disconnected",
@@ -102,7 +118,7 @@
     },
  
     "clock": {
-        "format": "{:%b %d  %I:%M %p}",
+        "format": " {:%d ~ %I:%M %p}",
         "tooltip-format": "<span size='15000'><tt>{calendar}</tt></span>",
         "calendar": {
             "mode": "month",
@@ -127,8 +143,7 @@
       "max-length": 20,
       "interval": 1,
       "return-type": "json",
-      "exec": "status=$(playerctl -p spotify status 2>/dev/null); vol=$(playerctl -p spotify volume 2>/dev/null | awk '{printf \"%.0f%%\", $1*100}'); info=$(playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null | sed 's/\"/\\\\\"/g' | sed 's/&/&amp;/g' | sed 's/</&lt;/g' | sed 's/>/&gt;/g'); icon='󰓇'; [[ \"$status\" == \"Paused\" ]] && icon='⏸'; echo \"{\\\"text\\\":\\\"$icon $vol $info\\\",\\\"tooltip\\\":\\\"$status\\\"}\" || echo '{\"text\":\"\",\"tooltip\":\"\"}'",
-      "exec-if": "playerctl -p spotify status 2>/dev/null",
+      "exec": "status=$(playerctl -p spotify status 2>/dev/null); vol=$(playerctl -p spotify volume 2>/dev/null | awk '{printf \"%.0f%%\", $1*100}'); info=$(playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null | sed 's/\"/\\\\\"/g' | sed 's/&/&amp;/g' | sed 's/</&lt;/g' | sed 's/>/&gt;/g'); icon='󰓇'; [[ \"$status\" == \"Paused\" ]] && icon='⏸'; echo \"{\\\"text\\\":\\\"$icon $vol $info\\\",\\\"tooltip\\\":\\\"$vol $status: $info\\\"}\" || echo '{\"text\":\"\",\"tooltip\":\"\"}'",      "exec-if": "playerctl -p spotify status 2>/dev/null",
       "on-click": "playerctl -p spotify next",
       "on-click-right": "playerctl -p spotify previous",
       "on-click-middle": "playerctl -p spotify play-pause",
@@ -136,9 +151,4 @@
       "on-scroll-down": "playerctl -p spotify volume 0.05-"
     },
     
-    "custom/menu": {
-      "format": "󰂚 ",
-      "on-click": "swaync-client -t -sw",
-      "tooltip-format": "Control Panel"
-    }
 },

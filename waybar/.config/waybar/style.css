@@ -1,82 +1,86 @@
 @import "mocha.css";
 
 * {
-    font-family: "Inter";
+    font-size: 13px;
+    font-family: "JetBrainsMono Nerd Font Propo";
     font-weight: 500;
+    border-radius: 10px;
 }
 
 window#waybar {
-    background-color: @base;
-    border-radius: 10px;
+  background-color: @base;
+  border-radius: 10px;
 }
 
 #workspaces button label {
-  font-family: "SF Pro Rounded";
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 16px;
 }
 
 #workspaces button {
-  color: @text;
-  transition: all 0.1s ease;
+  color: @lavender;
+  transition: all 0.1s ease-in;
 }
 
 #workspaces button.active {
-    color: @pink;
+  color: @rosewater;
 }
 
 #window {
-    color: @lavender;
+  color: @lavender;
 }
 
+#custom-menu,
+#custom-microphone,
+#custom-mudfish,
+#custom-spotify,
 #custom-cpu-temp,
 #custom-gpu-temp,
+#custom-system-temp,
+#bluetooth,
 #network,
 #pulseaudio,
+#clock,
+#custom-power,
 #tray {
-  font-family: "JetBrainsMono Nerd Font", sans-serif;
   font-weight: 700;
-  color: @text;
-  /* background-color: shade(@surface0, 0.9); */
   transition: all 0.3s ease;
-  /* border: 2px solid white; */
-  border-radius: 10px;
+  margin: 6px 0;
+  padding: 0 12px;
+  background-color: shade(@lavender, 0.25);
 }
 
-#custom-clock {
-    font-family: "Inter", sans-serif;
-    font-weight: 500;
-    padding: 2px 4px;
-    color: @text;
-    margin: 8px 0;
-    margin-left: 16px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    font-size: 14px;
-}
-
-#custom-clock:hover {
-    background-color: @surface0;
+#custom-microphone:hover,
+#custom-mudfish:hover,
+#custom-spotify:hover,
+#custom-cpu-temp:hover,
+#custom-gpu-temp:hover,
+#custom-system-temp:hover,
+#bluetooth:hover,
+#network:hover,
+#pulseaudio:hover,
+#clock:hover {
+  padding: 0 30px;
 }
 
 #custom-spotify {
-  font-family: "SF Pro Rounded";
-  font-weight: 500;
-  color: @lavender;
-  padding: 2px 4px;
-  margin: 6px 0;
-  margin-left: 8px;
-  border-radius: 10px;
+  color: shade(@mauve, 1.1);
   transition: all 0.3s ease;
 }
 
 #bluetooth {
-  color: @lavender;
+  color: @blue;
   font-size: 18px;
 }
 
 #custom-power {
-    color: @red;
-    margin-right: 22px;
+    color: @rosewater;
+    margin-right: 10px;
+    background-color: alpha(@red, 0.7);
+}
+
+#custom-power:hover {
+  background-color: alpha(@red, 0.6);
 }
 
 #pulseaudio {
@@ -84,62 +88,37 @@ window#waybar {
 }
 
 #custom-microphone {
-  color: @base;
-  font-size: 18px;
-  background-color: @flamingo;
-  border-radius: 5px;
+  color: @pink;
+  font-size: 20px;
   padding: 0 20px;
-  margin: 6px 0;
-  margin-left: 6px;
   transition: all 0.2s ease;
 }
 
 #custom-microphone.muted {
-  color: @pink;
-  background-color: @surface2;
+  color: @blue;
 }
 
 #custom-microphone:hover {
-  color: @pink;
-  background-color: @surface2;
+  color: @blue;
 }
 
 #custom-microphone.muted:hover {
-  color: @base;
-  background-color: @flamingo;
+  color: @yellow;
 }
 
 #network {
-  color: @pink;
+  color: @green;
 }
 
-/* #custom-gpu-temp { */
-/*   font-size: 16px; */
-/*   color: @pink; */
-/*   border-color: @pink; */
-/* } */
-/**/
-/* #custom-cpu-temp { */
-/*   font-size: 16px; */
-/*   color: shade(@blue, 1.1); */
-/*   border-color: @blue; */
-/* } */
-
-/* #tray { */
-/*   color: @flamingo; */
-/*   border-color: @flamingo; */
-/* } */
-
 #custom-menu {
-    font-size: 18px;
-    color: @blue;
-    margin-left: 8px;
+    font-size: 22px;
+    color: @rosewater;
+    margin-left: 10px;
 }
 
 #custom-system-temp {
-  font-size: 20px;
-  color: shade(@blue, 1.1);
-  margin-right: -8px;
+  /* font-size: 20px; */
+  color: @pink;
 }
 
 tooltip {
@@ -151,14 +130,25 @@ tooltip {
 }
 
 tooltip label {
+  font-family: "SF Display Mono";
   color: @text;
   padding: 8px;
   font-size: 16px;
 }
 
+#tray label {
+  font-family: "SF Pro Display";
+  font-size: 16px;
+}
+
 #clock {
-  color: @text;
-  font-family: "SF Pro Rounded";
-  font-weight: 500;
-  font-size: 14px;
+  color: @pink;
+}
+
+#custom-mudfish.on {
+  color: @yellow;
+}
+
+#custom-mudfish.off {
+  color: @blue;
 }
