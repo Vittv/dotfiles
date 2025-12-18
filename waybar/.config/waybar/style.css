@@ -4,7 +4,6 @@
     font-size: 13px;
     font-family: "JetBrainsMono Nerd Font Propo";
     font-weight: 500;
-    border-radius: 10px;
 }
 
 window#waybar {
@@ -13,17 +12,19 @@ window#waybar {
 }
 
 #workspaces button label {
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 15px;
 }
 
 #workspaces button {
-  color: @lavender;
-  transition: all 0.1s ease-in;
+  color: @text;
+  transition: all 0.2s ease-out;
+  padding: 0 5px;
 }
 
-#workspaces button.active {
-  color: @rosewater;
+#workspaces button.active label {
+  font-weight: 700;
+  color: @yellow;
 }
 
 #window {
@@ -43,11 +44,12 @@ window#waybar {
 #clock,
 #custom-power,
 #tray {
+  font-size: 14px;
   font-weight: 700;
   transition: all 0.3s ease;
-  margin: 6px 0;
-  padding: 0 12px;
-  background-color: shade(@lavender, 0.25);
+  /* margin: 6px 0; */
+  /* padding: 0 12px; */
+  /* background-color: @surface0; */
 }
 
 #custom-microphone:hover,
@@ -60,11 +62,14 @@ window#waybar {
 #network:hover,
 #pulseaudio:hover,
 #clock:hover {
-  padding: 0 30px;
+  padding: 0 10px;
 }
 
 #custom-spotify {
-  color: @blue;
+  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  font-size: 13px;
+  font-weight: 700;
+  color: @rosewater;
   transition: all 0.3s ease;
 }
 
@@ -84,22 +89,23 @@ window#waybar {
 }
 
 #pulseaudio {
+  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
   color: @yellow;
 }
 
 #custom-microphone {
   color: @pink;
   font-size: 20px;
-  padding: 0 20px;
   transition: all 0.2s ease;
+  margin-left: 10px;
 }
 
 #custom-microphone.muted {
-  color: @mauve;
+  color: @maroon;
 }
 
 #custom-microphone:hover {
-  color: @mauve;
+  color: @maroon;
 }
 
 #custom-microphone.muted:hover {
@@ -142,14 +148,25 @@ tooltip label {
 }
 
 #clock {
+  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
   color: @pink;
   margin-right: 10px;
 }
 
 #custom-mudfish.on {
-  color: @sky;
+  color: @lavender;
 }
 
 #custom-mudfish.off {
-  color: @yellow;
+  color: @mauve;
+}
+
+#custom-cpu-temp {
+  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  color: @lavender;
+}
+
+#custom-gpu-temp {
+  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  color: @maroon;
 }

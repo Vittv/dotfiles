@@ -8,7 +8,7 @@
     "reload_style_on_change": true,
     "modules-left": ["custom/menu", "custom/microphone", "custom/mudfish", "custom/spotify"],
     "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["tray", "custom/system-temp", "bluetooth", "network", "pulseaudio", "clock"],
+    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "bluetooth", "network", "pulseaudio", "clock"],
    
     "custom/menu": {
       "format": "󰣇",
@@ -17,23 +17,11 @@
     },
 
     "hyprland/workspaces": {
-        "format": "{icon}",
-        "format-icons": {
-          "1": "",
-          "2": "",
-          "3": "󰖟",
-          "4": "",
-          "5": "",
-          "6": "",
-          "7": "7",
-          "8": "8",
-          "9": "9",
-          "10": "10"
-        },
+        "format": "{name}",
         "on-click": "activate",
         "all-outputs": true,
         "persistent-workspaces": {
-            "*": [1, 2, 3, 4, 5, 6]
+            "*": [1, 2, 3, 4]
         },
         "cursor": true
     },
@@ -58,7 +46,7 @@
 
     "custom/cpu-temp": {
         "exec": "sensors | grep 'Tctl:' | awk '{print int($2)}' | tr -d '+°C'",
-        "format": "󰍛 {}°C",
+        "format": " {}°C",
         "tooltip-format": "CPU {}°C",
         "interval": 5
     },
@@ -66,7 +54,7 @@
     "custom/gpu-temp": {
         "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",  // For NVIDIA
         // "exec": "cat /sys/class/drm/card0/device/hwmon/hwmon*/temp1_input | awk '{print $1/1000}'",  // For AMD
-        "format": "󰾲 {}°C",
+        "format": "󱄄  {}°C",
         "tooltip-format": "GPU {}°C",
         "interval": 5,
         "return-type": ""
@@ -140,7 +128,7 @@
 
     "custom/spotify": {
       "format": "{}",
-      "max-length": 20,
+      "max-length": 30,
       "interval": 1,
       "return-type": "json",
       "exec": "status=$(playerctl -p spotify status 2>/dev/null); vol=$(playerctl -p spotify volume 2>/dev/null | awk '{printf \"%.0f%%\", $1*100}'); info=$(playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null | sed 's/\"/\\\\\"/g' | sed 's/&/&amp;/g' | sed 's/</&lt;/g' | sed 's/>/&gt;/g'); icon='󰓇'; [[ \"$status\" == \"Paused\" ]] && icon='⏸'; echo \"{\\\"text\\\":\\\"$icon $vol $info\\\",\\\"tooltip\\\":\\\"$vol $status: $info\\\"}\" || echo '{\"text\":\"\",\"tooltip\":\"\"}'",      "exec-if": "playerctl -p spotify status 2>/dev/null",
