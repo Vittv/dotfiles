@@ -12,7 +12,7 @@ configuration {
     display-run: "";
     display-window: "";
     drun-display-format: "{name}";
-    font: "AdwaitaMono Nerd Font SemiBold 14";
+    font: "SF Pro Display Regular 14";
     terminal: "kitty";
 }
 

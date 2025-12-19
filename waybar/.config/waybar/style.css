@@ -12,6 +12,7 @@ window#waybar {
 }
 
 #workspaces button label {
+  font-family: "Inter";
   font-weight: 500;
   font-size: 15px;
 }
@@ -25,6 +26,10 @@ window#waybar {
 #workspaces button.active label {
   font-weight: 700;
   color: @yellow;
+}
+
+#workspaces button.active + button{
+  color: @pink;
 }
 
 #window {
@@ -44,7 +49,6 @@ window#waybar {
 #clock,
 #custom-power,
 #tray {
-  font-size: 14px;
   font-weight: 700;
   transition: all 0.3s ease;
   /* margin: 6px 0; */
@@ -151,6 +155,10 @@ tooltip label {
   font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
   color: @pink;
   margin-right: 10px;
+}
+
+#custom-mudfish {
+  font-size: 14px;
 }
 
 #custom-mudfish.on {
