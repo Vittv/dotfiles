@@ -5,6 +5,7 @@
 
 WALLPAPER_DIR="$HOME/Pictures/pictures/pics/hyprland/hyprpaper"
 CONFIG_FILE="$HOME/.config/hypr/hyprpaper.conf"
+HYPRLOCK_CONFIG="$HOME/.config/hypr/hyprlock.conf"
 CACHE_DIR="$HOME/.cache/wallpaper-switcher"
 
 # Create cache directory for thumbnails
@@ -68,6 +69,9 @@ cat > "$CONFIG_FILE" << EOF
 preload = $WALLPAPER_PATH
 wallpaper = , $WALLPAPER_PATH
 EOF
+
+# Update hyprlock config - replace the path line in the background section
+sed -i "s|path = .*|path = $WALLPAPER_PATH|g" "$HYPRLOCK_CONFIG"
 
 # Restart hyprpaper
 killall hyprpaper 2>/dev/null
