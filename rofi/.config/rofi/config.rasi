@@ -12,7 +12,7 @@ configuration {
     display-run: "";
     display-window: "";
     drun-display-format: "{name}";
-    font: "SF Pro Display Regular 14";
+    font: "JetBrainsMono Nerd Font Propo 14";
     terminal: "kitty";
 }
 
@@ -87,6 +87,8 @@ element alternate.normal {
 element selected.normal {
     background-color: @accent;
     text-color: @bg;
+    // background-color: transparent;
+    // text-color: @accent;
 }
 
 element-icon {

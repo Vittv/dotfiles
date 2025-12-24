@@ -1,3 +1,4 @@
+// Catppuccin Mocha Flamingo
 * {
   /* Background colors */
   /* E6 = 90% opacity */
@@ -5,11 +6,28 @@
   bg: #1e1e2eE6;
   bg-alt: #313244;
   bg-selected: #45475a;
-    
+
   /* Foreground colors */
   fg: #cdd6f4;
   fg-dim: #6c7086;
-    
+
   /* Accent color */
   accent: #f2cdcd;
 }
+
+// Vague
+// * {
+//   /* Background colors */
+//   /* E6 = 90% opacity */
+//   /* F2 = 95% opacity */
+//   bg: #141415E6;
+//   bg-alt: #1c1c24;
+//   bg-selected: #252530;
+//
+//   /* Foreground colors */
+//   fg: #cdcdcd;
+//   fg-dim: #606079;
+//
+//   /* Accent color */
+//   accent: #90a0b5;
+// }

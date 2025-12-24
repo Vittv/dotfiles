@@ -1,9 +1,6 @@
 {
     "layer": "top",
     "position": "top",
-    "margin-top": 6,
-    "margin-left": 8,
-    "margin-right": 8,
     "spacing": 10,
     "reload_style_on_change": true,
     "modules-left": ["custom/menu", "custom/microphone", "custom/mudfish", "custom/spotify"],
@@ -11,9 +8,9 @@
     "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "bluetooth", "network", "pulseaudio", "clock"],
    
     "custom/menu": {
-      "format": "󰣇",
-      "on-click": "wlogout",
-      "tooltip-format": "Control Panel"
+      "format": "",
+      "on-click": "~/.local/bin/powermenu.sh",
+      "tooltip-format": "Power Menu"
     },
 
     "hyprland/workspaces": {
@@ -54,7 +51,7 @@
     "custom/gpu-temp": {
         "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",  // For NVIDIA
         // "exec": "cat /sys/class/drm/card0/device/hwmon/hwmon*/temp1_input | awk '{print $1/1000}'",  // For AMD
-        "format": "󱄄  {}°C",
+        "format": "󱄄 {}°C",
         "tooltip-format": "GPU {}°C",
         "interval": 5,
         "return-type": ""
