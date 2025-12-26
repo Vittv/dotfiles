@@ -7,21 +7,20 @@
 }
 
 window#waybar {
-  background-color: @base;
-  /* border-radius: 10px; */
+  background-color: alpha(@base, 0.9);
 }
 
 #workspaces button label {
-  /* font-family: "Inter"; */
-  font-weight: 500;
-  font-size: 15px;
-  margin: 0 10px;
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: 700;
+  font-size: 14px;
 }
 
 #workspaces button {
   color: @text;
   transition: all 0.2s ease-out;
-  padding: 0 5px;
+  padding: 0 12px;
+  border-radius: 0;
 }
 
 #workspaces button.active label {
@@ -52,10 +51,8 @@ window#waybar {
 #tray {
   font-weight: 500;
   transition: all 0.3s ease;
-  /* margin: 6px 0; */
-  /* padding: 0 12px; */
-  /* background-color: @surface0; */
-  border-radius: 10px;
+  margin: 6px 0;
+  border-radius: 6px;
 }
 
 #custom-microphone:hover,
@@ -68,7 +65,7 @@ window#waybar {
 #network:hover,
 #pulseaudio:hover,
 #clock:hover {
-  /* padding: 0 10px; */
+  background-color: @surface1;
 }
 
 #custom-spotify {
@@ -85,13 +82,14 @@ window#waybar {
 }
 
 #custom-power {
-    color: @rosewater;
-    margin-right: 10px;
-    background-color: alpha(@red, 0.7);
+    color: white;
+    padding: 0 12px;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 #custom-power:hover {
-  background-color: alpha(@red, 0.6);
+  background-color: alpha(@mantle, 0.6);
 }
 
 #pulseaudio {
@@ -101,9 +99,8 @@ window#waybar {
 
 #custom-microphone {
   color: @pink;
-  font-size: 20px;
+  font-size: 16px;
   transition: all 0.2s ease;
-  margin-left: 6px;
 }
 
 #custom-microphone.muted {
@@ -129,8 +126,8 @@ window#waybar {
 }
 
 #custom-system-temp {
-  /* font-size: 20px; */
-  color: @pink;
+  font-size: 20px;
+  color: @red;
 }
 
 tooltip {
@@ -154,13 +151,16 @@ tooltip label {
 }
 
 #clock {
-  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  font-family: "JetBrainsMono Nerd Font Propo";
   color: @pink;
   margin-right: 10px;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 #custom-mudfish {
   font-size: 14px;
+  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
 }
 
 #custom-mudfish.on {
