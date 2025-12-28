@@ -7,7 +7,9 @@
 }
 
 window#waybar {
-  background-color: alpha(@base, 0.9);
+  /* background-color: alpha(@base, 0.9); */
+  background-color: @base;
+  border-radius: 10px;
 }
 
 #workspaces button label {
@@ -19,8 +21,7 @@ window#waybar {
 #workspaces button {
   color: @text;
   transition: all 0.2s ease-out;
-  padding: 0 12px;
-  border-radius: 0;
+  padding: 0 6px;
 }
 
 #workspaces button.active label {
@@ -51,8 +52,11 @@ window#waybar {
 #tray {
   font-weight: 500;
   transition: all 0.3s ease;
-  margin: 6px 0;
   border-radius: 6px;
+  padding-top: 0;
+  padding-bottom: 0;
+  color: @text;
+  margin: 6px 0;
 }
 
 #custom-microphone:hover,
@@ -65,7 +69,7 @@ window#waybar {
 #network:hover,
 #pulseaudio:hover,
 #clock:hover {
-  background-color: @surface1;
+  color: @pink;
 }
 
 #custom-spotify {
@@ -82,14 +86,9 @@ window#waybar {
 }
 
 #custom-power {
-    color: white;
-    padding: 0 12px;
-    font-size: 16px;
+    color: @red;
     font-weight: 700;
-}
-
-#custom-power:hover {
-  background-color: alpha(@mantle, 0.6);
+    margin-right: 10px;
 }
 
 #pulseaudio {
@@ -99,8 +98,8 @@ window#waybar {
 
 #custom-microphone {
   color: @pink;
-  font-size: 16px;
   transition: all 0.2s ease;
+  margin-left: 10px;
 }
 
 #custom-microphone.muted {
@@ -120,9 +119,7 @@ window#waybar {
 }
 
 #custom-menu {
-    font-size: 16px;
-    color: white;
-    margin-left: 10px;
+    color: @pink;
 }
 
 #custom-system-temp {
@@ -151,24 +148,22 @@ tooltip label {
 }
 
 #clock {
-  font-family: "JetBrainsMono Nerd Font Propo";
-  color: @pink;
+  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  color: @text;
   margin-right: 10px;
-  font-size: 14px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 #custom-mudfish {
-  font-size: 14px;
   font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
 }
 
 #custom-mudfish.on {
-  color: @lavender;
+  color: @sapphire;
 }
 
 #custom-mudfish.off {
-  color: @mauve;
+  color: @maroon;
 }
 
 #custom-cpu-temp {
@@ -178,5 +173,9 @@ tooltip label {
 
 #custom-gpu-temp {
   font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
-  color: @maroon;
+  color: @mauve;
+}
+
+#custom-power:hover {
+  color: @pink;
 }
