@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Hyprland Wallpaper Switcher with Image Preview
 # Dependencies: rofi, imagemagick (for thumbnails)
 
@@ -64,10 +63,21 @@ fi
 # Full path to selected wallpaper (using ~/ for hyprpaper compatibility)
 WALLPAPER_PATH="~/Pictures/pictures/pics/hyprland/hyprpaper/$SELECTED"
 
-# Write new hyprpaper config (matching your exact format)
+# Write new hyprpaper config with new format for both monitors
 cat > "$CONFIG_FILE" << EOF
-preload = $WALLPAPER_PATH
-wallpaper = , $WALLPAPER_PATH
+splash = false
+
+wallpaper {
+  monitor = DP-1
+  path = $WALLPAPER_PATH
+  fit_mode = cover
+}
+
+wallpaper {
+  monitor = HDMI-A-1
+  path = $WALLPAPER_PATH
+  fit_mode = cover
+}
 EOF
 
 # Update hyprlock config - replace the path line in the background section
