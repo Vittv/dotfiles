@@ -49,7 +49,7 @@ SELECTED=$(echo -en "$MENU_ENTRIES" | rofi -dmenu \
     -i \
     -p "Select Wallpaper" \
     -theme-str 'window {location: center; anchor: center; width: 1100px; height: 85%;}' \
-    -theme-str 'listview {columns: 3; scrollbar: true; spacing: 10px; flow: horizontal;}' \
+    -theme-str 'listview {columns: 5; scrollbar: true; spacing: 10px; flow: horizontal;}' \
     -theme-str 'element {padding: 10px; orientation: vertical; border-radius: 8px;}' \
     -theme-str 'element-icon {size: 180px; border-radius: 8px;}' \
     -theme-str 'element-text {horizontal-align: 0.5; margin: 5px 0 0 0;}' \
