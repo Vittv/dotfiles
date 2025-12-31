@@ -29,7 +29,24 @@ window#waybar {
   color: @yellow;
 }
 
-#workspaces button.active + button{
+/* Only color pairs when the FIRST of the pair is active */
+#workspaces button:nth-child(1).active + button {
+  color: @pink;
+}
+
+#workspaces button:nth-child(3).active + button {
+  color: @pink;
+}
+
+#workspaces button:nth-child(5).active + button {
+  color: @pink;
+}
+
+#workspaces button:nth-child(7).active + button {
+  color: @pink;
+}
+
+#workspaces button:nth-child(9).active + button {
   color: @pink;
 }
 
