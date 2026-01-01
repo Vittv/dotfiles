@@ -12,9 +12,18 @@ PS1='[\u@\h \W]\$ '
 # Run starship automatically on startup
 eval "$(starship init bash)"
 
-# Run cutefetch automatically on startup
+# # Run cutefetch automatically on startup
+# if [ -x "$HOME/.local/bin/cutefetch" ]; then
+#     "$HOME/.local/bin/cutefetch" -m bunny -e 9
+# fi
+
+# Run cutefetch or fastfetch automatically on startup (50/50 chance)
 if [ -x "$HOME/.local/bin/cutefetch" ]; then
-    "$HOME/.local/bin/cutefetch" -m bunny -e 9
+    if [ $((RANDOM % 2)) -eq 0 ]; then
+        "$HOME/.local/bin/cutefetch" -m bunny -e 9
+    else
+        fastfetch --config os
+    fi
 fi
 
 export PATH="$HOME/.local/bin:$PATH"
