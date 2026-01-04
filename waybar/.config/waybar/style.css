@@ -12,16 +12,23 @@ window#waybar {
   border-radius: 10px;
 }
 
+#workspaces {
+  margin: 6px 0;
+  border-radius: 10px;
+}
+
 #workspaces button label {
   font-family: "JetBrainsMono Nerd Font";
   font-weight: 700;
   font-size: 14px;
+  border-radius: 10px 0 0 10px;
+  padding: 0 6px;
 }
 
 #workspaces button {
   color: @text;
   transition: all 0.2s ease-out;
-  padding: 0 6px;
+  padding: 0 2px;
 }
 
 #workspaces button.active label {
@@ -105,7 +112,7 @@ window#waybar {
 #custom-power {
     color: @red;
     font-weight: 700;
-    margin-right: 10px;
+    margin-right: 14px;
 }
 
 #pulseaudio {
@@ -116,7 +123,7 @@ window#waybar {
 #custom-microphone {
   color: @pink;
   transition: all 0.2s ease;
-  margin-left: 10px;
+  margin-left: 14px;
 }
 
 #custom-microphone.muted {

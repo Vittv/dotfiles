@@ -17,7 +17,7 @@
     },
 
     "hyprland/workspaces": {
-        "format": "{icon}",
+        "format": "{name}",
         "on-click": "activate",
         "all-outputs": true,
         "persistent-workspaces": {
@@ -109,7 +109,7 @@
     },
  
     "clock": {
-        "format": "{:%b %d  %I:%M %p}",
+        "format": "{:%I:%M %p • %m/%d}",
         "tooltip-format": "<span size='15000'><tt>{calendar}</tt></span>",
         "calendar": {
             "mode": "month",
