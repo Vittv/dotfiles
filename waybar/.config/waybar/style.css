@@ -28,7 +28,7 @@ window#waybar {
 #workspaces button {
   color: @text;
   transition: all 0.2s ease-out;
-  padding: 0 2px;
+  padding: 0 4px;
 }
 
 #workspaces button.active label {
@@ -80,7 +80,7 @@ window#waybar {
   padding-top: 0;
   padding-bottom: 0;
   color: @text;
-  margin: 6px 0;
+  margin: 8px 2px;
 }
 
 #custom-microphone:hover,
@@ -110,7 +110,7 @@ window#waybar {
 }
 
 #custom-power {
-    color: @red;
+    color: @rosewater;
     font-weight: 700;
     margin-right: 14px;
 }
@@ -121,21 +121,22 @@ window#waybar {
 }
 
 #custom-microphone {
-  color: @pink;
+  color: @rosewater;
   transition: all 0.2s ease;
   margin-left: 14px;
+  font-size: 15px;
 }
 
 #custom-microphone.muted {
-  color: @maroon;
+  color: @pink;
 }
 
 #custom-microphone:hover {
-  color: @maroon;
+  color: @pink;
 }
 
 #custom-microphone.muted:hover {
-  color: @pink;
+  color: @rosewater;
 }
 
 #network {
@@ -143,7 +144,7 @@ window#waybar {
 }
 
 #custom-menu {
-    color: @pink;
+    color: @red;
 }
 
 #custom-system-temp {
