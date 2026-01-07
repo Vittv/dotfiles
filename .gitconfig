@@ -1,0 +1,7 @@
+[user]
+	name = Vittv
+	email = 166668150+Vittv@users.noreply.github.com
+[init]
+  defaultBranch = main
+[pull]
+  rebase = false
