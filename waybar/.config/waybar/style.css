@@ -192,13 +192,15 @@ tooltip label {
 }
 
 #custom-cpu-temp {
-  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  font-family: "JetBrainsMono Nerd Font Propo";
   color: @lavender;
+  font-weight: 600;
 }
 
 #custom-gpu-temp {
-  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  font-family: "JetBrainsMono Nerd Font Propo";
   color: @mauve;
+  font-weight: 600;
 }
 
 #custom-power:hover {
