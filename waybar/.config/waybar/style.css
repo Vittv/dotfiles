@@ -15,6 +15,7 @@ window#waybar {
 #workspaces {
   margin: 6px 0;
   border-radius: 10px;
+  margin-left: 14px;
 }
 
 #workspaces button label {
@@ -98,8 +99,8 @@ window#waybar {
 
 #custom-spotify {
   font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
-  /* font-size: 13px; */
-  /* font-weight: 700; */
+  font-size: 12px;
+  font-weight: 600;
   color: @rosewater;
   transition: all 0.3s ease;
 }
@@ -110,9 +111,9 @@ window#waybar {
 }
 
 #custom-power {
-    color: @rosewater;
+    color: @red;
     font-weight: 700;
-    margin-right: 14px;
+    margin-right: 20px;
 }
 
 #pulseaudio {
@@ -121,21 +122,13 @@ window#waybar {
 }
 
 #custom-microphone {
-  color: @rosewater;
-  transition: all 0.2s ease;
-  margin-left: 14px;
-  font-size: 15px;
-}
-
-#custom-microphone.muted {
   color: @pink;
+  transition: all 0.2s ease;
+  font-size: 15px;
+  margin-left: 8px;
 }
 
 #custom-microphone:hover {
-  color: @pink;
-}
-
-#custom-microphone.muted:hover {
   color: @rosewater;
 }
 
@@ -144,7 +137,7 @@ window#waybar {
 }
 
 #custom-menu {
-    color: @red;
+    color: @pink;
 }
 
 #custom-system-temp {
@@ -173,10 +166,10 @@ tooltip label {
 }
 
 #clock {
-  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  font-family: "SF Compact Display";
   color: @text;
-  margin-right: 10px;
   font-weight: 500;
+  font-size: 14px;
 }
 
 #custom-mudfish {
@@ -194,15 +187,20 @@ tooltip label {
 #custom-cpu-temp {
   font-family: "JetBrainsMono Nerd Font Propo";
   color: @lavender;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 #custom-gpu-temp {
   font-family: "JetBrainsMono Nerd Font Propo";
   color: @mauve;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 #custom-power:hover {
   color: @pink;
+}
+
+#custom-separator {
+  color: @subtext1;
+  font-weight: 700;
 }

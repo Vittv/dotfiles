@@ -6,9 +6,9 @@
     "margin-left": 8,
     "margin-right": 8,
     "reload_style_on_change": true,
-    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/spotify"],
+    "modules-left": ["hyprland/workspaces", "custom/separator", "custom/microphone", "custom/spotify"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/menu", "custom/power"],
+    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/menu", "custom/power"],
    
     "custom/menu": {
       "format": "󰂚",
@@ -32,15 +32,6 @@
       "format": "{}",
       "tooltip": true,
       "return-type": "json"
-    },
-
-    "custom/system-temp": {
-        "exec": "cpu=$(sensors | grep 'Tctl:' | awk '{print int($2)}' | tr -d '+°C'); gpu=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits); echo \" CPU ${cpu}°C - GPU ${gpu}°C\"",
-        "format": "󰍛",
-        "tooltip-format": "{}",
-        "interval": 5,
-        "cursor": true,
-        "on-click": "btop"
     },
 
     "custom/cpu-temp": {
@@ -73,7 +64,7 @@
       "format-connected": "󰂱",
       "tooltip-format": "Bluetooth: {status}",
       "tooltip-format-connected": "Connected to {device_alias}",
-      "on-click": "blueman-manager",
+      "on-click": "blueman-manager"
     },
 
     "network": {
@@ -109,7 +100,7 @@
     },
  
     "clock": {
-        "format": "{:%I:%M %p • %m/%d}",
+        "format": "{:%b %d   %I:%M %p}",
         "tooltip-format": "<span size='15000'><tt>{calendar}</tt></span>",
         "calendar": {
             "mode": "month",
@@ -117,7 +108,7 @@
                 "months": "<span color='#F5C2E7'>{}</span>",
                 "weekdays": "<span color='#89B4FA'>{}</span>",
                 "days": "<span color='#CDD6F4'>{}</span>",
-                "today": "<span color='#F9E2AF'>{}</span>",
+                "today": "<span color='#F9E2AF'>{}</span>"
             }
         },
         "cursor": "true",
@@ -125,7 +116,7 @@
     },  
 
     "custom/power": {
-      "format": "󰍃",
+      "format": "⏼",
       "on-click": "~/.local/bin/powermenu.sh",
       "tooltip-format": "Power Menu"
     },
@@ -142,4 +133,8 @@
       "on-scroll-down": "playerctl -p spotify volume 0.05-"
     },
     
+    "custom/separator": {
+      "format": "|"
+    }
+
 },
