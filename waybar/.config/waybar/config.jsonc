@@ -11,9 +11,21 @@
     "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/menu", "custom/power"],
    
     "custom/menu": {
-      "format": "󰂚",
+      "format": "{icon}",
+      "format-icons": {
+          "notification": "󱅫",
+          "none": "󰂚",
+          "dnd-notification": "󰂛",
+          "dnd-none": "󰪑"
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
       "on-click": "swaync-client -t -sw",
-      "tooltip-format": "Notifications"
+      "on-click-right": "swaync-client -d -sw",
+      "on-click-middle": "swaync-client -C",
+      "tooltip-format": "Notifications",
+      "escape": true
     },
 
     "hyprland/workspaces": {
