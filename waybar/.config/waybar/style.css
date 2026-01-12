@@ -14,48 +14,31 @@ window#waybar {
 
 #workspaces {
   margin: 6px 0;
-  border-radius: 10px;
-  margin-left: 14px;
+  margin-left: 6px;
 }
 
 #workspaces button label {
   font-family: "SF Mono Nerd Font Mono";
   font-weight: 700;
   font-size: 12px;
-  border-radius: 10px 0 0 10px;
   padding: 0 6px;
 }
 
 #workspaces button {
   color: @text;
   transition: all 0.2s ease-out;
-  padding: 0 4px;
+  padding: 0 2px;
+}
+
+#workspaces button label {
+  padding: 0 10px;
+  border-radius: 6px;
 }
 
 #workspaces button.active label {
   font-weight: 700;
-  color: @yellow;
-}
-
-/* Only color pairs when the FIRST of the pair is active */
-#workspaces button:nth-child(1).active + button {
-  color: @pink;
-}
-
-#workspaces button:nth-child(3).active + button {
-  color: @pink;
-}
-
-#workspaces button:nth-child(5).active + button {
-  color: @pink;
-}
-
-#workspaces button:nth-child(7).active + button {
-  color: @pink;
-}
-
-#workspaces button:nth-child(9).active + button {
-  color: @pink;
+  color: @base;
+  background-color: @flamingo;
 }
 
 #window {
@@ -81,7 +64,7 @@ window#waybar {
   padding-top: 0;
   padding-bottom: 0;
   color: @text;
-  margin: 8px 2px;
+  margin: 4px 2px;
 }
 
 #custom-microphone:hover,
@@ -113,7 +96,7 @@ window#waybar {
 #custom-power {
     color: @red;
     font-weight: 700;
-    margin-right: 20px;
+    margin-right: 14px;
 }
 
 #pulseaudio {

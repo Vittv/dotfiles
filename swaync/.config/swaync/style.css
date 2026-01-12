@@ -3,7 +3,7 @@
 * {
     outline: none;
     font-family: "SF Pro Display";
-    font-size: 18px;
+    font-size: 16px;
     text-shadow: none;
     color: @text;
 }
@@ -19,8 +19,18 @@
   margin-top: 5px;
 }
 
+.control-center .control-center-list .notification .notification-default-action:hover,
+.control-center .control-center-list .notification .notification-action:hover {
+  background-color: @mantle;
+}
+
 .notification {
   background-color: alpha(@base, 0.9);
+}
+
+.notification-row .notification-background .notification .notification-default-action:hover {
+  -gtk-icon-filter: none;
+  background: @mantle;
 }
 
 .notification > *:last-child > *  {
@@ -80,6 +90,11 @@
     background-color: alpha(@red, 0.9);
 }
 
+.notification-group:focus {
+    background-color: @mantle;
+    border-radius: 10px;
+}
+
 trough highlight {
     background: @blue;
 }
@@ -116,46 +131,93 @@ tooltip {
     min-height: 30px;
     padding: 6px;
     margin: 0 3px 0;
-    transition: all .5s ease;
+    transition: all .3s ease;
 }
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
     background: @surface2;
 }
+
 .widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
-    background: @blue;
+    background-color: @flamingo;  
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle label {
+  font-size: 1.2rem;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked label {
+    color: @base;
 }
 .widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked:hover {
-    background: alpha(@blue, 0.9);
+    background: alpha(@flamingo, 0.9);
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button > label.toggle:checked {
+  color: @base;
 }
 
 /* Mpris widget */
-@define-color mpris-album-art-overlay rgba(0, 0, 0, 0.55);
-@define-color mpris-button-hover rgba(0, 0, 0, 0.5);
+:root {
+  --mpris-album-art-overlay: rgba(0, 0, 0, 0.55);
+  --mpris-button-hover: @blue;
+  --mpris-album-art-icon-size: 96px;
+  --mpris-album-art-shadow: none;
+}
 
 .widget-mpris .widget-mpris-player {
-    padding: 16px;
-    margin: 16px 20px;
-    background-color: @mpris-album-art-overlay;
-    border-radius: 12px;
-    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.65); */
+  margin: 8px 20px;
+  border-radius: var(--border-radius);
+  border: 2px solid @flamingo;
+  box-shadow: var(--mpris-album-art-shadow);
 }
-.widget-mpris .widget-mpris-player .widget-mpris-album-art {
-    border-radius: 12px;
-    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.65); */
+
+.widget-mpris .widget-mpris-player .mpris-background {
+  filter: blur(10px);
 }
-.widget-mpris .widget-mpris-player .widget-mpris-title {
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin: 0px 8px 8px 8px;
+
+.widget-mpris .widget-mpris-player .mpris-overlay {
+  padding: 16px;
+  background-color: var(--mpris-album-art-overlay);
 }
-.widget-mpris .widget-mpris-player .widget-mpris-subtitle {
-    font-size: 1rem;
+
+.widget-mpris .widget-mpris-player .mpris-overlay button:hover {
+  /* The media player buttons (play, pause, next, etc...) */
+  background: var(--noti-bg-hover);
+  color: @text;
 }
-.widget-mpris .widget-mpris-player > box > button:hover {
-    background-color: @mpris-button-hover;
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-album-art {
+  border-radius: var(--border-radius);
+  box-shadow: var(--mpris-album-art-shadow);
+  -gtk-icon-size: var(--mpris-album-art-icon-size);
 }
-.widget-mpris > box > button:hover {
-    background: alpha(@flamingo, 0.6);
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-subtitle {
+  font-size: 1.1rem;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay > box > button {
+  /* Change player control buttons */
+  background-color: @surface2;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay > box > button:hover {
+  background-color: var(--mpris-button-hover);
+}
+
+.widget-mpris > box > button {
+  /* Change player side buttons */
+  background-color: @surface2;
+}
+
+.widget-mpris > box > button:disabled {
+  /* Change player side buttons insensitive */
+  background-color: @surface0;
 }
 
 /* Volume widget */
@@ -167,9 +229,38 @@ tooltip {
 .widget-volume > box > button {
     border: none;
 }
+
+.widget-volume > box > button label {
+  font-size: 1.4rem;
+}
+
+.widget-volume > box > button:checked label {
+  color: @base;
+  font-size: 1.4rem;
+}
+
 .per-app-volume {
     padding: 4px 8px 8px 8px;
     margin: 0px 8px 8px 8px;
+}
+
+scale slider {
+  background-color: @base;
+  box-shadow: none;
+  border: 2px solid @flamingo;
+}
+
+scale slider:hover {
+  background-color: @base;
+  border-color: @flamingo;
+}
+
+scale trough {
+  background-color: @surface2;
+}
+
+trough highlight {
+  background-color: @flamingo;
 }
 
 /* Backlight widget */

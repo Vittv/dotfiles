@@ -8,7 +8,7 @@
     "reload_style_on_change": true,
     "modules-left": ["hyprland/workspaces", "custom/separator", "custom/microphone", "custom/spotify"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/menu", "custom/power"],
+    "modules-right": ["tray", "custom/separator", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/menu", "custom/power"],
    
     "custom/menu": {
       "format": "{icon}",
