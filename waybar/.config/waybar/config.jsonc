@@ -2,22 +2,16 @@
     "layer": "bottom",
     "position": "top",
     "spacing": 12,
-    "margin-top": 8,
-    "margin-left": 8,
-    "margin-right": 8,
+    // "margin-top": 8,
+    // "margin-left": 8,
+    // "margin-right": 8,
     "reload_style_on_change": true,
     "modules-left": ["hyprland/workspaces", "custom/separator", "custom/microphone", "custom/spotify"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "custom/separator", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/menu", "custom/power"],
+    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/menu", "custom/power"],
    
     "custom/menu": {
-      "format": "{icon}",
-      "format-icons": {
-          "notification": "󱅫",
-          "none": "󰂚",
-          "dnd-notification": "󰂛",
-          "dnd-none": "󰪑"
-      },
+      "format": "",
       "return-type": "json",
       "exec-if": "which swaync-client",
       "exec": "swaync-client -swb",
@@ -66,8 +60,8 @@
     },
 
     "tray": {
-      "icon-size": 20,
-      "spacing": 10,
+      "icon-size": 16,
+      "spacing": 10
     },
     
     "bluetooth": {
@@ -112,7 +106,7 @@
     },
  
     "clock": {
-        "format": "{:%b %d   %I:%M %p}",
+        "format": "{:%d - %H:%M}",
         "tooltip-format": "<span size='15000'><tt>{calendar}</tt></span>",
         "calendar": {
             "mode": "month",
@@ -128,7 +122,7 @@
     },  
 
     "custom/power": {
-      "format": "⏼",
+      "format": "󱌃",
       "on-click": "~/.local/bin/powermenu.sh",
       "tooltip-format": "Power Menu"
     },

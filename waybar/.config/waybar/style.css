@@ -1,4 +1,4 @@
-@import "mocha.css";
+@import "../colors/schemes/vague/colors.css";
 
 * {
     font-size: 14px;
@@ -9,7 +9,7 @@
 window#waybar {
   /* background-color: alpha(@base, 0.9); */
   background-color: @base;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 #workspaces {
@@ -21,7 +21,7 @@ window#waybar {
   font-family: "SF Mono Nerd Font Mono";
   font-weight: 700;
   font-size: 12px;
-  padding: 0 6px;
+  padding: 0 0px;
 }
 
 #workspaces button {
@@ -31,14 +31,13 @@ window#waybar {
 }
 
 #workspaces button label {
-  padding: 0 10px;
+  padding: 0 8px;
   border-radius: 6px;
 }
 
 #workspaces button.active label {
   font-weight: 700;
-  color: @base;
-  background-color: @flamingo;
+  color: @yellow;
 }
 
 #window {
@@ -63,7 +62,7 @@ window#waybar {
   border-radius: 6px;
   padding-top: 0;
   padding-bottom: 0;
-  color: @text;
+  color: @rosewater;
   margin: 4px 2px;
 }
 
@@ -81,7 +80,7 @@ window#waybar {
 }
 
 #custom-spotify {
-  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  font-family: "SF Compact Display", "JetBrainsMono Nerd Font Propo";
   font-size: 12px;
   font-weight: 600;
   color: @rosewater;
@@ -89,12 +88,12 @@ window#waybar {
 }
 
 #bluetooth {
-  color: @blue;
-  font-size: 18px;
+  color: @pink;
+  font-size: 16px;
 }
 
 #custom-power {
-    color: @red;
+    color: @rosewater;
     font-weight: 700;
     margin-right: 14px;
 }
@@ -116,7 +115,7 @@ window#waybar {
 }
 
 #network {
-  color: @green;
+  color: @sky;
 }
 
 #custom-menu {
@@ -129,7 +128,7 @@ window#waybar {
 }
 
 tooltip {
-  background-color: transparent;
+  background-color: @base;
   border: 2px solid @surface0;
   border-radius: 10px;
   padding: 8px;
@@ -150,7 +149,7 @@ tooltip label {
 
 #clock {
   font-family: "SF Compact Display";
-  color: @text;
+  color: @rosewater;
   font-weight: 500;
   font-size: 14px;
 }
@@ -164,12 +163,12 @@ tooltip label {
 }
 
 #custom-mudfish.off {
-  color: @maroon;
+  color: @blue;
 }
 
 #custom-cpu-temp {
   font-family: "JetBrainsMono Nerd Font Propo";
-  color: @lavender;
+  color: @pink;
   font-weight: 700;
 }
 

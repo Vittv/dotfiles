@@ -1,13 +1,8 @@
-/**
- * Rofi Configuration
- * Place this file at: ~/.config/rofi/config.rasi
- * Uses system colorscheme (Catppuccin Mocha via KDE Plasma)
- */
+@import "~/.config/colors/schemes/vague/colors.rasi"
 
 configuration {
     modi: "drun,run,window";
     show-icons: true;
-    icon-theme: "Tela";
     display-drun: "";
     display-run: "";
     display-window: "";
@@ -26,7 +21,7 @@ configuration {
 window {
     transparency: "real";
     background-color: @bg;
-    border: 2px;
+    border: 0px;
     border-color: @accent;
     border-radius: 6px;
     width: 400px;
@@ -116,6 +111,3 @@ scrollbar {
     handle-rounded-corners: true;
     handle-color: @accent;
 }
-
-/* Import system theme colors */
-@import "~/.config/rofi/colors.rasi"

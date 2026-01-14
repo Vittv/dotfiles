@@ -11,5 +11,5 @@
   fg-dim: #606079;
     
   /* Accent color */
-  accent: #c48482;
+  accent: #efefdc;
 }
