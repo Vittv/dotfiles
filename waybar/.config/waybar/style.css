@@ -7,8 +7,8 @@
 }
 
 window#waybar {
-  /* background-color: alpha(@base, 0.9); */
-  background-color: @base;
+  background-color: alpha(@base, 0.9);
+  /* background-color: @base; */
   /* border-radius: 10px; */
 }
 
@@ -18,9 +18,9 @@ window#waybar {
 }
 
 #workspaces button label {
-  font-family: "SF Mono Nerd Font Mono";
+  font-family: "JetBrainsMono Nerd Font Propo";
   font-weight: 700;
-  font-size: 12px;
+  font-size: 14px;
   padding: 0 0px;
 }
 
@@ -63,7 +63,7 @@ window#waybar {
   padding-top: 0;
   padding-bottom: 0;
   color: @rosewater;
-  margin: 4px 2px;
+  margin: 6px 2px;
 }
 
 #custom-microphone:hover,
@@ -96,6 +96,7 @@ window#waybar {
     color: @rosewater;
     font-weight: 700;
     margin-right: 14px;
+    font-size: 14px;
 }
 
 #pulseaudio {
