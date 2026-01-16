@@ -18,7 +18,7 @@ window#waybar {
 }
 
 #workspaces button label {
-  font-family: "JetBrainsMono Nerd Font Propo";
+  font-family: "JetBrainsMono Nerd Font";
   font-weight: 700;
   font-size: 14px;
   padding: 0 0px;
@@ -27,7 +27,7 @@ window#waybar {
 #workspaces button {
   color: @text;
   transition: all 0.2s ease-out;
-  padding: 0 2px;
+  padding: 0 3px;
 }
 
 #workspaces button label {
