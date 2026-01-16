@@ -85,7 +85,7 @@ sed -i "s|path = .*|path = $WALLPAPER_PATH|g" "$HYPRLOCK_CONFIG"
 
 # Restart hyprpaper
 killall hyprpaper 2>/dev/null
-sleep 0.2
+# sleep 0.2
 hyprpaper &
 disown
 
