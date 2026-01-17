@@ -57,3 +57,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- Add a keybind to open URLs
+vim.keymap.set('n', 'gx', function()
+  local url = vim.fn.expand('<cWORD>')
+  if url:match('^http') then
+    vim.fn.jobstart({'xdg-open', url}, {detach = true})  -- Linux
+    -- vim.fn.jobstart({'open', url}, {detach = true})   -- macOS
+  end
+end, { desc = 'Open URL under cursor' })
