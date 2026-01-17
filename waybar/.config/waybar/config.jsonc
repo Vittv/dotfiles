@@ -55,7 +55,7 @@
 
     "custom/cpu-temp": {
         "exec": "sensors | grep 'Tctl:' | awk '{print int($2)}' | tr -d '+°C'",
-        "format": "󰉊 {}°C",
+        "format": " {}°C",
         "tooltip-format": "CPU {}°C",
         "interval": 5,
         "cursor": true,
@@ -65,7 +65,7 @@
     "custom/gpu-temp": {
         "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",  // For NVIDIA
         // "exec": "cat /sys/class/drm/card0/device/hwmon/hwmon*/temp1_input | awk '{print $1/1000}'",  // For AMD
-        "format": "󰏘 {}°C",
+        "format": " {}°C",
         "tooltip-format": "GPU {}°C",
         "interval": 5,
         "cursor": true,
@@ -143,7 +143,7 @@
     "custom/spotify": {
       "format": "{}",
       "interval": 1,
-      "max-length": 40,
+      "max-length": 30,
       "return-type": "json",
       "exec": "status=$(playerctl -p spotify status 2>/dev/null); vol=$(playerctl -p spotify volume 2>/dev/null | awk '{printf \"%.0f%%\", $1*100}'); info=$(playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null | sed 's/\"/\\\\\"/g' | sed 's/&/&amp;/g' | sed 's/</&lt;/g' | sed 's/>/&gt;/g'); icon='󰓇'; [[ \"$status\" == \"Paused\" ]] && icon='⏸'; echo \"{\\\"text\\\":\\\"$icon $vol $info\\\",\\\"tooltip\\\":\\\"$vol $status: $info\\\"}\" || echo '{\"text\":\"\",\"tooltip\":\"\"}'",      "exec-if": "playerctl -p spotify status 2>/dev/null",
       "on-click": "playerctl -p spotify next",
@@ -152,7 +152,7 @@
       "on-scroll-up": "playerctl -p spotify volume 0.05+",
       "on-scroll-down": "playerctl -p spotify volume 0.05-"
     },
-    
+
     "custom/separator": {
       "format": "|"
     }
