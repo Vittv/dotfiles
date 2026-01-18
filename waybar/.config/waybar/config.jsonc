@@ -119,7 +119,7 @@
     },
  
     "clock": {
-        "format": "{:%b %d   %I:%M %p}",
+        "format": "{:%d - %I:%M %p}",
         "tooltip-format": "<span size='15000'><tt>{calendar}</tt></span>",
         "calendar": {
             "mode": "month",
