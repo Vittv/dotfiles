@@ -142,10 +142,10 @@
 
     "custom/spotify": {
       "format": "{}",
-      "interval": 1,
-      "max-length": 30,
+      "max-length": 40,
       "return-type": "json",
-      "exec": "status=$(playerctl -p spotify status 2>/dev/null); vol=$(playerctl -p spotify volume 2>/dev/null | awk '{printf \"%.0f%%\", $1*100}'); info=$(playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null | sed 's/\"/\\\\\"/g' | sed 's/&/&amp;/g' | sed 's/</&lt;/g' | sed 's/>/&gt;/g'); icon='󰓇'; [[ \"$status\" == \"Paused\" ]] && icon='⏸'; echo \"{\\\"text\\\":\\\"$icon $vol $info\\\",\\\"tooltip\\\":\\\"$vol $status: $info\\\"}\" || echo '{\"text\":\"\",\"tooltip\":\"\"}'",      "exec-if": "playerctl -p spotify status 2>/dev/null",
+      "exec": "~/.local/bin/spotify-waybar.sh",
+      "exec-if": "playerctl -p spotify status 2>/dev/null",
       "on-click": "playerctl -p spotify next",
       "on-click-right": "playerctl -p spotify previous",
       "on-click-middle": "playerctl -p spotify play-pause",
