@@ -7,8 +7,8 @@
 }
 
 window#waybar {
-  background-color: alpha(@base, 0.9);
-  /* background-color: @base; */
+  /* background-color: alpha(@base, 0.9); */
+  background-color: @base;
   /* border-radius: 10px; */
 }
 
@@ -18,9 +18,9 @@ window#waybar {
 }
 
 #workspaces button label {
-  font-family: "JetBrainsMono Nerd Font";
+  font-family: "FiraCode Nerd Font";
   font-weight: 700;
-  font-size: 13px;
+  font-size: 11px;
   padding: 0 0px;
 }
 
@@ -64,6 +64,7 @@ window#waybar {
   padding-bottom: 0;
   color: @rosewater;
   margin: 6px 2px;
+  font-size: 12px;
 }
 
 #custom-microphone:hover,
@@ -89,14 +90,13 @@ window#waybar {
 
 #bluetooth {
   color: @pink;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 #custom-power {
     color: @rosewater;
     font-weight: 700;
     margin-right: 14px;
-    font-size: 14px;
 }
 
 #pulseaudio {
