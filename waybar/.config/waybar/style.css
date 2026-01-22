@@ -27,7 +27,7 @@ window#waybar {
 #workspaces button {
   color: @text;
   transition: all 0.2s ease-out;
-  padding: 0 3px;
+  padding: 0 0px;
 }
 
 #workspaces button label {
@@ -107,7 +107,7 @@ window#waybar {
 #custom-microphone {
   color: @pink;
   transition: all 0.2s ease;
-  font-size: 15px;
+  font-size: 12px;
   margin-left: 8px;
 }
 
