@@ -13,7 +13,8 @@ return {
         "emmylua_ls",
         "emmet_ls",
         "pyright",
-        "bashls"
+        "bashls",
+
       },
     },
     dependencies = {

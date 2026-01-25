@@ -57,11 +57,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Add a keybind to open URLs
 vim.keymap.set('n', 'gx', function()
-  local url = vim.fn.expand('<cWORD>')
-  if url:match('^http') then
-    vim.fn.jobstart({'xdg-open', url}, {detach = true})  -- Linux
-    -- vim.fn.jobstart({'open', url}, {detach = true})   -- macOS
+  -- Get the "WORD" under the cursor
+  local word = vim.fn.expand('<cWORD>')
+  
+  -- Use a regex to extract the URL from within brackets or parentheses
+  local url = word:match("https?://[%w%-_%.%?%+=&/%%#]+")
+  
+  if url then
+    -- Detect OS and open accordingly
+    local opener = vim.fn.has('mac') == 1 and 'open' or 'xdg-open'
+    vim.fn.jobstart({opener, url}, {detach = true})
+    print("Opening: " .. url)
+  else
+    print("No URL found under cursor")
   end
 end, { desc = 'Open URL under cursor' })
