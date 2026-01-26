@@ -7,37 +7,34 @@
 }
 
 window#waybar {
-  /* background-color: alpha(@base, 0.9); */
-  background-color: @base;
+  background-color: alpha(@base, 0.95);
+  /* background-color: @base; */
   /* border-radius: 10px; */
 }
 
 #workspaces {
-  margin: 6px 0;
+  /* margin: 6px 0; */
   margin-left: 6px;
 }
 
 #workspaces button label {
   font-family: "FiraCode Nerd Font";
-  font-weight: 600;
+  font-weight: 700;
   font-size: 14px;
   padding: 0 0px;
+  color: @overlay2;
+  /* margin: 8px 2px; */
 }
 
 #workspaces button {
-  color: @text;
-  transition: all 0.2s ease-out;
-  padding: 0 0px;
-}
-
-#workspaces button label {
-  padding: 0 6px;
-  border-radius: 6px;
+  padding: 0 2px;
+  margin: 6px 0px;
+  border-radius: 10px;
 }
 
 #workspaces button.active label {
-  font-weight: 700;
-  color: @yellow;
+  color: @rosewater;
+  /* padding: 0 20px */
 }
 
 #window {
@@ -63,7 +60,7 @@ window#waybar {
   padding-top: 0;
   padding-bottom: 0;
   color: @rosewater;
-  margin: 6px 2px;
+  margin: 4px 2px;
   font-size: 12px;
 }
 
@@ -77,13 +74,13 @@ window#waybar {
 #network:hover,
 #pulseaudio:hover,
 #clock:hover {
-  color: @pink;
+  color: @rosewater;
 }
 
 #custom-spotify {
   font-family: "SF Compact Display", "JetBrainsMono Nerd Font Propo";
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   color: @rosewater;
   transition: all 0.3s ease;
 }
@@ -105,22 +102,22 @@ window#waybar {
 }
 
 #custom-microphone {
-  color: @pink;
+  color: @lavender;
   transition: all 0.2s ease;
-  font-size: 12px;
+  font-size: 14px;
   margin-left: 8px;
 }
 
 #custom-microphone:hover {
-  color: @rosewater;
+  color: @pink;
 }
 
 #network {
-  color: @sky;
+  color: @green;
 }
 
 #custom-menu {
-    color: @pink;
+    color: @red;
 }
 
 #custom-system-temp {
@@ -152,7 +149,7 @@ tooltip label {
   font-family: "SF Compact Display";
   color: @rosewater;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 #custom-mudfish {
@@ -168,14 +165,14 @@ tooltip label {
 }
 
 #custom-cpu-temp {
-  font-family: "JetBrainsMono Nerd Font Propo";
-  color: @pink;
+  font-family: "FiraCode Nerd Font Propo";
+  color: @mauve;
   font-weight: 700;
 }
 
 #custom-gpu-temp {
-  font-family: "JetBrainsMono Nerd Font Propo";
-  color: @mauve;
+  font-family: "FiraCode Nerd Font Propo";
+  color: @pink;
   font-weight: 700;
 }
 
