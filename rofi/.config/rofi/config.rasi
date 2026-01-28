@@ -7,7 +7,7 @@ configuration {
     display-run: "";
     display-window: "";
     drun-display-format: "{name}";
-    font: "SF Pro Display 14";
+    font: "Iosevka Nerd Font SemiBold 14";
     terminal: "kitty";
 }
 
@@ -23,7 +23,7 @@ window {
     background-color: @bg;
     border: 2px;
     border-color: @accent;
-    // border-radius: 6px;
+    // border-radius: 10px;
     width: 400px;
     padding: 16px;
 
