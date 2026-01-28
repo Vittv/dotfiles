@@ -2,11 +2,11 @@
     "layer": "bottom",
     "position": "top",
     "spacing": 12,
-    // "margin-top": 8,
-    // "margin-left": 8,
-    // "margin-right": 8,
+    // "margin-top": 10,
+    // "margin-left": 10,
+    // "margin-right": 10,
     "reload_style_on_change": true,
-    "modules-left": ["hyprland/workspaces", "custom/separator", "custom/microphone", "custom/spotify"],
+    "modules-left": ["hyprland/workspaces", "custom/separator", "custom/microphone", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
     "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "network", "pulseaudio", "custom/menu", "custom/power"],
    
@@ -46,7 +46,7 @@
     },
 
     "custom/mudfish": {
-      "exec": "if pgrep -x 'mudfish.sh' > /dev/null 2>&1; then echo '{\"text\":\"󰱓\", \"tooltip\":\"Mudfish VPN is ON\", \"class\":\"on\"}'; else echo '{\"text\":\"󰲛\", \"tooltip\":\"Mudfish VPN is OFF\", \"class\":\"off\"}'; fi",
+      "exec": "if pgrep -x 'mudfish.sh' > /dev/null 2>&1; then echo '{\"text\":\"󰱓 ON\", \"tooltip\":\"Mudfish VPN is ON\", \"class\":\"on\"}'; else echo '{\"text\":\"󰲛 OFF\", \"tooltip\":\"Mudfish VPN is OFF\", \"class\":\"off\"}'; fi",
       "interval": 5,
       "format": "{}",
       "tooltip": true,
@@ -156,6 +156,20 @@
 
     "custom/separator": {
       "format": "|"
-    }
+    },
 
+    "custom/tmux": {
+      "exec": "sessions=$(tmux list-sessions -F '#{session_created} #S' 2>/dev/null | sort -n | cut -d' ' -f2- | awk '{print NR\":\"$0}' | paste -sd ',' - | sed 's/,/, /g'); if [ -n \"$sessions\" ]; then echo \"{\\\"text\\\": \\\"  $sessions\\\", \\\"class\\\": \\\"tmux-active\\\", \\\"tooltip\\\": \\\"Tmux sessions: $sessions\\\"}\"; fi",
+      "return-type": "json",
+      "interval": 2,
+      "format": "tmux:{}",
+      "on-click": "kitty tmux choose-session"
+    },
+
+    "custom/devserver": {
+      "exec": "servers=''; if ss -tlnp 2>/dev/null | grep -q ':5173 '; then servers='vite:5173'; fi; if ss -tlnp 2>/dev/null | grep -q ':4173 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}vite:4173\"; fi; if ss -tlnp 2>/dev/null | grep -q ':8080 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}webpack:8080\"; fi; if ss -tlnp 2>/dev/null | grep -q ':3000 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}dev:3000\"; fi; if ss -tlnp 2>/dev/null | grep -q ':8081 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}dev:8081\"; fi; if [ -n \"$servers\" ]; then echo \"{\\\"text\\\": \\\"$servers\\\", \\\"class\\\": \\\"server-active\\\", \\\"tooltip\\\": \\\"Dev servers: $servers\\\"}\"; fi",
+      "return-type": "json",
+      "interval": 3,
+      "format": "{}"
+    }
 },
