@@ -9,6 +9,16 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
 
+-- Markdown indentation
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.shiftwidth = 2
+  end,
+})
+
 -- Clipboard provider
 -- If on Windows just install win32yank inside WSL
 
@@ -73,3 +83,17 @@ vim.keymap.set('n', 'gx', function()
     print("No URL found under cursor")
   end
 end, { desc = 'Open URL under cursor' })
+
+vim.keymap.set("n", "<leader>ot", function()
+  local template = vim.fn.expand("~/manoir/zettelkasten/Templates/default.md")
+  if vim.fn.filereadable(template) == 1 then
+    -- Read template at cursor position
+    vim.cmd("0r " .. template)
+    -- Replace placeholders
+    vim.cmd("%s/{{cryptoID}}/" .. math.random(1000000000, 9999999999) .. "/ge")
+    vim.cmd("%s/{{date}}/" .. os.date("%Y-%m-%d") .. "/ge")
+    vim.cmd("%s/{{time}}/" .. os.date("%H:%M:%S") .. "/ge")
+  else
+    print("Template not found: " .. template)
+  end
+end, { desc = "Insert template" })
