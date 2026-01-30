@@ -23,7 +23,8 @@ vim.opt.termguicolors = true
 -- make all windows rounded
 vim.o.winborder = "rounded"
 require("config.options")
-require("vimoptions")
+require("prefs")
+require("md")
 require("lazy").setup({
   spec = {
     { import = "plugins" },
