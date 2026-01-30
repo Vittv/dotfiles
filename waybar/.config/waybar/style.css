@@ -102,7 +102,7 @@ window#waybar {
 }
 
 #custom-microphone {
-  color: @lavender;
+  color: @pink;
   transition: all 0.2s ease;
   font-size: 14px;
   margin-left: 4px;
@@ -190,4 +190,5 @@ tooltip label {
 #custom-devserver {
   font-family: "SF Compact Display";
   font-weight: 600;
+  color: @text;
 }
