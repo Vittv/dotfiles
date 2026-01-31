@@ -66,14 +66,13 @@ window#waybar {
 
 #custom-microphone:hover,
 #custom-mudfish:hover,
-#custom-spotify:hover,
 #custom-cpu-temp:hover,
 #custom-gpu-temp:hover,
 #custom-system-temp:hover,
+#custom-menu:hover,
 #bluetooth:hover,
 #network:hover,
-#pulseaudio:hover,
-#clock:hover {
+#pulseaudio:hover {
   color: @rosewater;
 }
 
@@ -83,6 +82,10 @@ window#waybar {
   font-weight: 700;
   color: @rosewater;
   transition: all 0.3s ease;
+}
+
+#custom-spotify:hover {
+  color: @sky;
 }
 
 #bluetooth {
@@ -109,7 +112,7 @@ window#waybar {
 }
 
 #custom-microphone:hover {
-  color: @pink;
+  color: @rosewater;
 }
 
 #network {
@@ -152,6 +155,10 @@ tooltip label {
   font-size: 15px;
 }
 
+#clock:hover {
+  color: @pink;
+}
+
 #custom-mudfish {
   font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
   font-weight: 700;
@@ -163,6 +170,14 @@ tooltip label {
 
 #custom-mudfish.off {
   color: @blue;
+}
+
+#custom-mudfish.on:hover {
+  color: @rosewater;
+}
+
+#custom-mudfish.off:hover {
+  color: @rosewater;
 }
 
 #custom-cpu-temp {

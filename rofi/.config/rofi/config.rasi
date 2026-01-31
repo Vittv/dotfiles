@@ -23,7 +23,7 @@ window {
     background-color: @bg;
     border: 2px;
     border-color: @accent;
-    // border-radius: 10px;
+    border-radius: 6px;
     width: 400px;
     padding: 16px;
 
