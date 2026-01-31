@@ -205,5 +205,21 @@ tooltip label {
 #custom-devserver {
   font-family: "SF Compact Display";
   font-weight: 600;
-  color: @text;
+  transition: color 0.3s ease;
+}
+
+#custom-tmux {
+  color: @rosewater;
+}
+
+#custom-devserver {
+  color: @blue;
+}
+
+#custom-tmux:hover {
+  color: @flamingo;
+}
+
+#custom-devserver:hover {
+  color: @teal;
 }
