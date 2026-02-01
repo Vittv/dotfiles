@@ -72,10 +72,9 @@ stow tmux
     └── settings.json
 ```
 ## Neovim
+If you are not sure which version of nvim your distro provides you, or which plugin needs nvim to be at a more recent version, I recommend building it from source to use my configs properly. You can follow [this](https://neovim.io/doc/build/) along to build it yourself. If you're on Arch, you can instead run `sudo pacman -S neovim` to get the latest version of nvim installed.
 
-I always build nvim from source. Because I'm not sure which plugin needs nvim to be at a more recent version, I recommend also building it from source to use my configs properly. You can follow [this](https://neovim.io/doc/build/) along to build it yourself.
-
-If you have an existing nvim installation, delete any existing runtime dir you have for nvim to prevent errors in your new version. `usr/local/nvim/runtime`. See `:checkhealth` for your current neovim install to confirm what the path is on your machine.
+When having an existing nvim installation, delete any existing runtime dir you have for nvim to prevent errors in your new version. `/usr/local/nvim/runtime`. See `:checkhealth` for your current neovim install to confirm what the path is on your machine.
 
 ### Requirements
 - `nvim -v >= 0.11.5`
@@ -88,8 +87,10 @@ If you have an existing nvim installation, delete any existing runtime dir you h
 Everything, including other dependencies, should be automatically installed when you first open nvim with these configs!
 
 ## Tmux
-
 1. [Install tpm](https://github.com/tmux-plugins/tpm?tab=readme-ov-file#installation)
 2. Add plugins to ~/.config/tmux/tmux.conf
 3. Run tmux (or reload tmux env `tmux source ~/.config/tmux/tmux.conf`)
 4. Install plugins with `prefix + I`
+
+## Scripting
+My entire config relies on a lot of little scripts I've either written or grabbed somewhere to perform very specific tasks to my workflow and general daily life. The [waybar](https://github.com/Vittv/dotfiles/tree/main/waybar/.config/waybar) config for example expects some scripts which will require my [scripts](https://github.com/Vittv/dotfiles/tree/main/scripts/.local/bin) directory to be stowed as well, for ease of use. In there you can also find instructions on how to get everything running and working properly.
