@@ -1,7 +1,7 @@
 set -x PATH $PATH $HOME/.local/bin
 
 # Aliases
-alias ls="eza -la --color=auto"
+alias ls="eza -la --git --icons=always"
 alias grep="grep --color=auto"
 alias mudfish="bash ~/.local/bin/mudfish.sh"
 
@@ -27,8 +27,5 @@ starship init fish | source
 # No welcome message
 set fish_greeting
 
-# Thin caret cursor
-set -g fish_cursor_default line
-set -g fish_cursor_insert line
-set -g fish_cursor_replace_one underscore
-set -g fish_cursor_unknown line
+# fzf keybinds
+fzf --fish | source
