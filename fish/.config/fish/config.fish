@@ -17,7 +17,7 @@ if status is-interactive
 
 # Run cutefetch on startup
   if test -x "$HOME/.local/bin/cutefetch"
-      $HOME/.local/bin/cutefetch -m bunny -e 9
+    $HOME/.local/bin/cutefetch -m bunny -e 9
   end
 end
 
@@ -26,6 +26,10 @@ starship init fish | source
 
 # No welcome message
 set fish_greeting
+
+# init zoxide and add alias
+zoxide init fish | source
+alias cd="z"
 
 # fzf keybinds
 fzf --fish | source
