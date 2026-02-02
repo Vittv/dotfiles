@@ -17,6 +17,11 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.keymap.set('n', 'gx', links.open_url, { desc = 'Open URL under cursor' })
 vim.keymap.set("n", "<leader>ot", templates.insert_template, { desc = "Insert template" })
 vim.keymap.set("n", "<leader>t", tags.search_tags, { desc = "Search tags in notes" })
+vim.keymap.set("n", "<leader>ag", function()
+  vim.cmd("w")
+  vim.fn.system("~/manoir/bureau/att.sh")
+  vim.cmd("e")
+end)
 
 -- Enter key behavior in markdown files
 vim.api.nvim_create_autocmd("FileType", {
