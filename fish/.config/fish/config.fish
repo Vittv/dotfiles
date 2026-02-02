@@ -4,6 +4,7 @@ set -x PATH $PATH $HOME/.local/bin
 alias ls="eza -la --git --icons=always"
 alias grep="grep --color=auto"
 alias mudfish="bash ~/.local/bin/mudfish.sh"
+alias todo="nvim ~/manoir/bureau/todo.md"
 
 # Environment variables
 set -x EZA_COLORS "di=36"
