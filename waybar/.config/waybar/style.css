@@ -14,7 +14,7 @@ window#waybar {
 
 #workspaces {
   /* margin: 6px 0; */
-  margin-left: 6px;
+  margin-left: -6px;
 }
 
 #workspaces button label {
@@ -28,7 +28,7 @@ window#waybar {
 
 #workspaces button {
   padding: 0 2px;
-  margin: 6px 0px;
+  margin: 4px 0px;
   border-radius: 10px;
 }
 
@@ -80,12 +80,12 @@ window#waybar {
   font-family: "SF Compact Display", "JetBrainsMono Nerd Font Propo";
   font-size: 12px;
   font-weight: 700;
-  color: @rosewater;
+  color: @sky;
   transition: all 0.3s ease;
 }
 
 #custom-spotify:hover {
-  color: @sky;
+  color: @sapphire;
 }
 
 #bluetooth {
@@ -105,10 +105,10 @@ window#waybar {
 }
 
 #custom-microphone {
-  color: @pink;
+  color: @rosewater;
   transition: all 0.2s ease;
-  font-size: 14px;
-  margin-left: 4px;
+  font-size: 12px;
+  margin-left: 14px;
 }
 
 #custom-microphone:hover {
@@ -221,5 +221,5 @@ tooltip label {
 }
 
 #custom-devserver:hover {
-  color: @teal;
+  color: @lavender;
 }

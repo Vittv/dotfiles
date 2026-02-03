@@ -6,7 +6,7 @@
     // "margin-left": 10,
     // "margin-right": 10,
     "reload_style_on_change": true,
-    "modules-left": ["hyprland/workspaces", "custom/separator", "custom/microphone", "custom/tmux", "custom/devserver", "custom/spotify"],
+    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/separator", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
     "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "network", "pulseaudio", "custom/menu", "custom/power"],
    
@@ -46,7 +46,7 @@
     },
 
     "custom/mudfish": {
-      "exec": "if pgrep -x 'mudfish.sh' > /dev/null 2>&1; then echo '{\"text\":\"󰱓 ON\", \"tooltip\":\"Mudfish VPN is ON\", \"class\":\"on\"}'; else echo '{\"text\":\"󰲛 OFF\", \"tooltip\":\"Mudfish VPN is OFF\", \"class\":\"off\"}'; fi",
+      "exec": "sh -c \"if pgrep -x 'mudrun-headless' > /dev/null 2>&1; then echo '{\\\"text\\\":\\\"󰱓 ON\\\", \\\"tooltip\\\":\\\"Mudfish VPN is ON\\\", \\\"class\\\":\\\"on\\\"}'; else echo '{\\\"text\\\":\\\"󰲛 OFF\\\", \\\"tooltip\\\":\\\"Mudfish VPN is OFF\\\", \\\"class\\\":\\\"off\\\"}'; fi\"",
       "interval": 5,
       "format": "{}",
       "tooltip": true,
@@ -110,7 +110,7 @@
 
     "custom/microphone": {
         "format": "{}",
-        "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
+        "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
         "on-click": "pactl set-source-mute alsa_input.pci-0000_05_00.6.pro-input-0 toggle && pkill -RTMIN+8 waybar",
         "return-type": "json",
         "interval": "once",
