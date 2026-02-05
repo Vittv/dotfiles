@@ -4,7 +4,7 @@ set -x PATH $PATH $HOME/.local/bin
 alias ls="eza -la --git --icons=always"
 alias grep="grep --color=auto"
 alias mudfish="bash ~/.local/bin/mudfish.sh"
-alias todo="nvim ~/manoir/bureau/todo.md"
+alias tdo="nvim ~/manoir/bulletin/todo.md"
 
 # Environment variables
 set -x EZA_COLORS "di=36"
@@ -36,7 +36,7 @@ alias cd="z"
 fzf --fish | source
 
 # fzf-git shortcuts
-source ~/apps/fzf-git.sh/fzf-git.fish
+source ~/build/fzf-git.sh/fzf-git.fish
 
 # FZF options
 set -x FZF_CTRL_T_OPTS "--preview 'bat -n --color=always --line-range :500 {}'"
