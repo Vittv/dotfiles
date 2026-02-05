@@ -1,5 +1,5 @@
-local tags = require("zmdtools.tags")
-local checkboxes = require("zmdtools.checkboxes")
+local tags = require('mdbox.tags')
+local checkboxes = require('mdbox.checkboxes')
 
 local function handle_enter()
   local line = vim.api.nvim_get_current_line()

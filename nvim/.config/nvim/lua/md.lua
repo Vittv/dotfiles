@@ -1,7 +1,7 @@
-local tags = require("zmdtools.tags")
-local templates = require("zmdtools.templates")
-local links = require("zmdtools.links")
-local enter = require("zmdtools.enter")
+local tags = require('mdbox.tags')
+local templates = require('mdbox.templates')
+local links = require('mdbox.links')
+local enter = require('mdbox.enter')
 
 -- Markdown indentation
 vim.api.nvim_create_autocmd("FileType", {

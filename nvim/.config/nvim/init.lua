@@ -22,7 +22,6 @@ vim.opt.termguicolors = true
 
 -- make all windows rounded
 vim.o.winborder = "rounded"
-require("config.options")
 require("prefs")
 require("md")
 require("lazy").setup({
@@ -32,9 +31,9 @@ require("lazy").setup({
     { import = "themes" },
   },
 })
-require("config.floaterminal")
+require('config.floatty')
 vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 -- In case you'd want to try that local theme,
 -- Uncomment the following line:
--- vim.cmd.colorscheme("vaguevscode")
+-- vim.cmd.colorscheme("vaguevp")
 --
