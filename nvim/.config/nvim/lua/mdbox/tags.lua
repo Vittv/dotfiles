@@ -4,7 +4,7 @@ local function search_tags()
     print("Telescope not found")
     return
   end
-  local notes_dir = vim.fn.expand("~/manoir/zettelkasten")
+  local notes_dir = vim.fn.expand("~/dev/zettelkasten")
   
   builtin.live_grep({
     prompt_title = "Search Tags",
@@ -22,7 +22,7 @@ local function search_specific_tag(tag)
     print("Telescope not found")
     return
   end
-  local notes_dir = vim.fn.expand("~/manoir/zettelkasten")
+  local notes_dir = vim.fn.expand("~/dev/zettelkasten")
   
   builtin.live_grep({
     prompt_title = "Files with tag: " .. tag,

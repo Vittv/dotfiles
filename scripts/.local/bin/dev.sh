@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-PROJECTS_DIR="$HOME/manoir"
+PROJECTS_DIR="$HOME/dev"
 
 if [ ! -d "$PROJECTS_DIR" ]; then
     notify-send "Error" "Projects directory not found: $PROJECTS_DIR"

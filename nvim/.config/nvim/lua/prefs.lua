@@ -27,6 +27,20 @@ vim.g.clipboard = {
   cache_enabled = 0,
 }
 
+-- Xorg
+-- vim.g.clipboard = {
+--   name = "Xclip",
+--   copy = {
+--     ["+"]  = "xclip -selection clipboard",
+--     ["*"]  = "xclip -selection primary",
+--   },
+--   paste = {
+--     ["+"] = "xclip -selection clipboard -o",
+--     ["*"] = "xclip -selection primary -o",
+--   },
+--   cache_enabled = 0,
+-- }
+
 -- Keymaps
 vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
 local map = vim.api.nvim_set_keymap
