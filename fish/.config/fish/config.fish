@@ -1,10 +1,10 @@
 set -x PATH $PATH $HOME/.local/bin
 
 # Aliases
-alias ls="eza -la --git --icons=always"
+alias ls="eza -la --git --icons=always --group-directories-first"
 alias grep="grep --color=auto"
 alias mudfish="bash ~/.local/bin/mudfish.sh"
-alias tdo="nvim ~/manoir/bulletin/todo.md"
+alias tdo="nvim ~/dev/bulletin/todo.md"
 
 # Environment variables
 set -x EZA_COLORS "di=36"
@@ -57,4 +57,8 @@ function _fzf_comprun
     case '*'
         fzf --preview "bat -n --color=always --line-range :500 {}" $argv
   end
+end
+
+function ghostty
+    env GTK_IM_MODULE=simple /usr/bin/ghostty $argv
 end
