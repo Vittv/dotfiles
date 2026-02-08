@@ -1,0 +1,19 @@
+@import "config.rasi"
+
+window {
+    location: north;
+    anchor: north;
+    y-offset: 300;
+}
+
+listview {
+    background-color: transparent;
+    lines: 6;
+    spacing: 4px;
+    cycle: false;
+    dynamic: true;
+    scrollbar: false;
+    border: 0;
+    require-input: true;
+    fixed-height: false;
+}

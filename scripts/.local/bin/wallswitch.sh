@@ -40,7 +40,7 @@ show_directory_tree() {
         INDENT=$(printf '%*s' $((DEPTH * 2)) '')
         DIR_NAME=$(basename "$dir")
         
-        TREE_ENTRIES="${TREE_ENTRIES}${INDENT} ${REL_PATH}\n"
+        TREE_ENTRIES="${TREE_ENTRIES}${INDENT}   ${REL_PATH}\n"
     done < <(find . -type d ! -path "*/.sys*" | sort)
     
     # Show tree in rofi
@@ -59,7 +59,8 @@ show_directory_tree() {
         echo "$WALLPAPER_BASE"
     else
         # Remove emoji and leading spaces
-        DIR_PATH=$(echo "$SELECTED" | sed 's/^[[:space:]]* //')
+        DIR_PATH=$(echo "$SELECTED" | sed -E 's/^[[:space:]]+//' | sed -E 's/^[[:space:]]*//')
+        # DIR_PATH=$(echo "$SELECTED" | sed 's/^[[:space:]]* //')
         echo "$WALLPAPER_BASE/$DIR_PATH"
     fi
 }
@@ -105,8 +106,8 @@ show_wallpaper_menu() {
         -i \
         -p "Select Wallpaper (${CURRENT_DIR#$WALLPAPER_BASE}) - nav: Super+/" \
         -kb-custom-1 "Super+slash" \
-        -theme-str 'window {location: center; anchor: center; width: 1100px; height: 85%;}' \
-        -theme-str 'listview {columns: 5; scrollbar: true; spacing: 10px; flow: horizontal;}' \
+        -theme-str 'window {location: center; anchor: center; width: 1100px;}' \
+        -theme-str 'listview {columns: 5; scrollbar: true; spacing: 10px; flow: horizontal; lines: 2; dynamic: true; fixed-height: false;}' \
         -theme-str 'element {padding: 10px; orientation: vertical; border-radius: 8px;}' \
         -theme-str 'element-icon {size: 180px; border-radius: 8px;}' \
         -theme-str 'element-text {horizontal-align: 0.5; margin: 5px 0 0 0;}' \

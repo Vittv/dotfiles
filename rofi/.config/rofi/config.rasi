@@ -7,7 +7,7 @@ configuration {
     display-run: "";
     display-window: "";
     drun-display-format: "{name}";
-    font: "Iosevka Nerd Font SemiBold 14";
+    font: "SF Pro Rounded 14";
     terminal: "kitty";
 }
 
@@ -21,11 +21,11 @@ configuration {
 window {
     transparency: "real";
     background-color: @bg;
-    border: 2px;
+    border: 0;
     border-color: @accent;
-    border-radius: 6px;
+    border-radius: 10px;
     width: 400px;
-    padding: 16px;
+    padding: 12px;
 
     animation: "expand-vertical";
     animation-duration: 300;
@@ -51,7 +51,7 @@ prompt {
 }
 
 entry {
-    placeholder: "Type to filter";
+    placeholder: "   Search";
     placeholder-color: @fg-dim;
     background-color: transparent;
     text-color: @accent;
@@ -65,6 +65,7 @@ listview {
     dynamic: true;
     scrollbar: false;
     border: 0;
+    fixed-height: false;
 }
 
 element {

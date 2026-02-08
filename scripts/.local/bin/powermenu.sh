@@ -1,6 +1,11 @@
 #!/bin/bash
 
-chosen=$(printf "󰐥 Power Off\n󰜉 Restart\n󰌾 Lock\n󰍃 Logout\n󰤄 Suspend\n󰒲 Hibernate" | rofi -dmenu -no-custom -theme-str 'mainbox {children: [listview];}' -theme-str 'window {width: 200px;}' -theme-str 'listview {lines: 6;}' -theme-str 'element-text {padding: 0px;}' -theme-str 'configuration {show-icons: false;}' -p "Power Menu")
+chosen=$(printf "󰐥   Power Off\n󰜉   Restart\n󰌾   Lock\n󰍃   Logout\n󰤄   Suspend\n󰒲   Hibernate" | rofi -dmenu -no-custom \
+  -theme-str 'mainbox {children: [listview];}' \
+  -theme-str 'window {width: 200px; animation: "expand-vertical"; animation-duration: 300;}' \
+  -theme-str 'listview {lines: 6; dynamic: true; fixed-height: false;}' \
+  -theme-str 'element-text {padding: 0px;}' \
+  -theme-str 'configuration {show-icons: false;}' -p "Power Menu")
 
 case "$chosen" in
     "󰐥 Power Off") poweroff ;;
