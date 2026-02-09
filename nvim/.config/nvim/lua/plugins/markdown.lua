@@ -5,5 +5,12 @@ return {
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
-    opts = {},
+    opts = {
+    },
+    config = function()
+      require("render-markdown").setup({
+        -- paragraph = { left_margin = 0.5 },
+      })
+      
+    end
 }

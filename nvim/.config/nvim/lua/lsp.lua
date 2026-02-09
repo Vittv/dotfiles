@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, opts) -- jump to next diagnostic in buffer
 
     opts.desc = "Show documentation for what is under cursor"
-    keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf, silent = true, desc = "Show documentation for what is under the cursor"})
 
      -- show documentation for what is under cursor
 
@@ -66,16 +66,12 @@ vim.diagnostic.config({
       [severity.INFO] = " ",
     },
   },
-})
-
--- Old options.lua
-vim.diagnostic.config({
   float = { border = "rounded" }
 })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover,
-  { border = "rounded" }
+  { border = "rounded", focusable = false }
 )
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(

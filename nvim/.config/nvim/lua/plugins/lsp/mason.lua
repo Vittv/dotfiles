@@ -9,7 +9,7 @@ return {
         "cssls",
         "tailwindcss",
         "svelte",
-       -- "lua_ls",
+        -- "lua_ls",
         "emmylua_ls",
         "emmet_ls",
         "pyright",
@@ -32,6 +32,5 @@ return {
       },
       "neovim/nvim-lspconfig",
     },
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
   }, 
 }
