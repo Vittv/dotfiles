@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 GREEN="\033[0;32m"
 BLUE="\033[1;34m"
 YELLOW="\033[1;33m"
@@ -9,34 +8,89 @@ LAVENDER="\033[1;36m"
 NC="\033[0m"
 BOLD="\033[1m"
 
+installYay() {
+  echo -e "${YELLOW}yay not found. Installing yay...${NC}"
+  echo -e "${BLUE}:: ${NC}Requesting elevated privileges..."
+  
+  sudo pacman -S --needed --noconfirm base-devel git
+  
+  cd /tmp || exit 1
+  git clone https://aur.archlinux.org/yay.git
+  cd yay || exit 1
+  makepkg -si --noconfirm
+  cd ~ || exit 1
+  rm -rf /tmp/yay
+  
+  echo -e " ${GREEN} ${NC}${BOLD}Successfully installed yay!${NC}"
+}
+
+installFlatpak() {
+  echo -e "${YELLOW}flatpak not found. Installing flatpak...${NC}"
+  echo -e "${BLUE}:: ${NC}Requesting elevated privileges..."
+  sudo pacman -S --needed --noconfirm flatpak
+  echo -e " ${GREEN} ${NC}${BOLD}Successfully installed flatpak!${NC}"
+  echo -e "${YELLOW}Note: You may need to restart your session for Flatpak to work properly.${NC}"
+}
+
 systemUpdate() {
   echo -n "Checking yay installation... "
-
   if command -v yay &> /dev/null; then
     echo -e "${GREEN}OK${NC}"
-    yay -Pww
-
-    echo -e "Fetched latest news from: ${MAGENTA}https://archlinux.org/feeds/news${NC}"
-    echo -e "${YELLOW}${NC} It is ${BOLD}recommended${NC} to check the latest news before updating."
-    echo -ne "${LAVENDER}❯ ${NC}${BOLD}Check for package updates? [Y/n] ${NC}"
+  else
+    echo -e "${YELLOW}NOT FOUND${NC}"
+    echo -ne "${LAVENDER}❯ ${NC}${BOLD}Install yay? [Y/n] ${NC}"
     read -r yn
     if [[ "$yn" =~ ^[Yy]$ || -z "$yn" ]]; then
-      echo -e "${BLUE}:: ${NC}Package updates... ${GREEN}Approved!${NC}"
-      echo -e "${BLUE}:: ${NC}Requesting elevated privileges..."
-      yay -Syu
-
-      echo -e " ${GREEN} ${NC}${BOLD}Successfully updated system packages!${NC}"
-      exit 0
-
+      installYay
     else
-      echo -e "${RED}Cancelling update...${NC}"
-      echo -e "Exiting..." 
+      echo -e "${RED}Cannot proceed without yay. Exiting...${NC}"
       exit 1
-
     fi
+  fi
 
+  echo -n "Checking flatpak installation... "
+  if command -v flatpak &> /dev/null; then
+    echo -e "${GREEN}OK${NC}"
+    FLATPAK_INSTALLED=true
   else
-    echo -n "yay installation not found!" >&2
+    echo -e "${YELLOW}NOT FOUND${NC}"
+    echo -ne "${LAVENDER}❯ ${NC}${BOLD}Install flatpak? [Y/n] ${NC}"
+    read -r fn
+    if [[ "$fn" =~ ^[Yy]$ || -z "$fn" ]]; then
+      installFlatpak
+      FLATPAK_INSTALLED=true
+    else
+      echo -e "${YELLOW}Skipping flatpak installation.${NC}"
+      FLATPAK_INSTALLED=false
+    fi
+  fi
+
+  echo ""
+  yay -Pww
+  echo -e "Fetched latest news from: ${MAGENTA}https://archlinux.org/feeds/news${NC}"
+  echo -e "${YELLOW}${NC} It is ${BOLD}recommended${NC} to check the latest news before updating."
+  
+  echo -ne "${LAVENDER}❯ ${NC}${BOLD}Check for package updates? [Y/n] ${NC}"
+  read -r yn
+  
+  if [[ "$yn" =~ ^[Yy]$ || -z "$yn" ]]; then
+    echo -e "${BLUE}:: ${NC}Package updates... ${GREEN}Approved!${NC}"
+    
+    echo -e "${BLUE}:: ${NC}Requesting elevated privileges..."
+    yay -Syu
+    echo -e " ${GREEN} ${NC}${BOLD}Successfully updated system packages!${NC}"
+    
+    if [ "$FLATPAK_INSTALLED" = true ]; then
+      echo ""
+      echo -e "${BLUE}:: ${NC}Updating Flatpak packages..."
+      flatpak update -y
+      echo -e " ${GREEN} ${NC}${BOLD}Successfully updated Flatpak packages!${NC}"
+    fi
+    
+    exit 0
+  else
+    echo -e "${RED}Cancelling update...${NC}"
+    echo -e "Exiting..." 
     exit 1
   fi
 }
