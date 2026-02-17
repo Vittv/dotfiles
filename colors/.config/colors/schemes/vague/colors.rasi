@@ -2,7 +2,7 @@
   /* Background colors */
   /* E6 = 90% opacity */
   /* F2 = 95% opacity */
-  bg: #141415E6;
+  bg: #141415F2;
   bg-alt: #1c1c24;
   bg-selected: #252530;
     
