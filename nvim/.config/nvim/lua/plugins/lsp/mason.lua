@@ -14,6 +14,7 @@ return {
         "emmet_ls",
         "pyright",
         "bashls",
+        "gopls",
 
       },
     },

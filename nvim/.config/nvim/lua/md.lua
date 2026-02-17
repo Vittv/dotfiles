@@ -19,7 +19,7 @@ vim.keymap.set("n", "<leader>ot", templates.insert_template, { desc = "Insert te
 vim.keymap.set("n", "<leader>t", tags.search_tags, { desc = "Search tags in notes" })
 vim.keymap.set("n", "<leader>ag", function()
   vim.cmd("w")
-  vim.fn.system("~/dev/bulletin/src/att.sh")
+  vim.fn.system("~/Documents/Bulletin/src/att.sh")
   vim.cmd("e")
 end)
 

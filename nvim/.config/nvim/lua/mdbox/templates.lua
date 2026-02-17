@@ -1,5 +1,5 @@
 local function insert_template()
-  local template = vim.fn.expand("~/dev/zettelkasten/Templates/default.md")
+  local template = vim.fn.expand("~/Documents/zettelkasten/Templates/default.md")
   if vim.fn.filereadable(template) == 1 then
     vim.cmd("0r " .. template)
     vim.cmd("%s/{{cryptoID}}/" .. math.random(1000000000, 9999999999) .. "/ge")
