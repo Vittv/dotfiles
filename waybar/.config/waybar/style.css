@@ -18,7 +18,7 @@ window#waybar {
 }
 
 #workspaces button label {
-  font-family: "FiraCode Nerd Font";
+  font-family: "FiraCode Nerd Font Mono";
   font-weight: 700;
   font-size: 14px;
   padding: 0 0px;
@@ -30,6 +30,7 @@ window#waybar {
   padding: 0 2px;
   margin: 4px 0px;
   border-radius: 10px;
+  background-color: transparent;
 }
 
 #workspaces button.active label {
@@ -112,7 +113,7 @@ window#waybar {
 }
 
 #custom-microphone:hover {
-  color: @rosewater;
+  color: @pink;
 }
 
 #network {
@@ -149,10 +150,10 @@ tooltip label {
 }
 
 #clock {
-  font-family: "SF Compact Display";
+  font-family: "SF Pro Rounded";
   color: @rosewater;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 #clock:hover {
@@ -204,7 +205,8 @@ tooltip label {
 #custom-tmux,
 #custom-devserver {
   font-family: "SF Compact Display";
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 12px;
   transition: color 0.3s ease;
 }
 
