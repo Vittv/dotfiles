@@ -21,9 +21,9 @@ configuration {
 window {
     transparency: "real";
     background-color: @bg;
-    border: 0;
+    border: 2px;
     border-color: @accent;
-    border-radius: 10px;
+    // border-radius: 10px;
     width: 400px;
     padding: 12px;
 
