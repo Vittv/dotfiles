@@ -23,21 +23,21 @@
     },
 
     "hyprland/workspaces": {
-        "format": "{icon}",
-        "format-icons": {
-          "1": "z",
-          "2": "x",
-          "3": "c",
-          "4": "v",
-          "5": "n",
-          "6": "m",
-          "7": ",",
-          "8": "."
-        },
+        "format": "{name}",
+        // "format-icons": {
+        //   "1": "z",
+        //   "2": "x",
+        //   "3": "c",
+        //   "4": "v",
+        //   "5": "n",
+        //   "6": "m",
+        //   "7": ",",
+        //   "8": "."
+        // },
         "on-click": "activate",
         "all-outputs": true,
         "persistent-workspaces": {
-            "*": [1, 2]
+            "*": [1, 2, 3, 4]
         },
         "cursor": true
     },
