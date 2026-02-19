@@ -1,7 +1,8 @@
-local tags = require('mdbox.tags')
-local templates = require('mdbox.templates')
-local links = require('mdbox.links')
 local enter = require('mdbox.enter')
+local keymaps = require('mdbox.keymaps')
+
+-- Setup keymaps
+keymaps.setup()
 
 -- Markdown indentation
 vim.api.nvim_create_autocmd("FileType", {
@@ -12,16 +13,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.shiftwidth = 2
   end,
 })
-
--- Keymaps
-vim.keymap.set('n', 'gx', links.open_url, { desc = 'Open URL under cursor' })
-vim.keymap.set("n", "<leader>ot", templates.insert_template, { desc = "Insert template" })
-vim.keymap.set("n", "<leader>t", tags.search_tags, { desc = "Search tags in notes" })
-vim.keymap.set("n", "<leader>ag", function()
-  vim.cmd("w")
-  vim.fn.system("~/Documents/Bulletin/src/att.sh")
-  vim.cmd("e")
-end)
 
 -- Enter key behavior in markdown files
 vim.api.nvim_create_autocmd("FileType", {
