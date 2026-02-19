@@ -3,7 +3,7 @@
 PROJECTS_DIR="$HOME/dev"
 DOCUMENTS_DIR="$HOME/Documents"
 
-PRIORITY_PROJECTS=("Bulletin" "zettelkasten" "Academia")
+PRIORITY_PROJECTS=("Tasks" "Academia" "zettelkasten")
 
 if [ ! -d "$PROJECTS_DIR" ]; then
     notify-send "Error" "Projects directory not found: $PROJECTS_DIR"
