@@ -26,7 +26,7 @@ for entry in "${PRIORITY_PROJECTS[@]}"; do
     fi
 done
 
-regular_projects=$(find "$PROJECTS_DIR" -maxdepth 1 -mindepth 1 -type d -printf '%f\n' | sort)
+regular_projects=$(find "$PROJECTS_DIR" -maxdepth 1 -mindepth 1 -type d -printf '%f\n' | sort | grep -vxF "$(printf '%s\n' "${priority_names[@]}")")
 projects="${priority_list}${regular_projects}"
 
 selected=$(echo "$projects" | rofi -dmenu -i -p "" -theme-str "element { children: [element-text]; } element-text { padding: 0 0 0 10px; }")
