@@ -24,6 +24,7 @@ vim.opt.termguicolors = true
 vim.o.winborder = "rounded"
 require("prefs")
 require("md")
+require("latex")
 require("lazy").setup({
   spec = {
     { import = "plugins" },

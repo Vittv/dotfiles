@@ -38,6 +38,12 @@ function M.setup()
     vim.cmd('normal! l')
   end, { desc = 'Wrap word in backticks' })
 
+  vim.keymap.set('v', '<leader>c', function()
+    vim.cmd('normal! y')
+    local sel = vim.fn.getreg('"')
+    vim.cmd('normal! gvc`' .. sel .. '`')
+  end, { desc = 'Wrap selection in backticks' })
+
 end
 
 return M

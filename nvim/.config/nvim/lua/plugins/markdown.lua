@@ -10,6 +10,10 @@ return {
     config = function()
       require("render-markdown").setup({
         -- paragraph = { left_margin = 0.5 },
+        latex = { 
+          enabled = true,
+          converter = "utftex",
+        }
       })
       
     end
