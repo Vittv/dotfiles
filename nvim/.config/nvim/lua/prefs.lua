@@ -9,7 +9,6 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
 
-
 -- Clipboard provider
 -- If on Windows just install win32yank inside WSL
 

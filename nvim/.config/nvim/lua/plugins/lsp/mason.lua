@@ -15,7 +15,7 @@ return {
         "pyright",
         "bashls",
         "gopls",
-
+        "tinymist"
       },
     },
     dependencies = {
