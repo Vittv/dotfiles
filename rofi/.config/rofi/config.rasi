@@ -7,7 +7,8 @@ configuration {
     display-run: "";
     display-window: "";
     drun-display-format: "{name}";
-    font: "SF Pro Rounded 14";
+    font: "SF Pro Display 14";
+    // font: "JetBrainsMono Nerd Font Propo SemiBold 12";
     terminal: "kitty";
 }
 
@@ -21,9 +22,9 @@ configuration {
 window {
     transparency: "real";
     background-color: @bg;
-    border: 2px;
+    border: 0px;
     border-color: @accent;
-    // border-radius: 10px;
+    border-radius: 10px;
     width: 400px;
     padding: 12px;
 
@@ -94,7 +95,7 @@ element selected.normal {
 }
 
 element-icon {
-    size: 24px;
+    size: 16px;
     background-color: transparent;
 }
 
