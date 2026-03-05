@@ -9,7 +9,7 @@
 }
 
 .control-center {
-  background-color: alpha(@base, 0.9);
+  background-color: alpha(@base, 0.95);
   /* background-color: @base; */
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.65);
   padding: 5px;

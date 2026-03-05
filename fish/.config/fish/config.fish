@@ -6,6 +6,7 @@ alias grep="grep --color=auto"
 alias mudfish="bash ~/.local/bin/mudfish.sh"
 alias tdo="nvim ~/Documents/Tasks/todo.md"
 alias weather="curl wttr.in"
+alias gcd="bash ~/dev/gcd/ui/gcd.sh"
 
 # Environment variables
 set -x EZA_COLORS "di=36"
