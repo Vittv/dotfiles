@@ -7,18 +7,23 @@
 }
 
 window#waybar {
-  background-color: alpha(@base, 0.95);
-  /* background-color: @base; */
-  /* border-radius: 10px; */
+  /* background-color: alpha(@base, 0.95); */
+  /* background-color: @base */
+  border-radius: 10px;
+  background-color: transparent;
 }
 
-#workspaces {
-  /* margin: 6px 0; */
-  margin-left: -6px;
+.modules-left,
+.modules-center,
+.modules-right {
+  background-color: alpha(@base, 0.90);
+  border: 2px solid @surface0;
+  border-radius: 10px;
+  padding: 0 14px;
 }
 
 #workspaces button label {
-  font-family: "FiraCode Nerd Font Mono";
+  font-family: "FiraCode Nerd Font Propo";
   font-weight: 700;
   font-size: 14px;
   padding: 0 0px;
@@ -28,7 +33,7 @@ window#waybar {
 
 #workspaces button {
   padding: 0 0px;
-  margin: 2px 0px;
+  margin: 3px 0px;
   border-radius: 10px;
   background-color: transparent;
 }
@@ -97,7 +102,6 @@ window#waybar {
 #custom-power {
     color: @rosewater;
     font-weight: 700;
-    margin-right: 14px;
 }
 
 #pulseaudio {
@@ -109,7 +113,6 @@ window#waybar {
   color: @rosewater;
   transition: all 0.2s ease;
   font-size: 12px;
-  margin-left: 14px;
 }
 
 #custom-microphone:hover {

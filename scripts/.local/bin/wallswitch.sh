@@ -107,7 +107,7 @@ show_wallpaper_menu() {
         -p "Select Wallpaper (${CURRENT_DIR#$WALLPAPER_BASE}) - nav: Super+/" \
         -kb-custom-1 "Super+slash" \
         -theme-str 'window {location: center; anchor: center; width: 1100px;}' \
-        -theme-str 'listview {columns: 5; scrollbar: true; spacing: 10px; flow: horizontal; lines: 2; dynamic: true; fixed-height: false;}' \
+        -theme-str 'listview {columns: 5; scrollbar: true; spacing: 10px; flow: horizontal; lines: 2;}' \
         -theme-str 'element {padding: 10px; orientation: vertical; border-radius: 8px;}' \
         -theme-str 'element-icon {size: 180px; border-radius: 8px;}' \
         -theme-str 'element-text {horizontal-align: 0.5; margin: 5px 0 0 0;}' \

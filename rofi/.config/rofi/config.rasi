@@ -63,9 +63,12 @@ listview {
     lines: 8;
     spacing: 4px;
     cycle: false;
-    dynamic: true;
     scrollbar: false;
     border: 0;
+
+    // This will make things open with a certain animation
+    // With disabled animations, it should probably be commented out
+    dynamic: true;
     fixed-height: false;
 }
 
