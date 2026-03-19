@@ -7,27 +7,27 @@
 }
 
 window#waybar {
-  /* background-color: alpha(@base, 0.95); */
+  background-color: alpha(@base, 0.95);
   /* background-color: @base */
-  border-radius: 10px;
-  background-color: transparent;
+  /* border-radius: 4px; */
+  /* background-color: transparent; */
+  /* background: transparent; */
 }
 
-.modules-left,
-.modules-center,
-.modules-right {
-  background-color: alpha(@base, 0.90);
-  border: 2px solid @surface0;
-  border-radius: 10px;
-  padding: 0 14px;
-}
+/* .modules-left, */
+/* .modules-center, */
+/* .modules-right { */
+/*   background-color: alpha(@base, 0.90); */
+/*   border-radius: 4px; */
+/*   padding: 0 14px; */
+/* } */
 
 #workspaces button label {
   font-family: "FiraCode Nerd Font Propo";
   font-weight: 700;
   font-size: 14px;
   padding: 0 0px;
-  color: @overlay2;
+  color: @overlay1;
   /* margin: 8px 2px; */
 }
 
@@ -62,10 +62,8 @@ window#waybar {
 #tray {
   font-weight: 500;
   transition: all 0.3s ease;
-  border-radius: 6px;
   padding-top: 0;
   padding-bottom: 0;
-  color: @rosewater;
   margin: 4px 2px;
   font-size: 12px;
 }
@@ -102,6 +100,7 @@ window#waybar {
 #custom-power {
     color: @rosewater;
     font-weight: 700;
+    margin-right: 14px;
 }
 
 #pulseaudio {
@@ -113,6 +112,7 @@ window#waybar {
   color: @rosewater;
   transition: all 0.2s ease;
   font-size: 12px;
+  margin-left: 14px;
 }
 
 #custom-microphone:hover {
@@ -142,7 +142,7 @@ tooltip {
 
 tooltip label {
   font-family: "SF Display Mono";
-  color: @text;
+  color: @rosewater;
   padding: 8px;
   font-size: 16px;
 }

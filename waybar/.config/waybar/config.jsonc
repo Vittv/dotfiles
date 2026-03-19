@@ -2,13 +2,13 @@
     "layer": "top",
     "position": "top",
     "spacing": 12,
-    "margin-top": 10,
-    "margin-left": 10,
-    "margin-right": 10,
+    // "margin-top": 10,
+    // "margin-left": 10,
+    // "margin-right": 10,
     "reload_style_on_change": true,
-    "modules-left": ["custom/microphone", "clock", "custom/cpu-temp", "custom/gpu-temp"],
-    "modules-center": ["hyprland/workspaces", "custom/spotify"],
-    "modules-right": ["tray", "custom/mudfish", "network", "pulseaudio", "custom/menu", "custom/power"],
+    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/separator", "custom/tmux", "custom/devserver", "custom/spotify"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "custom/separator", "custom/mudfish", "network", "pulseaudio", "custom/menu", "custom/power"],
    
     "custom/menu": {
       "format": "",
@@ -23,7 +23,7 @@
     },
 
     "hyprland/workspaces": {
-        "format": "{icon}",
+        "format": "{name}",
         "format-icons": {
           // "1": "z",
           // "2": "x",
@@ -33,8 +33,8 @@
           // "6": "m",
           // "7": ",",
           // "8": "."
-          "active": "",
-          "default": ""
+          "active": "",
+          "default": ""
         },
         "on-click": "activate",
         "all-outputs": true,
@@ -118,7 +118,7 @@
     },
  
     "clock": {
-        "format": "{:%I:%M %p}",
+        "format": "{:%d  •  %I:%M %p}",
         "tooltip-format": "<span size='15000'><tt>{calendar}</tt></span>",
         "calendar": {
             "mode": "month",
