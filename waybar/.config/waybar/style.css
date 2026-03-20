@@ -9,7 +9,7 @@
 window#waybar {
   background-color: alpha(@base, 0.95);
   /* background-color: @base; */
-  border-radius: 10px;
+  /* border-radius: 10px; */
   /* background-color: transparent; */
   /* background: transparent; */
 }
@@ -23,16 +23,12 @@ window#waybar {
   /* border: 2px solid alpha(@surface0, 0.40); */
 /* } */
 
-/* #workspaces { */
-/*   margin-left: -4px; */
-/* } */
-
 #workspaces button label {
   font-family: "FiraCode Nerd Font Propo";
   font-weight: 700;
   font-size: 14px;
   padding: 0 0px;
-  color: @overlay1;
+  color: @overlay2;
   /* margin: 8px 2px; */
 }
 
@@ -69,7 +65,7 @@ window#waybar {
   transition: all 0.3s ease;
   padding-top: 0;
   padding-bottom: 0;
-  margin: 8px 2px;
+  margin: 4px 2px;
   font-size: 12px;
 }
 
@@ -115,20 +111,20 @@ window#waybar {
 
 #custom-microphone {
   font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
-  color: @pink;
+  color: @rosewater;
   transition: all 0.2s ease;
   font-size: 12px;
-  margin-left: 6px;
-  /* margin-left: 14px; */
+  /* margin-left: 6px; */
+  margin-left: 14px;
 }
 
 #custom-microphone:hover {
   color: @pink;
 }
 
-#custom-microphone.muted {
-  color: @red;
-}
+/* #custom-microphone.muted { */
+/*   color: @blue; */
+/* } */
 
 #network {
   color: @green;

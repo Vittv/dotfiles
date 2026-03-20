@@ -2,11 +2,11 @@
     "layer": "top",
     "position": "top",
     "spacing": 10,
-    "margin-top": 10,
-    "margin-left": 10,
-    "margin-right": 10,
+    // "margin-top": 10,
+    // "margin-left": 10,
+    // "margin-right": 10,
     "reload_style_on_change": true,
-    "modules-left": ["custom/menu", "custom/microphone", "hyprland/workspaces", "custom/tmux", "custom/devserver", "custom/spotify"],
+    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
     "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "network", "pulseaudio", "custom/inbox", "custom/power"],
   
@@ -28,7 +28,7 @@
     },
 
     "hyprland/workspaces": {
-        "format": "{icon}",
+        "format": "{name}",
         "format-icons": {
           // "1": "z",
           // "2": "x",
@@ -114,7 +114,7 @@
 
     "custom/microphone": {
         "format": "{}",
-        "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
+        "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
         "on-click": "pactl set-source-mute alsa_input.pci-0000_05_00.6.pro-input-0 toggle && pkill -RTMIN+8 waybar",
         "return-type": "json",
         "interval": "once",
