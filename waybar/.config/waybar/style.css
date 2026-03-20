@@ -8,8 +8,8 @@
 
 window#waybar {
   background-color: alpha(@base, 0.95);
-  /* background-color: @base */
-  /* border-radius: 4px; */
+  /* background-color: @base; */
+  border-radius: 10px;
   /* background-color: transparent; */
   /* background: transparent; */
 }
@@ -18,8 +18,13 @@ window#waybar {
 /* .modules-center, */
 /* .modules-right { */
 /*   background-color: alpha(@base, 0.90); */
-/*   border-radius: 4px; */
+/*   border-radius: 10px; */
 /*   padding: 0 14px; */
+  /* border: 2px solid alpha(@surface0, 0.40); */
+/* } */
+
+/* #workspaces { */
+/*   margin-left: -4px; */
 /* } */
 
 #workspaces button label {
@@ -47,8 +52,8 @@ window#waybar {
   color: @lavender;
 }
 
-#custom-menu,
 #custom-microphone,
+#custom-inbox,
 #custom-mudfish,
 #custom-spotify,
 #custom-cpu-temp,
@@ -64,7 +69,7 @@ window#waybar {
   transition: all 0.3s ease;
   padding-top: 0;
   padding-bottom: 0;
-  margin: 4px 2px;
+  margin: 8px 2px;
   font-size: 12px;
 }
 
@@ -73,7 +78,7 @@ window#waybar {
 #custom-cpu-temp:hover,
 #custom-gpu-temp:hover,
 #custom-system-temp:hover,
-#custom-menu:hover,
+#custom-inbox:hover,
 #bluetooth:hover,
 #network:hover,
 #pulseaudio:hover {
@@ -109,21 +114,27 @@ window#waybar {
 }
 
 #custom-microphone {
-  color: @rosewater;
+  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  color: @pink;
   transition: all 0.2s ease;
   font-size: 12px;
-  margin-left: 14px;
+  margin-left: 6px;
+  /* margin-left: 14px; */
 }
 
 #custom-microphone:hover {
   color: @pink;
 }
 
+#custom-microphone.muted {
+  color: @red;
+}
+
 #network {
   color: @green;
 }
 
-#custom-menu {
+#custom-inbox {
     color: @red;
 }
 
@@ -186,13 +197,13 @@ tooltip label {
 
 #custom-cpu-temp {
   font-family: "FiraCode Nerd Font Propo";
-  color: @mauve;
+  color: @sapphire;
   font-weight: 700;
 }
 
 #custom-gpu-temp {
   font-family: "FiraCode Nerd Font Propo";
-  color: @pink;
+  color: @lavender;
   font-weight: 700;
 }
 
@@ -226,5 +237,16 @@ tooltip label {
 }
 
 #custom-devserver:hover {
+  color: @lavender;
+}
+
+#custom-menu {
+  color: @text;
+  font-size: 20px;
+  margin-left: 14px;
+  transition: color 0.2s ease;
+}
+
+#custom-menu:hover {
   color: @lavender;
 }

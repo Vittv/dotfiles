@@ -1,17 +1,22 @@
 {
     "layer": "top",
     "position": "top",
-    "spacing": 12,
-    // "margin-top": 10,
-    // "margin-left": 10,
-    // "margin-right": 10,
+    "spacing": 10,
+    "margin-top": 10,
+    "margin-left": 10,
+    "margin-right": 10,
     "reload_style_on_change": true,
-    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/separator", "custom/tmux", "custom/devserver", "custom/spotify"],
+    "modules-left": ["custom/menu", "custom/microphone", "hyprland/workspaces", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "custom/separator", "custom/mudfish", "network", "pulseaudio", "custom/menu", "custom/power"],
-   
+    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "network", "pulseaudio", "custom/inbox", "custom/power"],
+  
     "custom/menu": {
-      "format": "",
+      "format": "󰣇",
+      "on-click": "rofi -show drun"
+    },
+
+    "custom/inbox": {
+      "format": "󰚇",
       "return-type": "json",
       "exec-if": "which swaync-client",
       "exec": "swaync-client -swb",
@@ -23,7 +28,7 @@
     },
 
     "hyprland/workspaces": {
-        "format": "{name}",
+        "format": "{icon}",
         "format-icons": {
           // "1": "z",
           // "2": "x",
@@ -33,8 +38,8 @@
           // "6": "m",
           // "7": ",",
           // "8": "."
-          "active": "",
-          "default": ""
+          "active": "󰮯",
+          "default": "󰮯"
         },
         "on-click": "activate",
         "all-outputs": true,
@@ -73,7 +78,7 @@
 
     "tray": {
       "icon-size": 16,
-      "spacing": 10
+      "spacing": 6
     },
     
     "bluetooth": {
@@ -109,7 +114,7 @@
 
     "custom/microphone": {
         "format": "{}",
-        "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
+        "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
         "on-click": "pactl set-source-mute alsa_input.pci-0000_05_00.6.pro-input-0 toggle && pkill -RTMIN+8 waybar",
         "return-type": "json",
         "interval": "once",

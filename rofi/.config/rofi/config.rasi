@@ -24,7 +24,7 @@ window {
     background-color: @bg;
     border: 0px;
     border-color: @accent;
-    border-radius: 4px;
+    border-radius: 10px;
     width: 340px;
     padding: 12px;
 
