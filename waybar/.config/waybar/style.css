@@ -90,7 +90,7 @@ window#waybar {
 }
 
 #custom-spotify:hover {
-  color: @sapphire;
+  color: shade(@lavender, 1.2);
 }
 
 #bluetooth {
