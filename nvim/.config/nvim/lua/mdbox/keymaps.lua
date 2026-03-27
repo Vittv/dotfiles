@@ -22,6 +22,13 @@ function M.setup()
     vim.cmd("e")
   end)
 
+  -- Italicize words under cursor or visual selection
+  vim.keymap.set('n', '<leader>i', function()
+    local word = vim.fn.expand('<cword>')
+    vim.cmd('normal! ciw*' .. word .. '*')
+    vim.cmd('normal! l')
+  end, { desc = 'Bold word under cursor' })
+
   -- Embolden words under cursor or visual selection
   vim.keymap.set('n', '<leader>b', function()
     local word = vim.fn.expand('<cword>')
