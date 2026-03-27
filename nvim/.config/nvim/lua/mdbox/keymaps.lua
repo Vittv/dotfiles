@@ -31,18 +31,26 @@ function M.setup()
 
   vim.keymap.set('v', '<leader>b', 'c****<Esc>hP', { desc = 'Bold selection' })
 
-  -- Wrap word in backticks for code preview
+  -- Wrap word in backticks
   vim.keymap.set('n', '<leader>c', function()
     local word = vim.fn.expand('<cword>')
     vim.cmd('normal! ciw`' .. word .. '`')
     vim.cmd('normal! l')
   end, { desc = 'Wrap word in backticks' })
 
+  -- Wrap selection in backticks
   vim.keymap.set('v', '<leader>c', function()
     vim.cmd('normal! y')
     local sel = vim.fn.getreg('"')
     vim.cmd('normal! gvc`' .. sel .. '`')
   end, { desc = 'Wrap selection in backticks' })
+
+  -- Generate codeblock and place cursor after opening ```
+  vim.keymap.set('n', '<leader>cc', function()
+    vim.api.nvim_put({'```', '```'}, 'l', true, true)
+    vim.cmd('normal! k$')
+    vim.cmd('startinsert!')
+  end, { desc = 'Insert markdown codeblock' })
 
 end
 
