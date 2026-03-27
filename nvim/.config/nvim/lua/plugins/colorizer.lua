@@ -4,7 +4,10 @@ return {
     require("colorizer").setup({
       "css",
       "javascript",
-      "scss"
+      "scss",
+      "json",
+      "conf",
+      "rasi"
     })
   end,
 }
