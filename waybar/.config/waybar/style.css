@@ -40,7 +40,7 @@ window#waybar {
 }
 
 #workspaces button.active label {
-  color: @rosewater;
+  color: @text;
   /* padding: 0 20px */
 }
 
@@ -99,7 +99,7 @@ window#waybar {
 }
 
 #custom-power {
-    color: @rosewater;
+    color: @text;
     font-weight: 700;
     margin-right: 14px;
 }
@@ -111,7 +111,7 @@ window#waybar {
 
 #custom-microphone {
   font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
-  color: @rosewater;
+  color: @text;
   transition: all 0.2s ease;
   font-size: 12px;
   /* margin-left: 6px; */
@@ -161,7 +161,7 @@ tooltip label {
 
 #clock {
   font-family: "SF Pro Rounded";
-  color: @rosewater;
+  color: @text;
   font-weight: 500;
   font-size: 14px;
 }
