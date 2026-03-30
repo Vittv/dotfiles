@@ -7,8 +7,8 @@
 }
 
 window#waybar {
-  /* background-color: alpha(@base, 0.95); */
-  background-color: shade(@base, 1.2);
+  background-color: alpha(@base, 0.95);
+  /* background-color: shade(@base, 1.2); */
   /* border-radius: 10px; */
   /* background-color: transparent; */
   /* background: transparent; */
@@ -26,7 +26,7 @@ window#waybar {
 #workspaces button label {
   font-family: "FiraCode Nerd Font Propo";
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   padding: 0 0px;
   color: @overlay2;
   /* margin: 8px 2px; */
@@ -34,7 +34,7 @@ window#waybar {
 
 #workspaces button {
   padding: 0 0px;
-  margin: 3px 0px;
+  margin: 2px 0px;
   border-radius: 10px;
   background-color: transparent;
 }
@@ -66,7 +66,7 @@ window#waybar {
   padding-top: 0;
   padding-bottom: 0;
   margin: 4px 2px;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 #custom-microphone:hover,
@@ -131,7 +131,7 @@ window#waybar {
 }
 
 #custom-inbox {
-    color: @red;
+  color: @red;
 }
 
 #custom-system-temp {
@@ -142,16 +142,16 @@ window#waybar {
 tooltip {
   background-color: @base;
   border: 2px solid @surface0;
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 8px;
   transition: all 0.3s ease;
 }
 
 tooltip label {
   font-family: "SF Display Mono";
-  color: @rosewater;
+  color: @text;
   padding: 8px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 #tray label {
