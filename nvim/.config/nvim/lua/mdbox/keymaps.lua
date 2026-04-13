@@ -22,20 +22,24 @@ function M.setup()
     vim.cmd("e")
   end)
 
-  -- Italicize words under cursor or visual selection
+  -- Italicize word under cursor
   vim.keymap.set('n', '<leader>i', function()
     local word = vim.fn.expand('<cword>')
     vim.cmd('normal! ciw*' .. word .. '*')
     vim.cmd('normal! l')
-  end, { desc = 'Bold word under cursor' })
+  end, { desc = 'Italicize word under cursor' })
 
-  -- Embolden words under cursor or visual selection
+  -- Italicize visual selection
+  vim.keymap.set('v', '<leader>i', 'c**<Esc>P', { desc = 'Italicize selection' })
+
+  -- Embolden word under cursor
   vim.keymap.set('n', '<leader>b', function()
     local word = vim.fn.expand('<cword>')
     vim.cmd('normal! ciw**' .. word .. '**')
     vim.cmd('normal! l')
   end, { desc = 'Bold word under cursor' })
 
+  -- Embolden visual selection
   vim.keymap.set('v', '<leader>b', 'c****<Esc>hP', { desc = 'Bold selection' })
 
   -- Wrap word in backticks
