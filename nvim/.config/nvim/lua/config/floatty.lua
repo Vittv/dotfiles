@@ -28,6 +28,9 @@ local function create_floating_terminal()
     -- Start terminal job using jobstart with term option
     state.job_id = vim.fn.jobstart(vim.o.shell, {
       term = true,
+      env = {
+        TERM = "xterm-256color"
+      },
       on_exit = function()
         -- Clean up when terminal exits
         if state.buf and vim.api.nvim_buf_is_valid(state.buf) then
