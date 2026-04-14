@@ -77,7 +77,7 @@ If you are not sure which version of nvim your distro provides you, or which plu
 When having an existing nvim installation, delete any existing runtime dir you have for nvim to prevent errors in your new version. `/usr/local/nvim/runtime`. See `:checkhealth` for your current neovim install to confirm what the path is on your machine.
 
 ### Requirements
-- `nvim -v >= 0.11.5`
+- `nvim -v >= 0.12.1`
 - `gcc or clang` (C compiler for Treesitter)
 - `node.js` and `npm` (for LSP servers and other plugins)
 - `ripgrep` (Telescope fuzzy finding)
