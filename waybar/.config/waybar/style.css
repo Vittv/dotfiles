@@ -7,8 +7,8 @@
 }
 
 window#waybar {
-  background-color: alpha(@base, 0.95);
-  /* background-color: shade(@base, 1.2); */
+  /* background-color: alpha(@base, 0.95); */
+  background-color: shade(@base, 1.2);
   /* border-radius: 10px; */
   /* background-color: transparent; */
   /* background: transparent; */
@@ -22,6 +22,13 @@ window#waybar {
 /*   padding: 0 14px; */
   /* border: 2px solid alpha(@surface0, 0.40); */
 /* } */
+
+#window label {
+  font-family: "SF Compact Display";
+  font-size: 12px;
+  font-weight: 700;
+  color: @rosewater;
+}
 
 #workspaces button label {
   font-family: "FiraCode Nerd Font Propo";
@@ -48,7 +55,6 @@ window#waybar {
   color: @lavender;
 }
 
-#custom-microphone,
 #custom-inbox,
 #custom-mudfish,
 #custom-spotify,
@@ -113,7 +119,7 @@ window#waybar {
   font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
   color: @text;
   transition: all 0.2s ease;
-  font-size: 12px;
+  font-size: 10px;
   /* margin-left: 6px; */
   margin-left: 14px;
 }
@@ -122,8 +128,8 @@ window#waybar {
   color: @pink;
 }
 
-/* #custom-microphone.muted { */
-/*   color: @blue; */
+/* #custom-microphone.unmuted { */
+/*   color: @pink; */
 /* } */
 
 #network {
@@ -131,7 +137,7 @@ window#waybar {
 }
 
 #custom-inbox {
-  color: @red;
+  color: @maroon;
 }
 
 #custom-system-temp {
@@ -193,7 +199,7 @@ tooltip label {
 
 #custom-cpu-temp {
   font-family: "FiraCode Nerd Font Propo";
-  color: @sapphire;
+  color: @mauve;
   font-weight: 700;
 }
 

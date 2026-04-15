@@ -1,35 +1,33 @@
 {
-    "layer": "top",
-    "position": "top",
-    "spacing": 10,
-    // "margin-top": 10,
-    // "margin-left": 10,
-    // "margin-right": 10,
+  "layer": "top",
+  "position": "top",
+  "spacing": 10,
+    // "margin-top": 4,
+    // "margin-left": 4,
+    // "margin-right": 4,
     "reload_style_on_change": true,
-    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/spotify", "custom/tmux", "custom/devserver"],
+    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
     "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "network", "pulseaudio", "custom/inbox", "custom/power"],
-  
+
     "custom/menu": {
       "format": "󰣇",
       "on-click": "rofi -show drun"
     },
 
-    "custom/inbox": {
-      "format": "󰂚",
+    "custom/microphone": {
+      "format": "{}",
+      "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
+      "on-click": "pactl set-source-mute alsa_input.pci-0000_05_00.6.pro-input-0 toggle && pkill -RTMIN+8 waybar",
       "return-type": "json",
-      "exec-if": "which swaync-client",
-      "exec": "swaync-client -swb",
-      "on-click": "swaync-client -t -sw",
-      "on-click-right": "swaync-client -d -sw",
-      "on-click-middle": "swaync-client -C",
-      "tooltip-format": "Notifications",
-      "escape": true
+      "interval": "once",
+      "signal": 8,
+      "tooltip": true
     },
 
     "hyprland/workspaces": {
-        "format": "{name}",
-        "format-icons": {
+      "format": "{name}",
+      "format-icons": {
           // "1": "z",
           // "2": "x",
           // "3": "c",
@@ -40,34 +38,63 @@
           // "8": "."
           "active": "󰮯",
           "default": "󰮯"
-        },
-        "on-click": "activate",
-        "all-outputs": true,
-        "persistent-workspaces": {
-            "*": [1, 2, 3, 4]
-        },
-        "cursor": true
+      },
+      "on-click": "activate",
+      "all-outputs": true,
+      "persistent-workspaces": {
+        "*": [1, 2, 3, 4]
+      },
+      "cursor": true
+    },
+
+    "hyprland/window": {
+      "format": "{initialTitle}",
+      "separate-outputs": false,
+      "rewrite": {
+        "^$": "Files"
+      },
+      "on-click": "nautilus"
+    },
+
+    "custom/tmux": {
+      "exec": "sessions=$(tmux list-sessions -F '#{session_created} #S' 2>/dev/null | sort -n | cut -d' ' -f2- | awk '{print NR\":\"$0}' | paste -sd ',' - | sed 's/,/, /g'); if [ -n \"$sessions\" ]; then echo \"{\\\"text\\\": \\\"  $sessions\\\", \\\"class\\\": \\\"tmux-active\\\", \\\"tooltip\\\": \\\"Tmux sessions: $sessions\\\"}\"; fi",
+      "return-type": "json",
+      "interval": 2,
+      "format": "tmux:{}",
+      "on-click": "kitty tmux choose-session"
+    },
+
+    "custom/devserver": {
+      "exec": "servers=''; if ss -tlnp 2>/dev/null | grep -q ':5173 '; then servers='vite:5173'; fi; if ss -tlnp 2>/dev/null | grep -q ':4173 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}vite:4173\"; fi; if ss -tlnp 2>/dev/null | grep -q ':8080 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}webpack:8080\"; fi; if ss -tlnp 2>/dev/null | grep -q ':3000 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}dev:3000\"; fi; if ss -tlnp 2>/dev/null | grep -q ':8081 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}dev:8081\"; fi; if [ -n \"$servers\" ]; then echo \"{\\\"text\\\": \\\"$servers\\\", \\\"class\\\": \\\"server-active\\\", \\\"tooltip\\\": \\\"Dev servers: $servers\\\"}\"; fi",
+      "return-type": "json",
+      "interval": 3,
+      "format": "{}"
     },
 
     "custom/mudfish": {
-      "exec": "sh -c \"if pgrep -x 'mudrun-headless' > /dev/null 2>&1; then echo '{\\\"text\\\":\\\"󰱓 ON\\\", \\\"tooltip\\\":\\\"Mudfish VPN is ON\\\", \\\"class\\\":\\\"on\\\"}'; else echo '{\\\"text\\\":\\\"󰲛 OFF\\\", \\\"tooltip\\\":\\\"Mudfish VPN is OFF\\\", \\\"class\\\":\\\"off\\\"}'; fi\"",
-      "interval": 5,
+      "exec": "$HOME/.config/waybar/src/mudfish-status.sh",
+      "interval": 2,
       "format": "{}",
       "tooltip": true,
       "return-type": "json"
     },
 
+    "tray": {
+      "icon-size": 16,
+      "spacing": 6
+    },
+
     "custom/cpu-temp": {
-        "exec": "sensors | grep 'Tctl:' | awk '{print int($2)}' | tr -d '+°C'",
-        "format": "{}°C",
-        "tooltip-format": "CPU {}°C",
-        "interval": 5,
-        "cursor": true,
-        "on-click": "kitty btop"
+      "exec": "sensors | grep 'Tctl:' | awk '{print int($2)}' | tr -d '+°C'",
+      "format": "{}°C",
+      "tooltip-format": "CPU {}°C",
+      "interval": 5,
+      "cursor": true,
+      "on-click": "kitty btop"
     },
 
     "custom/gpu-temp": {
-        "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",  // For NVIDIA
+      "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",  // For NVIDIA
         // "exec": "cat /sys/class/drm/card0/device/hwmon/hwmon*/temp1_input | awk '{print $1/1000}'",  // For AMD
         "format": "{}°C",
         "tooltip-format": "GPU {}°C",
@@ -76,11 +103,6 @@
         "on-click": "kitty btop"
     },
 
-    "tray": {
-      "icon-size": 16,
-      "spacing": 6
-    },
-    
     "bluetooth": {
       "format": "󰂯",
       "format-disabled": "󰂲",
@@ -91,51 +113,41 @@
     },
 
     "network": {
-        "format-wifi": "󰤨",
-        "format-ethernet": "",
-        "format-linked": "󰈂 rip",
-        "format-disconnected": "󰤮 dc",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
-        "tooltip-format-ethernet": "Connected {ipaddr}/{cidr} ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
-        "tooltip-format-disconnected": "Disconnected",
-        "on-click": "nm-connection-editor"
-    },
-    
-    "pulseaudio": {
-        "format": "{icon}",
-        "format-muted": "",
-        "format-icons": {
-            "default": ["", "", ""]
-        },
-        "tooltip-format": "VOL {volume}%",
-        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-        "on-click-right": "pavucontrol"
+      "format-wifi": "󰤨",
+      "format-ethernet": "",
+      "format-linked": "󰈂 rip",
+      "format-disconnected": "󰤮 dc",
+      "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
+      "tooltip-format-ethernet": "Connected {ipaddr}/{cidr} ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
+      "tooltip-format-disconnected": "Disconnected",
+      "on-click": "nm-connection-editor"
     },
 
-    "custom/microphone": {
-        "format": "{}",
-        "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
-        "on-click": "pactl set-source-mute alsa_input.pci-0000_05_00.6.pro-input-0 toggle && pkill -RTMIN+8 waybar",
-        "return-type": "json",
-        "interval": "once",
-        "signal": 8,
-        "tooltip": true
+    "pulseaudio": {
+      "format": "{icon}",
+      "format-muted": "",
+      "format-icons": {
+        "default": ["", "", ""]
+      },
+      "tooltip-format": "VOL {volume}%",
+      "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+      "on-click-right": "pavucontrol"
     },
- 
+
     "clock": {
-        "format": "{:%d  •  %I:%M %p}",
-        "tooltip-format": "<span size='15000'><tt>{calendar}</tt></span>",
-        "calendar": {
-            "mode": "month",
-            "format": {
-                "months": "<span color='#F5C2E7'>{}</span>",
-                "weekdays": "<span color='#89B4FA'>{}</span>",
-                "days": "<span color='#CDD6F4'>{}</span>",
-                "today": "<span color='#F9E2AF'>{}</span>"
-            }
-        },
-        "cursor": "true",
-        "on-click": "gnome-calendar"
+      "format": "{:%d  •  %I:%M %p}",
+      "tooltip-format": "<span size='15000'><tt>{calendar}</tt></span>",
+      "calendar": {
+        "mode": "month",
+        "format": {
+          "months": "<span color='#F5C2E7'>{}</span>",
+          "weekdays": "<span color='#89B4FA'>{}</span>",
+          "days": "<span color='#CDD6F4'>{}</span>",
+          "today": "<span color='#F9E2AF'>{}</span>"
+        }
+      },
+      "cursor": "true",
+      "on-click": "gnome-calendar"
     },  
 
     "custom/power": {
@@ -162,18 +174,15 @@
       "format": "|"
     },
 
-    "custom/tmux": {
-      "exec": "sessions=$(tmux list-sessions -F '#{session_created} #S' 2>/dev/null | sort -n | cut -d' ' -f2- | awk '{print NR\":\"$0}' | paste -sd ',' - | sed 's/,/, /g'); if [ -n \"$sessions\" ]; then echo \"{\\\"text\\\": \\\"  $sessions\\\", \\\"class\\\": \\\"tmux-active\\\", \\\"tooltip\\\": \\\"Tmux sessions: $sessions\\\"}\"; fi",
+    "custom/inbox": {
+      "format": "󰂚",
       "return-type": "json",
-      "interval": 2,
-      "format": "tmux:{}",
-      "on-click": "kitty tmux choose-session"
-    },
-
-    "custom/devserver": {
-      "exec": "servers=''; if ss -tlnp 2>/dev/null | grep -q ':5173 '; then servers='vite:5173'; fi; if ss -tlnp 2>/dev/null | grep -q ':4173 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}vite:4173\"; fi; if ss -tlnp 2>/dev/null | grep -q ':8080 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}webpack:8080\"; fi; if ss -tlnp 2>/dev/null | grep -q ':3000 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}dev:3000\"; fi; if ss -tlnp 2>/dev/null | grep -q ':8081 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}dev:8081\"; fi; if [ -n \"$servers\" ]; then echo \"{\\\"text\\\": \\\"$servers\\\", \\\"class\\\": \\\"server-active\\\", \\\"tooltip\\\": \\\"Dev servers: $servers\\\"}\"; fi",
-      "return-type": "json",
-      "interval": 3,
-      "format": "{}"
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "on-click-middle": "swaync-client -C",
+      "tooltip-format": "Notifications",
+      "escape": true
     }
 },
