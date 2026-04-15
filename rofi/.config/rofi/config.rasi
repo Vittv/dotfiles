@@ -98,7 +98,7 @@ element selected.normal {
 }
 
 element-icon {
-    size: 16px;
+    size: 12px;
     background-color: transparent;
 }
 
