@@ -12,6 +12,9 @@ return {
     opts = {
     },
     config = function()
+      local boldColor = vim.api.nvim_get_hl(0, { name = "Function" }).fg
+      vim.api.nvim_set_hl(0, "@markup.strong.markdown_inline", { fg = boldColor, bold = true })
+
       require("render-markdown").setup({
         -- paragraph = { left_margin = 0.5 },
         latex = { 
@@ -19,8 +22,7 @@ return {
           converter = "utftex",
         }
       })
-
-    end
+    end,
   },
   {
     {

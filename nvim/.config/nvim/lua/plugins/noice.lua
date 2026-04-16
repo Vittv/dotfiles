@@ -1,18 +1,22 @@
 return {
   "folke/noice.nvim",
+  enabled = true,
   event = "VeryLazy",
   opts = {
     -- add any options here
-    views = {
-      hover = {
-        border = {
-          style = "rounded",
-        },
-        win_options = {
-          winblend = 0,
-          winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-        },
-      }
+    -- views = {
+    --   hover = {
+    --     border = {
+    --       style = "rounded",
+    --     },
+    --     win_options = {
+    --       winblend = 0,
+    --       winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+    --     },
+    --   }
+    -- },
+    cmdline = {
+      view = "cmdline",
     },
     mini = {
       align = "center",
@@ -29,10 +33,16 @@ return {
       progress = {
         enabled = true,
       },
+      hover = {
+        enabled = false
+      },
+      signature = {
+        enabled = false
+      },
       override = {
-        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-        ["vim.lsp.util.stylize.markdown"] = true,
-        ["cmp.entry.get_documentation"] = true,
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+        ["vim.lsp.util.stylize.markdown"] = false,
+        ["cmp.entry.get_documentation"] = false,
       },
     },
   },

@@ -1,3 +1,9 @@
+-- vim ui2
+-- require("vim._core.ui2").enable({
+--   enable = true,
+-- })
+-- vim.opt.cmdheight = 0
+
 -- lazy.nvim package manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -37,4 +43,6 @@ vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 -- In case you'd want to try that local theme,
 -- Uncomment the following line:
 -- vim.cmd.colorscheme("vaguevp")
---
+
+-- builtin color preview - no more need for colorizer
+vim.lsp.document_color.enable(true, nil, { style = 'virtual' })
