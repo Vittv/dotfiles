@@ -10,8 +10,8 @@
 
 .control-center {
   /* background-color: alpha(@base, 0.95); */
-  background-color: shade(@base, 1.2);
-  /* background-color: @base; */
+  /* background-color: shade(@base, 1.2); */
+  background-color: @base;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.65);
   padding: 5px;
 }
@@ -35,9 +35,9 @@
 }
 
 .notification {
-  background-color: shade(@base, 1.2);
+  /* background-color: shade(@base, 1.2); */
   /* background-color: alpha(@base, 0.9); */
-  /* background-color: @base; */
+  background-color: @base;
 }
 
 .notification-row .notification-background .notification .notification-default-action:hover {
@@ -72,9 +72,9 @@
 }
 .notification.low,
 .notification.normal  {
-  background-color: shade(@base, 1.2);
+  /* background-color: shade(@base, 1.2); */
   /* background-color: alpha(@base, 0.9); */
-  /* background-color: @base; */
+  background-color: @base;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.65);
 }
 
@@ -144,7 +144,7 @@ tooltip {
 
 .widget-buttons-grid > flowbox > flowboxchild > button {
   background: @surface0;
-  box-shadow: 0px 0px 10px shade(@base, 1.2);
+  box-shadow: 0px 0px 10px @base;
   border-radius: 12px;
   min-width: 38px;
   min-height: 20px;
