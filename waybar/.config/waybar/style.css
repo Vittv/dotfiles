@@ -1,14 +1,15 @@
 @import "../colors/schemes/vague/colors.css";
 
 * {
-    font-size: 14px;
+    font-size: 12px;
     font-family: "JetBrainsMono Nerd Font Propo";
     font-weight: 500;
 }
 
 window#waybar {
   /* background-color: alpha(@base, 0.95); */
-  background-color: shade(@base, 1.2);
+  /* background-color: shade(@base, 1.2); */
+  background-color: @base;
   /* border-radius: 10px; */
   /* background-color: transparent; */
   /* background: transparent; */
@@ -69,8 +70,7 @@ window#waybar {
 #tray {
   font-weight: 500;
   transition: all 0.3s ease;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding: 0 0;
   margin: 4px 2px;
   font-size: 11px;
 }
@@ -100,7 +100,7 @@ window#waybar {
 }
 
 #bluetooth {
-  color: @pink;
+  color: @sky;
   font-size: 14px;
 }
 

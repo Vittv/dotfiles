@@ -8,7 +8,7 @@
     "reload_style_on_change": true,
     "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "network", "pulseaudio", "custom/inbox", "custom/power"],
+    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/inbox", "custom/power"],
 
     "custom/menu": {
       "format": "󰣇",
@@ -80,7 +80,7 @@
     },
 
     "tray": {
-      "icon-size": 16,
+      "icon-size": 14,
       "spacing": 6
     },
 
@@ -136,14 +136,14 @@
 
     "clock": {
       "format": "{:%d  •  %I:%M %p}",
-      "tooltip-format": "<span size='15000'><tt>{calendar}</tt></span>",
+      "tooltip-format": "<span font='JetBrainsMono Nerd Font Mono 10' size='16000'>{calendar}</span>",
       "calendar": {
         "mode": "month",
         "format": {
-          "months": "<span color='#F5C2E7'>{}</span>",
-          "weekdays": "<span color='#89B4FA'>{}</span>",
-          "days": "<span color='#CDD6F4'>{}</span>",
-          "today": "<span color='#F9E2AF'>{}</span>"
+          "months": "<span color='#bb9dbd'>{}</span>",
+          "weekdays": "<span color='#7e98e8'>{}</span>",
+          "days": "<span color='#cdcdcd'>{}</span>",
+          "today": "<span color='#f3be7c'>{}</span>"
         }
       },
       "cursor": "true",
