@@ -15,7 +15,8 @@ return {
         "bashls",
         "gopls",
         "tinymist",
-        "clangd"
+        "clangd",
+        "rust_analyzer"
       },
     },
     dependencies = {

@@ -11,7 +11,7 @@ return {
     local parsers = {
       "lua", "html", "css", "javascript", "typescript",
       "markdown", "markdown_inline", "yaml", "latex", "typst",
-      "bash", "python", "c"
+      "bash", "python", "c", "cpp", "rust"
     }
     for _, parser in ipairs(parsers) do
       ts.install(parser)

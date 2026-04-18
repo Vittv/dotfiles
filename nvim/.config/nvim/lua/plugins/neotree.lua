@@ -11,8 +11,6 @@ return {
     require("lsp-file-operations").setup()
 
 		vim.keymap.set("n", "<space><Tab>", ":Neotree filesystem toggle float<CR>", {})
-		vim.keymap.set("n", "<leader>bf", ":Neotree buffers toggle float<CR>", {})
-    vim.keymap.set("n", "<leader>gs", ":Neotree git_status toggle float<CR>")
 
     require("neo-tree").setup({
       popup_border_style = "rounded",
