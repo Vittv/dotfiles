@@ -1,10 +1,9 @@
 # Welcome to my dotfiles!
-
 Here you can find the configs for the tools I use on my dev workflow. This process is a lot easier by using GNU Stow to create symlinks between this repository and your actual .config/ diretory. You can learn more about it [here](https://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html).
 
 ## Installation
 ### 1. Requirements
->Use your package manager of choice.
+> Use your package manager of choice.
 ```bash
 # Arch
 sudo pacman -S git stow
@@ -94,3 +93,11 @@ Everything, including other dependencies, should be automatically installed when
 
 ## Scripting
 My entire config relies on a lot of little scripts I've either written or grabbed somewhere to perform very specific tasks to my workflow and general daily life. The [waybar](https://github.com/Vittv/dotfiles/tree/main/waybar/.config/waybar) config for example expects some scripts which will require my [scripts](https://github.com/Vittv/dotfiles/tree/main/scripts/.local/bin) directory to be stowed as well, for ease of use. In there you can also find instructions on how to get everything running and working properly.
+
+## Install script (Arch only)
+To install and configure everything in one go, you can use the following command and run the install script:
+
+```bash
+git clone https://github.com/Vittv/dotfiles.git ~/dotfiles && cd ~/dotfiles
+chmod +x install.sh && ./install.sh
+```
