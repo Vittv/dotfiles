@@ -4,7 +4,7 @@ set -e
 echo "==> Installing base dependencies..."
 sudo pacman -S --needed --noconfirm git stow base-devel
 
-echo "==> Creating directories..."
+echo "==> Creating build directory..."
 mkdir -p "$HOME/build/"
 
 # yay
