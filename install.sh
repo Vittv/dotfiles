@@ -131,10 +131,10 @@ done
 
 # Switch shell to fish
 # Ensure fish is in /etc/shells (pacman should do this, but guard anyway)
-grep -qxF '/usr/bin/fish' /etc/shells || echo '/usr/bin/fish' | sudo tee -a /etc/shells
+grep -qxF '/usr/sbin/fish' /etc/shells || echo '/usr/sbin/fish' | sudo tee -a /etc/shells
 
 # Change shell without password prompt
-sudo usermod --shell /usr/bin/fish "$USER"
+sudo usermod --shell /usr/sbin/fish "$USER"
 
 # Done
 echo ""
