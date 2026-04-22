@@ -26,7 +26,7 @@ vim.g.clipboard = {
   cache_enabled = 0,
 }
 
--- Xorg
+-- Xorg (make sure to install xclip as it doesn't always come with every distro)
 -- vim.g.clipboard = {
 --   name = "Xclip",
 --   copy = {
@@ -69,3 +69,31 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
+
+-- Navigate buffers with leader 1 2 3...
+for i = 1, 9 do
+  vim.keymap.set("n", "<leader>" .. i, function()
+    local bufs = vim.tbl_filter(function(b)
+      return vim.api.nvim_buf_is_loaded(b)
+        and vim.bo[b].buflisted
+    end, vim.api.nvim_list_bufs())
+    if bufs[i] then
+      vim.api.nvim_set_current_buf(bufs[i])
+    end
+  end, { desc = "Go to buffer " .. i })
+end
+
+-- Delete buffer but preserve window
+vim.keymap.set("n", "<leader>x", function()
+  local bufs = vim.tbl_filter(function(b)
+    return vim.api.nvim_buf_is_loaded(b) and vim.bo[b].buflisted
+  end, vim.api.nvim_list_bufs())
+
+  local current = vim.api.nvim_get_current_buf()
+
+  if #bufs > 1 then
+    vim.cmd("bprevious")
+  end
+
+  vim.api.nvim_buf_delete(current, {})
+end, { desc = "Close buffer" })

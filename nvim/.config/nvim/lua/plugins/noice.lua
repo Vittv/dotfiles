@@ -17,6 +17,9 @@ return {
     -- },
     cmdline = {
       view = "cmdline",
+      format = {
+        cmdline = { icon = "" }
+      }
     },
     mini = {
       align = "center",
