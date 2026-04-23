@@ -97,12 +97,13 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 echo "==> Installing Vague themes..."
 mkdir -p "$HOME/.themes"
 
-# I'll have to add this later when I submit a wm version for qt only not kde
-# if [ ! -d "$HOME/.themes/vague-kde" ]; then
-#   git clone https://github.com/vague-theme/vague-kde.git "$HOME/build/vague-kde"
-# else
-#   echo "  vague-kde already present, skipping"
-# fi
+if [ ! -d "$HOME/build/vague-kde" ]; then
+  git clone https://github.com/vague-theme/vague-kde.git "$HOME/build/vague-kde"
+  mkdir -p ~/.local/share/color-schemes
+  cp -p "$HOME/build/vague-kde/Vague.colors" ~/.local/share/color-schemes/
+else
+  echo "  vague-kde already present, skipping"
+fi
 
 if [ ! -d "$HOME/.themes/Vague" ]; then
   git clone https://github.com/vague-theme/vague-gtk.git "$HOME/.themes/Vague"
@@ -110,7 +111,7 @@ else
   echo "  Vague already present, skipping"
 fi
 
-if [ ! -d "$HOME/.themes/vague-chromium" ]; then
+if [ ! -d "$HOME/build/vague-chromium" ]; then
   git clone https://github.com/vague-theme/vague-chromium.git "$HOME/build/vague-chromium"
 else
   echo "  vague-chromium already present, skipping"
