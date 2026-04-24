@@ -11,7 +11,7 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-MUDFISH_PATH="/opt/mudfish/6.4.3/bin/mudrun-headless"
+MUDFISH_PATH="/opt/mudfish/6.5.0/bin/mudrun-headless"
 
 echo -e "${BLUE}Mudfish VPN Launcher v1.0${NC}"
 echo -e "Initializing connection manager..."
