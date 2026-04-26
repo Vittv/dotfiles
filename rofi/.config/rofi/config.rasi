@@ -22,11 +22,11 @@ configuration {
 window {
     transparency: "real";
     background-color: @bg;
-    border: 0px;
-    border-color: @accent;
+    border: 1px;
+    border-color: @bg-alt;
     border-radius: 10px;
-    width: 340px;
-    padding: 12px;
+    width: 320px;
+    padding: 8px;
 
     animation: "expand-vertical";
     animation-duration: 300;
@@ -34,14 +34,28 @@ window {
 
 mainbox {
     background-color: transparent;
-    spacing: 12px;
+    spacing: 0px;
     border: 0;
+    children: [ inputbar, listview ];
+}
+
+textbox {
+    expand: false;
+    str: "↑↓ navigate   ↵ open   Esc close";
+    font: "SF Pro Display 10";
+    text-color: @fg-dim;
+    background-color: transparent;
+    margin: 0;
+    padding: 0px 4px;
 }
 
 inputbar {
     background-color: @bg-alt;
+    border: 1px;
+    border-color: @bg-selected;
     border-radius: 6px;
     padding: 12px;
+    margin: 0px 0px 8px 0px;
     spacing: 8px;
     children: [prompt, entry];
 }
@@ -52,7 +66,7 @@ prompt {
 }
 
 entry {
-    placeholder: "   Search";
+    placeholder: "   Search...";
     placeholder-color: @fg-dim;
     background-color: transparent;
     text-color: @accent;
@@ -60,7 +74,7 @@ entry {
 
 listview {
     background-color: transparent;
-    lines: 8;
+    lines: 6;
     spacing: 4px;
     cycle: false;
     scrollbar: false;
@@ -70,12 +84,15 @@ listview {
     // With disabled animations, it should probably be commented out
     dynamic: true;
     fixed-height: false;
+    expand: true;
 }
 
 element {
     background-color: transparent;
     padding: 10px;
-    border-radius: 6px;
+    // border: 1px 0px 0px 0px;
+    border-color: @bg-selected;
+    border-radius: 0px;
     spacing: 12px;
 }
 
@@ -93,6 +110,8 @@ element selected.normal {
     background-color: @bg-selected;
     border-radius: 6px;
     text-color: @accent;
+    border: 1px;
+    border-color: @bg-alt;
     // background-color: transparent;
     // text-color: @accent;
 }
