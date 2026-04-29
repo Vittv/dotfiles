@@ -136,7 +136,7 @@
 
     "clock": {
       "format": "{:%d  •  %I:%M %p}",
-      "tooltip-format": "<span font='JetBrainsMono Nerd Font Mono 10' size='16000'>{calendar}</span>",
+      "tooltip-format": "<span font='JetBrainsMono Nerd Font Medium 10' size='14000'>{calendar}</span>",
       "calendar": {
         "mode": "month",
         "format": {
