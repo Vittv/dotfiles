@@ -1,0 +1,166 @@
+#!/usr/bin/env bash
+
+# configuration
+TRACKED_DIRS=(
+  "$HOME/Documents"
+  "$HOME/dev"
+  "$HOME/dotfiles"
+  "$HOME/drive"
+)
+
+BCV_PATH=$(realpath "$0")
+CACHE_FILE="/tmp/bcv_preview_$USER.txt"
+
+normalize_path() {
+  echo "$1" | sed "s|^$HOME|~|"
+}
+
+expand_path() {
+  echo "$1" | sed "s|^~|$HOME|"
+}
+
+scan_vault() {
+  for dir in "${TRACKED_DIRS[@]}"; do
+    [[ ! -d "$dir" ]] && continue
+    if [[ "$dir" == "$HOME/drive" ]]; then
+      echo "$dir"
+      continue
+    fi
+    find "$dir" -maxdepth 2 -name ".git" -type d -prune | sed 's|/\.git||'
+  done | sort -u
+}
+
+get_git_status_info() {
+  local path=$(expand_path "$1")
+  if [[ ! -d "$path/.git" ]]; then
+    printf "34\t\e[34m󰖟\e[0m" 
+    return
+  fi
+
+  local status=$(git -C "$path" status --porcelain 2>/dev/null)
+  local ahead=$(git -C "$path" rev-list --count @{u}..HEAD 2>/dev/null)
+
+  if [[ -n "$status" ]]; then
+    printf "35\t\e[35m*\e[0m"
+  elif [[ "$ahead" -gt 0 ]]; then
+    printf "34\t\e[34m󰶣\e[0m"
+  else
+    printf "32\t\e[32m󰄬\e[0m"
+  fi
+}
+
+generate_cache() {
+  > "$CACHE_FILE"
+
+  local v_blue="\e[34m"
+  local v_yellow="\e[33m"
+  local v_cyan="\e[36m"
+  local v_reset="\e[0m"
+
+  # read all paths into an array to allow "look-ahead"
+  mapfile -t all_paths < <(scan_vault)
+  local total=${#all_paths[@]}
+    local last_parent=""
+
+    printf "${v_blue}~${v_reset}\n" >> "$CACHE_FILE"
+
+    for (( i=0; i<$total; i++ )); do
+      local raw_path="${all_paths[$i]}"
+      local next_raw_path="${all_paths[$((i+1))]}"
+
+      local path=$(normalize_path "$raw_path")
+      local parent=$(dirname "$path")
+      local name=$(basename "$path")
+
+      # category Headers
+      if [[ "$parent" != "$last_parent" ]]; then
+        [[ $i -gt 0 ]] && printf "│\n" >> "$CACHE_FILE"
+
+        if [[ "$parent" != "~" ]]; then
+          local folder_name=$(echo "$parent" | sed 's|^~/||')
+          printf "├── ${v_blue}%s${v_reset}\n" "$folder_name" >> "$CACHE_FILE"
+        fi
+        last_parent="$parent"
+      fi
+
+      # drive (final entry)
+      if [[ "$raw_path" == "$HOME/drive" ]]; then
+        printf "└── \e[34m󰖟\e[0m drive ${v_yellow}󰁔${v_reset} ${v_cyan}https://drive.google.com/drive/my-drive${v_reset}\n" >> "$CACHE_FILE"
+        continue
+      fi
+
+      IFS=$'\t' read -r status_code glyph < <(get_git_status_info "$raw_path")
+      local remote_url=$(git -C "$raw_path" remote get-url origin 2>/dev/null | sed 's|\.git$||')
+
+      # determine branch symbol based on if another item follows in same category
+      local next_parent=$(normalize_path "$(dirname "$next_raw_path")")
+      local branch="├──"
+
+      if [[ "$parent" == "~" ]]; then
+        # root items like dotfiles
+        printf "├── %b %s" "$glyph" "$name" >> "$CACHE_FILE"
+      else
+        # nested items inside dev/Documents
+        if [[ "$next_parent" != "$parent" ]]; then
+          branch="└──"
+        fi
+        printf "│   %s %b %s" "$branch" "$glyph" "$name" >> "$CACHE_FILE"
+      fi
+
+      if [[ -n "$remote_url" ]]; then
+        printf " ${v_yellow}󰁔${v_reset} ${v_cyan}%s${v_reset}" "$remote_url" >> "$CACHE_FILE"
+      fi
+      echo "" >> "$CACHE_FILE"
+    done
+}
+
+open_local() {
+  local path=$(expand_path "$1"); [[ -z "$path" ]] && return
+  if [[ "$path" == "$HOME/drive" ]]; then
+    xdg-open "https://drive.google.com/drive/my-drive" &>/dev/null &
+    return
+  fi
+
+  if command -v yazi >/dev/null; then
+    tmux new-window -c "$path" "yazi" || xdg-open "$path" &>/dev/null &
+  else
+    xdg-open "$path" &>/dev/null &
+  fi
+}
+
+open_remote() {
+  local path=$(expand_path "$1"); [[ -z "$path" ]] && return
+  if [[ "$path" == "$HOME/drive" ]]; then
+    xdg-open "https://drive.google.com/drive/my-drive" &>/dev/null &
+    return
+  fi
+
+  local remote_url=$(git -C "$path" remote get-url origin 2>/dev/null)
+  if [[ "$remote_url" =~ "git@" ]]; then
+    remote_url=$(echo "$remote_url" | sed -e 's|:|/|' -e 's|git@|https://|' -e 's|\.git$||')
+  fi
+  [[ -n "$remote_url" ]] && xdg-open "$remote_url" &>/dev/null &
+}
+
+# dispatcher
+case "${1:-}" in
+  --local) open_local "$2" ;;
+  --remote) open_remote "$2" ;;
+  *)
+    generate_cache
+
+    NAV_HELP=$(printf "\e[1;33mbcv\e[0m  \e[1;34menter\e[0m Local  \e[1;34mctrl-r\e[0m Remote")
+
+    scan_vault | sed "s|^$HOME|~|" | fzf \
+      --layout=reverse --height=100% \
+      --border=top \
+      --border-label=" $NAV_HELP " \
+      --border-label-pos=3 \
+      --prompt='  bcv 󰁔 ' \
+      --preview="cat $CACHE_FILE" \
+      --preview-window='bottom:70%:wrap:border-top' \
+      --bind="enter:execute-silent($BCV_PATH --local {})" \
+      --bind="ctrl-r:change-prompt(  󰑐 bcv 󰁔 )+execute-silent($BCV_PATH --remote {})+change-prompt(  bcv 󰁔 )" \
+      2>/dev/null || true
+    ;;
+esac
