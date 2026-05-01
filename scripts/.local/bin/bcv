@@ -72,7 +72,7 @@ generate_cache() {
       local parent=$(dirname "$path")
       local name=$(basename "$path")
 
-      # category Headers
+      # category headers
       if [[ "$parent" != "$last_parent" ]]; then
         [[ $i -gt 0 ]] && printf "│\n" >> "$CACHE_FILE"
 
@@ -116,13 +116,14 @@ generate_cache() {
 
 open_local() {
   local path=$(expand_path "$1"); [[ -z "$path" ]] && return
+
   if [[ "$path" == "$HOME/drive" ]]; then
     xdg-open "https://drive.google.com/drive/my-drive" &>/dev/null &
     return
   fi
 
   if command -v yazi >/dev/null; then
-    tmux new-window -c "$path" "yazi" || xdg-open "$path" &>/dev/null &
+    yazi "$path"
   else
     xdg-open "$path" &>/dev/null &
   fi
@@ -159,7 +160,7 @@ case "${1:-}" in
       --prompt='  bcv 󰁔 ' \
       --preview="cat $CACHE_FILE" \
       --preview-window='bottom:70%:wrap:border-top' \
-      --bind="enter:execute-silent($BCV_PATH --local {})" \
+      --bind="enter:execute($BCV_PATH --local {})" \
       --bind="ctrl-r:change-prompt(  󰑐 bcv 󰁔 )+execute-silent($BCV_PATH --remote {})+change-prompt(  bcv 󰁔 )" \
       2>/dev/null || true
     ;;
