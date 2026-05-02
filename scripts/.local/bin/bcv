@@ -1,38 +1,27 @@
 #!/usr/bin/env bash
-
-# configuration
 TRACKED_DIRS=(
   "$HOME/Documents"
   "$HOME/dev"
   "$HOME/dotfiles"
   "/mnt/drive"
 )
-
 BCV_PATH=$(realpath "$0")
 CACHE_FILE="/tmp/bcv_preview_$USER.txt"
+INDEX_FILE="/tmp/bcv_index_$USER.txt"
 
-normalize_path() {
-  echo "$1" | sed "s|^$HOME|~|"
-}
-
-expand_path() {
-  echo "$1" | sed "s|^~|$HOME|"
-}
+normalize_path() { echo "$1" | sed "s|^$HOME|~|"; }
+expand_path()    { echo "$1" | sed "s|^~|$HOME|"; }
 
 scan_vault() {
   for dir in "${TRACKED_DIRS[@]}"; do
     [[ ! -d "$dir" ]] && continue
-
-    if [[ "$dir" == "$HOME/dotfiles" ]]; then
-       find "$dir" -maxdepth 1 -mindepth 1 -type d ! -name ".git"
-    elif [[ "$dir" == "/mnt/drive" ]]; then
-       find "$dir" -maxdepth 1 -mindepth 1 -type d ! -name "backup"
-       [[ -d "$dir/backup" ]] && find "$dir/backup" -maxdepth 1 -mindepth 1 -type d
+    if [[ "$dir" == "/mnt/drive" ]]; then
+      find "$dir" -maxdepth 1 -mindepth 1 -type d ! -name "backup"
+      [[ -d "$dir/backup" ]] && find "$dir/backup" -maxdepth 1 -mindepth 1 -type d
     else
-       find "$dir" -maxdepth 2 -name ".git" -type d -prune | sed 's|/\.git||'
+      find "$dir" -maxdepth 2 -name ".git" -type d -prune | sed 's|/\.git||'
     fi
   done | awk -F/ '{
-    # Sort key: parent path | hidden (0) or normal (1) | name | full path
     parent = ""; for(i=1; i<NF; i++) parent = parent $i "/";
     is_hidden = ($NF ~ /^\./) ? "0" : "1";
     print parent "|" is_hidden "|" $NF "|" $0
@@ -42,21 +31,18 @@ scan_vault() {
 get_git_status_info() {
   local path=$(expand_path "$1")
   local repo_root=""
-
   if [[ -d "$path/.git" ]]; then
     repo_root="$path"
   else
     repo_root=$(git -C "$path" rev-parse --show-toplevel 2>/dev/null)
   fi
-
   if [[ -z "$repo_root" ]]; then
-    printf "34\t\e[34m󰉋\e[0m\tNo Repo" 
+    printf "34\t\e[34m󰉋\e[0m\tNo Repo"
     return
   fi
-
-  local status=$(git -C "$repo_root" status --porcelain -- "$path" 2>/dev/null)
+  # if multiple paths share the same repo root, avoid redundant/concurrent calls
+  local status=$(git -C "$repo_root" status --porcelain 2>/dev/null)
   local ahead=$(git -C "$repo_root" rev-list --count @{u}..HEAD 2>/dev/null)
-
   if [[ -n "$status" ]]; then
     printf "35\t\e[35m*\e[0m\tModified"
   elif [[ "$ahead" -gt 0 ]]; then
@@ -67,82 +53,97 @@ get_git_status_info() {
 }
 
 generate_cache() {
+  # skip if cache is less than 60 seconds old
+  if [[ -f "$CACHE_FILE" ]] && (( $(date +%s) - $(stat -c %Y "$CACHE_FILE") < 60 )); then
+    return
+  fi
+
   local v_blue="\e[34m"
   local v_cyan="\e[36m"
   local v_dim="\e[2m"
   local v_reset="\e[0m"
-
-  printf "${v_dim}%-30s %-15s %s${v_reset}\n" "DIRECTORY" "STATUS" "REMOTE" > "$CACHE_FILE"
+  printf "${v_dim}  %-24s %-16s %-18s %s${v_reset}\n" "DIRECTORY" "STATUS" "ACTIVITY" "REMOTE" > "$CACHE_FILE"
   printf "${v_dim}%s${v_reset}\n" "$(printf '%.0s─' {1..80})" >> "$CACHE_FILE"
-
+  > "$INDEX_FILE"
+  local line_num=2
   mapfile -t all_paths < <(scan_vault)
   local last_parent=""
-
   for raw_path in "${all_paths[@]}"; do
     local path=$(normalize_path "$raw_path")
     local parent=$(dirname "$path")
     local name=$(basename "$path")
 
+    # dirs sitting directly in ~ look better with their own header
+    if [[ "$parent" == "~" ]]; then
+      parent="~/$(basename "$path")"
+      name="$(basename "$path")"
+    fi
+
     if [[ "$parent" != "$last_parent" ]]; then
       printf "\n${v_blue}%s${v_reset}\n" "$parent" >> "$CACHE_FILE"
+      (( line_num += 2 ))
       last_parent="$parent"
     fi
 
     IFS=$'\t' read -r status_code glyph status_text < <(get_git_status_info "$raw_path")
-    
-    local repo_root=$(git -C "$(expand_path "$raw_path")" rev-parse --show-toplevel 2>/dev/null)
-    local remote_url=""
-    [[ -n "$repo_root" ]] && remote_url=$(git -C "$repo_root" remote get-url origin 2>/dev/null | sed -e 's|\.git$||' -e 's|git@github.com:|https://github.com/|')
 
-    local remote_display
-    if [[ -n "$remote_url" ]]; then
-        remote_display="${v_cyan}${remote_url}${v_reset}"
-    else
-        remote_display="${v_dim}---${v_reset}"
+    local repo_root=$(git -C "$(expand_path "$raw_path")" rev-parse --show-toplevel 2>/dev/null)
+    local remote_url="" remote_display="${v_dim}---${v_reset}" remote_short="---"
+    local last_modified="${v_dim}---${v_reset}"
+
+    if [[ -n "$repo_root" ]]; then
+      remote_url=$(git -C "$repo_root" remote get-url origin 2>/dev/null \
+        | sed -e 's|\.git$||' -e 's|git@github\.com:|https://github.com/|')
+
+      # shorten remote label
+      if [[ "$remote_url" == *"github.com"* ]]; then
+        remote_display="${v_cyan}github${v_reset}"
+      elif [[ -n "$remote_url" ]]; then
+        remote_display="${v_cyan}$(echo "$remote_url" | sed 's|https://||;s|/.*||')${v_reset}"
+      fi
+
+      # last commit date relative
+      local rel_date=$(git -C "$repo_root" log -1 --format="%cr" 2>/dev/null)
+      [[ -n "$rel_date" ]] && last_modified="${v_dim}${rel_date}${v_reset}"
     fi
-    
-    printf "  %-28s %b %-12s %b\n" \
-      "$name" \
-      "$glyph" \
-      "$status_text" \
-      "$remote_display" >> "$CACHE_FILE"
+
+    printf "  %-24s %b %-14s %-26b %b\n" \
+      "$name" "$glyph" "$status_text" "$last_modified" "$remote_display" >> "$CACHE_FILE"
+    (( line_num++ ))
+    echo "${path}|${line_num}" >> "$INDEX_FILE"
   done
 }
 
-open_local() {
-  local path=$(expand_path "$1"); [[ -z "$path" ]] && return
-  yazi "$path"
-}
-
-open_remote() {
-  local path=$(expand_path "$1"); [[ -z "$path" ]] && return
-  local repo_root=$(git -C "$path" rev-parse --show-toplevel 2>/dev/null)
-  [[ -z "$repo_root" ]] && return
-
-  local remote_url=$(git -C "$repo_root" remote get-url origin 2>/dev/null)
-  if [[ "$remote_url" =~ "git@" ]]; then
-    remote_url=$(echo "$remote_url" | sed -e 's|:|/|' -e 's|git@|https://|' -e 's|\.git$||')
-  fi
-  xdg-open "$remote_url" &>/dev/null &
-}
-
 case "${1:-}" in
-  --local) open_local "$2" ;;
-  --remote) open_remote "$2" ;;
+  --local) yazi "$(expand_path "$2")" ;;
+  --remote)
+    repo_root=$(git -C "$(expand_path "$2")" rev-parse --show-toplevel 2>/dev/null)
+    [[ -n "$repo_root" ]] && remote_url=$(git -C "$repo_root" remote get-url origin 2>/dev/null \
+      | sed -e 's|:|/|' -e 's|git@|https://|' -e 's|\.git$||')
+    [[ -n "$remote_url" ]] && xdg-open "$remote_url" &>/dev/null &
+    ;;
   *)
-    generate_cache
+    # only regenerate if cache is stale (>60s old or missing)
+    if [[ ! -f "$CACHE_FILE" ]] || (( $(date +%s) - $(stat -c %Y "$CACHE_FILE") >= 60 )); then
+      generate_cache
+    fi
     NAV_HELP=$(printf "\e[1;33mbcv\e[0m  \e[1;34menter\e[0m Local  \e[1;34mctrl-r\e[0m Remote")
-
-    scan_vault | sed "s|^$HOME|~|" | fzf \
-      --layout=reverse --height=100% \
-      --border=top \
-      --border-label=" $NAV_HELP " \
-      --border-label-pos=3 \
-      --prompt='  bcv 󰁔 ' \
+    while IFS= read -r raw_path; do
+      path=$(normalize_path "$raw_path")
+      line=$(grep -m1 "^${path}|" "$INDEX_FILE" | cut -d'|' -f2)
+      printf "%s\t%s\n" "${line:-3}" "$path"
+    done < <(scan_vault) | fzf \
+      --height=100% \
+      --layout=reverse \
+      --header="$NAV_HELP" \
+      --prompt="  → " \
+      --ansi \
+      --delimiter='\t' \
+      --with-nth=2 \
       --preview="cat $CACHE_FILE" \
-      --preview-window='bottom:80%:wrap:border-top' \
-      --bind="enter:execute($BCV_PATH --local {})" \
-      --bind="ctrl-r:execute-silent($BCV_PATH --remote {})" \
+      --preview-window="top:80%:nowrap:~2:+{1}-2/2" \
+      --bind="enter:execute($BCV_PATH --local {2})" \
+      --bind="ctrl-r:execute-silent($BCV_PATH --remote {2})" \
       2>/dev/null || true
     ;;
 esac
