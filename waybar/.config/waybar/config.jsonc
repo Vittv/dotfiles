@@ -76,7 +76,9 @@
       "interval": 2,
       "format": "{}",
       "tooltip": true,
-      "return-type": "json"
+      "return-type": "json",
+      "on-click": "setsid -f /home/vitt/.config/waybar/src/mudfish-start.sh",
+      "on-click-right": "setsid -f sudo /home/vitt/.config/waybar/src/mudfish-stop.sh"
     },
 
     "tray": {
