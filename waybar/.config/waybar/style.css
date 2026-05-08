@@ -1,9 +1,9 @@
 @import "../colors/schemes/vague/colors.css";
 
 * {
-    font-size: 12px;
-    font-family: "JetBrainsMono Nerd Font Propo";
-    font-weight: 500;
+  font-size: 12px;
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-weight: 500;
 }
 
 window#waybar {
@@ -21,14 +21,47 @@ window#waybar {
 /*   background-color: alpha(@base, 0.90); */
 /*   border-radius: 10px; */
 /*   padding: 0 14px; */
-  /* border: 2px solid alpha(@surface0, 0.40); */
+/* border: 2px solid alpha(@surface0, 0.40); */
 /* } */
 
+#custom-microphone,
+#custom-menu,
+#custom-files,
+#custom-work,
+#custom-palette,
+#custom-tmux,
+#custom-devserver,
+#custom-spotify {
+  margin: 0 2px;
+}
+
+#custom-menu,
+#custom-files,
+#custom-work,
+#custom-palette,
 #window label {
   font-family: "SF Compact Display";
   font-size: 12px;
   font-weight: 700;
-  color: @rosewater;
+  color: @text;
+  transition: color 0.3s ease;
+}
+
+#window label:hover,
+#custom-menu:hover,
+#custom-files:hover,
+#custom-work:hover,
+#custom-palette:hover {
+  color: @lavender;
+}
+
+#workspaces {
+  /* margin-left: 14px; */
+  margin: 0 -4px;
+}
+
+#custom-microphone {
+  margin-left: 14px;
 }
 
 #workspaces button label {
@@ -37,19 +70,20 @@ window#waybar {
   font-size: 13px;
   padding: 0 0px;
   color: @overlay2;
-  /* margin: 8px 2px; */
+  margin: 0px 0px;
 }
 
 #workspaces button {
   padding: 0 0px;
-  margin: 2px 0px;
+  margin: 2px -2px;
   border-radius: 10px;
   background-color: transparent;
 }
 
 #workspaces button.active label {
   color: @text;
-  /* padding: 0 20px */
+  padding: 0 0px;
+  border-radius: 4px;
 }
 
 #window {
@@ -83,7 +117,7 @@ window#waybar {
 #pulseaudio,
 #custom-inbox,
 #custom-power {
-  padding: 0 2px;
+  padding: 0 0px;
 }
 
 #custom-microphone:hover,
@@ -116,9 +150,9 @@ window#waybar {
 }
 
 #custom-power {
-    color: @text;
-    font-weight: 700;
-    margin-right: 14px;
+  color: @text;
+  font-weight: 700;
+  margin-right: 14px;
 }
 
 #pulseaudio {
@@ -132,7 +166,7 @@ window#waybar {
   transition: all 0.2s ease;
   font-size: 10px;
   /* margin-left: 6px; */
-  margin-left: 14px;
+  /* margin-left: 14px; */
 }
 
 #custom-microphone:hover {
@@ -210,13 +244,13 @@ tooltip label {
 
 #custom-cpu-temp {
   font-family: "FiraCode Nerd Font Propo";
-  color: @mauve;
+  color: @lavender;
   font-weight: 700;
 }
 
 #custom-gpu-temp {
   font-family: "FiraCode Nerd Font Propo";
-  color: @lavender;
+  color: @mauve;
   font-weight: 700;
 }
 
@@ -238,6 +272,7 @@ tooltip label {
 }
 
 #custom-tmux {
+  /* color: shade(@sapphire, 1.2); */
   color: @rosewater;
 }
 
@@ -246,20 +281,9 @@ tooltip label {
 }
 
 #custom-tmux:hover {
-  color: @flamingo;
+  color: shade(@rosewater, 1.2);
 }
 
 #custom-devserver:hover {
-  color: @lavender;
-}
-
-#custom-menu {
-  color: @text;
-  font-size: 20px;
-  margin-left: 14px;
-  transition: color 0.2s ease;
-}
-
-#custom-menu:hover {
   color: @lavender;
 }

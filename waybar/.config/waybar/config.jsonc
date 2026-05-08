@@ -11,8 +11,23 @@
     "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/inbox", "custom/power"],
 
     "custom/menu": {
-      "format": "󰣇",
+      "format": "Apps",
       "on-click": "rofi -show drun"
+    },
+
+    "custom/files": {
+      "format": "Files",
+      "on-click": "nautilus"
+    },
+
+    "custom/work": {
+      "format": "Work",
+      "on-click": "~/.local/bin/dev.sh"
+    },
+
+    "custom/palette": {
+      "format": "Palette",
+      "on-click": "COLOR=$(hyprpicker -a) && notify-send 'Palette 🎨' \"<b>$COLOR</b> copied to clipboard\""
     },
 
     "custom/microphone": {
@@ -27,20 +42,21 @@
 
     "hyprland/workspaces": {
       "format": "{name}",
-      "format-icons": {
-          // "1": "z",
-          // "2": "x",
-          // "3": "c",
-          // "4": "v",
-          // "5": "n",
-          // "6": "m",
-          // "7": ",",
-          // "8": "."
-          "active": "󰮯",
-          "default": "󰮯"
-      },
+      // "format-icons": {
+      //     // "1": "z",
+      //     // "2": "x",
+      //     // "3": "c",
+      //     // "4": "v",
+      //     // "5": "n",
+      //     // "6": "m",
+      //     // "7": ",",
+      //     // "8": "."
+      //     "active": "󰮯",
+      //     "default": "󰮯"
+      // },
       "on-click": "activate",
       "all-outputs": true,
+      "active-only": false,
       "persistent-workspaces": {
         "*": [1, 2, 3, 4]
       },
