@@ -1,10 +1,11 @@
 local enter = require('mdbox.enter')
 local keymaps = require('mdbox.keymaps')
+require('mdbox.footer')
 
--- Setup keymaps
+-- setup keymaps
 keymaps.setup()
 
--- Markdown indentation
+-- markdown indentation
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
@@ -14,7 +15,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Enter key behavior in markdown files
+-- enter key behavior in markdown files
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
@@ -22,13 +23,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Enable heading-based folding
+-- enable heading-based folding
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
     vim.opt_local.foldmethod = "expr"
     vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-    vim.opt_local.foldenable = true   -- Enable folds
-    vim.opt_local.foldlevel = 99      -- Start with all folds open
+    vim.opt_local.foldenable = true   -- enable folds
+    vim.opt_local.foldlevel = 99      -- start with all folds open
   end,
 })

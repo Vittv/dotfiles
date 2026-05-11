@@ -56,13 +56,6 @@ function M.setup()
     vim.cmd('normal! gvc`' .. sel .. '`')
   end, { desc = 'Wrap selection in backticks' })
 
-  -- Generate codeblock and place cursor after opening ```
-  vim.keymap.set('n', '<leader>cc', function()
-    vim.api.nvim_put({'```', '```'}, 'l', true, true)
-    vim.cmd('normal! k$')
-    vim.cmd('startinsert!')
-  end, { desc = 'Insert markdown codeblock' })
-
 end
 
 return M

@@ -28,7 +28,6 @@ return {
     {
       "OXY2DEV/markview.nvim",
       lazy = false,
-      dependencies = { "hrsh7th/nvim-cmp" },
       opts = {
         preview = {
           filetypes = { "typst" },  -- ONLY activate for typst

@@ -1,16 +1,16 @@
 return {
-	"nvim-neo-tree/neo-tree.nvim",
-	branch = "v3.x",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"nvim-tree/nvim-web-devicons",
-		"MunifTanjim/nui.nvim",
+  "nvim-neo-tree/neo-tree.nvim",
+  branch = "v3.x",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-tree/nvim-web-devicons",
+    "MunifTanjim/nui.nvim",
     "antosha417/nvim-lsp-file-operations",
-	},
-	config = function()
+  },
+  config = function()
     require("lsp-file-operations").setup()
 
-		vim.keymap.set("n", "<space><Tab>", ":Neotree filesystem toggle float<CR>", {})
+    vim.keymap.set("n", "<space><Tab>", ":Neotree filesystem toggle float<CR>", {})
 
     require("neo-tree").setup({
       popup_border_style = "rounded",
@@ -20,6 +20,9 @@ return {
         window = {
           position = "float",
           popup = {
+            title = function(state)
+              return vim.fn.fnamemodify(state.path, ":t")
+            end,
             size = {
               height = "70%",
               width = "70%",
@@ -29,5 +32,5 @@ return {
         },
       },
     })
-	end,
+  end,
 }
