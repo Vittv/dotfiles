@@ -3,13 +3,16 @@ return {
   config = function()
     require("colorizer").setup({
       "javascript",
+      "typescript",
+      "jsx",
+      "tsx",
       "json",
       "conf",
       "rasi",
       "yaml",
       "toml",
-      "markdown",
-      "typst"
+      "typst",
+      "lua"
     })
   end,
 }

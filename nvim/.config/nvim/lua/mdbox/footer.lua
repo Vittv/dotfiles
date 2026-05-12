@@ -3,15 +3,29 @@ local ns = vim.api.nvim_create_namespace("md_footer")
 local function count_backlinks(bufnr)
   local fname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t:r")
   if fname == "" then return 0 end
-  local result = vim.fn.systemlist(string.format(
+
+  -- match [[fname]] wikilinks
+  local result1 = vim.fn.systemlist(string.format(
     "rg --count-matches '\\[\\[%s\\]\\]' --glob '*.md' .",
     fname
   ))
+
+  -- match [text](fname) or [text](fname.md) but not URLs
+  local result2 = vim.fn.systemlist(string.format(
+    "rg --count-matches '\\[[^\\]]+\\]\\([^)]*%s(\\.md)?\\)' --glob '*.md' .",
+    fname
+  ))
+
   local total = 0
-  for _, line in ipairs(result) do
+  for _, line in ipairs(result1) do
     local n = tonumber(line:match(":(%d+)$"))
     if n then total = total + n end
   end
+  for _, line in ipairs(result2) do
+    local n = tonumber(line:match(":(%d+)$"))
+    if n then total = total + n end
+  end
+
   return total
 end
 
