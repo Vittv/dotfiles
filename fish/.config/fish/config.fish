@@ -17,6 +17,9 @@ set -x QT_QPA_PLATFORMTHEME qt5ct
 
 if status is-interactive
 # Commands to run in interactive sessions can go here
+# Switch fish to vi keybinds
+fish_vi_key_bindings
+bind -M insert ctrl-f forward-char
 
 # Run cutefetch on startup
   if test -x "$HOME/.local/bin/cutefetch"
