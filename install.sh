@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
+# prompt for sudo upfront
+sudo -v
+
+# enable pac-man progress bar in pacman
+echo "==> Configuring pacman..."
+sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
+grep -qxF 'ILoveCandy' /etc/pacman.conf || sudo sed -i '/^Color/a ILoveCandy' /etc/pacman.conf
+
 echo "==> Installing base dependencies..."
 sudo pacman -S --needed --noconfirm git stow base-devel
 
@@ -49,6 +57,7 @@ sudo pacman -S --needed --noconfirm \
   alsa-utils
 
 # yay packages
+echo "==> Installing AUR packages..."
 yay -S --needed --noconfirm \
   qt6ct-kde \
   nvibrant-bin
@@ -117,7 +126,7 @@ else
   echo "  vague-chromium already present, skipping"
 fi
 
-# Stow dotfiles
+# stow dotfiles
 echo "==> Stowing dotfiles..."
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -130,14 +139,14 @@ for pkg in colors fish hyprland kitty lazygit nvim rofi scripts starship swaync 
   fi
 done
 
-# Switch shell to fish
-# Ensure fish is in /etc/shells (pacman should do this, but guard anyway)
+# switch shell to fish
+# ensure fish is in /etc/shells (pacman should do this, but guard anyway)
 grep -qxF '/usr/sbin/fish' /etc/shells || echo '/usr/sbin/fish' | sudo tee -a /etc/shells
 
-# Change shell without password prompt
+# change shell without password prompt
 sudo usermod --shell /usr/sbin/fish "$USER"
 
-# Done
+# done
 echo ""
 echo "All done! A few manual steps remaining:"
 echo "  1. Open a new tmux session and press prefix + I to install plugins via TPM"
