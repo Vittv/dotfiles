@@ -6,7 +6,7 @@ local mainMod = "SUPER"
 
 -- apps
 hl.bind(mainMod .. " + RETURN",    hl.dsp.exec_cmd(Terminal))
-hl.bind(mainMod .. " + W",         hl.dsp.window.kill())
+hl.bind(mainMod .. " + W",         hl.dsp.window.close())
 hl.bind(mainMod .. " + E",         hl.dsp.exec_cmd(FileManager))
 hl.bind(mainMod .. " + A",         hl.dsp.exec_cmd(Browser))
 hl.bind(mainMod .. " + V",         hl.dsp.window.float({ action = "toggle" }))
