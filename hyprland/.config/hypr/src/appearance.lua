@@ -7,8 +7,8 @@ local Colors = require("schemes.vague.colors")
 -- general
 hl.config({
   general = {
-    gaps_in          = 3,
-    gaps_out         = 6,
+    gaps_in          = 4,
+    gaps_out         = 8,
     border_size      = 2,
     resize_on_border = false,
     allow_tearing    = false,
@@ -23,7 +23,7 @@ hl.config({
 -- decoration
 hl.config({
   decoration = {
-    rounding         = 4,
+    rounding         = 2,
     rounding_power   = 2,
     active_opacity   = 1.0,
     inactive_opacity = 1.0,

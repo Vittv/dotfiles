@@ -33,14 +33,14 @@ hl.window_rule({
 })
 
 -- tile steam
-hl.window_rule({
-  name  = "tile-steam",
-  match = {
-    class = "steam",
-    title = "^(Steam|Friends List|.* - Steam)$",
-  },
-  tile  = true,
-})
+-- hl.window_rule({
+--   name  = "tile-steam",
+--   match = {
+--     class = "steam",
+--     title = "^(Steam|Friends List|.* - Steam)$",
+--   },
+--   tile  = true,
+-- })
 
 -- tile minecraft
 hl.window_rule({
@@ -58,35 +58,17 @@ hl.window_rule({
   move  = { 0, 0 },
 })
 
--- launch Discord on workspace 5
-hl.window_rule {
-  name = "discord-set-workspace",
-  match = {class = "discord.*"},
-  workspace = 5,
+hl.window_rule({
+  match = { class = "steam", title = "Steam" },
+  workspace = "4",
   no_initial_focus = true,
-}
+})
 
--- launch FFXIV and XIVLauncher on workspace 1
-hl.window_rule {
-  name = "ffxiv-set-workspace",
-  match = {class = "ffxiv_dx11.exe"},
-  workspace = 1,
-  no_initial_focus = true
-}
-
-hl.window_rule {
-  name = "xivlauncher-set-workspace",
-  match = {class = "XIVLauncher.Core"},
-  workspace = 1,
-  no_initial_focus = true
-}
-
-hl.window_rule {
-  name = "steam-games-set-workspace",
-  match = {class = "steam.*"},
-  workspace = 1,
+hl.window_rule({
+  match = { class = "steam", title = "Friends List" },
+  workspace = "4",
   no_initial_focus = true,
-}
+})
 
 -- layer rules
 hl.layer_rule({
