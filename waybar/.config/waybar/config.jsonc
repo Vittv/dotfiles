@@ -6,19 +6,9 @@
     // "margin-left": 4,
     // "margin-right": 4,
     "reload_style_on_change": true,
-    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/tmux", "custom/devserver", "custom/spotify"],
+    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/palette", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
     "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/inbox", "custom/power"],
-
-    "custom/menu": {
-      "format": "Apps",
-      "on-click": "rofi -show drun"
-    },
-
-    "custom/files": {
-      "format": "Files",
-      "on-click": "nautilus"
-    },
 
     "custom/work": {
       "format": "Work",
@@ -26,7 +16,7 @@
     },
 
     "custom/palette": {
-      "format": "Palette",
+      "format": "Tools",
       "on-click": "COLOR=$(hyprpicker -a) && notify-send 'Palette 🎨' \"<b>$COLOR</b> copied to clipboard\""
     },
 
@@ -42,34 +32,11 @@
 
     "hyprland/workspaces": {
       "format": "{name}",
-      // "format-icons": {
-      //     // "1": "z",
-      //     // "2": "x",
-      //     // "3": "c",
-      //     // "4": "v",
-      //     // "5": "n",
-      //     // "6": "m",
-      //     // "7": ",",
-      //     // "8": "."
-      //     "active": "󰮯",
-      //     "default": "󰮯"
-      // },
       "on-click": "activate",
-      "all-outputs": true,
-      "active-only": false,
-      "persistent-workspaces": {
-        "*": [1, 2, 3, 4]
-      },
+      "ignore-hidden": true,
+      "all-outputs": false,
+      "active-only": true,
       "cursor": true
-    },
-
-    "hyprland/window": {
-      "format": "{initialTitle}",
-      "separate-outputs": false,
-      "rewrite": {
-        "^$": "Files"
-      },
-      "on-click": "nautilus"
     },
 
     "custom/tmux": {
@@ -84,7 +51,8 @@
       "exec": "servers=''; if ss -tlnp 2>/dev/null | grep -q ':5173 '; then servers='vite:5173'; fi; if ss -tlnp 2>/dev/null | grep -q ':4173 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}vite:4173\"; fi; if ss -tlnp 2>/dev/null | grep -q ':8080 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}webpack:8080\"; fi; if ss -tlnp 2>/dev/null | grep -q ':3000 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}dev:3000\"; fi; if ss -tlnp 2>/dev/null | grep -q ':8081 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}dev:8081\"; fi; if [ -n \"$servers\" ]; then echo \"{\\\"text\\\": \\\"$servers\\\", \\\"class\\\": \\\"server-active\\\", \\\"tooltip\\\": \\\"Dev servers: $servers\\\"}\"; fi",
       "return-type": "json",
       "interval": 3,
-      "format": "{}"
+      "format": "{}",
+      "on-click": "bash -c 'port=$(ss -tlnp 2>/dev/null | grep -oP \":(5173|4173|8080|3000|8081) \" | head -1 | tr -d \": \"); [ -n \"$port\" ] && xdg-open \"http://localhost:$port\"'"
     },
 
     "custom/mudfish": {

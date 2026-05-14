@@ -86,10 +86,6 @@ window#waybar {
   border-radius: 4px;
 }
 
-#window {
-  color: @lavender;
-}
-
 #custom-inbox,
 #custom-mudfish,
 #custom-spotify,
@@ -272,16 +268,16 @@ tooltip label {
 }
 
 #custom-tmux {
-  /* color: shade(@sapphire, 1.2); */
-  color: @rosewater;
+  color: shade(@sapphire, 1.2);
+  /* color: @rosewater; */
+}
+
+#custom-tmux:hover {
+  color: shade(@sapphire, 1.4);
 }
 
 #custom-devserver {
   color: @blue;
-}
-
-#custom-tmux:hover {
-  color: shade(@rosewater, 1.2);
 }
 
 #custom-devserver:hover {
