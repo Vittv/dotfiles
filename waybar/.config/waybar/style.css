@@ -28,7 +28,7 @@ window#waybar {
 #custom-menu,
 #custom-files,
 #custom-work,
-#custom-palette,
+#custom-tasks,
 #custom-tmux,
 #custom-devserver,
 #custom-spotify {
@@ -38,7 +38,7 @@ window#waybar {
 #custom-menu,
 #custom-files,
 #custom-work,
-#custom-palette,
+#custom-tasks,
 #window label {
   font-family: "SF Compact Display";
   font-size: 12px;
@@ -51,7 +51,7 @@ window#waybar {
 #custom-menu:hover,
 #custom-files:hover,
 #custom-work:hover,
-#custom-palette:hover {
+#custom-tasks:hover {
   color: @lavender;
 }
 
@@ -142,7 +142,7 @@ window#waybar {
 
 #bluetooth {
   color: @sky;
-  font-size: 14px;
+  font-size: 11px;
 }
 
 #custom-power {
@@ -268,12 +268,13 @@ tooltip label {
 }
 
 #custom-tmux {
-  color: shade(@sapphire, 1.2);
-  /* color: @rosewater; */
+  /* color: shade(@sapphire, 1.2); */
+  color: @rosewater;
 }
 
 #custom-tmux:hover {
-  color: shade(@sapphire, 1.4);
+  /* color: shade(@sapphire, 1.4); */
+  color: alpha(@rosewater, 0.9);
 }
 
 #custom-devserver {

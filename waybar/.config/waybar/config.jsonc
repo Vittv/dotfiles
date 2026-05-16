@@ -6,14 +6,9 @@
     // "margin-left": 4,
     // "margin-right": 4,
     "reload_style_on_change": true,
-    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/palette", "custom/tmux", "custom/devserver", "custom/spotify"],
+    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/inbox", "custom/power"],
-
-    "custom/work": {
-      "format": "Work",
-      "on-click": "~/.local/bin/dev.sh"
-    },
+    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "network", "pulseaudio", "custom/inbox", "custom/power"],
 
     "custom/palette": {
       "format": "Tools",
@@ -36,7 +31,11 @@
       "ignore-hidden": true,
       "all-outputs": false,
       "active-only": true,
-      "cursor": true
+      "cursor": true,
+      "persistent-workspaces": {
+        "DP-1": [1, 2, 3, 4],
+        "HDMI-A-1": [5, 6]
+      }
     },
 
     "custom/tmux": {
