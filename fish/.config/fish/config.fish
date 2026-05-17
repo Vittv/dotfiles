@@ -11,6 +11,7 @@ alias gcd="bash ~/dev/gcd/ui/gcd.sh"
 # Environment variables
 set -x EZA_COLORS "di=36"
 set -x PATH $HOME/.local/bin $PATH
+set -x PATH $HOME/.cargo/bin $PATH
 set -x EDITOR nvim
 set -x XDG_DATA_DIRS "/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:/usr/local/share:/usr/share"
 set -x QT_QPA_PLATFORMTHEME qt5ct
