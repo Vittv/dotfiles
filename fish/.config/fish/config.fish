@@ -2,6 +2,7 @@ set -x PATH $PATH $HOME/.local/bin
 
 # Aliases
 alias ls="eza -la --git --icons=always --group-directories-first"
+alias lg="lazygit"
 alias grep="grep --color=auto"
 alias mudfish="bash ~/.local/bin/mudfish.sh"
 alias tdo="nvim ~/Documents/Tasks/todo.md"
