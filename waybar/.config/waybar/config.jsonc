@@ -31,15 +31,20 @@
       "ignore-hidden": true,
       "all-outputs": false,
       "active-only": true,
-      "cursor": true,
-      "persistent-workspaces": {
-        "DP-1": [1, 2, 3, 4],
-        "HDMI-A-1": [5, 6]
-      }
+      "cursor": true
+    },
+
+    "hyprland/window": {
+      "format": "{initialTitle}",
+      "separate-outputs": false,
+      "rewrite": {
+        "^$": "Apps"
+      },
+      "on-click": "rofi -show drun"
     },
 
     "custom/tmux": {
-      "exec": "sessions=$(tmux list-sessions -F '#{session_created} #S' 2>/dev/null | sort -n | cut -d' ' -f2- | awk '{print NR\":\"$0}' | paste -sd ',' - | sed 's/,/, /g'); if [ -n \"$sessions\" ]; then echo \"{\\\"text\\\": \\\"  $sessions\\\", \\\"class\\\": \\\"tmux-active\\\", \\\"tooltip\\\": \\\"Tmux sessions: $sessions\\\"}\"; fi",
+      "exec": "sessions=$(tmux list-sessions -F '#{session_created} #S' 2>/dev/null | sort -n | cut -d' ' -f2- | awk '{n=split($0,a,\"/\"); if(n>2){r=a[1]; for(i=2;i<=2;i++) r=r\"/\"a[i]; print r\"…\"} else print $0}' | awk '{print NR\":\"$0}' | paste -sd ',' - | sed 's/,/, /g'); if [ -n \"$sessions\" ]; then echo \"{\\\"text\\\": \\\"  $sessions\\\", \\\"class\\\": \\\"tmux-active\\\", \\\"tooltip\\\": \\\"Tmux sessions: $sessions\\\"}\"; fi",
       "return-type": "json",
       "interval": 2,
       "format": "tmux:{}",
