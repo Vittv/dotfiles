@@ -39,10 +39,10 @@ hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
 
 -- resize
-hl.bind(mainMod .. " + CTRL + H",  hl.dsp.window.resize({ x = -50, y = 0   }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + J",  hl.dsp.window.resize({ x = 0,   y = 50  }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + K",  hl.dsp.window.resize({ x = 0,   y = -50 }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + L",  hl.dsp.window.resize({ x = 50,  y = 0   }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + H",  hl.dsp.window.resize({ x = -50, y = 0,   relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + J",  hl.dsp.window.resize({ x = 0,   y = 50,  relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + K",  hl.dsp.window.resize({ x = 0,   y = -50, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + L",  hl.dsp.window.resize({ x = 50,  y = 0,   relative = true }), { repeating = true })
 
 -- workspaces
 hl.bind(mainMod .. " + 1",         hl.dsp.focus({ workspace = 1 }))
@@ -63,8 +63,7 @@ hl.bind(mainMod .. " + SHIFT + 6", hl.dsp.window.move({ workspace = 6 }))
 -- scrolling layout
 hl.bind(mainMod .. " + period",             hl.dsp.layout("swapcol r"))
 hl.bind(mainMod .. " + comma",              hl.dsp.layout("swapcol l"))
-hl.bind(mainMod .. " + semicolon",          hl.dsp.layout("colresize 0.7"))
-hl.bind(mainMod .. " + SHIFT + semicolon",  hl.dsp.layout("colresize 0.5"))
+hl.bind(mainMod .. " + SHIFT + comma",  hl.dsp.layout("colresize 0.5"))
 hl.bind(mainMod .. " + SHIFT + period",     hl.dsp.layout("colresize 1.0"))
 
 -- special workspace
