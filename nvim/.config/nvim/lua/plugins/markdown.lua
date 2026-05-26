@@ -2,7 +2,7 @@ return {
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 
-      'nvim-treesitter/nvim-treesitter',
+      'neovim-treesitter/nvim-treesitter',
       'nvim-mini/mini.nvim'
     },            -- if you use the mini.nvim suite
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
@@ -24,15 +24,4 @@ return {
       })
     end,
   },
-  {
-    {
-      "OXY2DEV/markview.nvim",
-      lazy = false,
-      opts = {
-        preview = {
-          filetypes = { "typst" },  -- ONLY activate for typst
-        }
-      }
-    }
-  }
 }

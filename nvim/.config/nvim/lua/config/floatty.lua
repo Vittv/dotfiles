@@ -5,10 +5,10 @@ local state = {
 }
 
 local function create_floating_terminal()
-  local width = math.floor(vim.o.columns * 0.8)
-  local height = math.floor(vim.o.lines * 0.8)
+  local width = math.floor(vim.o.columns * 0.98)
+  local height = math.floor(vim.o.lines * 0.70)
   local col = math.floor((vim.o.columns - width) / 2)
-  local row = math.floor((vim.o.lines - height) / 2)
+  local row = math.floor((vim.o.lines - height) * 0.90)
   
   -- create terminal buffer if needed
   if not (state.buf and vim.api.nvim_buf_is_valid(state.buf)) then

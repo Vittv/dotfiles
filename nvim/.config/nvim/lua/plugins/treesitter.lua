@@ -1,20 +1,17 @@
 return {
-  "nvim-treesitter/nvim-treesitter",
-  branch = "main",
+  "neovim-treesitter/nvim-treesitter",
   lazy = false,
-  build = ":TSUpdate",
+  dependencies = { "neovim-treesitter/treesitter-parser-registry" },
   config = function()
-    require("nvim-treesitter").setup()
-
-    -- Install parsers individually (ensure_installed is gone)
-    local ts = require("nvim-treesitter")
-    local parsers = {
-      "lua", "html", "css", "javascript", "typescript",
-      "markdown", "markdown_inline", "yaml", "latex", "typst",
-      "bash", "python", "c", "cpp", "rust"
-    }
-    for _, parser in ipairs(parsers) do
-      ts.install(parser)
-    end
-  end
+    require("nvim-treesitter").setup({
+      ensure_installed = {
+        "lua", "html", "css", "javascript", "typescript", "tsx",
+        "markdown", "markdown_inline", "yaml", "latex", "typst",
+        "bash", "python", "c", "cpp", "rust"
+      },
+      highlight = { enable = true },
+    })
+    -- javascriptreact uses the javascript parser, not a separate jsx one
+    vim.treesitter.language.register("javascript", "javascriptreact")
+  end,
 }
