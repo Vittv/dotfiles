@@ -242,12 +242,14 @@ tooltip label {
   font-family: "FiraCode Nerd Font Propo";
   color: @lavender;
   font-weight: 700;
+  margin-right: 6px;
 }
 
 #custom-gpu-temp {
   font-family: "FiraCode Nerd Font Propo";
   color: @mauve;
   font-weight: 700;
+  margin-right: 8px;
 }
 
 #custom-power:hover {
@@ -282,5 +284,13 @@ tooltip label {
 }
 
 #custom-devserver:hover {
+  color: @lavender;
+}
+
+#custom-drawer-icon {
+  color: @overlay2;
+}
+
+#custom-drawer-icon:hover {
   color: @lavender;
 }

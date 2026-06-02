@@ -8,7 +8,7 @@
     "reload_style_on_change": true,
     "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "custom/cpu-temp", "custom/gpu-temp", "custom/separator", "custom/mudfish", "network", "pulseaudio", "custom/inbox", "custom/power"],
+    "modules-right": ["tray", "group/temps", "custom/separator", "custom/mudfish", "network", "pulseaudio", "custom/inbox", "custom/power"],
 
     "custom/palette": {
       "format": "Tools",
@@ -72,6 +72,21 @@
     "tray": {
       "icon-size": 14,
       "spacing": 6
+    },
+
+    "group/temps": {
+      "orientation": "inherit",
+      "drawer": {
+        "transition-duration": 300,
+        "children-class": "hidden",
+        "transition-left-to-right": false
+      },
+      "modules": ["custom/drawer-icon", "custom/cpu-temp", "custom/gpu-temp"]
+    },
+
+    "custom/drawer-icon": {
+      "format": "",
+      "tooltip": false
     },
 
     "custom/cpu-temp": {
