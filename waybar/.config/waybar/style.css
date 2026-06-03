@@ -195,10 +195,10 @@ tooltip {
 }
 
 tooltip label {
-  font-family: "SF Display Mono";
+  font-family: "SF Compact Display";
   color: @text;
   padding: 8px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 #tray label {

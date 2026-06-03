@@ -100,12 +100,11 @@
 
     "custom/gpu-temp": {
       "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",  // For NVIDIA
-        // "exec": "cat /sys/class/drm/card0/device/hwmon/hwmon*/temp1_input | awk '{print $1/1000}'",  // For AMD
-        "format": "{}°C",
-        "tooltip-format": "GPU {}°C",
-        "interval": 5,
-        "cursor": true,
-        "on-click": "kitty btop"
+      "format": "{}°C",
+      "tooltip-format": "GPU {}°C",
+      "interval": 5,
+      "cursor": true,
+      "on-click": "kitty btop"
     },
 
     "bluetooth": {
@@ -165,7 +164,7 @@
       "format": "{}",
       "max-length": 35,
       "return-type": "json",
-      "interval": 0.5,
+      "interval": 1,
       "escape": false,
       "exec": "~/.config/waybar/src/spotify.sh",
       "exec-if": "playerctl -p spotify status 2>/dev/null",
