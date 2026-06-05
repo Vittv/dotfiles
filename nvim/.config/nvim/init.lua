@@ -38,7 +38,7 @@ require("lazy").setup({
     { import = "themes" },
   },
 })
-require('config.floatty')
+require('config.term')
 vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 -- In case you'd want to try that local theme,
 -- Uncomment the following line:

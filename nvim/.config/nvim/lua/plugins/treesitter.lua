@@ -13,5 +13,10 @@ return {
     })
     -- javascriptreact uses the javascript parser, not a separate jsx one
     vim.treesitter.language.register("javascript", "javascriptreact")
+    vim.filetype.add({
+      extension = {
+        rpy = "python",
+      }
+    })
   end,
 }
