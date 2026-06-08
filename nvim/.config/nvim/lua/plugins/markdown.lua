@@ -19,10 +19,19 @@ return {
       },
     },
     init = function()
-      -- highlights go in init, which runs before setup
-      vim.api.nvim_set_hl(0, '@markup.strong.markdown_inline', {
-        fg = vim.api.nvim_get_hl(0, { name = 'Function' }).fg,
-        bold = true,
+      local function set_hl()
+        vim.api.nvim_set_hl(0, '@markup.strong.markdown_inline', {
+          fg = vim.api.nvim_get_hl(0, { name = 'Function' }).fg,
+          bold = true,
+        })
+      end
+
+      -- apply now (in case colorscheme already loaded)
+      set_hl()
+
+      -- re-apply after any colorscheme change
+      vim.api.nvim_create_autocmd('ColorScheme', {
+        callback = set_hl,
       })
     end,
   },

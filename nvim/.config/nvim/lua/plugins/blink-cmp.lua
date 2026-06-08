@@ -9,6 +9,7 @@ return {
   },
   config = function(_, opts)
     require("luasnip.loaders.from_vscode").lazy_load()
+    require("luasnip").filetype_extend("mdx", { "markdown" })
     require("blink.cmp").setup(opts)
   end,
   opts = {
@@ -31,7 +32,9 @@ return {
     completion = {
       documentation = {
         auto_show = true,
-        window = { border = "rounded" },
+        window = {
+          border = "rounded",
+        },
       },
       menu = {
         border = "rounded",
