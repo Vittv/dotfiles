@@ -7,7 +7,7 @@ configuration {
     display-run: "";
     display-window: "";
     drun-display-format: "{name}";
-    font: "SF Pro Display 14";
+    font: "SF Pro Display 13";
     // font: "JetBrainsMono Nerd Font Propo SemiBold 12";
     terminal: "kitty";
 }
@@ -25,7 +25,7 @@ window {
     border: 1px;
     border-color: @bg-alt;
     border-radius: 10px;
-    width: 320px;
+    width: 420px;
     padding: 8px;
 
     animation: "expand-vertical";
