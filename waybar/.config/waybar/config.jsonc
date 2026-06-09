@@ -8,7 +8,7 @@
     "reload_style_on_change": true,
     "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "group/temps", "custom/separator", "custom/mudfish", "network", "pulseaudio", "custom/inbox", "custom/power"],
+    "modules-right": ["tray", "group/temps", "custom/mudfish", "network", "pulseaudio", "custom/inbox", "custom/power"],
 
     "custom/palette": {
       "format": "Tools",
@@ -48,7 +48,7 @@
       "return-type": "json",
       "interval": 2,
       "format": "tmux:{}",
-      "on-click": "kitty tmux choose-session"
+      "on-click": "kitty fish -c t"
     },
 
     "custom/devserver": {
