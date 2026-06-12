@@ -7,15 +7,17 @@ local Colors = require("schemes.vague.colors")
 -- general
 hl.config({
   general = {
-    gaps_in          = 4,
-    gaps_out         = 8,
+    gaps_in          = 2,
+    gaps_out         = 4,
     border_size      = 2,
     resize_on_border = false,
     allow_tearing    = false,
     layout           = "dwindle",
     col = {
       active_border   = Colors.text,
-      inactive_border = "rgba(595959aa)",
+      -- inactive_border = "rgba(595959aa)",
+      inactive_border = "rgba(999999aa)",
+      -- inactive_border = "0x00000000",
     },
   },
 })
@@ -25,14 +27,17 @@ hl.config({
   decoration = {
     rounding         = 2,
     rounding_power   = 2,
+
     active_opacity   = 1.0,
     inactive_opacity = 1.0,
+
     shadow = {
       enabled      = true,
       range        = 4,
       render_power = 3,
       color        = "rgba(1a1a1aee)",
     },
+
     blur = {
       enabled           = true,
       size              = 4,
@@ -167,6 +172,7 @@ hl.animation({
 hl.config({
   render = {
     cm_enabled = false,
+    cm_auto_hdr = false,
   },
 })
 
