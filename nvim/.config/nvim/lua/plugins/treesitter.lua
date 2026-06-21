@@ -7,7 +7,7 @@ return {
       ensure_installed = {
         "lua", "html", "css", "javascript", "typescript", "tsx",
         "markdown", "markdown_inline", "yaml", "latex", "typst",
-        "bash", "python", "c", "cpp", "rust"
+        "bash", "python", "c", "cpp", "rust", "sql"
       },
       highlight = { enable = true },
     })

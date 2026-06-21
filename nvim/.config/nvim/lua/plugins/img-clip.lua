@@ -8,6 +8,7 @@ return {
         local project = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
         return vim.fn.expand("~/Pictures/pictures/pics/nvim/") .. project
       end,
+      template = "![$FILE_NAME]($FILE_PATH)",
     },
   },
   keys = {

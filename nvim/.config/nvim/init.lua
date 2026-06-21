@@ -39,10 +39,6 @@ require("lazy").setup({
   },
 })
 require('config.term')
-vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
--- In case you'd want to try that local theme,
--- Uncomment the following line:
--- vim.cmd.colorscheme("vaguevp")
 
 -- builtin color preview - no more need for colorizer
 vim.lsp.document_color.enable(true, nil, { style = 'virtual' })

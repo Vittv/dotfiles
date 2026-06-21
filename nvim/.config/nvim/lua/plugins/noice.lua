@@ -3,6 +3,7 @@ return {
   enabled = true,
   event = "VeryLazy",
   opts = {
+    -- adding a new comment here for testing c:
     -- add any options here
     -- views = {
     --   hover = {
