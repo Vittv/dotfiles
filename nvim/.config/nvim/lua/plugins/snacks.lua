@@ -31,7 +31,7 @@ return {
       sources = {
         files = { excluded = { "node_modules" } },
         explorer = {
-          layout = { preset = "vertical" },
+          layout = { preset = "vertical", preview = true },
           jump = { close = true } -- close after opening a file
         },
       },
