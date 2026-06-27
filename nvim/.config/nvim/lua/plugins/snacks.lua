@@ -10,7 +10,7 @@ return {
     image = {
       enabled = true,
       doc = {
-        inline = false, -- disable inline rendering
+        inline = true, -- disable inline rendering
         float = true,   -- show on hover instead
       }
     },
@@ -36,6 +36,15 @@ return {
         },
       },
     },
+    terminal = {
+      win = {
+        position = "float",
+        border = "rounded",
+        interactive = true,
+        title = " cat ",
+        title_post = "center",
+      }
+    }
   },
   keys = {
     { "<leader>z", function() require("snacks").zen() end, desc = "Zen mode" },
@@ -50,6 +59,7 @@ return {
     end, desc = "Buffers" },
     { "<leader><leader>", function() require("snacks").picker.recent() end, desc = "Recent files" },
     { "<space><Tab>", function() require("snacks").explorer() end, desc = "Explorer" },
+    { "<leader>tt", function() require("snacks").terminal() end, desc ="Terminal" }
   },
   config = function(_, opts)
     require("snacks").setup(opts)

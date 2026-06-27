@@ -38,7 +38,6 @@ require("lazy").setup({
     { import = "themes" },
   },
 })
-require('config.term')
 
 -- builtin color preview - no more need for colorizer
 vim.lsp.document_color.enable(true, nil, { style = 'virtual' })
