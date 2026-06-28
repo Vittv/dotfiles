@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
+
 set -e
 
 # prompt for sudo upfront
 sudo -v
+
+echo "==> Installing dotfiles"
 
 # enable pac-man progress bar in pacman
 echo "==> Configuring pacman..."
@@ -50,17 +53,35 @@ sudo pacman -S --needed --noconfirm \
   noto-fonts-emoji \
   ripgrep \
   fd \
+  jq \
   python \
   python-pip \
   wl-clipboard \
   pavucontrol \
-  alsa-utils
+  alsa-utils \
+  power-profiles-daemon
 
 # yay packages
 echo "==> Installing AUR packages..."
 yay -S --needed --noconfirm \
   qt6ct-kde \
-  nvibrant-bin
+  nvibrant-bin \
+  apple-fonts
+
+# performance power profile
+echo "==> Enabling power-profiles-daemon..."
+if sudo systemctl enable --now power-profiles-daemon; then
+  echo "  Enabling performance mode"
+  if powerprofilesctl set performance; then
+    echo "  performance mode enabled"
+  else
+    echo "  performance profile not available"
+    echo "  Enabling balanced mode"
+    powerprofilesctl set balanced
+  fi
+else
+  echo "==> ERROR: failed to enable power-profiles-daemon" >&2
+fi
 
 # nvm + Node/npm
 echo "==> Installing nvm..."
@@ -69,14 +90,18 @@ if [ ! -d "$HOME/.nvm" ]; then
 fi
 
 export NVM_DIR="$HOME/.nvm"
-# shellcheck source=/dev/null
-source "$NVM_DIR/nvm.sh"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  # shellcheck source=/dev/null
+  source "$NVM_DIR/nvm.sh"
 
-echo "==> Installing latest Node (includes npm)..."
-nvm install --lts       # installs latest lts (long-term support)
-nvm use --lts
-nvm alias default "lts/*"
-echo "  Node $(node -v) / npm $(npm -v)"
+  echo "==> Installing latest Node (includes npm)..."
+  nvm install --lts       # installs latest lts (long-term support)
+  nvm use --lts
+  nvm alias default "lts/*"
+  echo "  Node $(node -v) / npm $(npm -v)"
+else
+  echo "==> ERROR: nvm.sh not found, skipping Node install" >&2
+fi
 
 # TPM (Tmux Plugin Manager)
 echo "==> Installing TPM..."
@@ -140,11 +165,14 @@ for pkg in colors fish hyprland kitty lazygit nvim rofi scripts starship swaync 
 done
 
 # switch shell to fish
-# ensure fish is in /etc/shells (pacman should do this, but guard anyway)
-grep -qxF '/usr/sbin/fish' /etc/shells || echo '/usr/sbin/fish' | sudo tee -a /etc/shells
-
-# change shell without password prompt
-sudo usermod --shell /usr/sbin/fish "$USER"
+echo "==> Switching default shell to fish..."
+FISH_PATH="$(command -v fish)"
+if [ -n "$FISH_PATH" ]; then
+  grep -qxF "$FISH_PATH" /etc/shells || echo "$FISH_PATH" | sudo tee -a /etc/shells
+  sudo usermod --shell "$FISH_PATH" "$USER"
+else
+  echo "==> ERROR: fish not found, skipping shell change" >&2
+fi
 
 # done
 echo ""
@@ -152,4 +180,5 @@ echo "All done! A few manual steps remaining:"
 echo "  1. Open a new tmux session and press prefix + I to install plugins via TPM"
 echo "  2. Make sure your fish config sources $HOME/build/fzf-git/fzf-git.sh"
 echo "  3. Adjust your audio levels with alsamixer"
-echo "  4. Restart your shell or log out for all changes to take effect"
+echo "  4. Apply Vague colors and theme with the GUIs qt5ct, qt6ct, and nwg-look"
+echo "  5. Restart your shell or log out for all changes to take effect"
