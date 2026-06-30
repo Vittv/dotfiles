@@ -101,7 +101,7 @@ window#waybar {
   font-weight: 500;
   transition: all 0.3s ease;
   padding: 0 0;
-  margin: 4px 2px;
+  margin: 0px 2px;
   font-size: 11px;
 }
 
@@ -195,10 +195,10 @@ tooltip {
 }
 
 tooltip label {
-  font-family: "SF Compact Display";
+  font-family: "SF Pro Display";
   color: @text;
   padding: 8px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 #tray label {

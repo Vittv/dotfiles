@@ -167,12 +167,12 @@
       "interval": 1,
       "escape": false,
       "exec": "~/.config/waybar/src/spotify.sh",
-      "exec-if": "playerctl -p spotify status 2>/dev/null",
-      "on-click": "playerctl -p spotify next",
-      "on-click-right": "playerctl -p spotify previous",
-      "on-click-middle": "playerctl -p spotify play-pause",
-      "on-scroll-up": "playerctl -p spotify volume 0.05+",
-      "on-scroll-down": "playerctl -p spotify volume 0.05-"
+      "exec-if": "~/.config/waybar/src/spotify-detect.sh",
+      "on-click": "~/.config/waybar/src/spotify-ctl.sh next",
+      "on-click-right": "~/.config/waybar/src/spotify-ctl.sh previous",
+      "on-click-middle": "~/.config/waybar/src/spotify-ctl.sh play-pause",
+      "on-scroll-up": "~/.config/waybar/src/spotify-ctl.sh volume 0.05+",
+      "on-scroll-down": "~/.config/waybar/src/spotify-ctl.sh volume 0.05-"
     },
 
     "custom/separator": {
