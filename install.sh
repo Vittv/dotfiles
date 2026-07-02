@@ -59,6 +59,8 @@ sudo pacman -S --needed --noconfirm \
   wl-clipboard \
   pavucontrol \
   alsa-utils \
+  eza \
+  zoxide \
   power-profiles-daemon
 
 # yay packages
