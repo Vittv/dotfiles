@@ -225,10 +225,20 @@ Scope {
               height: 20
               radius: 4
               color: Colors.surface
-              Logout { id: logoutModule; anchors.centerIn: parent }
+              Logout { 
+                id: logoutModule; 
+                anchors.centerIn: parent
+                onClicked: logoutMenuOpen = !logoutMenuOpen
+              }
             }
           }
         }
+      }
+
+      LogoutPopup {
+        id: logoutPopup
+        panelWindow: panel
+        hoveredAncestor: logoutModule.hovered
       }
     }
   }

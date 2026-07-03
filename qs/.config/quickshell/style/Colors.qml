@@ -37,6 +37,8 @@ QtObject {
   readonly property color base: palette.base
   readonly property color surface: palette.surface0
   readonly property color surfaceAlt: palette.surface1
+  readonly property color surface0: palette.surface0
+  readonly property color overlay0: palette.overlay0
   readonly property color text: palette.text
   readonly property color subtext: palette.subtext0
   readonly property color accent: palette.blue

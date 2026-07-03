@@ -14,7 +14,7 @@ Item {
   Icon {
     id: icon
     name: "bluetooth"
-    size: 15
+    size: 16
     iconColor:  Colors.text
   }
 }

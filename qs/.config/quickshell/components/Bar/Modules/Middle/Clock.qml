@@ -12,7 +12,7 @@ Text {
 
   text: Qt.formatDateTime(clock.date, "dd • hh:mm AP")
   color: "#F0F0F0"
-  font.family: "SF Pro Display"
-  font.pixelSize: 15
-  font.weight: Font.Medium
+  font.family: "SF Compact Display"
+  font.pixelSize: 14
+  font.weight: 600
 }

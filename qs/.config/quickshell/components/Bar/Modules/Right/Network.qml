@@ -36,7 +36,7 @@ Item {
     spacing: 4
     Icon {
       name: netModule.connectionType === "none" ? "wifi" : netModule.connectionType
-      size: 15
+      size: 16
       iconColor: netModule.connectionType !== "none" ? Colors.text : Colors.surfaceAlt
     }
   }
