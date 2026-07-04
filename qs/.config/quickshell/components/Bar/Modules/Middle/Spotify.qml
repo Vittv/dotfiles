@@ -11,18 +11,13 @@ Item {
   property int volumePercent: 0
   property string playerStatus: ""
   property bool isActive: playerStatus === "Playing"
-  property var barColors: [
-    Colors.palette.blue, 
-    Colors.palette.lavender, 
-    Colors.palette.mauve, 
-    Colors.palette.pink, 
-    Colors.palette.peach
-  ]
 
   visible: displayText !== ""
 
   implicitHeight: 24
   implicitWidth: 180
+  width: implicitWidth
+  height: implicitHeight
 
   Row {
     spacing: 6
@@ -63,46 +58,6 @@ Item {
             from: -(label.implicitWidth - textClip.width + 8)
             to: 0
             duration: 0
-          }
-        }
-      }
-    }
-
-    // equalizer bars
-    Item {
-      id: eq
-      width: 27
-      height: 16
-      anchors.verticalCenter: parent.verticalCenter
-
-      Repeater {
-        id: eqRepeater
-        model: 5
-
-        Rectangle {
-          width: 3
-          radius: 1.5
-          color: root.barColors[index]
-          anchors.bottom: eq.bottom
-          x: index * 5
-
-          property real barHeight: 3 + Math.random() * 13
-          height: root.isActive ? barHeight : 3
-
-          Behavior on height {
-            NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
-          }
-        }
-      }
-
-      Timer {
-        interval: 150
-        repeat: true
-        running: root.isActive
-        onTriggered: {
-          for (var i = 0; i < eqRepeater.count; i++) {
-            var bar = eqRepeater.itemAt(i);
-            if (bar) bar.barHeight = 3 + Math.random() * 13;
           }
         }
       }

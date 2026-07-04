@@ -123,7 +123,7 @@ PopupWindow {
     color: Colors.base
     border.width: 1
     border.color: Colors.surface
-    radius: 10
+    radius: 20
 
     opacity: root.open ? 1 : 0
     Behavior on opacity {
@@ -152,7 +152,7 @@ PopupWindow {
       Rectangle {
         Layout.fillWidth: true
         Layout.preferredHeight: 60
-        radius: 6
+        radius: 20
         color: Colors.palette.mantle
         border.width: 1
         border.color: Colors.surface
@@ -267,7 +267,7 @@ PopupWindow {
             Text {
               Layout.fillWidth: true
               text: delegateRoot.modelData.name || ""
-              color: (delegateRoot.ListView.isCurrentItem || mouse.containsMouse) ? Colors.accent : Colors.text
+              color: (delegateRoot.ListView.isCurrentItem || mouse.containsMouse) ? Colors.palette.lavender : Colors.text
               font.family: Fonts.display
               font.weight: 500
               font.pixelSize: 16

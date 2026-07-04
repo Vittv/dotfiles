@@ -6,21 +6,17 @@ import "../../../../style"
 Item {
   id: micModule
   property bool muted: false
-  implicitWidth: 10
-  implicitHeight: 20
+  implicitWidth: 14
+  implicitHeight: 18
 
-  function checkMute() {
-    checkMic.running = true;
-  }
+  function checkMute() { checkMic.running = true }
 
   Process {
     id: checkMic
     command: ["bash", "-c", "pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && echo muted || echo unmuted"]
     stdout: SplitParser {
       splitMarker: "\n"
-      onRead: (line) => {
-        micModule.muted = line.trim() === "muted";
-      }
+      onRead: (line) => { micModule.muted = line.trim() === "muted" }
     }
   }
 
@@ -30,25 +26,32 @@ Item {
     running: true
     stdout: SplitParser {
       splitMarker: "\n"
-      onRead: (line) => {
-        if (line.includes("source")) checkMic.running = true;
-      }
+      onRead: (line) => { if (line.includes("source")) checkMic.running = true }
     }
   }
 
   Component.onCompleted: checkMic.running = true;
 
-  Rectangle {
-    anchors.fill: parent
-    radius: 4
-    color: "transparent"
-  }
-
-  Icon {
+  Item {
     anchors.centerIn: parent
-    name: muted ? "mic_off" : "mic"
-    size: 14
-    iconColor: muted ? Colors.red : Colors.text
+    width: 10; height: 10
+
+    Rectangle {
+      anchors.fill: parent
+      radius: 2
+      color: "transparent"
+      border.width: 2
+      border.color: Colors.text
+      Behavior on border.color { ColorAnimation { duration: 100 } }
+    }
+
+    Rectangle {
+      anchors.fill: parent
+      radius: 2
+      color: Colors.text
+      opacity: muted ? 1 : 0
+      Behavior on opacity { NumberAnimation { duration: 100 } }
+    }
   }
 
   MouseArea {

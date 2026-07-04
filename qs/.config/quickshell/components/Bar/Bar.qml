@@ -107,7 +107,15 @@ Scope {
             Row {
               id: leftRow
               anchors.centerIn: parent
-              spacing: 4
+              spacing: 10
+
+              LauncherButton {
+                id: launcherButton
+                targetScreen: modelData
+                anchors {
+                  verticalCenter: parent.verticalCenter
+                }
+              }
 
               Microphone {
                 anchors.verticalCenter: parent.verticalCenter
