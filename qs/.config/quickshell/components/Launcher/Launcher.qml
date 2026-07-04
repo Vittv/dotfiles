@@ -123,7 +123,7 @@ PopupWindow {
     color: Colors.base
     border.width: 1
     border.color: Colors.surface
-    radius: 6
+    radius: 10
 
     opacity: root.open ? 1 : 0
     Behavior on opacity {

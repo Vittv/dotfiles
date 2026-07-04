@@ -17,7 +17,7 @@ Row {
 
   Icon {
     anchors.verticalCenter: parent.verticalCenter
-    size: 16
+    size: 14
     iconColor: root.muted ? Colors.red : Colors.text
     name: {
       if (root.muted) return "volume_off";

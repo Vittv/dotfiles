@@ -11,7 +11,7 @@ Item {
   Icon {
     id: icon
     name: "logout"
-    size: 16
+    size: 14
     iconColor: Colors.text
   }
 

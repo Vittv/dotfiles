@@ -1,44 +1,66 @@
 import QtQuick
 import Quickshell.Hyprland
 import "../../../../style/"
-
-Row {
+Item {
   id: root
-  spacing: 4
-
-  // jeceived from Bar.qml
   property var targetScreen
+  height: 22
+  width: background.width
 
-  Repeater {
-    model: Hyprland.workspaces
+  // Single source of truth for "which workspace is actually focused right now,"
+  // instead of each item's own per-monitor "active" flag.
+  readonly property int focusedId: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id : -1
 
-    delegate: Rectangle {
-      required property var modelData
-      property var ws: modelData
+  Rectangle {
+    id: background
+    height: 22
+    radius: 6
+    color: Colors.overlay0
+    width: contentRow.width + 12
+  }
+  Rectangle {
+    id: highlight
+    width: 36
+    height: 18
+    radius: 6
+    color: Colors.text
+    y: (root.height - height) / 2
+    Behavior on x { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
+  }
+  Row {
+    id: contentRow
+    anchors.centerIn: background
+    spacing: 2
+    Repeater {
+      model: Hyprland.workspaces
+      delegate: Item {
+        required property var modelData
+        property var ws: modelData
+        width: 36
+        height: 18
 
-      // correct comparison: match the name property of both objects
-      visible: ws.active && ws.monitor && ws.monitor.name === root.targetScreen.name
-      
-      // dynamic width collapse to maintain clean padding/spacing
-      width: visible ? 28 : 0
-      height: visible ? 22 : 0
-      
-      radius: 4
-      color: Colors.base
+        // Recomputed whenever root.focusedId changes, so exactly one item
+        // flips true and the previous one flips false, every time.
+        readonly property bool isActive: ws.id === root.focusedId
 
-      Text {
-        anchors.centerIn: parent
-        text: ws.id
-        color: Colors.text
-        font.pixelSize: 13
-        font.bold: true
-        font.family: "FiraCode Nerd Font"
-      }
-
-      MouseArea {
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-        onClicked: ws.activate()
+        onIsActiveChanged: {
+          if (isActive) highlight.x = mapToItem(root, 0, 0).x
+        }
+        Component.onCompleted: {
+          if (isActive) highlight.x = mapToItem(root, 0, 0).x
+        }
+        Text {
+          anchors.centerIn: parent
+          text: ws.id
+          font { family: "FiraCode Nerd Font"; pixelSize: 12 }
+          font.weight: 500
+          color: isActive ? Colors.base : Colors.text
+        }
+        MouseArea {
+          anchors.fill: parent
+          cursorShape: Qt.PointingHandCursor
+          onClicked: ws.activate()
+        }
       }
     }
   }

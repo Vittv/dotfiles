@@ -6,35 +6,12 @@ import QtQuick.Layouts
 import "Modules/Left"
 import "Modules/Middle"
 import "Modules/Right"
+import "../../services"
 import "../Launcher"
 import "../../style"
 
 Scope {
   id: root
-
-  property bool launcherOpen: false
-  property string launcherScreen: ""
-
-  IpcHandler {
-    target: "launcher"
-
-    function toggle(): void {
-      var focused = Hyprland.focusedMonitor ? Hyprland.focusedMonitor.name : ""
-      if (root.launcherOpen && root.launcherScreen === focused) {
-        root.launcherOpen = false
-      } else {
-        root.launcherScreen = focused
-        root.launcherOpen = true
-      }
-    }
-    function open(): void {
-      root.launcherScreen = Hyprland.focusedMonitor ? Hyprland.focusedMonitor.name : ""
-      root.launcherOpen = true
-    }
-    function close(): void {
-      root.launcherOpen = false
-    }
-  }
 
   Variants {
     model: Quickshell.screens
@@ -46,76 +23,76 @@ Scope {
 
       anchors { top: true; left: true; right: true }
       
-      implicitHeight: 28
+      implicitHeight: mainBarBody.height + leftWing.height
       color: "transparent"
       exclusiveZone: mainBarBody.height
 
       Rectangle {
         id: mainBarBody
         anchors {
-          top: parent.top
-          left: parent.left
-          right: parent.right
+          top: parent.top;
+          left: parent.left;
+          right: parent.right;
         }
-        height: 28
+        height: 26
         color: typeof Colors !== 'undefined' ? Colors.base : "#171719"
 
-        // // left wing
-        // Canvas {
-        //   id: leftWing
-        //   width: 12
-        //   height: 12
-        //   anchors {
-        //     top: parent.bottom
-        //     left: parent.left
-        //   }
-        //
-        //   onWidthChanged: requestPaint()
-        //   onHeightChanged: requestPaint()
-        //
-        //   onPaint: {
-        //     var ctx = getContext("2d");
-        //     ctx.reset();
-        //     ctx.fillStyle = typeof Colors !== 'undefined' ? Colors.base : "#171719";
-        //     ctx.beginPath();
-        //     ctx.moveTo(0, 0);                             // top-left corner
-        //     ctx.lineTo(width, 0);                         // line along the bar baseline
-        //     ctx.quadraticCurveTo(0, 0, 0, height);        // curve outwards to the screen edge
-        //     ctx.closePath();
-        //     ctx.fill();
-        //   }
-        // }
-        //
-        // // right wing
-        // Canvas {
-        //   id: rightWing
-        //   width: 12
-        //   height: 12
-        //   anchors {
-        //     top: parent.bottom
-        //     right: parent.right
-        //   }
-        //
-        //   onWidthChanged: requestPaint()
-        //   onHeightChanged: requestPaint()
-        //
-        //   onPaint: {
-        //     var ctx = getContext("2d");
-        //     ctx.reset();
-        //     ctx.fillStyle = typeof Colors !== 'undefined' ? Colors.base : "#171719";
-        //     ctx.beginPath();
-        //     ctx.moveTo(width, 0);                         
-        //     ctx.lineTo(width, height);                    
-        //     ctx.quadraticCurveTo(width, 0, 0, 0);
-        //     ctx.closePath();
-        //     ctx.fill();
-        //   }
-        // }
+        // left wing
+        Canvas {
+          id: leftWing
+          width: 12
+          height: 12
+          anchors {
+            top: parent.bottom
+            left: parent.left
+          }
+
+          onWidthChanged: requestPaint()
+          onHeightChanged: requestPaint()
+
+          onPaint: {
+            var ctx = getContext("2d");
+            ctx.reset();
+            ctx.fillStyle = typeof Colors !== 'undefined' ? Colors.base : "#171719";
+            ctx.beginPath();
+            ctx.moveTo(0, 0);                             // top-left corner
+            ctx.lineTo(width, 0);                         // line along the bar baseline
+            ctx.quadraticCurveTo(0, 0, 0, height);        // curve outwards to the screen edge
+            ctx.closePath();
+            ctx.fill();
+          }
+        }
+
+        // right wing
+        Canvas {
+          id: rightWing
+          width: 12
+          height: 12
+          anchors {
+            top: parent.bottom
+            right: parent.right
+          }
+
+          onWidthChanged: requestPaint()
+          onHeightChanged: requestPaint()
+
+          onPaint: {
+            var ctx = getContext("2d");
+            ctx.reset();
+            ctx.fillStyle = typeof Colors !== 'undefined' ? Colors.base : "#171719";
+            ctx.beginPath();
+            ctx.moveTo(width, 0);                         
+            ctx.lineTo(width, height);                    
+            ctx.quadraticCurveTo(width, 0, 0, 0);
+            ctx.closePath();
+            ctx.fill();
+          }
+        }
 
         Item {
           anchors.fill: parent
-          anchors.leftMargin: 8
-          anchors.rightMargin: 8
+          anchors.leftMargin: 4
+          anchors.rightMargin: 4
 
           // left
           Rectangle {
@@ -130,33 +107,14 @@ Scope {
             Row {
               id: leftRow
               anchors.centerIn: parent
-              spacing: 0
-              Rectangle {
-                width: 28
-                height: 20
-                radius: 4
-                color: Colors.surface
-                anchors.verticalCenter: parent.verticalCenter
-                Icon {
-                  name: "apps"
-                  size: 14
-                  anchors.centerIn: parent
-                }
-                MouseArea {
-                  anchors.fill: parent
-                  cursorShape: Qt.PointingHandCursor
-                  onClicked: {
-                    root.launcherScreen = modelData.name
-                    root.launcherOpen = !root.launcherOpen
-                  }
-                }
-              }
+              spacing: 4
+
               Microphone {
-                  anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenter: parent.verticalCenter
               }
-              Workspaces {
-                targetScreen: modelData
-              }
+
+              Tmux {}
+              DevServer {}
             }
           }
           // middle
@@ -175,18 +133,42 @@ Scope {
             }
           }
 
-          // clock - absolutely centered in the bar
+          // clock
           Clock {
             id: clockModule
-            anchors.centerIn: parent
+            anchors {
+              left: parent.horizontalCenter
+              leftMargin: 16
+              verticalCenter: parent.verticalCenter
+            }
+            width: 96
+            horizontalAlignment: Text.AlignHCenter
+          }
+          Workspaces {
+            id: workspacesModule
+            targetScreen: modelData
+            anchors {
+              right: parent.horizontalCenter
+              rightMargin: 12
+              verticalCenter: parent.verticalCenter
+            }
           }
 
           // spotify
           Spotify {
             id: spotifyModule
             anchors {
-              right: clockModule.left
-              rightMargin: 60
+              right: workspacesModule.left
+              rightMargin: 12
+              verticalCenter: parent.verticalCenter
+            }
+          }
+
+          SystemStatus {
+            id: systemStatusModule
+            anchors {
+              left: clockModule.right
+              leftMargin: 26
               verticalCenter: parent.verticalCenter
             }
           }
@@ -198,14 +180,14 @@ Scope {
               rightMargin: 10
               verticalCenter: parent.verticalCenter
             }
-            spacing: 6
+            spacing: 8
 
             // tray
             Rectangle {
               width: trayModule.implicitWidth + 8
               height: 20
               radius: 4
-              color: Colors.surface
+              color: "transparent"
               Tray { id: trayModule; anchors.centerIn: parent }
             }
 
@@ -227,37 +209,28 @@ Scope {
 
             // network
             Rectangle {
-              width: netModule.implicitWidth + 8
+              width: netModule.implicitWidth + 4
               height: 20
               radius: 4
-              color: Colors.surface
+              color: "transparent"
               Network { id: netModule; anchors.centerIn: parent }
-            }
-
-            // bluetooth
-            Rectangle {
-              width: btModule.implicitWidth + 8
-              height: 20
-              radius: 4
-              color: Colors.surface
-              Bluetooth { id: btModule; anchors.centerIn: parent }
             }
 
             // volume
             Rectangle {
-              width: volModule.implicitWidth + 8
+              width: volModule.implicitWidth + 4
               height: 20
               radius: 4
-              color: Colors.surface
+              color: "transparent"
               Volume { id: volModule; anchors.centerIn: parent }
             }
 
             // notifications
             Rectangle {
-              width: notifModule.implicitWidth + 8
+              width: notifModule.implicitWidth + 4
               height: 20
               radius: 4
-              color: Colors.surface
+              color: "transparent"
               Notifications { id: notifModule; anchors.centerIn: parent }
             }
 
@@ -266,7 +239,7 @@ Scope {
               width: logoutModule.implicitWidth + 8
               height: 20
               radius: 4
-              color: Colors.surface
+              color: "transparent"
               Logout { 
                 id: logoutModule; 
                 anchors.centerIn: parent
@@ -279,29 +252,28 @@ Scope {
 
       LogoutPopup {
         id: logoutPopup
-        panelWindow: panel
+        panelWindow: ScreenAnchors.forScreen(modelData)
       }
 
       Launcher {
         id: launcher
-        panelWindow: panel
+        panelWindow: ScreenAnchors.forScreen(modelData)
       }
+
 
       Connections {
         target: launcher
         function onOpenChanged() {
-          if (!launcher.open) {
-            root.launcherOpen = false
-          }
+          if (!launcher.open) GlobalStates.launcherOpen = false
         }
       }
 
       Connections {
-        target: root
+        target: GlobalStates
         function onLauncherOpenChanged() { updateLauncherState() }
         function onLauncherScreenChanged() { updateLauncherState() }
         function updateLauncherState() {
-          launcher.open = root.launcherOpen && root.launcherScreen === modelData.name
+          launcher.open = GlobalStates.launcherOpen && GlobalStates.launcherScreen === modelData.name
         }
       }
     }

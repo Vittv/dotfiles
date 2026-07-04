@@ -8,7 +8,7 @@ Item {
   Icon {
     id: icon
     name: "inbox"
-    size: 16
+    size: 14
     iconColor: Colors.text
   }
 }

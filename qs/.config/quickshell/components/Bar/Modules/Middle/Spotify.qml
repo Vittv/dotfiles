@@ -11,6 +11,13 @@ Item {
   property int volumePercent: 0
   property string playerStatus: ""
   property bool isActive: playerStatus === "Playing"
+  property var barColors: [
+    Colors.palette.blue, 
+    Colors.palette.lavender, 
+    Colors.palette.mauve, 
+    Colors.palette.pink, 
+    Colors.palette.peach
+  ]
 
   visible: displayText !== ""
 
@@ -75,7 +82,7 @@ Item {
         Rectangle {
           width: 3
           radius: 1.5
-          color: Colors.palette.blue
+          color: root.barColors[index]
           anchors.bottom: eq.bottom
           x: index * 5
 
