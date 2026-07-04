@@ -121,8 +121,6 @@ PopupWindow {
     id: content
     anchors.fill: parent
     color: Colors.base
-    border.width: 1
-    border.color: Colors.surface
     radius: 20
 
     opacity: root.open ? 1 : 0
@@ -154,8 +152,6 @@ PopupWindow {
         Layout.preferredHeight: 60
         radius: 20
         color: Colors.palette.mantle
-        border.width: 1
-        border.color: Colors.surface
 
         Item {
           anchors.fill: parent

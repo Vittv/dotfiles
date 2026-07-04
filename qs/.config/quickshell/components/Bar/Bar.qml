@@ -117,11 +117,23 @@ Scope {
                 }
               }
 
-              Microphone {
+              Rectangle {
+                width: micModule.implicitWidth + 8
+                height: 20
+                radius: 4
+                color: Colors.overlay0
                 anchors.verticalCenter: parent.verticalCenter
+                Microphone { id: micModule; anchors.centerIn: parent }
               }
 
-              Tmux {}
+              Rectangle {
+                width: tmuxModule.implicitWidth + 8
+                height: 20
+                radius: 4
+                color: Colors.text
+                anchors.verticalCenter: parent.verticalCenter
+                Tmux { id: tmuxModule; anchors.centerIn: parent; textColor: Colors.base }
+              }
               DevServer {}
             }
           }
@@ -217,28 +229,28 @@ Scope {
 
             // network
             Rectangle {
-              width: netModule.implicitWidth + 4
+              width: netModule.implicitWidth + 8
               height: 20
               radius: 4
-              color: "transparent"
+              color: Colors.overlay0
               Network { id: netModule; anchors.centerIn: parent }
             }
 
             // volume
             Rectangle {
-              width: volModule.implicitWidth + 4
+              width: volModule.implicitWidth + 8
               height: 20
               radius: 4
-              color: "transparent"
+              color: Colors.overlay0
               Volume { id: volModule; anchors.centerIn: parent }
             }
 
             // notifications
             Rectangle {
-              width: notifModule.implicitWidth + 4
+              width: notifModule.implicitWidth + 8
               height: 20
               radius: 4
-              color: "transparent"
+              color: Colors.overlay0
               Notifications { id: notifModule; anchors.centerIn: parent }
             }
 
@@ -247,11 +259,10 @@ Scope {
               width: logoutModule.implicitWidth + 8
               height: 20
               radius: 4
-              color: "transparent"
+              color: Colors.overlay0
               Logout { 
                 id: logoutModule; 
                 anchors.centerIn: parent
-                onClicked: logoutPopup.open = !logoutPopup.open
               }
             }
           }
@@ -260,7 +271,12 @@ Scope {
 
       LogoutPopup {
         id: logoutPopup
-        panelWindow: ScreenAnchors.forScreen(modelData)
+        triggerItem: logoutModule
+      }
+
+      VolumePopup {
+        id: volumePopup
+        triggerItem: volModule
       }
 
       Launcher {

@@ -6,8 +6,8 @@ import "../../../../style"
 Item {
   id: micModule
   property bool muted: false
-  implicitWidth: 14
-  implicitHeight: 18
+  implicitWidth: 22
+  implicitHeight: 20
 
   function checkMute() { checkMic.running = true }
 
@@ -32,33 +32,24 @@ Item {
 
   Component.onCompleted: checkMic.running = true;
 
-  Item {
+  Icon {
     anchors.centerIn: parent
-    width: 10; height: 10
+    size: 14
+    iconColor: muted ? Colors.palette.yellow : Colors.text
+    name: muted ? "mic_off" : "mic"
+  }
 
-    Rectangle {
-      anchors.fill: parent
-      radius: 2
-      color: "transparent"
-      border.width: 2
-      border.color: Colors.text
-      Behavior on border.color { ColorAnimation { duration: 100 } }
-    }
-
-    Rectangle {
-      anchors.fill: parent
-      radius: 2
-      color: Colors.text
-      opacity: muted ? 1 : 0
-      Behavior on opacity { NumberAnimation { duration: 100 } }
-    }
+  Process {
+    id: toggleProc
   }
 
   MouseArea {
     anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     onClicked: {
-      Quickshell.exec(["bash", "-c", "pactl set-source-mute @DEFAULT_SOURCE@ toggle"]);
+      toggleProc.command = ["bash", "-c", "pactl set-source-mute @DEFAULT_SOURCE@ toggle"];
+      toggleProc.running = true;
+      checkMic.running = true;
     }
   }
 }

@@ -14,6 +14,7 @@ Item {
   property color textColor: Colors.text
   property int fontSize: 11
   property int fontWeight: Font.Bold
+  property string fontFamily: ""
 
   // internal data parsed from your script's JSON output
   property string text: ""
@@ -60,6 +61,7 @@ Item {
     color: module.textColor
     font.pixelSize: module.fontSize
     font.weight: module.fontWeight
+    font.family: module.fontFamily || Qt.application.font.family
     anchors.verticalCenter: parent.verticalCenter
   }
 

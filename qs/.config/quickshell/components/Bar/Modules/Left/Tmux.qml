@@ -14,6 +14,7 @@ ScriptModule {
   // only allocate layout space if there are active sessions
   visible: text !== ""
   textColor: Colors.palette.rosewater
-  fontSize: 12
+  fontSize: 14
   fontWeight: Font.Bold
+  fontFamily: "SF Pro Display"
 }

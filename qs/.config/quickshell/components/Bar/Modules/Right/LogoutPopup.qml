@@ -1,64 +1,43 @@
-import Quickshell
+import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import "../../../../style"
+import "../../../Bar/"
 
-PopupWindow {
+HoverMenu {
   id: root
 
-  required property var panelWindow
-  property bool open: false
-
-  width: 260
+  implicitWidth: 260
   implicitHeight: 232
-  color: Colors.base
-
-  grabFocus: true
-
-  anchor {
-    window: panelWindow
-    rect.x: panelWindow.width + 22
-    rect.y: panelWindow.height
-    margins.top: 4
-  }
-
-  onOpenChanged: visible = open
-
-  onVisibleChanged: {
-    if (visible != open) open = visible
-  }
+  backgroundColor: Colors.base
+  radius: 12
 
   ColumnLayout {
     anchors { fill: parent; margins: 6 }
     spacing: 2
-
     Repeater {
       model: [
-        { label: "Lock",          cmd: "hyprlock" },
-        { label: "Logout",        cmd: "loginctl kill-session $XDG_SESSION_ID" },
-        { label: "Suspend",       cmd: "systemctl suspend" },
-        { label: "Hibernate",     cmd: "systemctl hibernate" },
-        { label: "Shutdown",      cmd: "poweroff" },
-        { label: "Restart",       cmd: "reboot" },
+        { label: "Lock",      cmd: "hyprlock" },
+        { label: "Logout",    cmd: "loginctl kill-session $XDG_SESSION_ID" },
+        { label: "Suspend",   cmd: "systemctl suspend" },
+        { label: "Hibernate", cmd: "systemctl hibernate" },
+        { label: "Shutdown",  cmd: "poweroff" },
+        { label: "Restart",   cmd: "reboot" },
       ]
-
       delegate: Rectangle {
         required property var modelData
-
         Layout.fillWidth: true
         Layout.preferredHeight: 34
-        radius: 6
+        radius: 10
         color: mouse.containsMouse ? Colors.base : "transparent"
-
         Text {
           anchors { left: parent.left; leftMargin: 12; verticalCenter: parent.verticalCenter }
           text: modelData.label
-          color: mouse.containsMouse ? Colors.accent : Colors.text
-          font.family: Fonts.display
-          font.weight: 500
-          font.pixelSize: 14
+          color: mouse.containsMouse ? Colors.palette.lavender : Colors.text
+          font.family: "Georgia"
+          font.weight: 600
+          font.pixelSize: 16
         }
-
         MouseArea {
           id: mouse
           anchors.fill: parent

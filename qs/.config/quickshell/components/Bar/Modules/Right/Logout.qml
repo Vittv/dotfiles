@@ -5,7 +5,6 @@ Item {
   implicitWidth: icon.implicitWidth
   implicitHeight: icon.implicitHeight
 
-  signal clicked()
   property bool hovered: mouseArea.containsMouse
 
   Icon {
@@ -19,6 +18,5 @@ Item {
     id: mouseArea
     anchors.fill: parent
     hoverEnabled: true
-    onClicked: parent.clicked()
   }
 }
