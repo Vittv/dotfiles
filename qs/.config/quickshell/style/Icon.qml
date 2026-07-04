@@ -28,6 +28,7 @@ Text {
     "mic":           "\ue029",
     "mic_off":       "\ue02b",
     "logout":        "\ue9ba",
+    "apps":          "\ue5c3",
   })
 
   text: _glyphs[root.name] || "?"

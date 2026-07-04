@@ -75,7 +75,7 @@ Item {
         Rectangle {
           width: 3
           radius: 1.5
-          color: Colors.accent
+          color: Colors.palette.blue
           anchors.bottom: eq.bottom
           x: index * 5
 

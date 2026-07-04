@@ -15,4 +15,12 @@ Text {
   font.family: "SF Compact Display"
   font.pixelSize: 14
   font.weight: 600
+
+  property bool hovered: hoverArea.containsMouse
+
+  MouseArea {
+    id: hoverArea
+    anchors.fill: parent
+    hoverEnabled: true
+  }
 }
