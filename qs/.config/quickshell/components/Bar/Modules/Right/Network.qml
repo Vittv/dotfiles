@@ -41,10 +41,16 @@ Item {
     }
   }
 
+  Process {
+    id: nmProcess
+  }
+
   MouseArea {
+    anchors.fill: parent
     cursorShape: Qt.PointingHandCursor
     onClicked: {
-      Quickshell.exec("nm-connection-editor");
+      nmProcess.command = ["bash", "-c", "nm-connection-editor"];
+      nmProcess.running = true;
     }
   }
 }

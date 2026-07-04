@@ -4,12 +4,15 @@ import "../../../../utils"
 import "../../../../style"
 
 Row {
+  id: root
+  readonly property bool active: devServerText.text !== ""
+  visible: active
   spacing: 4
   anchors.verticalCenter: parent.verticalCenter
 
   Rectangle {
     width: 6; height: 6; radius: 3
-    color: Colors.palette.blue
+    color: Colors.base
     anchors.verticalCenter: parent.verticalCenter
     visible: devServerText.text !== ""
 
@@ -27,7 +30,7 @@ Row {
     intervalMs: 3000
     onClickCommand: "bash -c 'port=$(ss -tlnp 2>/dev/null | grep -oP \":(5173|4173|8080|3000|8081) \" | head -1 | tr -d \": \"); [ -n \"$port\" ] && xdg-open \"http://localhost:$port\"'"
     visible: text !== ""
-    textColor: Colors.palette.blue
+    textColor: Colors.base
     fontSize: 12
     fontWeight: Font.Bold
   }

@@ -132,9 +132,19 @@ Scope {
                 radius: 4
                 color: Colors.text
                 anchors.verticalCenter: parent.verticalCenter
+                visible: tmuxModule.active
                 Tmux { id: tmuxModule; anchors.centerIn: parent; textColor: Colors.base }
               }
-              DevServer {}
+
+              Rectangle {
+                width: devServerText.implicitWidth + 8
+                height: 20
+                radius: 4
+                color: Colors.palette.blue
+                anchors.verticalCenter: parent.verticalCenter
+                visible: devServerText.active
+                DevServer { id: devServerText; anchors.centerIn: parent; }
+              }
             }
           }
           // middle

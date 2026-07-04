@@ -4,6 +4,8 @@ import "../../../../style/"
 
 ScriptModule {
   id: tmuxModule
+  readonly property bool active: text !== ""
+  visible: active
 
   execCommand: "$HOME/.config/quickshell/src/tmux.sh"
   intervalMs: 2000
@@ -12,7 +14,6 @@ ScriptModule {
   onClickCommand: "kitty fish -c t"
 
   // only allocate layout space if there are active sessions
-  visible: text !== ""
   textColor: Colors.palette.rosewater
   fontSize: 14
   fontWeight: Font.Bold
