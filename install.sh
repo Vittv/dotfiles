@@ -33,14 +33,14 @@ echo "==> Installing packages via pacman..."
 sudo pacman -S --needed --noconfirm \
   fish \
   hyprland \
+  hyprlock \
+  hyprsunset \
   kitty \
   lazygit \
   neovim \
-  rofi \
   starship \
-  swaync \
+  quickshell \
   tmux \
-  waybar \
   yazi \
   fzf \
   go \
@@ -68,7 +68,17 @@ echo "==> Installing AUR packages..."
 yay -S --needed --noconfirm \
   qt6ct-kde \
   nvibrant-bin \
-  apple-fonts
+  apple-fonts \
+  cmatrix-git \
+  peaclock \
+  pipes-rs \
+  darkly \
+  grimblast-git \
+  helium-browser-bin \
+  hyprqt6engine \
+  sesh-bin \
+  zen-browser-bin
+
 
 # performance power profile
 echo "==> Enabling power-profiles-daemon..."
@@ -157,7 +167,7 @@ fi
 echo "==> Stowing dotfiles..."
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-for pkg in colors fish hyprland kitty lazygit nvim rofi scripts starship swaync tmux waybar yazi ui; do
+for pkg in colors fish hyprland kitty lazygit nvim scripts starship qs tmux yazi ui; do
   if [ -d "$DOTFILES_DIR/$pkg" ]; then
     echo "  stowing $pkg..."
     stow --dir="$DOTFILES_DIR" --target="$HOME" "$pkg"
