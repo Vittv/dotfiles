@@ -36,7 +36,7 @@ HoverMenu {
           color: mouse.containsMouse ? Colors.palette.lavender : Colors.text
           font.family: "Georgia"
           font.weight: 600
-          font.pixelSize: 16
+          font.pixelSize: 14
         }
         MouseArea {
           id: mouse

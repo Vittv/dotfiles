@@ -2,46 +2,43 @@ import QtQuick
 import QtQuick.Layouts
 import "../../style"
 
-// One row: icon (click = mute), slider (drag = set volume), percentage.
-// Used for both the master output and each per-application stream.
-RowLayout {
+ColumnLayout {
   id: root
-  spacing: 10
+  spacing: 2
 
   property string label: ""
   property string iconName: "volume_up"
-  property real value: 0        // 0.0 - 1.0
+  property real value: 0
   property bool muted: false
 
   signal dragged(real value)
   signal iconClicked()
 
-  Icon {
-    name: root.iconName
-    size: 16
-    iconColor: Colors.text
-    Layout.alignment: Qt.AlignVCenter
-
-    MouseArea {
-      anchors.fill: parent
-      anchors.margins: -6
-      onClicked: root.iconClicked()
-    }
+  Text {
+    visible: root.label.length > 0
+    text: root.label
+    color: Colors.text
+    font.family: Fonts.display
+    font.pixelSize: 13
+    font.weight: 600
+    elide: Text.ElideRight
+    Layout.fillWidth: true
   }
 
-  ColumnLayout {
+  RowLayout {
+    spacing: 10
     Layout.fillWidth: true
-    spacing: 2
 
-    Text {
-      visible: root.label.length > 0
-      text: root.label
-      color: Colors.text
-      font.family: Fonts.display
-      font.pixelSize: 13
-      font.weight: 600
-      elide: Text.ElideRight
-      Layout.fillWidth: true
+    Icon {
+      name: root.iconName
+      size: 16
+      iconColor: Colors.text
+
+      MouseArea {
+        anchors.fill: parent
+        anchors.margins: -6
+        onClicked: root.iconClicked()
+      }
     }
 
     Item {
@@ -81,15 +78,15 @@ RowLayout {
         onPositionChanged: (mouse) => { if (pressed) root.dragged(mouse.x / sliderTrack.width) }
       }
     }
-  }
 
-  Text {
-    text: root.muted ? "muted" : Math.round(root.value * 100) + "%"
-    color: Colors.text
-    font.family: Fonts.display
-    font.pixelSize: 13
-    font.weight: 600
-    Layout.preferredWidth: 38
-    horizontalAlignment: Text.AlignRight
+    Text {
+      text: root.muted ? "muted" : Math.round(root.value * 100) + "%"
+      color: Colors.text
+      font.family: Fonts.display
+      font.pixelSize: 13
+      font.weight: 600
+      Layout.preferredWidth: 38
+      horizontalAlignment: Text.AlignRight
+    }
   }
 }

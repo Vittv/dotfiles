@@ -21,6 +21,7 @@ Text {
     "settings":      "\ue8b8",
     "wifi":          "\ue63e",
     "eth":           "\uefe6",
+    "computer":      "\ue30c",
     "bluetooth":     "\ue1a7",
     "battery_full":  "\ue1a5",
     "cpu":           "\ue322",
@@ -28,7 +29,6 @@ Text {
     "mic":           "\ue029",
     "mic_off":       "\ue02b",
     "logout":        "\ue9ba",
-    "arch":          "󰣇",   // nf-linux-archlinux
   })
 
   readonly property var _nerdIcons: (["arch"])

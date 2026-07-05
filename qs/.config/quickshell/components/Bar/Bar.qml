@@ -236,7 +236,14 @@ Scope {
             //   color: Colors.surface
             //   GpuTemp { id: gpuModule; anchors.centerIn: parent }
             // }
-
+            // mudfish
+            Rectangle {
+              width: mudfishModule.implicitWidth + 8
+              height: 20
+              radius: 4
+              color: Colors.overlay0
+              Mudfish { id: mudfishModule; anchors.centerIn: parent }
+            }
             // network
             Rectangle {
               width: netModule.implicitWidth + 8
