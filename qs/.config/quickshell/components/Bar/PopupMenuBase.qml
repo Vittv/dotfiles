@@ -1,36 +1,21 @@
 import Quickshell
 import QtQuick
 
-// shared foundation for popup menus: anchor positioning relative to a
-// trigger item, slide+fade open/close animation, and a rounded background
-// (the window itself stays transparent - see HoverMenu.qml's header comment
-// for why). this type doesn't decide *how* the menu opens - that's left to
-// whatever wraps it. See HoverMenu.qml (hover-triggered) and
-// ClickMenu.qml (click-triggered).
 PopupWindow {
   id: root
 
   required property Item triggerItem
-  property int gap: 4   // px gap between trigger and popup
+  property int gap: 4
 
-  // where the popup anchors on the trigger, and which way it grows
   property int edgesFlag: Edges.Bottom | Edges.Left
   property int gravityFlag: Edges.Bottom | Edges.Right
 
-  // set true to center the popup horizontally under the trigger instead of
-  // left-aligning it - useful when the popup is much wider than the trigger
   property bool centered: false
-
   property bool centerInWindow: false
 
   readonly property real _windowWidth: (triggerItem && triggerItem.Window && triggerItem.Window.window)
     ? triggerItem.Window.window.width : 0
 
-  // computed fresh right when the popup opens (not a live binding) - a
-  // binding through mapToItem() wouldn't be re-evaluated when the trigger's
-  // position changes, since QML can't see inside the method call to know
-  // it should track that dependency, so it could go stale and center on a
-  // wrong, cached position.
   property real _centerOffsetX: 0
 
   function _recomputeCenterOffset() {
@@ -49,22 +34,22 @@ PopupWindow {
     }
   }
 
-  // animation tuning
   property int animDuration: 140
   property int slideDistance: 10
 
-  // appearance - window stays transparent, this Rectangle draws the
-  // visible rounded "card"
   property color backgroundColor: "transparent"
   property int radius: 0
+  property bool bottomOnlyRadius: false
   color: "transparent"
+
+  readonly property bool _hasSpecialCorners: root.bottomOnlyRadius
 
   default property alias menuContent: hoverArea.data
   readonly property bool contentHovered: hoverArea.containsMouse
 
   property bool open: false
-  visible: false   // driven manually, not bound directly to `open`, so the
-  grabFocus: true    // close animation has time to play before we hide
+  visible: false
+  grabFocus: true
 
   anchor {
     item: root.triggerItem
@@ -107,7 +92,75 @@ PopupWindow {
       radius: root.radius
       color: root.backgroundColor
       antialiasing: true
-      border.width: 0   // avoids QTBUG-137166 (transparent rect + border)
+      border.width: 0
+      visible: !root._hasSpecialCorners
+    }
+
+    Canvas {
+      anchors.fill: parent
+      antialiasing: true
+      visible: root._hasSpecialCorners
+
+      property color bgColor: root.backgroundColor
+      property int cornerRadius: root.radius
+      property bool bor: root.bottomOnlyRadius
+
+      onBgColorChanged: requestPaint()
+      onCornerRadiusChanged: requestPaint()
+      onBorChanged: requestPaint()
+      onWidthChanged: requestPaint()
+      onHeightChanged: requestPaint()
+
+      onPaint: {
+        var ctx = getContext("2d")
+        ctx.reset()
+        ctx.fillStyle = bgColor
+
+        var r = Math.min(cornerRadius, Math.min(width, height) / 2)
+        var w = width
+        var h = height
+
+        function isRound(isTop) {
+          return r > 0 && (!bor || !isTop)
+        }
+
+        ctx.beginPath()
+        ctx.moveTo(0, isRound(false) ? h - r : h)
+        ctx.lineTo(0, isRound(true) ? r : 0)
+
+        if (isRound(true)) {
+          ctx.arc(r, r, r, Math.PI, 1.5 * Math.PI)
+        } else {
+          ctx.lineTo(0, 0)
+        }
+
+        ctx.lineTo(isRound(true) ? w - r : w, 0)
+
+        if (isRound(true)) {
+          ctx.arc(w - r, r, r, 1.5 * Math.PI, 0)
+        } else {
+          ctx.lineTo(w, 0)
+        }
+
+        ctx.lineTo(w, isRound(false) ? h - r : h)
+
+        if (isRound(false)) {
+          ctx.arc(w - r, h - r, r, 0, 0.5 * Math.PI)
+        } else {
+          ctx.lineTo(w, h)
+        }
+
+        ctx.lineTo(isRound(false) ? r : 0, h)
+
+        if (isRound(false)) {
+          ctx.arc(r, h - r, r, 0.5 * Math.PI, Math.PI)
+        } else {
+          ctx.lineTo(0, h)
+        }
+
+        ctx.closePath()
+        ctx.fill()
+      }
     }
 
     MouseArea {

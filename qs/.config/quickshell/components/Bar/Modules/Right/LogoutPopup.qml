@@ -34,7 +34,7 @@ HoverMenu {
           anchors { left: parent.left; leftMargin: 12; verticalCenter: parent.verticalCenter }
           text: modelData.label
           color: mouse.containsMouse ? Colors.palette.lavender : Colors.text
-          font.family: "Georgia"
+          font.family: "SF Pro Display"
           font.weight: 600
           font.pixelSize: 14
         }

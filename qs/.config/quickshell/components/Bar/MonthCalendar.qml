@@ -63,9 +63,9 @@ Item {
         horizontalAlignment: Text.AlignHCenter
         text: root.monthNames[root.viewDate.getMonth()] + " " + root.viewDate.getFullYear()
         color: Colors.text
-        font.family: "Georgia"
-        font.pixelSize: 18
-        font.weight: 700
+        font.family: Fonts.display
+        font.pixelSize: 16
+        font.weight: 500
         font.letterSpacing: 0.5
       }
 
@@ -94,7 +94,7 @@ Item {
           horizontalAlignment: Text.AlignHCenter
           text: modelData.toUpperCase()
           color: Colors.subtext
-          font.family: "Georgia"
+          font.family: Fonts.display
           font.pixelSize: 11
           font.letterSpacing: 0.8
           font.weight: 600
@@ -167,7 +167,7 @@ Item {
               if (isWeekend) return Colors.subtext
               return Colors.text
             }
-            font.family: "Georgia"
+            font.family: Fonts.display
             font.pixelSize: 14
             font.weight: isToday || isSelected ? 700 : 500
           }

@@ -31,6 +31,10 @@ Text {
     "logout":        "\ue9ba",
     "chevron_left":  "\ue5cb",
     "chevron_right": "\ue5cc",
+    "lock":          "\ue897",
+    "sleep":         "\ue8b4",
+    "hibernate":     "\ue8ac",
+    "restart":       "\ue5d5",
   })
 
   readonly property var _nerdIcons: (["arch"])

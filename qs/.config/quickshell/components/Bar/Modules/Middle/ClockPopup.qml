@@ -8,11 +8,12 @@ import "../../../Bar/"
 ClickMenu {
   id: root
 
-  implicitWidth: 680
+  implicitWidth: 500
   implicitHeight: content.implicitHeight + 40
   backgroundColor: Colors.base
   radius: 12
   centerInWindow: true
+  bottomOnlyRadius: true
 
   SystemClock {
     id: sysClock
@@ -239,9 +240,9 @@ ClickMenu {
           horizontalAlignment: Text.AlignLeft
           text: Qt.formatTime(root.now, "hh:mm:ss")
           color: Colors.text
-          font.family: "Georgia"
+          font.family: Fonts.display
           font.pixelSize: 36
-          font.weight: 600
+          font.weight: 300
           font.letterSpacing: 1
         }
 
@@ -250,7 +251,7 @@ ClickMenu {
           horizontalAlignment: Text.AlignLeft
           text: Qt.formatDate(root.now, "dddd, MMMM d, yyyy")
           color: Colors.subtext
-          font.family: "Georgia"
+          font.family: Fonts.display
           font.pixelSize: 13
           font.italic: true
         }
@@ -286,7 +287,7 @@ ClickMenu {
         Layout.fillWidth: true
         text: "WORLD"
         color: Colors.subtext
-        font.family: "Georgia"
+        font.family: Fonts.display
         font.pixelSize: 12
         font.letterSpacing: 1.8
         font.weight: 600
@@ -319,7 +320,7 @@ ClickMenu {
               Text {
                 text: modelData
                 color: Colors.text
-                font.family: "Georgia"
+                font.family: Fonts.display
                 font.pixelSize: 14
               }
 
@@ -337,7 +338,7 @@ ClickMenu {
             Text {
               text: worldTimes[modelData] ? worldTimes[modelData].zone : ""
               color: Colors.surface
-              font.family: "Georgia"
+              font.family: Fonts.display
               font.pixelSize: 11
               font.italic: true
               Layout.leftMargin: 10
@@ -357,7 +358,7 @@ ClickMenu {
         Text {
           text: "UPCOMING"
           color: Colors.subtext
-          font.family: "Georgia"
+          font.family: Fonts.display
           font.pixelSize: 12
           font.letterSpacing: 1.8
           font.weight: 600
@@ -368,7 +369,7 @@ ClickMenu {
         Text {
           text: root.isBirthdayMode ? "BDAY" : "EVENT"
           color: Colors.text
-          font.family: "Georgia"
+          font.family: Fonts.display
           font.pixelSize: 11
           font.weight: 600
           font.letterSpacing: 1.2
@@ -400,7 +401,7 @@ ClickMenu {
           Text {
             text: modelData.displayDate
             color: modelData.type === "birthday" ? Colors.red : Colors.subtext
-            font.family: "Georgia"
+            font.family: Fonts.display
             font.pixelSize: 12
           }
 
@@ -408,7 +409,7 @@ ClickMenu {
             Layout.fillWidth: true
             text: modelData.text
             color: Colors.text
-            font.family: "Georgia"
+            font.family: Fonts.display
             font.pixelSize: 13
             wrapMode: Text.WordWrap
           }
@@ -452,7 +453,7 @@ ClickMenu {
             anchors.leftMargin: 8
             text: root.newEventText
             color: Colors.text
-            font.family: "Georgia"
+            font.family: Fonts.display
             font.pixelSize: 14
             font.weight: 600
             onTextChanged: root.newEventText = text
@@ -464,7 +465,7 @@ ClickMenu {
           text: "ADD"
           Layout.leftMargin: 8
           color: Colors.text
-          font.family: "Georgia"
+          font.family: Fonts.display
           font.pixelSize: 11
           font.weight: 600
           font.letterSpacing: 1.2
