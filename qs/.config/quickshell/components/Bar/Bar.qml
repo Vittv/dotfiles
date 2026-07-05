@@ -34,14 +34,14 @@ Scope {
           left: parent.left;
           right: parent.right;
         }
-        height: 26
+        implicitHeight: 26
         color: typeof Colors !== 'undefined' ? Colors.base : "#171719"
 
         // left wing
         Canvas {
           id: leftWing
           width: 12
-          height: 12
+          implicitHeight: 12
           anchors {
             top: parent.bottom
             left: parent.left
@@ -57,7 +57,7 @@ Scope {
             ctx.beginPath();
             ctx.moveTo(0, 0);                             // top-left corner
             ctx.lineTo(width, 0);                         // line along the bar baseline
-            ctx.quadraticCurveTo(0, 0, 0, height);        // curve outwards to the screen edge
+            ctx.quadraticCurveTo(0, 0, 0, implicitHeight);        // curve outwards to the screen edge
             ctx.closePath();
             ctx.fill();
           }
@@ -67,7 +67,7 @@ Scope {
         Canvas {
           id: rightWing
           width: 12
-          height: 12
+          implicitHeight: 12
           anchors {
             top: parent.bottom
             right: parent.right
@@ -82,7 +82,7 @@ Scope {
             ctx.fillStyle = typeof Colors !== 'undefined' ? Colors.base : "#171719";
             ctx.beginPath();
             ctx.moveTo(width, 0);                         
-            ctx.lineTo(width, height);                    
+            ctx.lineTo(width, implicitHeight);                    
             ctx.quadraticCurveTo(width, 0, 0, 0);
             ctx.closePath();
             ctx.fill();
@@ -99,7 +99,7 @@ Scope {
             id: leftPill
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
-            height: 24
+            implicitHeight: 24
             width: leftRow.width + 16
             color: typeof Colors !== 'undefined' ? Colors.base : "#252530"
             radius: 6
@@ -119,7 +119,7 @@ Scope {
 
               Rectangle {
                 width: micModule.implicitWidth + 8
-                height: 20
+                implicitHeight: 20
                 radius: 4
                 color: Colors.overlay0
                 anchors.verticalCenter: parent.verticalCenter
@@ -128,7 +128,7 @@ Scope {
 
               Rectangle {
                 width: tmuxModule.implicitWidth + 8
-                height: 20
+                implicitHeight: 20
                 radius: 4
                 color: Colors.text
                 anchors.verticalCenter: parent.verticalCenter
@@ -138,7 +138,7 @@ Scope {
 
               Rectangle {
                 width: devServerText.implicitWidth + 8
-                height: 20
+                implicitHeight: 20
                 radius: 4
                 color: Colors.palette.blue
                 anchors.verticalCenter: parent.verticalCenter
@@ -150,7 +150,7 @@ Scope {
           // middle
           Rectangle {
             id: centerPill
-            height: 24
+            implicitHeight: 24
             radius: 6
             color: Colors.base
 
@@ -215,7 +215,7 @@ Scope {
             // tray
             Rectangle {
               width: trayModule.implicitWidth + 8
-              height: 20
+              implicitHeight: 20
               radius: 4
               color: "transparent"
               Tray { id: trayModule; anchors.centerIn: parent }
@@ -239,7 +239,7 @@ Scope {
             // mudfish
             Rectangle {
               width: mudfishModule.implicitWidth + 8
-              height: 20
+              implicitHeight: 20
               radius: 4
               color: Colors.overlay0
               Mudfish { id: mudfishModule; anchors.centerIn: parent }
@@ -247,7 +247,7 @@ Scope {
             // network
             Rectangle {
               width: netModule.implicitWidth + 8
-              height: 20
+              implicitHeight: 20
               radius: 4
               color: Colors.overlay0
               Network { id: netModule; anchors.centerIn: parent }
@@ -256,7 +256,7 @@ Scope {
             // volume
             Rectangle {
               width: volModule.implicitWidth + 8
-              height: 20
+              implicitHeight: 20
               radius: 4
               color: Colors.overlay0
               Volume { id: volModule; anchors.centerIn: parent }
@@ -265,7 +265,7 @@ Scope {
             // notifications
             Rectangle {
               width: notifModule.implicitWidth + 8
-              height: 20
+              implicitHeight: 20
               radius: 4
               color: Colors.overlay0
               Notifications { id: notifModule; anchors.centerIn: parent }
@@ -274,7 +274,7 @@ Scope {
             // logout
             Rectangle {
               width: logoutModule.implicitWidth + 8
-              height: 20
+              implicitHeight: 20
               radius: 4
               color: Colors.overlay0
               Logout { 
@@ -296,11 +296,15 @@ Scope {
         triggerItem: volModule
       }
 
-      Launcher {
-        id: launcher
-        panelWindow: ScreenAnchors.forScreen(modelData)
+      NetworkPopup {
+        id: networkPopup
+        triggerItem: netModule
       }
 
+      Launcher {
+        id: launcher
+        panelWindow: panel
+      }
 
       Connections {
         target: launcher

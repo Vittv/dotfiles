@@ -15,8 +15,8 @@ PopupWindow {
   readonly property int contentSpacing: 8
   readonly property int contentMargins: 4
 
-  width: 800
-  height: (contentMargins * 2) + searchHeight + contentSpacing + listHeight
+  implicitWidth: 800
+  implicitHeight: (contentMargins * 2) + searchHeight + contentSpacing + listHeight
   color: "transparent"
 
   grabFocus: true
@@ -33,7 +33,7 @@ PopupWindow {
 
   anchor {
     window: panelWindow
-    rect.x: root.screen ? (root.screen.width - width) / 2 : 0
+    rect.x: root.screen ? (root.screen.width - implicitWidth) / 2 : 0
     rect.y: root.screen ? Math.round(root.screen.height * 0.3) : 36
   }
 
@@ -130,7 +130,7 @@ PopupWindow {
 
     transform: Scale {
       id: scaleTransform
-      origin.x: content.width / 2
+      origin.x: content.implicitWidth / 2
       origin.y: content.height / 2
       xScale: root.open ? 1 : 0.97
       yScale: root.open ? 1 : 0.97
@@ -244,8 +244,8 @@ PopupWindow {
           id: delegateRoot
           required property var modelData
           required property int index
-          width: ListView.view.width
-          height: 40
+          implicitWidth: ListView.view.width
+          implicitHeight: 40
           radius: 6
           color: (ListView.isCurrentItem || mouse.containsMouse) ? Colors.base : "transparent"
 
@@ -255,8 +255,8 @@ PopupWindow {
 
             IconImage {
               source: Quickshell.iconPath(delegateRoot.modelData.icon || "", true)
-              width: 14
-              height: 14
+              implicitWidth: 14
+              implicitHeight: 14
               asynchronous: true
             }
 

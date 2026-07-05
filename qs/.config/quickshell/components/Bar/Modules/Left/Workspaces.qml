@@ -7,9 +7,18 @@ Item {
   height: 22
   width: background.width
 
-  // Single source of truth for "which workspace is actually focused right now,"
-  // instead of each item's own per-monitor "active" flag.
   readonly property int focusedId: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id : -1
+
+  // recalculate highlight whenever the focused workspace changes
+  onFocusedIdChanged: {
+    for (var i = 0; i < contentRow.children.length; i++) {
+      var child = contentRow.children[i]
+      if (child.ws && child.ws.id === focusedId) {
+        highlight.x = child.mapToItem(root, 0, 0).x
+        break
+      }
+    }
+  }
 
   Rectangle {
     id: background
@@ -39,10 +48,12 @@ Item {
         width: 36
         height: 18
 
-        // Recomputed whenever root.focusedId changes, so exactly one item
-        // flips true and the previous one flips false, every time.
         readonly property bool isActive: ws.id === root.focusedId
 
+        // update highlight whenever this item moves (fixes startup layout timing)
+        onXChanged: {
+          if (isActive) highlight.x = mapToItem(root, 0, 0).x
+        }
         onIsActiveChanged: {
           if (isActive) highlight.x = mapToItem(root, 0, 0).x
         }

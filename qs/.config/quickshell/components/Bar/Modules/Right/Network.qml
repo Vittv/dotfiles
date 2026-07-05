@@ -5,7 +5,8 @@ import "../../../../style"
 
 Item {
   id: netModule
-  property string connectionType: "none"  // "wifi", "lan", or "none"
+  property string connectionType: "none"
+  property bool hovered: mouseArea.containsMouse
   implicitWidth: row.implicitWidth
   implicitHeight: row.implicitHeight
 
@@ -46,7 +47,9 @@ Item {
   }
 
   MouseArea {
+    id: mouseArea
     anchors.fill: parent
+    hoverEnabled: true
     cursorShape: Qt.PointingHandCursor
     onClicked: {
       nmProcess.command = ["bash", "-c", "nm-connection-editor"];
