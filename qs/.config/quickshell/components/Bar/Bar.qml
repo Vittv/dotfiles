@@ -174,6 +174,10 @@ Scope {
             width: 96
             horizontalAlignment: Text.AlignHCenter
           }
+          ClockPopup {
+            id: clockPopup
+            triggerItem: clockModule
+          }
           Workspaces {
             id: workspacesModule
             targetScreen: modelData

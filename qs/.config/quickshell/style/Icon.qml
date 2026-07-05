@@ -29,6 +29,8 @@ Text {
     "mic":           "\ue029",
     "mic_off":       "\ue02b",
     "logout":        "\ue9ba",
+    "chevron_left":  "\ue5cb",
+    "chevron_right": "\ue5cc",
   })
 
   readonly property var _nerdIcons: (["arch"])
