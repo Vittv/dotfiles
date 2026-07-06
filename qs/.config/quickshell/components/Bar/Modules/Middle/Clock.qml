@@ -9,7 +9,7 @@ Text {
   }
   text: Qt.formatDateTime(clock.date, "hh:mm AP") + "  •  " + Qt.formatDateTime(clock.date, "MMM dd").toLowerCase()
   color: Colors.text
-  font.family: "Georgia"
+  font.family: Fonts.display
   font.pixelSize: 14
   font.weight: 600
   horizontalAlignment: Text.AlignHCenter

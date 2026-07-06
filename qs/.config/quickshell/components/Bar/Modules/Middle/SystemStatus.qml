@@ -111,7 +111,7 @@ Item {
       RingGauge {
         anchors.verticalCenter: parent.verticalCenter
         fraction: root.cpuUsage / 100
-        ringColor: Colors.palette.lavender
+        ringColor: Colors.palette.blue
       }
       Text {
         anchors.verticalCenter: parent.verticalCenter
@@ -136,7 +136,7 @@ Item {
       RingGauge {
         anchors.verticalCenter: parent.verticalCenter
         fraction: root.gpuUsage / 100
-        ringColor: Colors.palette.rosewater
+        ringColor: Colors.palette.pink
       }
       Text {
         anchors.verticalCenter: parent.verticalCenter

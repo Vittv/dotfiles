@@ -14,7 +14,7 @@ ScriptModule {
   onClickCommand: "kitty fish -c t"
 
   // only allocate layout space if there are active sessions
-  textColor: Colors.palette.rosewater
+  textColor: Colors.palette.base
   fontSize: 14
   fontWeight: Font.Bold
   fontFamily: "SF Pro Display"
