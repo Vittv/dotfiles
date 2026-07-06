@@ -127,13 +127,26 @@ Scope {
               }
 
               Rectangle {
+                  width: updateGreetingModule.implicitWidth + 8
+                  implicitHeight: 20
+                  radius: 4
+                  color: Colors.text
+                  anchors.verticalCenter: parent.verticalCenter
+                  visible: true
+                  UpdateGreeting {
+                      id: updateGreetingModule
+                      anchors.centerIn: parent
+                  }
+              }
+
+              Rectangle {
                 width: tmuxModule.implicitWidth + 8
                 implicitHeight: 20
                 radius: 4
-                color: Colors.text
+                color: Colors.palette.sapphire
                 anchors.verticalCenter: parent.verticalCenter
                 visible: tmuxModule.active
-                Tmux { id: tmuxModule; anchors.centerIn: parent; textColor: Colors.base }
+                Tmux { id: tmuxModule; anchors.centerIn: parent; textColor: Colors.palette.surface1 }
               }
 
               Rectangle {
