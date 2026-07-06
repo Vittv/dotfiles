@@ -1,15 +1,30 @@
 import QtQuick
 import Quickshell.Hyprland
 import "../../../../style/"
+
 Item {
   id: root
   property var targetScreen
   height: 22
   width: background.width
 
-  readonly property int focusedId: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id : -1
+  property int focusedId: -1
 
-  // recalculate highlight whenever the focused workspace changes
+  function refresh() {
+    var m = targetScreen ? Hyprland.monitorFor(targetScreen) : null
+    root.focusedId = m && m.activeWorkspace ? m.activeWorkspace.id : -1
+  }
+
+  Component.onCompleted: refresh()
+
+  Connections {
+    target: Hyprland
+    function onRawEvent(event) {
+      if (event.name === "workspacev2" || event.name === "focusedmon")
+        root.refresh()
+    }
+  }
+
   onFocusedIdChanged: {
     for (var i = 0; i < contentRow.children.length; i++) {
       var child = contentRow.children[i]
@@ -50,7 +65,6 @@ Item {
 
         readonly property bool isActive: ws.id === root.focusedId
 
-        // update highlight whenever this item moves (fixes startup layout timing)
         onXChanged: {
           if (isActive) highlight.x = mapToItem(root, 0, 0).x
         }

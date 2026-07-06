@@ -5,7 +5,7 @@ PopupWindow {
   id: root
 
   required property Item triggerItem
-  property int gap: 4
+  property int gap: 12
 
   property int edgesFlag: Edges.Bottom | Edges.Left
   property int gravityFlag: Edges.Bottom | Edges.Right
@@ -39,10 +39,7 @@ PopupWindow {
 
   property color backgroundColor: "transparent"
   property int radius: 0
-  property bool bottomOnlyRadius: false
   color: "transparent"
-
-  readonly property bool _hasSpecialCorners: root.bottomOnlyRadius
 
   default property alias menuContent: hoverArea.data
   readonly property bool contentHovered: hoverArea.containsMouse
@@ -56,7 +53,7 @@ PopupWindow {
     rect: root._anchorRect
     edges: (root.centered || root.centerInWindow) ? (Edges.Bottom | Edges.Left) : root.edgesFlag
     gravity: (root.centered || root.centerInWindow) ? (Edges.Bottom | Edges.Right) : root.gravityFlag
-    margins.top: root.gap
+    margins.bottom: -root.gap
   }
 
   onOpenChanged: {
@@ -93,74 +90,6 @@ PopupWindow {
       color: root.backgroundColor
       antialiasing: true
       border.width: 0
-      visible: !root._hasSpecialCorners
-    }
-
-    Canvas {
-      anchors.fill: parent
-      antialiasing: true
-      visible: root._hasSpecialCorners
-
-      property color bgColor: root.backgroundColor
-      property int cornerRadius: root.radius
-      property bool bor: root.bottomOnlyRadius
-
-      onBgColorChanged: requestPaint()
-      onCornerRadiusChanged: requestPaint()
-      onBorChanged: requestPaint()
-      onWidthChanged: requestPaint()
-      onHeightChanged: requestPaint()
-
-      onPaint: {
-        var ctx = getContext("2d")
-        ctx.reset()
-        ctx.fillStyle = bgColor
-
-        var r = Math.min(cornerRadius, Math.min(width, height) / 2)
-        var w = width
-        var h = height
-
-        function isRound(isTop) {
-          return r > 0 && (!bor || !isTop)
-        }
-
-        ctx.beginPath()
-        ctx.moveTo(0, isRound(false) ? h - r : h)
-        ctx.lineTo(0, isRound(true) ? r : 0)
-
-        if (isRound(true)) {
-          ctx.arc(r, r, r, Math.PI, 1.5 * Math.PI)
-        } else {
-          ctx.lineTo(0, 0)
-        }
-
-        ctx.lineTo(isRound(true) ? w - r : w, 0)
-
-        if (isRound(true)) {
-          ctx.arc(w - r, r, r, 1.5 * Math.PI, 0)
-        } else {
-          ctx.lineTo(w, 0)
-        }
-
-        ctx.lineTo(w, isRound(false) ? h - r : h)
-
-        if (isRound(false)) {
-          ctx.arc(w - r, h - r, r, 0, 0.5 * Math.PI)
-        } else {
-          ctx.lineTo(w, h)
-        }
-
-        ctx.lineTo(isRound(false) ? r : 0, h)
-
-        if (isRound(false)) {
-          ctx.arc(r, h - r, r, 0.5 * Math.PI, Math.PI)
-        } else {
-          ctx.lineTo(0, h)
-        }
-
-        ctx.closePath()
-        ctx.fill()
-      }
     }
 
     MouseArea {
