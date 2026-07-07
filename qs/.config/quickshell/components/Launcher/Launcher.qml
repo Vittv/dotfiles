@@ -147,11 +147,9 @@ PopupWindow {
       anchors { fill: parent; margins: 6 }
       spacing: 8
 
-      Rectangle {
+      Item {
         Layout.fillWidth: true
         Layout.preferredHeight: 60
-        radius: 20
-        color: Colors.palette.mantle
 
         Item {
           anchors.fill: parent
@@ -225,7 +223,11 @@ PopupWindow {
           }
         }
       }
-
+      Rectangle {
+        Layout.fillWidth: true
+        Layout.preferredHeight: 1
+        color: Colors.palette.surface0
+      }
       ListView {
         id: resultList
         Layout.fillWidth: true
@@ -309,11 +311,11 @@ PopupWindow {
           if (firstMatchIndex === -1) firstMatchIndex = ti
 
           if (ti === 0 || text[ti-1] === ' ' || text[ti-1] === '-' || text[ti-1] === '_')
-            score += 15  // word boundary match
+            score += 15
           else if (lastMatchIndex >= 0 && ti === lastMatchIndex + 1)
-            score += 8   // consecutive match
+            score += 8
           else
-            score += 3   // scattered match
+            score += 3
 
           if (lastMatchIndex >= 0)
             totalGap += ti - lastMatchIndex - 1
@@ -329,10 +331,10 @@ PopupWindow {
       if (!matched) return 0
     }
 
-    if (firstMatchIndex === 0) score += 30       // prefix match
-    score -= totalGap * 2                         // penalize gaps
+    if (firstMatchIndex === 0) score += 30
+    score -= totalGap * 2
     if (lastMatchIndex - firstMatchIndex + 1 === query.length)
-      score += 20                                 // consecutive block bonus
+      score += 20
 
     return Math.max(score, 0)
   }

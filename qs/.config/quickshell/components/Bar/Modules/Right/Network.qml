@@ -6,31 +6,51 @@ import "../../../../style"
 Item {
   id: netModule
   property string connectionType: "none"
-  property bool hovered: mouseArea.containsMouse
+  signal clicked()
+  property bool popupActive: false
   implicitWidth: row.implicitWidth
   implicitHeight: row.implicitHeight
 
-  Timer {
-    interval: 5000
-    running: true
-    repeat: true
-    triggeredOnStart: true
-    onTriggered: checkConn.running = true
-  }
-
+  // one-shot status check: single process, parsed in JS instead of
+  // piping through bash | grep | cut | head.
   Process {
     id: checkConn
-    command: ["bash", "-c", "nmcli -t -f TYPE,STATE device status 2>/dev/null | grep ':connected$' | cut -d: -f1 | head -1"]
+    command: ["nmcli", "-t", "-f", "TYPE,STATE", "device", "status"]
     stdout: SplitParser {
       splitMarker: "\n"
       onRead: (line) => {
-        let t = line.trim();
-        if (t === "wifi") netModule.connectionType = "wifi";
-        else if (t === "ethernet") netModule.connectionType = "eth";
-        else netModule.connectionType = "none";
+        const parts = line.split(":");
+        const type = parts[0];
+        const state = parts[1];
+        if (state !== "connected") return;
+        if (type === "wifi") netModule.connectionType = "wifi";
+        else if (type === "ethernet") netModule.connectionType = "eth";
+      }
+    }
+    onRunningChanged: {
+      // reset before each check so a stale "wifi"/"eth" doesn't linger
+      // if nothing matches.
+      if (running) netModule.connectionType = "none";
+    }
+  }
+
+  // long-lived process that blocks on nmcli's own event stream instead
+  // of us polling every 5s. only triggers a status re-check on an
+  // actual connectivity change.
+  Process {
+    id: monitor
+    command: ["nmcli", "monitor"]
+    running: true
+    stdout: SplitParser {
+      splitMarker: "\n"
+      onRead: (line) => {
+        checkConn.running = true;
       }
     }
   }
+
+  // initial check on startup, since monitor only reports future changes.
+  Component.onCompleted: checkConn.running = true
 
   Row {
     id: row
@@ -38,12 +58,8 @@ Item {
     Icon {
       name: netModule.connectionType === "none" ? "wifi" : netModule.connectionType
       size: 14
-      iconColor: netModule.connectionType !== "none" ? Colors.text : Colors.surfaceAlt
+      iconColor: netModule.popupActive ? Colors.accent : (netModule.connectionType === "none" ? Colors.red : Colors.text)
     }
-  }
-
-  Process {
-    id: nmProcess
   }
 
   MouseArea {
@@ -51,9 +67,6 @@ Item {
     anchors.fill: parent
     hoverEnabled: true
     cursorShape: Qt.PointingHandCursor
-    onClicked: {
-      nmProcess.command = ["bash", "-c", "nm-connection-editor"];
-      nmProcess.running = true;
-    }
+    onClicked: netModule.clicked()
   }
 }

@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import "../../../../style"
 import "../../../Bar/"
 
-HoverMenu {
+ClickMenu {
   id: root
 
   implicitWidth: 260

@@ -1,14 +1,14 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Io
 import Quickshell.Services.Pipewire
 import "../../../../style"
 import "../../../Bar"
 
-HoverMenu {
+ClickMenu {
   id: root
 
-  implicitWidth: 340
-  implicitHeight: outputColumn.implicitHeight + 28
+  implicitWidth: 400
   backgroundColor: Colors.base
   radius: 12
 
@@ -25,10 +25,7 @@ HoverMenu {
     if (root.sink && root.sink.audio) root.sink.audio.muted = !root.sink.audio.muted
   }
 
-  // --- per-application streams ---
-  // AudioOutStream = pipewire media.class "Stream/Output/Audio", i.e. an
-  // app playing sound (Spotify, Discord, a browser tab, a game, etc.)
-  // rather than a hardware sink/source.
+  // per-application streams
   readonly property var streamNodes: {
     var out = []
     var list = Pipewire.nodes.values
@@ -45,7 +42,6 @@ HoverMenu {
     return p["application.name"] || p["media.name"] || node.description || node.name
   }
 
-  // keep the sink + every visible stream bound so .audio.* stays live
   readonly property var _trackedNodes: {
     var list = root.streamNodes.slice()
     if (root.sink) list.push(root.sink)
@@ -53,10 +49,14 @@ HoverMenu {
   }
   PwObjectTracker { objects: root._trackedNodes }
 
+  Process { id: pavuControlProc }
+
+  implicitHeight: outputColumn.implicitHeight + 32
+
   ColumnLayout {
     id: outputColumn
-    anchors { left: parent.left; right: parent.right; top: parent.top; margins: 14 }
-    spacing: 10
+    anchors { left: parent.left; right: parent.right; top: parent.top; margins: 16 }
+    spacing: 12
 
     VolumeRow {
       Layout.fillWidth: true
@@ -79,6 +79,23 @@ HoverMenu {
         muted: modelData.audio.muted
         onDragged: (v) => { modelData.audio.volume = Math.max(0, Math.min(1, v)) }
         onIconClicked: modelData.audio.muted = !modelData.audio.muted
+      }
+    }
+  }
+
+  Icon {
+    name: "settings"
+    size: 14
+    iconColor: Colors.palette.overlay1
+    anchors { top: parent.top; right: parent.right; margins: 12 }
+
+    MouseArea {
+      anchors.fill: parent
+      anchors.margins: -4
+      cursorShape: Qt.PointingHandCursor
+      onClicked: {
+        pavuControlProc.command = ["pavucontrol"]
+        pavuControlProc.running = true
       }
     }
   }

@@ -8,7 +8,7 @@ ScriptModule {
   visible: active
 
   execCommand: "$HOME/.config/quickshell/src/tmux.sh"
-  intervalMs: 2000
+  intervalMs: 15000
 
   // opens kitty terminal running the fish shell 't' alias/function
   onClickCommand: "kitty fish -c t"

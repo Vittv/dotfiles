@@ -7,9 +7,9 @@ Item {
   implicitWidth: contentRow.implicitWidth
   implicitHeight: contentRow.implicitHeight
 
-  property bool hovered: hoverArea.containsMouse
+  signal clicked()
+  property bool popupActive: false
 
-  // keeps the default sink bound so its audio properties update live
   PwObjectTracker {
     objects: [Pipewire.defaultAudioSink]
   }
@@ -25,7 +25,7 @@ Item {
     Icon {
       anchors.verticalCenter: parent.verticalCenter
       size: 14
-      iconColor: root.muted ? Colors.red : Colors.text
+      iconColor: root.popupActive ? Colors.accent : (root.muted ? Colors.red : Colors.text)
       name: {
         if (root.muted) return "volume_off";
         if (root.volumePct < 1) return "volume_mute";
@@ -40,9 +40,6 @@ Item {
     anchors.fill: parent
     hoverEnabled: true
     cursorShape: Qt.PointingHandCursor
-    onClicked: {
-      if (root.sink && root.sink.audio)
-        root.sink.audio.muted = !root.sink.audio.muted;
-    }
+    onClicked: root.clicked()
   }
 }

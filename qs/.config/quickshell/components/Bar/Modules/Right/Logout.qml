@@ -2,10 +2,11 @@ import QtQuick
 import "../../../../style"
 
 Item {
+  id: root
   implicitWidth: icon.implicitWidth
   implicitHeight: icon.implicitHeight
 
-  property bool hovered: mouseArea.containsMouse
+  signal clicked()
 
   Icon {
     id: icon
@@ -18,5 +19,7 @@ Item {
     id: mouseArea
     anchors.fill: parent
     hoverEnabled: true
+    cursorShape: Qt.PointingHandCursor
+    onClicked: root.clicked()
   }
 }

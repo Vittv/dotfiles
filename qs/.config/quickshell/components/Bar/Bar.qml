@@ -127,23 +127,10 @@ Scope {
               }
 
               Rectangle {
-                  width: updateGreetingModule.implicitWidth + 8
-                  implicitHeight: 20
-                  radius: 4
-                  color: Colors.text
-                  anchors.verticalCenter: parent.verticalCenter
-                  visible: true
-                  UpdateGreeting {
-                      id: updateGreetingModule
-                      anchors.centerIn: parent
-                  }
-              }
-
-              Rectangle {
                 width: tmuxModule.implicitWidth + 8
                 implicitHeight: 20
                 radius: 4
-                color: Colors.palette.sapphire
+                color: Colors.text
                 anchors.verticalCenter: parent.verticalCenter
                 visible: tmuxModule.active
                 Tmux { id: tmuxModule; anchors.centerIn: parent; textColor: Colors.palette.surface1 }
@@ -261,12 +248,13 @@ Scope {
               color: Colors.overlay0
               Mudfish { id: mudfishModule; anchors.centerIn: parent }
             }
+
             // network
             Rectangle {
               width: netModule.implicitWidth + 8
               implicitHeight: 20
               radius: 4
-              color: Colors.overlay0
+              color: netModule.popupActive ? Colors.surface : Colors.overlay0
               Network { id: netModule; anchors.centerIn: parent }
             }
 
@@ -275,42 +263,30 @@ Scope {
               width: volModule.implicitWidth + 8
               implicitHeight: 20
               radius: 4
-              color: Colors.overlay0
+              color: volModule.popupActive ? Colors.surface : Colors.overlay0
               Volume { id: volModule; anchors.centerIn: parent }
             }
 
-            // notifications
+            // control center
             Rectangle {
-              width: notifModule.implicitWidth + 8
+              width: ccModule.implicitWidth + 8
               implicitHeight: 20
               radius: 4
-              color: Colors.overlay0
-              Notifications { id: notifModule; anchors.centerIn: parent }
-            }
-
-            // logout
-            Rectangle {
-              width: logoutModule.implicitWidth + 8
-              implicitHeight: 20
-              radius: 4
-              color: Colors.overlay0
-              Logout { 
-                id: logoutModule; 
-                anchors.centerIn: parent
-              }
+              color: ccModule.popupActive ? Colors.surface : Colors.overlay0
+              ControlCenter { id: ccModule; anchors.centerIn: parent }
             }
           }
         }
       }
 
-      LogoutPopup {
-        id: logoutPopup
-        triggerItem: logoutModule
-      }
-
       VolumePopup {
         id: volumePopup
         triggerItem: volModule
+      }
+
+      ControlCenterPopup {
+        id: ccPopup
+        triggerItem: ccModule
       }
 
       NetworkPopup {

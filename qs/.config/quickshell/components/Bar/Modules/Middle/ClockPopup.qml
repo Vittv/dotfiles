@@ -13,7 +13,6 @@ ClickMenu {
   backgroundColor: Colors.base
   radius: 12
   centerInWindow: true
-  bottomOnlyRadius: true
 
   SystemClock {
     id: sysClock
