@@ -13,8 +13,8 @@ Bar {
   }
 
   ToastLayer {
-    // Anchors to a specific screen since ToastLayer isn't inside
-    // the per-monitor Variants loop — pick your primary.
+    // anchors to a specific screen since ToastLayer isn't inside
+    // the per-monitor Variants loop -> we should pick our primary.
     screen: Quickshell.screens.find(s => s.name === "DP-1") || Quickshell.screens[0]
   }
 }

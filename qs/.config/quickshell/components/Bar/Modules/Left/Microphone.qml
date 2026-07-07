@@ -1,13 +1,12 @@
 import QtQuick
-import Quickshell
 import Quickshell.Io
 import "../../../../style"
 
 Item {
   id: micModule
   property bool muted: false
-  implicitWidth: 22
-  implicitHeight: 20
+  implicitWidth: 12
+  implicitHeight: 12
 
   function checkMute() { checkMic.running = true }
 
@@ -32,11 +31,17 @@ Item {
 
   Component.onCompleted: checkMic.running = true;
 
-  Icon {
+  Rectangle {
     anchors.centerIn: parent
-    size: 14
-    iconColor: muted ? Colors.palette.yellow : Colors.text
-    name: muted ? "mic_off" : "mic"
+    width: 8
+    height: 8
+    radius: 1.5
+    border.width: 2
+    color: muted ? Colors.palette.text : "transparent"
+    border.color: Colors.text
+
+    Behavior on color { ColorAnimation { duration: 150; easing.type: Easing.OutCubic } }
+    Behavior on border.color { ColorAnimation { duration: 150; easing.type: Easing.OutCubic } }
   }
 
   Process {

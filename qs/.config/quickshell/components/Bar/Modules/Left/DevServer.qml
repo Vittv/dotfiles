@@ -11,8 +11,8 @@ Row {
   anchors.verticalCenter: parent.verticalCenter
 
   Rectangle {
-    width: 6; height: 6; radius: 3
-    color: Colors.base
+    width: 4; height: 6; radius: 3
+    color: Colors.palette.blue
     anchors.verticalCenter: parent.verticalCenter
     visible: devServerText.text !== ""
 
@@ -30,8 +30,9 @@ Row {
     intervalMs: 15000
     onClickCommand: "bash -c 'port=$(ss -tlnp 2>/dev/null | grep -oP \":(5173|4173|8080|3000|8081) \" | head -1 | tr -d \": \"); [ -n \"$port\" ] && xdg-open \"http://localhost:$port\"'"
     visible: text !== ""
-    textColor: Colors.base
-    fontSize: 12
+    textColor: Colors.palette.blue
+    fontSize: 13
+    fontFamily: "SF Pro Display"
     fontWeight: Font.Bold
   }
 }

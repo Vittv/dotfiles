@@ -226,7 +226,7 @@ PopupWindow {
       Rectangle {
         Layout.fillWidth: true
         Layout.preferredHeight: 1
-        color: Colors.palette.surface0
+        color: Colors.palette.overlay0
       }
       ListView {
         id: resultList

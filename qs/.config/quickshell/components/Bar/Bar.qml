@@ -6,8 +6,8 @@ import QtQuick.Layouts
 import "Modules/Left"
 import "Modules/Middle"
 import "Modules/Right"
-import "../../services"
 import "../Launcher"
+import "../../services"
 import "../../style"
 
 Scope {
@@ -22,8 +22,8 @@ Scope {
       screen: modelData
 
       anchors { top: true; left: true; right: true }
-      
-      implicitHeight: mainBarBody.height + leftWing.height
+
+      implicitHeight: mainBarBody.height
       color: "transparent"
       exclusiveZone: mainBarBody.height
 
@@ -34,59 +34,13 @@ Scope {
           left: parent.left;
           right: parent.right;
         }
-        implicitHeight: 26
-        color: typeof Colors !== 'undefined' ? Colors.base : "#171719"
+        implicitHeight: 30
+        color: Colors.base
 
-        // left wing
-        Canvas {
-          id: leftWing
-          width: 12
-          implicitHeight: 12
-          anchors {
-            top: parent.bottom
-            left: parent.left
-          }
-
-          onWidthChanged: requestPaint()
-          onHeightChanged: requestPaint()
-
-          onPaint: {
-            var ctx = getContext("2d");
-            ctx.reset();
-            ctx.fillStyle = typeof Colors !== 'undefined' ? Colors.base : "#171719";
-            ctx.beginPath();
-            ctx.moveTo(0, 0);                             // top-left corner
-            ctx.lineTo(width, 0);                         // line along the bar baseline
-            ctx.quadraticCurveTo(0, 0, 0, implicitHeight);        // curve outwards to the screen edge
-            ctx.closePath();
-            ctx.fill();
-          }
-        }
-
-        // right wing
-        Canvas {
-          id: rightWing
-          width: 12
-          implicitHeight: 12
-          anchors {
-            top: parent.bottom
-            right: parent.right
-          }
-
-          onWidthChanged: requestPaint()
-          onHeightChanged: requestPaint()
-
-          onPaint: {
-            var ctx = getContext("2d");
-            ctx.reset();
-            ctx.fillStyle = typeof Colors !== 'undefined' ? Colors.base : "#171719";
-            ctx.beginPath();
-            ctx.moveTo(width, 0);                         
-            ctx.lineTo(width, implicitHeight);                    
-            ctx.quadraticCurveTo(width, 0, 0, 0);
-            ctx.closePath();
-            ctx.fill();
-          }
+        Rectangle {
+          anchors { top: parent.top; left: parent.left; right: parent.right }
+          height: 1
+          color: Qt.rgba(1, 1, 1, 0.06)
         }
 
         Item {
@@ -109,103 +63,118 @@ Scope {
               anchors.centerIn: parent
               spacing: 10
 
-              LauncherButton {
-                id: launcherButton
-                targetScreen: modelData
-                anchors {
-                  verticalCenter: parent.verticalCenter
-                }
-              }
-
               Rectangle {
                 width: micModule.implicitWidth + 8
                 implicitHeight: 20
                 radius: 4
-                color: Colors.overlay0
+                color: micHover.containsMouse ? Colors.overlay0 : "transparent"
+                Behavior on color { ColorAnimation { duration: 120 } }
                 anchors.verticalCenter: parent.verticalCenter
+
                 Microphone { id: micModule; anchors.centerIn: parent }
+
+                MouseArea {
+                  id: micHover
+                  anchors.fill: parent
+                  hoverEnabled: true
+                  acceptedButtons: Qt.NoButton
+                  cursorShape: Qt.PointingHandCursor
+                }
+              }
+
+              Workspaces {
+                id: workspacesModule
+                targetScreen: modelData
+                anchors.verticalCenter: parent.verticalCenter
               }
 
               Rectangle {
                 width: tmuxModule.implicitWidth + 8
                 implicitHeight: 20
                 radius: 4
-                color: Colors.text
+                color: tmuxHover.containsMouse ? Colors.overlay0 : "transparent"
+                Behavior on color { ColorAnimation { duration: 120 } }
                 anchors.verticalCenter: parent.verticalCenter
                 visible: tmuxModule.active
-                Tmux { id: tmuxModule; anchors.centerIn: parent; textColor: Colors.palette.surface1 }
+
+                Tmux { id: tmuxModule; anchors.centerIn: parent; }
+
+                MouseArea {
+                  id: tmuxHover
+                  anchors.fill: parent
+                  hoverEnabled: true
+                  acceptedButtons: Qt.NoButton
+                  cursorShape: Qt.PointingHandCursor
+                }
               }
 
               Rectangle {
                 width: devServerText.implicitWidth + 8
                 implicitHeight: 20
                 radius: 4
-                color: Colors.palette.blue
+                color: devHover.containsMouse ? Colors.overlay0 : "transparent"
+                Behavior on color { ColorAnimation { duration: 120 } }
                 anchors.verticalCenter: parent.verticalCenter
                 visible: devServerText.active
+
                 DevServer { id: devServerText; anchors.centerIn: parent; }
+
+                MouseArea {
+                  id: devHover
+                  anchors.fill: parent
+                  hoverEnabled: true
+                  acceptedButtons: Qt.NoButton
+                  cursorShape: Qt.PointingHandCursor
+                }
               }
+
             }
           }
-          // middle
-          Rectangle {
-            id: centerPill
-            implicitHeight: 24
-            radius: 6
-            color: Colors.base
 
+          // spotify
+          Rectangle {
+            id: spotifyWrapper
+            width: spotifyModule.implicitWidth + 8
+            implicitHeight: 20
+            radius: 4
+            color: "transparent"
+            Behavior on color { ColorAnimation { duration: 120 } }
             anchors {
-              left: spotifyModule.left
-              leftMargin: -12
-              right: clockModule.right
-              rightMargin: 12
+              right: clockWrapper.left
+              rightMargin: 8
               verticalCenter: parent.verticalCenter
             }
+            Spotify { id: spotifyModule; anchors.centerIn: parent }
           }
 
           // clock
-          Clock {
-            id: clockModule
-            anchors {
-              left: parent.horizontalCenter
-              leftMargin: 16
-              verticalCenter: parent.verticalCenter
+          Rectangle {
+            id: clockWrapper
+            anchors.centerIn: parent
+            implicitWidth: clockModule.implicitWidth + 12
+            implicitHeight: 24
+            radius: 6
+            color: clockHover.containsMouse ? Colors.overlay0 : "transparent"
+            Behavior on color { ColorAnimation { duration: 120 } }
+
+            Clock {
+              id: clockModule
+              anchors.centerIn: parent
             }
-            width: 96
-            horizontalAlignment: Text.AlignHCenter
+
+            MouseArea {
+              id: clockHover
+              anchors.fill: parent
+              hoverEnabled: true
+              acceptedButtons: Qt.NoButton
+              cursorShape: Qt.PointingHandCursor
+            }
           }
           ClockPopup {
             id: clockPopup
             triggerItem: clockModule
           }
-          Workspaces {
-            id: workspacesModule
-            targetScreen: modelData
-            anchors {
-              right: parent.horizontalCenter
-              rightMargin: 12
-              verticalCenter: parent.verticalCenter
-            }
-          }
 
-          // spotify
-          Spotify {
-            id: spotifyModule
-            anchors {
-              right: workspacesModule.left
-              rightMargin: 12
-              verticalCenter: parent.verticalCenter
-            }
-          }
-
-          SystemStatus {
-            id: systemStatusModule
-            anchors {
-              left: clockModule.right
-              leftMargin: 26
-              verticalCenter: parent.verticalCenter
-            }
-          }
           // right
           Row {
             id: rightSideRow
@@ -216,66 +185,105 @@ Scope {
             }
             spacing: 8
 
-            // tray
             Rectangle {
               width: trayModule.implicitWidth + 8
               implicitHeight: 20
               radius: 4
-              color: "transparent"
+              color: trayHover.containsMouse ? Colors.overlay0 : "transparent"
+              Behavior on color { ColorAnimation { duration: 120 } }
+
               Tray { id: trayModule; anchors.centerIn: parent }
+
+              MouseArea {
+                id: trayHover
+                anchors.fill: parent
+                hoverEnabled: true
+                acceptedButtons: Qt.NoButton
+                cursorShape: Qt.PointingHandCursor
+              }
             }
 
-            // Rectangle {
-            //   width: cpuModule.implicitWidth + 8
-            //   height: 20
-            //   radius: 4
-            //   color: Colors.surface
-            //   CpuTemp { id: cpuModule; anchors.centerIn: parent }
-            // }
-            //
-            // Rectangle {
-            //   width: gpuModule.implicitWidth + 8
-            //   height: 20
-            //   radius: 4
-            //   color: Colors.surface
-            //   GpuTemp { id: gpuModule; anchors.centerIn: parent }
-            // }
-            // mudfish
             Rectangle {
               width: mudfishModule.implicitWidth + 8
               implicitHeight: 20
               radius: 4
-              color: Colors.overlay0
+              color: mudHover.containsMouse ? Colors.overlay0 : "transparent"
+              Behavior on color { ColorAnimation { duration: 120 } }
+
               Mudfish { id: mudfishModule; anchors.centerIn: parent }
+
+              MouseArea {
+                id: mudHover
+                anchors.fill: parent
+                hoverEnabled: true
+                acceptedButtons: Qt.NoButton
+                cursorShape: Qt.PointingHandCursor
+              }
             }
 
-            // network
             Rectangle {
               width: netModule.implicitWidth + 8
               implicitHeight: 20
               radius: 4
-              color: netModule.popupActive ? Colors.surface : Colors.overlay0
+              color: netHover.containsMouse ? Colors.overlay0 : "transparent"
+              Behavior on color { ColorAnimation { duration: 120 } }
+
               Network { id: netModule; anchors.centerIn: parent }
+
+              MouseArea {
+                id: netHover
+                anchors.fill: parent
+                hoverEnabled: true
+                acceptedButtons: Qt.NoButton
+                cursorShape: Qt.PointingHandCursor
+              }
             }
 
-            // volume
             Rectangle {
               width: volModule.implicitWidth + 8
               implicitHeight: 20
               radius: 4
-              color: volModule.popupActive ? Colors.surface : Colors.overlay0
+              color: volHover.containsMouse ? Colors.overlay0 : "transparent"
+              Behavior on color { ColorAnimation { duration: 120 } }
+
               Volume { id: volModule; anchors.centerIn: parent }
+
+              MouseArea {
+                id: volHover
+                anchors.fill: parent
+                hoverEnabled: true
+                acceptedButtons: Qt.NoButton
+                cursorShape: Qt.PointingHandCursor
+              }
             }
 
-            // control center
             Rectangle {
               width: ccModule.implicitWidth + 8
               implicitHeight: 20
               radius: 4
-              color: ccModule.popupActive ? Colors.surface : Colors.overlay0
+              color: ccHover.containsMouse ? Colors.overlay0 : "transparent"
+              Behavior on color { ColorAnimation { duration: 120 } }
+
               ControlCenter { id: ccModule; anchors.centerIn: parent }
+
+              MouseArea {
+                id: ccHover
+                anchors.fill: parent
+                hoverEnabled: true
+                acceptedButtons: Qt.NoButton
+                cursorShape: Qt.PointingHandCursor
+              }
             }
           }
+        }
+        Rectangle {
+          anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+          }
+          height: 1
+          color: Qt.rgba(1, 1, 1, 0.06)
         }
       }
 
@@ -297,13 +305,6 @@ Scope {
       Launcher {
         id: launcher
         panelWindow: panel
-      }
-
-      Connections {
-        target: launcher
-        function onOpenChanged() {
-          if (!launcher.open) GlobalStates.launcherOpen = false
-        }
       }
 
       Connections {

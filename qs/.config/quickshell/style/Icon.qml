@@ -13,7 +13,7 @@ Text {
     "volume_down":   "\ue04d",
     "volume_mute":   "\ue04e",
     "volume_off":    "\ue04f",
-    "inbox":         "\ue7f4",
+    "inbox":         "\ueb74",
     "bolt":          "\uea0b",
     "eco":           "\uea35",
     "balance":       "\ueaf6",
@@ -42,6 +42,7 @@ Text {
   text: _glyphs[root.name] || "?"
   font.family: root.name in _nerdIcons ? "FiraCode Nerd Font Mono" : "Material Icons"
   font.pixelSize: root.size
+  font.weight: 700
   color: root.iconColor
   verticalAlignment: Text.AlignVCenter
   horizontalAlignment: Text.AlignHCenter

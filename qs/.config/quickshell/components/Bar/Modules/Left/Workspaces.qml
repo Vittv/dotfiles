@@ -16,6 +16,12 @@ Item {
   }
 
   Component.onCompleted: refresh()
+  Timer {
+    interval: 100
+    running: root.focusedId < 0
+    repeat: true
+    onTriggered: root.refresh()
+  }
 
   Connections {
     target: Hyprland
@@ -25,68 +31,20 @@ Item {
     }
   }
 
-  onFocusedIdChanged: {
-    for (var i = 0; i < contentRow.children.length; i++) {
-      var child = contentRow.children[i]
-      if (child.ws && child.ws.id === focusedId) {
-        highlight.x = child.mapToItem(root, 0, 0).x
-        break
-      }
-    }
-  }
-
   Rectangle {
     id: background
     height: 22
     radius: 6
     color: Colors.overlay0
-    width: contentRow.width + 12
+    width: label.implicitWidth + 16
   }
-  Rectangle {
-    id: highlight
-    width: 36
-    height: 18
-    radius: 6
-    color: Colors.text
-    y: (root.height - height) / 2
-    Behavior on x { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
-  }
-  Row {
-    id: contentRow
+
+  Text {
+    id: label
     anchors.centerIn: background
-    spacing: 2
-    Repeater {
-      model: Hyprland.workspaces
-      delegate: Item {
-        required property var modelData
-        property var ws: modelData
-        width: 36
-        height: 18
-
-        readonly property bool isActive: ws.id === root.focusedId
-
-        onXChanged: {
-          if (isActive) highlight.x = mapToItem(root, 0, 0).x
-        }
-        onIsActiveChanged: {
-          if (isActive) highlight.x = mapToItem(root, 0, 0).x
-        }
-        Component.onCompleted: {
-          if (isActive) highlight.x = mapToItem(root, 0, 0).x
-        }
-        Text {
-          anchors.centerIn: parent
-          text: ws.id
-          font { family: "FiraCode Nerd Font"; pixelSize: 12 }
-          font.weight: 500
-          color: isActive ? Colors.base : Colors.text
-        }
-        MouseArea {
-          anchors.fill: parent
-          cursorShape: Qt.PointingHandCursor
-          onClicked: ws.activate()
-        }
-      }
-    }
+    text: root.focusedId > 0 ? root.focusedId : ""
+    font { family: "FiraCode Nerd Font"; pixelSize: 12 }
+    font.weight: 700
+    color: Colors.text
   }
 }

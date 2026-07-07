@@ -7,9 +7,9 @@ Text {
     id: clock
     precision: SystemClock.Seconds
   }
-  text: Qt.formatDateTime(clock.date, "hh:mm AP") + "  •  " + Qt.formatDateTime(clock.date, "MMM dd").toLowerCase()
+  text: Qt.formatDateTime(clock.date, "dd") + "  •  " + Qt.formatDateTime(clock.date, "hh:mm AP") 
   color: Colors.text
-  font.family: Fonts.display
+  font.family: "SF Compact Display"
   font.pixelSize: 14
   font.weight: 600
   horizontalAlignment: Text.AlignHCenter
