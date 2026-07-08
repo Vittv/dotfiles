@@ -6,7 +6,7 @@
     // "margin-left": 4,
     // "margin-right": 4,
     "reload_style_on_change": true,
-    "modules-left": ["hyprland/workspaces", "custom/microphone", "custom/tmux", "custom/devserver", "custom/spotify"],
+    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
     "modules-right": ["tray", "group/temps", "custom/mudfish", "network", "pulseaudio", "custom/power"],
 
@@ -27,6 +27,10 @@
 
     "hyprland/workspaces": {
       "format": "{name}",
+      "format-icons": {
+        "default": "",
+        "active": "󰝤"
+      },
       "on-click": "activate",
       "ignore-hidden": false,
       "all-outputs": false,
