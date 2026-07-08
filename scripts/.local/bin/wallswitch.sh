@@ -104,8 +104,7 @@ show_wallpaper_menu() {
     # Show rofi with image previews
     SELECTED=$(echo -en "$MENU_ENTRIES" | rofi -dmenu \
         -i \
-        -p "Select Wallpaper (${CURRENT_DIR#$WALLPAPER_BASE}) - nav: Super+/" \
-        -kb-custom-1 "Super+slash" \
+        -p "󰍉 " \
         -theme-str 'window {location: center; anchor: center; width: 1100px;}' \
         -theme-str 'listview {columns: 5; scrollbar: true; spacing: 10px; flow: horizontal; lines: 2;}' \
         -theme-str 'element {padding: 10px; orientation: vertical; border-radius: 8px;}' \

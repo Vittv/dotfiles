@@ -3,11 +3,11 @@
 configuration {
     modi: "drun,run,window";
     show-icons: true;
-    display-drun: "";
-    display-run: "";
-    display-window: "";
+    display-drun: "󰍉 ";
+    display-run: "󰍉 ";
+    display-window: "󰍉 ";
     drun-display-format: "{name}";
-    font: "SF Pro Display 13";
+    font: "SF Pro Display Medium 13";
     // font: "JetBrainsMono Nerd Font Propo SemiBold 12";
     terminal: "kitty";
 }
@@ -25,7 +25,7 @@ window {
     border: 1px;
     border-color: @bg-alt;
     border-radius: 10px;
-    width: 420px;
+    width: 340px;
     padding: 8px;
 
     animation: "expand-vertical";
@@ -39,34 +39,23 @@ mainbox {
     children: [ inputbar, listview ];
 }
 
-textbox {
-    expand: false;
-    str: "↑↓ navigate   ↵ open   Esc close";
-    font: "SF Pro Display 10";
-    text-color: @fg-dim;
-    background-color: transparent;
-    margin: 0;
-    padding: 0px 4px;
-}
-
 inputbar {
-    background-color: @bg-alt;
-    border: 1px;
-    border-color: @bg-selected;
-    border-radius: 6px;
+    background-color: transparent;
+    border: 0px 0px 1px 0px;
+    border-color: @bg-alt;
     padding: 12px;
     margin: 0px 0px 8px 0px;
-    spacing: 8px;
+    spacing: 4px;
     children: [prompt, entry];
 }
 
 prompt {
-    text-color: @accent;
+    text-color: @fg-dim;
     background-color: transparent;
 }
 
 entry {
-    placeholder: "   Search...";
+    placeholder: "Search...";
     placeholder-color: @fg-dim;
     background-color: transparent;
     text-color: @accent;
@@ -107,10 +96,10 @@ element alternate.normal {
 }
 
 element selected.normal {
-    background-color: @bg-selected;
+    background-color: transparent;
     border-radius: 6px;
     text-color: @accent;
-    border: 1px;
+    // border: 1px;
     border-color: @bg-alt;
     // background-color: transparent;
     // text-color: @accent;
@@ -131,7 +120,7 @@ scrollbar {
     border-radius: 10px;
     border-color: @bg-selected;
     background-color: @bg-alt;
-    handle-width: 6px;
+    handle-width: 2px;
     handle-rounded-corners: true;
-    handle-color: @accent;
+    handle-color: @bg-selected;
 }

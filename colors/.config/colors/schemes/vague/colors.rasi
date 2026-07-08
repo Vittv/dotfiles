@@ -3,14 +3,14 @@
   /* E6 = 90% opacity */
   /* F2 = 95% opacity */
   /* FF = 100% opacity */
-  bg: #141415FF;
-  bg-alt: #1c1c24;
-  bg-selected: #252530;
+  bg: #171719FF;
+  bg-alt: #252530;
+  bg-selected: #2c2c3e;
     
   /* Foreground colors */
   fg: #cdcdcd;
   fg-dim: #606079;
     
   /* Accent color */
-  accent: #cdcdcd;
+  accent: #7e98e8;
 }

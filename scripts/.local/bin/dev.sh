@@ -29,7 +29,7 @@ done
 regular_projects=$(find "$PROJECTS_DIR" -maxdepth 1 -mindepth 1 -type d -printf '%f\n' | sort | grep -vxF "$(printf '%s\n' "${priority_names[@]}")")
 projects="${priority_list}${regular_projects}"
 
-selected=$(echo "$projects" | rofi -dmenu -i -p "" -theme-str "element { children: [element-text]; } element-text { padding: 0 0 0 10px; }")
+selected=$(echo "$projects" | rofi -dmenu -i -p "󰍉 ")
 
 if [ -n "$selected" ]; then
   # Look up the base dir from priority list first
