@@ -6,18 +6,18 @@
     // "margin-left": 4,
     // "margin-right": 4,
     "reload_style_on_change": true,
-    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/tmux", "custom/devserver", "custom/spotify"],
+    "modules-left": ["hyprland/workspaces", "custom/microphone", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "group/temps", "custom/mudfish", "network", "pulseaudio", "custom/inbox", "custom/power"],
+    "modules-right": ["tray", "group/temps", "custom/mudfish", "network", "pulseaudio", "custom/power"],
 
     "custom/palette": {
-      "format": "Tools",
+      "format": "",
       "on-click": "COLOR=$(hyprpicker -a) && notify-send 'Palette 🎨' \"<b>$COLOR</b> copied to clipboard\""
     },
 
     "custom/microphone": {
       "format": "{}",
-      "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
+      "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
       "on-click": "pactl set-source-mute alsa_input.pci-0000_05_00.6.pro-input-0 toggle && pkill -RTMIN+8 waybar",
       "return-type": "json",
       "interval": "once",
@@ -28,7 +28,7 @@
     "hyprland/workspaces": {
       "format": "{name}",
       "on-click": "activate",
-      "ignore-hidden": true,
+      "ignore-hidden": false,
       "all-outputs": false,
       "active-only": true,
       "cursor": true
@@ -47,7 +47,7 @@
       "exec": "sessions=$(tmux list-sessions -F '#{session_created} #S' 2>/dev/null | sort -n | cut -d' ' -f2- | awk '{n=split($0,a,\"/\"); if(n>2){r=a[1]; for(i=2;i<=2;i++) r=r\"/\"a[i]; print r\"…\"} else print $0}' | awk '{print NR\":\"$0}' | paste -sd ',' - | sed 's/,/, /g'); if [ -n \"$sessions\" ]; then echo \"{\\\"text\\\": \\\"  $sessions\\\", \\\"class\\\": \\\"tmux-active\\\", \\\"tooltip\\\": \\\"Tmux sessions: $sessions\\\"}\"; fi",
       "return-type": "json",
       "interval": 2,
-      "format": "tmux:{}",
+      "format": "{}",
       "on-click": "kitty fish -c t"
     },
 
@@ -155,7 +155,7 @@
     },  
 
     "custom/power": {
-      "format": "󰍃",
+      "format": "⏼",
       "on-click": "~/.local/bin/powermenu.sh",
       "tooltip-format": "Power Menu"
     },

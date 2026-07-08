@@ -24,17 +24,6 @@ window#waybar {
 /* border: 2px solid alpha(@surface0, 0.40); */
 /* } */
 
-#custom-microphone,
-#custom-menu,
-#custom-files,
-#custom-work,
-#custom-tasks,
-#custom-tmux,
-#custom-devserver,
-#custom-spotify {
-  margin: 0 2px;
-}
-
 #custom-menu,
 #custom-files,
 #custom-work,
@@ -56,28 +45,28 @@ window#waybar {
 }
 
 #workspaces {
-  /* margin-left: 14px; */
-  margin: 0 -4px;
-}
-
-#custom-microphone {
+  margin: 0px 0px;
   margin-left: 14px;
 }
+
+/* #custom-microphone { */
+/*   margin-left: 14px; */
+/* } */
 
 #workspaces button label {
   font-family: "FiraCode Nerd Font Propo";
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
   padding: 0 0px;
   color: @overlay2;
   margin: 0px 0px;
 }
 
 #workspaces button {
-  padding: 0 0px;
-  margin: 2px -2px;
-  border-radius: 10px;
-  background-color: transparent;
+  margin: 2px 0;
+  padding: 0 2px;
+  border-radius: 6px;
+  background-color: @overlay0;
 }
 
 #workspaces button.active label {
@@ -130,7 +119,7 @@ window#waybar {
 
 #custom-spotify {
   font-family: "SF Compact Display", "JetBrainsMono Nerd Font Propo";
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   color: @lavender;
   transition: all 0.3s ease;
@@ -146,7 +135,7 @@ window#waybar {
 }
 
 #custom-power {
-  color: @text;
+  color: @red;
   font-weight: 700;
   margin-right: 14px;
 }
@@ -158,9 +147,8 @@ window#waybar {
 
 #custom-microphone {
   font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
-  color: @text;
-  transition: all 0.2s ease;
-  font-size: 10px;
+  color: @overlay2;
+  font-size: 14px;
   /* margin-left: 6px; */
   /* margin-left: 14px; */
 }
@@ -169,9 +157,9 @@ window#waybar {
   color: @pink;
 }
 
-/* #custom-microphone.unmuted { */
-/*   color: @pink; */
-/* } */
+#custom-microphone.unmuted {
+  color: @text;
+}
 
 #network {
   color: @green;
@@ -207,9 +195,9 @@ tooltip label {
 }
 
 #clock {
-  font-family: "SF Pro Rounded";
+  font-family: "SF Compact Display";
   color: @text;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
 }
 
@@ -259,13 +247,14 @@ tooltip label {
 #custom-separator {
   color: @overlay1;
   font-weight: 700;
+  margin: 0 2px;
 }
 
 #custom-tmux,
 #custom-devserver {
   font-family: "SF Compact Display";
   font-weight: 700;
-  font-size: 12px;
+  font-size: 13px;
   transition: color 0.3s ease;
 }
 
