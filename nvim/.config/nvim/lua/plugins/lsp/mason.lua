@@ -16,7 +16,8 @@ return {
         "gopls",
         "tinymist",
         "clangd",
-        "rust_analyzer"
+        "rust_analyzer",
+        "qmlls"
       },
     },
     dependencies = {
@@ -34,5 +35,5 @@ return {
       },
       "neovim/nvim-lspconfig",
     },
-  }, 
+  },
 }

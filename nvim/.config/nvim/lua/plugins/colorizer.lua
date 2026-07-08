@@ -12,7 +12,8 @@ return {
       "yaml",
       "toml",
       "typst",
-      "lua"
+      "lua",
+      "qml"
     })
   end,
 }

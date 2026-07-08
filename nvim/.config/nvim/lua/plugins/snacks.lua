@@ -31,8 +31,16 @@ return {
       sources = {
         files = { excluded = { "node_modules" } },
         explorer = {
-          layout = { preset = "vertical", preview = true },
-          jump = { close = true } -- close after opening a file
+          layout = {
+            preset = "sidebar",
+            layout = {
+              width = function()
+                return math.min(50, math.floor(vim.o.columns * 0.28))
+              end,
+            },
+            preview = true,
+          },
+          jump = { close = true }
         },
       },
     },
@@ -41,8 +49,6 @@ return {
         position = "float",
         border = "rounded",
         interactive = true,
-        title = " cat ",
-        title_post = "center",
       }
     }
   },
@@ -59,7 +65,12 @@ return {
     end, desc = "Buffers" },
     { "<leader><leader>", function() require("snacks").picker.recent() end, desc = "Recent files" },
     { "<space><Tab>", function() require("snacks").explorer() end, desc = "Explorer" },
-    { "<leader>tt", function() require("snacks").terminal() end, desc ="Terminal" }
+    { "<leader>tt", function() require("snacks").terminal() end, desc ="Terminal" },
+    { "<C-q>", function()
+      if vim.bo.filetype == "snacks_terminal" then
+        require("snacks").terminal.toggle()
+      end
+    end, mode = "t", desc = "Hide Terminal" }
   },
   config = function(_, opts)
     require("snacks").setup(opts)
