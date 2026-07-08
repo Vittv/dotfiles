@@ -35,11 +35,13 @@ sudo pacman -S --needed --noconfirm \
   hyprland \
   hyprlock \
   hyprsunset \
+  waybar \
+  rofi \
+  dunst \
   kitty \
   lazygit \
   neovim \
   starship \
-  quickshell \
   tmux \
   yazi \
   fzf \
@@ -78,7 +80,6 @@ yay -S --needed --noconfirm \
   hyprqt6engine \
   sesh-bin \
   zen-browser-bin
-
 
 # performance power profile
 echo "==> Enabling power-profiles-daemon..."
@@ -167,7 +168,7 @@ fi
 echo "==> Stowing dotfiles..."
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-for pkg in colors fish hyprland kitty lazygit nvim scripts starship qs tmux yazi ui; do
+for pkg in colors fish hyprland kitty waybar rofi dunst lazygit nvim scripts starship qs tmux yazi ui; do
   if [ -d "$DOTFILES_DIR/$pkg" ]; then
     echo "  stowing $pkg..."
     stow --dir="$DOTFILES_DIR" --target="$HOME" "$pkg"
