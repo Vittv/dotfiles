@@ -64,13 +64,13 @@
     },
 
     "custom/mudfish": {
-      "exec": "$HOME/.config/waybar/src/mudfish-status.sh",
+      "exec": "$HOME/.local/bin/mudfish-status.sh",
       "interval": 2,
       "format": "{}",
       "tooltip": true,
       "return-type": "json",
-      "on-click": "setsid -f /home/vitt/.config/waybar/src/mudfish-start.sh",
-      "on-click-right": "setsid -f sudo /home/vitt/.config/waybar/src/mudfish-stop.sh"
+      "on-click": "setsid -f /home/vitt/.local/bin/mudfish-start.sh",
+      "on-click-right": "setsid -f sudo /home/vitt/.local/bin/mudfish-stop.sh"
     },
 
     "tray": {
@@ -170,13 +170,13 @@
       "return-type": "json",
       "interval": 1,
       "escape": false,
-      "exec": "~/.config/waybar/src/spotify.sh",
-      "exec-if": "~/.config/waybar/src/spotify-detect.sh",
-      "on-click": "~/.config/waybar/src/spotify-ctl.sh next",
-      "on-click-right": "~/.config/waybar/src/spotify-ctl.sh previous",
-      "on-click-middle": "~/.config/waybar/src/spotify-ctl.sh play-pause",
-      "on-scroll-up": "~/.config/waybar/src/spotify-ctl.sh volume 0.05+",
-      "on-scroll-down": "~/.config/waybar/src/spotify-ctl.sh volume 0.05-"
+      "exec": "~/.local/bin/spotify.sh",
+      "exec-if": "~/.local/bin/spotify-detect.sh",
+      "on-click": "~/.local/bin/spotify-ctl.sh next",
+      "on-click-right": "~/.local/bin/spotify-ctl.sh previous",
+      "on-click-middle": "~/.local/bin/spotify-ctl.sh play-pause",
+      "on-scroll-up": "~/.local/bin/spotify-ctl.sh volume 0.05+",
+      "on-scroll-down": "~/.local/bin/spotify-ctl.sh volume 0.05-"
     },
 
     "custom/separator": {

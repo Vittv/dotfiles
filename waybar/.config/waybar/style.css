@@ -8,8 +8,8 @@
 
 window#waybar {
   /* background-color: alpha(@base, 0.95); */
-  background-color: shade(@base, 1.2);
-  /* background-color: @base; */
+  /* background-color: shade(@base, 1.2); */
+  background-color: @base;
   /* border-radius: 10px; */
   /* background-color: transparent; */
   /* background: transparent; */
