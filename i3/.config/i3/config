@@ -1,0 +1,185 @@
+# =============================================================================
+# i3 config  v4
+# Adapted from Hyprland config (~/dotfiles/hyprland/.config/hypr/)
+# Colorscheme: vague
+# =============================================================================
+
+set $mod Mod4
+font pango:JetBrainsMono Nerd Font 11
+floating_modifier $mod
+
+# =============================================================================
+# Variables (matches apps.lua)
+# =============================================================================
+set $terminal    kitty
+set $filemanager "kitty yazi"
+set $menu        "rofi -show drun"
+set $browser     "zen-browser"
+set $wallswitch  "~/.local/bin/wallswitch.sh"
+set $powermenu   "~/.local/bin/powermenu.sh"
+set $devscript   "~/.local/bin/dev.sh"
+
+# =============================================================================
+# Monitor setup (matches monitors.lua + .xinitrc)
+# =============================================================================
+exec_always --no-startup-id xrandr --output DP-0 --mode 1920x1080 --rate 144 --primary \
+    --output HDMI-0 --mode 1920x1080 --rate 60 --right-of DP-0
+exec_always --no-startup-id xsetroot -cursor_name left_ptr
+
+# turn off screen blanking
+exec_always xset s off
+exec_always xset -dpms
+
+# redshift
+exec --no-startup-id redshift -c ~/.config/redshift/redshift.conf
+
+# =============================================================================
+# Input (matches input.lua)
+# =============================================================================
+exec_always --no-startup-id setxkbmap -model abnt2 -layout br
+exec_always --no-startup-id xset r rate 250 50
+focus_follows_mouse no
+
+# =============================================================================
+# Appearance (matches appearance.lua)
+# =============================================================================
+gaps inner 4
+gaps outer 2
+default_border pixel 2
+hide_edge_borders none
+# smart_borders on
+smart_gaps off
+
+set $fg         #cdcdcd
+set $bg         #141415
+set $inactive   #606079
+set $active     #cdcdcd
+set $urgent     #d8647e
+
+client.focused          $active  $active  $fg  $bg
+client.focused_inactive $inactive $inactive $fg $bg
+client.unfocused        $inactive $inactive $fg $bg
+client.urgent           $urgent    $bg      $fg  $bg
+client.placeholder      $inactive $inactive $fg $bg
+
+exec_always --no-startup-id feh --bg-scale ~/Pictures/pictures/pics/hyprland/hyprpaper/thumb-1920-787745.png
+
+# =============================================================================
+# Autostart (matches autostart.lua + .xinitrc)
+# =============================================================================
+exec --no-startup-id dunst
+exec --no-startup-id nvidia-settings -a "DigitalVibrance=307"
+exec --no-startup-id gnome-keyring-daemon --start --components=secrets
+exec --no-startup-id nm-applet
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id clipmenud
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id ~/.config/polybar/src/launch.sh
+
+# =============================================================================
+# Keybindings - Applications
+# =============================================================================
+bindsym $mod+Return     exec $terminal
+bindsym $mod+w          kill
+bindsym $mod+e          exec $filemanager
+bindsym $mod+a          exec $browser
+bindsym Mod1+space      exec $menu
+bindsym $mod+space      exec $devscript
+bindsym $mod+n          exec $wallswitch
+bindsym $mod+Shift+c    exec "colorpicker -s --one-shot --short | head -c 7 | xclip -sel clip && notify-send 'Colorpicker' 'Color copied to clipboard'"
+bindsym $mod+Shift+p    exec $powermenu
+bindsym Print        exec --no-startup-id "mkdir -p ~/Pictures/Screenshots && maim --select --noopengl ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'Screenshot' 'Saved to folder & clipboard'"
+bindsym Shift+Print  exec --no-startup-id "mkdir -p ~/Pictures/Screenshots && maim --noopengl ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'Screenshot' 'Full screen saved'"
+bindsym $mod+r exec --no-startup-id ~/.config/polybar/src/launch.sh
+bindcode 105 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && polybar-msg action "#mic.hook.0"
+
+# =============================================================================
+# Keybindings - Window management
+# =============================================================================
+bindsym $mod+v          floating toggle
+bindsym $mod+f          fullscreen toggle
+bindsym $mod+s          move scratchpad
+bindsym $mod+Shift+s    scratchpad show
+bindsym $mod+h          focus left
+bindsym $mod+j          focus down
+bindsym $mod+k          focus up
+bindsym $mod+l          focus right
+bindsym $mod+Shift+h    move left
+bindsym $mod+Shift+j    move down
+bindsym $mod+Shift+k    move up
+bindsym $mod+Shift+l    move right
+bindsym $mod+Ctrl+a     focus parent
+bindsym $mod+Shift+w    layout tabbed
+bindsym $mod+Ctrl+space layout toggle split
+
+# =============================================================================
+# Resize mode (triggered by $mod+Ctrl+r)
+# =============================================================================
+mode "resize" {
+    bindsym h resize shrink width 50 px or 50 ppt
+    bindsym j resize grow height 50 px or 50 ppt
+    bindsym k resize shrink height 50 px or 50 ppt
+    bindsym l resize grow width 50 px or 50 ppt
+    bindsym Left  resize shrink width 50 px or 50 ppt
+    bindsym Down  resize grow height 50 px or 50 ppt
+    bindsym Up    resize shrink height 50 px or 50 ppt
+    bindsym Right resize grow width 50 px or 50 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+Ctrl+r mode "default"
+}
+bindsym $mod+Ctrl+r mode "resize"
+
+# =============================================================================
+# Workspaces (matches workspaces.lua)
+# =============================================================================
+workspace "1" output DP-0
+workspace "2" output DP-0
+workspace "3" output DP-0
+workspace "4" output DP-0
+workspace "5" output HDMI-0
+workspace "6" output HDMI-0
+
+bindsym $mod+1 workspace number "1"
+bindsym $mod+2 workspace number "2"
+bindsym $mod+3 workspace number "3"
+bindsym $mod+4 workspace number "4"
+bindsym $mod+5 workspace number "5"
+bindsym $mod+6 workspace number "6"
+bindsym $mod+Shift+1 move container to workspace number "1"
+bindsym $mod+Shift+2 move container to workspace number "2"
+bindsym $mod+Shift+3 move container to workspace number "3"
+bindsym $mod+Shift+4 move container to workspace number "4"
+bindsym $mod+Shift+5 move container to workspace number "5"
+bindsym $mod+Shift+6 move container to workspace number "6"
+bindsym $mod+Ctrl+Next  workspace next
+bindsym $mod+Ctrl+Prior workspace prev
+
+# =============================================================================
+# Window rules (matches rules.lua)
+# =============================================================================
+# for_window [class="Steam" title="^Steam$"] move to workspace "4"
+# for_window [class="Steam" title="^Friends List$"] move to workspace "4"
+# for_window [class="Minecraft.*"] floating disable
+# for_window [class="steam_app_1151340"] floating enable, resize set 1920 1080, move position 0 0
+
+# =============================================================================
+# Media keys
+# =============================================================================
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl -e4 -n2 set 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -e4 -n2 set 5%-
+bindsym XF86AudioNext  exec --no-startup-id playerctl next
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPlay  exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPrev  exec --no-startup-id playerctl previous
+
+# =============================================================================
+# i3 config management
+# =============================================================================
+bindsym $mod+Shift+r          reload
+bindsym $mod+Ctrl+Shift+r     restart
+bindsym $mod+Shift+e          exec "i3-nagbar -t warning -m 'Exit i3?' -B 'Yes' 'i3-msg exit'"
