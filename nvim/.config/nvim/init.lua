@@ -38,6 +38,8 @@ require("lazy").setup({
     { import = "themes" },
   },
 })
+vim.api.nvim_set_hl(0, "TodoDone", { fg = "#7fa563", strikethrough = true })
+vim.api.nvim_set_hl(0, "TodoPending", { fg = "#d4a574" })
 
 -- builtin color preview - no more need for colorizer
 vim.lsp.document_color.enable(true, nil, { style = 'virtual' })

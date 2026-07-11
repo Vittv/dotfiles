@@ -55,6 +55,9 @@ function M.setup()
     local sel = vim.fn.getreg('"')
     vim.cmd('normal! gvc`' .. sel .. '`')
   end, { desc = 'Wrap selection in backticks' })
+
+  -- Open todo list
+  vim.keymap.set("n", "<leader>nn", require("mdbox.todos").open_todos, { desc = "Project todos" })
 end
 
 return M
