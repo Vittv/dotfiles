@@ -55,7 +55,6 @@ function M.setup()
     local sel = vim.fn.getreg('"')
     vim.cmd('normal! gvc`' .. sel .. '`')
   end, { desc = 'Wrap selection in backticks' })
-
 end
 
 return M

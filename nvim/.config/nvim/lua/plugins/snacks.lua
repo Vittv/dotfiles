@@ -35,7 +35,7 @@ return {
             preset = "sidebar",
             layout = {
               width = function()
-                return math.min(50, math.floor(vim.o.columns * 0.28))
+                return math.min(40, math.floor(vim.o.columns * 0.28))
               end,
             },
             preview = true,
@@ -70,7 +70,9 @@ return {
       if vim.bo.filetype == "snacks_terminal" then
         require("snacks").terminal.toggle()
       end
-    end, mode = "t", desc = "Hide Terminal" }
+    end, mode = "t", desc = "Hide Terminal" },
+    { "<C-h>", "<C-w>h", desc = "Window left" },
+    { "<C-l>", "<C-w>l", desc = "Window right" },
   },
   config = function(_, opts)
     require("snacks").setup(opts)
