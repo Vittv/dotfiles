@@ -43,8 +43,8 @@ focus_follows_mouse no
 # =============================================================================
 # Appearance (matches appearance.lua)
 # =============================================================================
-gaps inner 4
-gaps outer 2
+gaps inner 2
+gaps outer 1
 default_border pixel 2
 hide_edge_borders none
 # smart_borders on
@@ -62,7 +62,7 @@ client.unfocused        $inactive $inactive $fg $bg
 client.urgent           $urgent    $bg      $fg  $bg
 client.placeholder      $inactive $inactive $fg $bg
 
-exec_always --no-startup-id feh --bg-scale ~/Pictures/pictures/pics/hyprland/hyprpaper/thumb-1920-787745.png
+exec --no-startup-id ~/.fehbg
 
 # =============================================================================
 # Autostart (matches autostart.lua + .xinitrc)
@@ -73,6 +73,7 @@ exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 exec --no-startup-id nm-applet
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id clipmenud
+exec --no-startup-id flameshor
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id ~/.config/polybar/src/launch.sh
 
@@ -88,10 +89,12 @@ bindsym $mod+space      exec $devscript
 bindsym $mod+n          exec $wallswitch
 bindsym $mod+Shift+c    exec "colorpicker -s --one-shot --short | head -c 7 | xclip -sel clip && notify-send 'Colorpicker' 'Color copied to clipboard'"
 bindsym $mod+Shift+p    exec $powermenu
-bindsym Print        exec --no-startup-id "mkdir -p ~/Pictures/Screenshots && maim --select --noopengl ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'Screenshot' 'Saved to folder & clipboard'"
-bindsym Shift+Print  exec --no-startup-id "mkdir -p ~/Pictures/Screenshots && maim --noopengl ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png && xclip -selection clipboard -t image/png -i ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png && notify-send 'Screenshot' 'Full screen saved'"
+bindsym Print exec --no-startup-id flameshot gui -p ~/Pictures/Screenshots
+bindsym Shift+Print exec --no-startup-id flameshot full -p ~/Pictures/Screenshots
 bindsym $mod+r exec --no-startup-id ~/.config/polybar/src/launch.sh
-bindcode 105 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && polybar-msg action "#mic.hook.0"
+# bindsym Control_R exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && polybar-msg action "#mic.hook.0"
+bindcode --release 105 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && polybar-msg action "#mic.hook.0"
+# bindcode --release 105 exec --no-startup-id true
 
 # =============================================================================
 # Keybindings - Window management

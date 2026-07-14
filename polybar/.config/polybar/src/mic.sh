@@ -5,7 +5,7 @@
 MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | awk '{print $2}')
 
 if [ "$MUTED" = "yes" ]; then
-  echo ""
+  echo ""
 else
-  echo ""
+  echo ""
 fi
