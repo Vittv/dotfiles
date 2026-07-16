@@ -5,21 +5,21 @@ import "../../../../style"
 
 Rectangle {
   id: root
-  width: netModule.implicitWidth + 8
+  width: netModule.implicitWidth + 16
   implicitHeight: 20
   radius: 4
-  color: Colors.surface
+  color: Colors.overlay0
   border.width: 1
   border.color: Colors.palette.surface2
 
-  property string connectionType: netModule.connectionType
+  property bool popupActive: false
   signal clicked()
-  property bool popupActive: netModule.popupActive
 
   Item {
     id: netModule
     anchors.centerIn: parent
     property string connectionType: "none"
+    property bool mudfishOn: false
     property bool popupActive: root.popupActive
     implicitWidth: row.implicitWidth
     implicitHeight: row.implicitHeight
@@ -44,6 +44,18 @@ Rectangle {
     }
 
     Process {
+      id: checkMudfish
+      command: ["pgrep", "-x", "mudfish"]
+      stdout: SplitParser {
+        onRead: () => { netModule.mudfishOn = true }
+      }
+      onExited: (code) => { netModule.mudfishOn = (code === 0) }
+      onRunningChanged: {
+        if (running) netModule.mudfishOn = false
+      }
+    }
+
+    Process {
       id: monitor
       command: ["nmcli", "monitor"]
       running: true
@@ -55,15 +67,42 @@ Rectangle {
       }
     }
 
-    Component.onCompleted: checkConn.running = true
+    Timer {
+      interval: 5000
+      running: true
+      repeat: true
+      triggeredOnStart: true
+      onTriggered: checkMudfish.running = true
+    }
+
+    Component.onCompleted: {
+      checkConn.running = true
+      checkMudfish.running = true
+    }
 
     Row {
       id: row
       spacing: 4
+
+      Text {
+        text: "NET"
+        color: Colors.text
+        font.family: Fonts.display
+        font.pixelSize: 10
+        font.weight: 600
+        font.letterSpacing: 1.2
+        anchors.verticalCenter: parent.verticalCenter
+      }
+
       Icon {
         name: netModule.connectionType === "none" ? "wifi" : netModule.connectionType
         size: 14
-        iconColor: netModule.popupActive ? Colors.accent : (netModule.connectionType === "none" ? Colors.red : Colors.text)
+        iconColor: netModule.mudfishOn
+          ? Colors.palette.blue
+          : netModule.connectionType === "none"
+          ? Colors.red
+          : Colors.green
+        anchors.verticalCenter: parent.verticalCenter
       }
     }
 

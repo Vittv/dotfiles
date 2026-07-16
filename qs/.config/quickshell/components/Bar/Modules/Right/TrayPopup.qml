@@ -1,48 +1,90 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import Quickshell
+import Quickshell.Hyprland
 import "../../../../style"
+import "../../../Bar"
 
-PopupWindow {
+PopupMenuBase {
   id: root
 
-  property var menuHandle: null
-  property Item anchorItem: null
+  property var trayItemMenuHandle: null
 
   implicitWidth: 220
-  color: "transparent"
-  grabFocus: true
+  implicitHeight: {
+    var h = 0;
+    var item = stackView.currentItem;
+    if (item) h = item.implicitHeight;
+    return h + 12 + 6;
+  }
+
+  backgroundColor: Colors.base
+  radius: 6
+  borderWidth: 1
+  borderColor: Colors.palette.surface2
+
+  HyprlandFocusGrab {
+    windows: [root]
+    active: root.open
+    onCleared: root.open = false
+  }
+
+  function show(handle, item, x, y) {
+    root.trayItemMenuHandle = handle
+    root.triggerItem = item
+    root.anchor.item = item
+    root.anchor.rect = Qt.rect(x, y, 0, 0)
+    stackView.clear()
+    stackView.push(menuComponent, { handle: handle })
+    root.open = true
+  }
+
+  function close() {
+    root.open = false
+    stackView.clear()
+  }
 
   anchor {
-    item: root.anchorItem
-    rect.x: 0
-    rect.y: 0
+    item: root.triggerItem
+    rect: Qt.rect(0, 0, 0, 0)
     edges: Edges.Bottom | Edges.Right
     gravity: Edges.Bottom | Edges.Left
   }
 
-  function show(handle, item) {
-    root.menuHandle = handle
-    root.anchorItem = item
-    opener.menu = handle
-    root.open = true
+  StackView {
+    id: stackView
+    anchors { fill: parent; leftMargin: 3; rightMargin: 3; topMargin: 8; bottomMargin: 8 }
+
+    pushEnter: Transition {
+      NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 100 }
+    }
+    pushExit: Transition {
+      NumberAnimation { property: "opacity"; from: 1; to: 0; duration: 100 }
+    }
+    popEnter: Transition {
+      NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 100 }
+    }
+    popExit: Transition {
+      NumberAnimation { property: "opacity"; from: 1; to: 0; duration: 100 }
+    }
   }
 
-  QsMenuOpener {
-    id: opener
-  }
-
-  Rectangle {
-    anchors.fill: parent
-    color: Colors.base
-    radius: 10
-
+  Component {
+    id: menuComponent
     ColumnLayout {
-      anchors { fill: parent; margins: 6 }
-      spacing: 2
+      id: submenu
+      required property QsMenuHandle handle
+
+      QsMenuOpener {
+        id: menuOpener
+        menu: submenu.handle
+      }
+
+      spacing: 4
 
       Repeater {
-        model: opener.children
+        model: menuOpener.children
 
         delegate: Item {
           id: menuItem
@@ -51,14 +93,13 @@ PopupWindow {
           readonly property bool hasSubmenu: modelData.hasChildren === true
 
           Layout.fillWidth: true
-          Layout.preferredHeight: isSeparator ? 8 : 32
+          Layout.preferredHeight: isSeparator ? 4 : 26
 
           Rectangle {
             anchors.fill: parent
-            radius: 6
-            color: mouse.containsMouse ? Colors.surface : "transparent"
+            radius: 4
+            color: itemMouse.containsMouse ? Colors.surface : "transparent"
             visible: !isSeparator
-            Behavior on color { ColorAnimation { duration: 80 } }
           }
 
           Rectangle {
@@ -73,23 +114,24 @@ PopupWindow {
             text: modelData.text || ""
             color: Colors.text
             font.family: Fonts.display
-            font.pixelSize: 13
+            font.weight: 500
+            font.pixelSize: 16
             elide: Text.ElideRight
             visible: !isSeparator
           }
 
           MouseArea {
-            id: mouse
+            id: itemMouse
             anchors.fill: parent
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
             visible: !isSeparator
             onClicked: {
               if (hasSubmenu) {
-                // submenu navigation
+                stackView.push(menuComponent, { handle: modelData })
               } else {
                 modelData.triggered()
-                root.open = false
+                root.close()
               }
             }
           }

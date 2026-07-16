@@ -10,7 +10,7 @@ ClickMenu {
   implicitWidth: 260
   implicitHeight: 232
   backgroundColor: Colors.base
-  radius: 12
+  radius: 10
 
   Process { id: actionProc }
 

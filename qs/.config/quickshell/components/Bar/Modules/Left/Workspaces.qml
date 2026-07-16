@@ -5,8 +5,8 @@ import "../../../../style/"
 Item {
   id: root
   property var targetScreen
-  height: 22
-  width: row.width + 12
+  implicitHeight: 20
+  implicitWidth: row.width + 12
 
   readonly property int wsCount: {
     var max = 0
@@ -37,9 +37,9 @@ Item {
         property var ws: Hyprland.workspaces.values.find(w => w.id === wsId)
         property bool isActive: Hyprland.focusedWorkspace ? Hyprland.focusedWorkspace.id === wsId : false
 
-        width: 20
-        height: 20
-        radius: 5
+        implicitWidth: 20
+        implicitHeight: 16
+        radius: 3
         color: isActive ? Qt.rgba(Colors.palette.blue.r, Colors.palette.blue.g, Colors.palette.blue.b, 0.2) : "transparent"
 
         Text {

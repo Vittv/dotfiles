@@ -36,7 +36,7 @@ Rectangle {
       Icon {
         anchors.verticalCenter: parent.verticalCenter
         size: 14
-        iconColor: volModule.popupActive ? Colors.accent : (volModule.muted ? Colors.red : Colors.text)
+        iconColor: volModule.popupActive ? Colors.accent : (volModule.muted ? Colors.red : Colors.palette.blue)
         name: {
           if (volModule.muted) return "volume_off";
           if (volModule.volumePct < 1) return "volume_mute";
@@ -48,7 +48,7 @@ Rectangle {
       Item {
         anchors.verticalCenter: parent.verticalCenter
         width: 30
-        height: 6
+        height: 2
 
         Rectangle {
           anchors.fill: parent
@@ -60,7 +60,7 @@ Rectangle {
           width: parent.width * (volModule.volumePct / 100)
           height: parent.height
           radius: height / 2
-          color: volModule.muted ? Colors.red : Colors.text
+          color: volModule.muted ? Colors.red : Colors.palette.blue
         }
       }
     }

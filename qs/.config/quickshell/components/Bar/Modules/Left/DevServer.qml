@@ -26,6 +26,6 @@ Rectangle {
     textColor: Colors.palette.blue
     fontSize: 13
     fontFamily: "SF Pro Display"
-    fontWeight: Font.Bold
+    fontWeight: Font.Medium
   }
 }

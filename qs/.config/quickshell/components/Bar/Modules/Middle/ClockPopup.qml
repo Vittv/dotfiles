@@ -13,6 +13,8 @@ ClickMenu {
   backgroundColor: Colors.base
   radius: 12
   centerInWindow: true
+  borderWidth: 1
+  borderColor: Colors.palette.surface2
 
   SystemClock {
     id: sysClock
@@ -256,7 +258,7 @@ ClickMenu {
         }
       }
 
-      Rectangle { Layout.fillWidth: true; height: 1; color: Colors.surfaceAlt; opacity: 0.5 }
+      Rectangle { Layout.fillWidth: true; height: 1; color: Colors.palette.surface2 }
 
       MonthCalendar {
         id: cal
@@ -269,8 +271,7 @@ ClickMenu {
     Rectangle {
       Layout.fillHeight: true
       width: 1
-      color: Colors.surfaceAlt
-      opacity: 0.5
+      color: Colors.palette.surface2
     }
 
     // right column: world + upcoming
@@ -281,18 +282,25 @@ ClickMenu {
       Layout.topMargin: 4
       spacing: 10
 
-      // world section
-      Text {
+      // world section header
+      Rectangle {
         Layout.fillWidth: true
-        text: "WORLD"
-        color: Colors.subtext
-        font.family: Fonts.display
-        font.pixelSize: 12
-        font.letterSpacing: 1.8
-        font.weight: 600
-      }
+        Layout.preferredHeight: 24
+        radius: 6
+        color: Colors.overlay0
+        border.width: 1
+        border.color: Colors.palette.surface2
 
-      Rectangle { Layout.fillWidth: true; height: 1; color: Colors.surfaceAlt; opacity: 0.4 }
+        Text {
+          anchors.centerIn: parent
+          text: "WORLD"
+          color: Colors.subtext
+          font.family: Fonts.display
+          font.pixelSize: 12
+          font.letterSpacing: 1.8
+          font.weight: 600
+        }
+      }
 
       ColumnLayout {
         Layout.fillWidth: true
@@ -336,7 +344,7 @@ ClickMenu {
 
             Text {
               text: worldTimes[modelData] ? worldTimes[modelData].zone : ""
-              color: Colors.surface
+              color: Colors.palette
               font.family: Fonts.display
               font.pixelSize: 11
               font.italic: true
@@ -347,41 +355,46 @@ ClickMenu {
         }
       }
 
-      // upcoming section
-      Rectangle { Layout.fillWidth: true; height: 1; color: Colors.surfaceAlt; opacity: 0.4 }
+      Rectangle { Layout.fillWidth: true; height: 1; color: Colors.palette.surface2 }
 
-      RowLayout {
+      // upcoming section header
+      Rectangle {
         Layout.fillWidth: true
-        spacing: 6
+        Layout.preferredHeight: 24
+        radius: 6
+        color: Colors.overlay0
+        border.width: 1
+        border.color: Colors.palette.surface2
 
-        Text {
-          text: "UPCOMING"
-          color: Colors.subtext
-          font.family: Fonts.display
-          font.pixelSize: 12
-          font.letterSpacing: 1.8
-          font.weight: 600
-        }
+        RowLayout {
+          anchors.centerIn: parent
+          spacing: 8
 
-        Item { Layout.fillWidth: true }
+          Text {
+            text: "UPCOMING"
+            color: Colors.subtext
+            font.family: Fonts.display
+            font.pixelSize: 12
+            font.letterSpacing: 1.8
+            font.weight: 600
+          }
 
-        Text {
-          text: root.isBirthdayMode ? "BDAY" : "EVENT"
-          color: Colors.text
-          font.family: Fonts.display
-          font.pixelSize: 11
-          font.weight: 600
-          font.letterSpacing: 1.2
-          MouseArea {
-            anchors.fill: parent
-            anchors.margins: -4
-            cursorShape: Qt.PointingHandCursor
-            onClicked: root.isBirthdayMode = !root.isBirthdayMode
+          Text {
+            text: root.isBirthdayMode ? "BDAY" : "EVENT"
+            color: Colors.text
+            font.family: Fonts.display
+            font.pixelSize: 11
+            font.weight: 600
+            font.letterSpacing: 1.2
+            MouseArea {
+              anchors.fill: parent
+              anchors.margins: -4
+              cursorShape: Qt.PointingHandCursor
+              onClicked: root.isBirthdayMode = !root.isBirthdayMode
+            }
           }
         }
       }
-
-      Rectangle { Layout.fillWidth: true; height: 1; color: Colors.surfaceAlt; opacity: 0.4 }
 
       ListView {
         id: upcomingList
@@ -434,7 +447,7 @@ ClickMenu {
         }
       }
 
-      Rectangle { Layout.fillWidth: true; height: 1; color: Colors.surfaceAlt; opacity: 0.4 }
+      Rectangle { Layout.fillWidth: true; height: 1; color: Colors.palette.surface2 }
 
       RowLayout {
         Layout.fillWidth: true
@@ -444,7 +457,9 @@ ClickMenu {
           Layout.fillWidth: true
           Layout.preferredHeight: 30
           radius: 6
-          color: Colors.surface
+          color: Colors.overlay0
+          border.width: 1
+          border.color: Colors.palette.surface2
           clip: true
 
           TextInput {

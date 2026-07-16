@@ -40,8 +40,8 @@ Rectangle {
             if (mouse.button === Qt.LeftButton)
               trayItem.activate();
             else if (mouse.button === Qt.RightButton && trayItem.hasMenu) {
-              var pos = trayDelegate.mapToItem(null, trayDelegate.width, 0);
-              trayItem.display(panel, pos.x, pos.y);
+              var pos = trayDelegate.mapToItem(null, 0, trayDelegate.height);
+              trayPopup.show(trayItem.menu, trayDelegate, pos.x, pos.y);
             }
           }
         }

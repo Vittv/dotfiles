@@ -22,7 +22,7 @@ Rectangle {
     intervalMs: 15000
     onClickCommand: "kitty fish -c t"
 
-    textColor: Colors.text
+    textColor: Colors.palette.sapphire
     fontSize: 13
     fontWeight: Font.Medium
     fontFamily: "SF Pro Display"

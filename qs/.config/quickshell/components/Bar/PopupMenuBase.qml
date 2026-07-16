@@ -5,13 +5,16 @@ PopupWindow {
   id: root
 
   required property Item triggerItem
-  property int gap: 12
+  property int gap: 8
 
   property int edgesFlag: Edges.Bottom | Edges.Left
   property int gravityFlag: Edges.Bottom | Edges.Right
 
   property bool centered: false
   property bool centerInWindow: false
+
+  property color borderColor: "transparent"
+  property int borderWidth: 0
 
   readonly property real _windowWidth: (triggerItem && triggerItem.Window && triggerItem.Window.window)
     ? triggerItem.Window.window.width : 0
@@ -88,7 +91,8 @@ PopupWindow {
       radius: root.radius
       color: root.backgroundColor
       antialiasing: true
-      border.width: 0
+      border.width: root.borderWidth
+      border.color: root.borderColor
     }
 
     MouseArea {

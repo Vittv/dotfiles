@@ -56,7 +56,7 @@ Scope {
             implicitHeight: 24
             width: leftRow.width + 16
             color: typeof Colors !== 'undefined' ? Colors.base : "#252530"
-            radius: 6
+            // radius: 6
 
             Row {
               id: leftRow
@@ -77,8 +77,10 @@ Scope {
               Tmux {
                 anchors.verticalCenter: parent.verticalCenter
               }
-
               DevServer {
+                anchors.verticalCenter: parent.verticalCenter
+              }
+              ActiveWindow {
                 anchors.verticalCenter: parent.verticalCenter
               }
             }
@@ -143,6 +145,12 @@ Scope {
         }
       }
       // popups and state
+
+      TrayPopup {
+        id: trayPopup
+        triggerItem: trayModule
+      }
+
       VolumePopup {
         id: volumePopup
         triggerItem: volModule

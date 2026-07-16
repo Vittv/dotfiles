@@ -22,6 +22,7 @@ Rectangle {
     property int volumePercent: 0
     property bool isActive: playerStatus === "Playing"
     property string activePlayerName: ""
+    property bool _playerAlive: false
     property string displayText: trackInfo !== "" ? ("󰓇  " + volumePercent + "% " + trackInfo) : ""
     implicitHeight: 24
     implicitWidth: 180
@@ -67,6 +68,28 @@ Rectangle {
               duration: Math.max(1500, label.implicitWidth * 8)
               easing.type: Easing.Linear
             }
+          }
+        }
+      }
+    }
+
+    Timer {
+      id: playerAliveTimer
+      interval: 1000
+      running: spotifyContent.activePlayerName !== ""
+      repeat: true
+      onTriggered: aliveProc.running = true
+    }
+
+    Process {
+      id: aliveProc
+      command: ["bash", "-c", "playerctl -l 2>/dev/null | grep -qxF '" + spotifyContent.activePlayerName + "' && echo alive || echo dead"]
+      stdout: SplitParser {
+        onRead: (line) => {
+          if (line === "dead") {
+            spotifyContent.activePlayerName = ""
+            spotifyContent.trackInfo = ""
+            spotifyContent.playerStatus = ""
           }
         }
       }
@@ -155,7 +178,7 @@ Rectangle {
       }
       onWheel: (wheel) => {
         if (wheel.angleDelta.y > 0) volUpProcess.running = true;
-        else volDownProcess.running = true;
+        else volDownProcess.running = true
       }
     }
   }

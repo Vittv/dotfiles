@@ -49,7 +49,7 @@ Rectangle {
       anchors.centerIn: parent
       name: micModule.muted ? "mic_off" : "mic"
       size: 14
-      iconColor: micModule.muted ? Colors.palette.maroon : Colors.text
+      iconColor: micModule.muted ? Colors.palette.maroon : Colors.yellow
     }
 
     Process {
