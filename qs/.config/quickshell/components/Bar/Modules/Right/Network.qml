@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import "../../../../style"
+import "../../../../services/"
 
 Rectangle {
   id: root
@@ -18,67 +19,10 @@ Rectangle {
   Item {
     id: netModule
     anchors.centerIn: parent
-    property string connectionType: "none"
-    property bool mudfishOn: false
-    property bool popupActive: root.popupActive
+    property string connectionType: NetworkService.connectionType
+    property bool mudfishOn: NetworkService.mudfishOn
     implicitWidth: row.implicitWidth
     implicitHeight: row.implicitHeight
-
-    Process {
-      id: checkConn
-      command: ["nmcli", "-t", "-f", "TYPE,STATE", "device", "status"]
-      stdout: SplitParser {
-        splitMarker: "\n"
-        onRead: (line) => {
-          const parts = line.split(":");
-          const type = parts[0];
-          const state = parts[1];
-          if (state !== "connected") return;
-          if (type === "wifi") netModule.connectionType = "wifi";
-          else if (type === "ethernet") netModule.connectionType = "eth";
-        }
-      }
-      onRunningChanged: {
-        if (running) netModule.connectionType = "none";
-      }
-    }
-
-    Process {
-      id: checkMudfish
-      command: ["pgrep", "-x", "mudfish"]
-      stdout: SplitParser {
-        onRead: () => { netModule.mudfishOn = true }
-      }
-      onExited: (code) => { netModule.mudfishOn = (code === 0) }
-      onRunningChanged: {
-        if (running) netModule.mudfishOn = false
-      }
-    }
-
-    Process {
-      id: monitor
-      command: ["nmcli", "monitor"]
-      running: true
-      stdout: SplitParser {
-        splitMarker: "\n"
-        onRead: (line) => {
-          checkConn.running = true;
-        }
-      }
-    }
-
-    Timer {
-      interval: 5000
-      running: true
-      repeat: true
-      triggeredOnStart: true
-      onTriggered: checkMudfish.running = true
-    }
-
-    Component.onCompleted: {
-      checkConn.running = true
-      checkMudfish.running = true
-    }
 
     Row {
       id: row

@@ -48,38 +48,11 @@ PopupWindow {
     rect.y: root.screen ? Math.round(root.screen.height * 0.3) : 36
   }
 
-  property var appList: []
-
-  function buildAppList() {
-    var all = [...DesktopEntries.applications.values]
-    var visible = []
-
-    for (var i = 0; i < all.length; i++) {
-      var e = all[i]
-      if (!e.name) continue
-      if (e.noDisplay) continue
-      if (typeof e.hidden !== "undefined" && e.hidden) continue
-      visible.push(e)
-    }
-
-    visible.sort(function(a, b) {
-      return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-    })
-
-    appList = visible
-  }
-
-  Component.onCompleted: {
-    buildAppList()
-    runSearch()
-  }
+  Component.onCompleted: runSearch()
 
   Connections {
-    target: DesktopEntries
-    function onApplicationsChanged() {
-      buildAppList()
-      runSearch()
-    }
+    target: AppDatabase
+    function onAppListChanged() { runSearch() }
   }
 
   property string pendingQuery: ""
@@ -95,14 +68,14 @@ PopupWindow {
     var q = pendingQuery.trim().toLowerCase()
 
     if (!q) {
-      filteredResults = appList
+      filteredResults = AppDatabase.appList
       resultList.currentIndex = filteredResults.length > 0 ? 0 : -1
       return
     }
 
     var scored = []
-    for (var i = 0; i < appList.length; i++) {
-      var entry = appList[i]
+    for (var i = 0; i < AppDatabase.appList.length; i++) {
+      var entry = AppDatabase.appList[i]
       var s = fuzzyScore(entry.name, q)
       if (s > 0) scored.push({ entry: entry, score: s })
     }

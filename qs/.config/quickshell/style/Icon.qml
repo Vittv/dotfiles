@@ -32,8 +32,8 @@ Text {
     "chevron_left":  "\ue5cb",
     "chevron_right": "\ue5cc",
     "lock":          "\ue897",
-    "sleep":         "\ue8b4",
-    "hibernate":     "\ue8ac",
+    "sleep":         "\uf037",
+    "hibernate":     "\uef44",
     "restart":       "\ue5d5",
     "command":       "\ueae7"
   })

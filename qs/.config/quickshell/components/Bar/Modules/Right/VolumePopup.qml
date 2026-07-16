@@ -66,7 +66,7 @@ ClickMenu {
 
   Process { id: pavuControlProc }
 
-  // ---- reusable section subheading: accent bar + label, no border ----
+  // reusable section subheading: accent bar + label
   component SectionLabel: RowLayout {
     property alias text: labelText.text
     spacing: 8
@@ -131,14 +131,14 @@ ClickMenu {
       }
     }
 
-    // devices — flat, no nested card, divider between rows
+    // devices - flat, no nested card, divider between rows
     ColumnLayout {
       Layout.fillWidth: true
       spacing: 12
 
       VolumeRow {
         Layout.fillWidth: true
-        label: root.sinkName
+        label: root.sinkName + " (Output)"
         iconName: root.muted ? "volume_off" : (root.volume < 0.01 ? "volume_mute" : root.volume < 0.5 ? "volume_down" : "volume_up")
         value: root.volume
         muted: root.muted
@@ -151,7 +151,7 @@ ClickMenu {
 
       VolumeRow {
         Layout.fillWidth: true
-        label: root.sourceName
+        label: root.sourceName + " (Input)"
         iconName: root.sourceMuted ? "mic_off" : "mic"
         value: root.sourceVolume
         muted: root.sourceMuted
@@ -180,6 +180,7 @@ ClickMenu {
       Repeater {
         model: root.streamNodes
         delegate: ColumnLayout {
+          required property int index
           required property var modelData
           Layout.fillWidth: true
           spacing: 12

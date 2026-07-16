@@ -1,8 +1,9 @@
 import QtQuick
-import QtQml
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import "../../../../style"
+import "../../../../services"
 
 Rectangle {
   id: root
@@ -12,25 +13,14 @@ Rectangle {
   color: Colors.palette.overlay0
   border.width: 1
   border.color: Colors.palette.surface2
-  visible: spotifyContent.displayText !== ""
+  visible: SpotifyService.displayText !== ""
 
   Item {
     id: spotifyContent
     anchors.centerIn: parent
-    property string trackInfo: ""
-    property string playerStatus: ""
-    property int volumePercent: 0
-    property bool isActive: playerStatus === "Playing"
-    property string activePlayerName: ""
-    property bool _playerAlive: false
-    property string displayText: trackInfo !== "" ? ("󰓇  " + volumePercent + "% " + trackInfo) : ""
+    property string displayText: SpotifyService.displayText
     implicitHeight: 24
     implicitWidth: 180
-
-    function looksLikeSpotify(name, url) {
-      const s = (name + url).toLowerCase()
-      return s.indexOf("spotify") !== -1
-    }
 
     Row {
       spacing: 6
@@ -68,94 +58,6 @@ Rectangle {
               duration: Math.max(1500, label.implicitWidth * 8)
               easing.type: Easing.Linear
             }
-          }
-        }
-      }
-    }
-
-    Timer {
-      id: playerAliveTimer
-      interval: 1000
-      running: spotifyContent.activePlayerName !== ""
-      repeat: true
-      onTriggered: aliveProc.running = true
-    }
-
-    Process {
-      id: aliveProc
-      command: ["bash", "-c", "playerctl -l 2>/dev/null | grep -qxF '" + spotifyContent.activePlayerName + "' && echo alive || echo dead"]
-      stdout: SplitParser {
-        onRead: (line) => {
-          if (line === "dead") {
-            spotifyContent.activePlayerName = ""
-            spotifyContent.trackInfo = ""
-            spotifyContent.playerStatus = ""
-          }
-        }
-      }
-    }
-
-    Process {
-      id: initProcess
-      command: ["bash", "-c",
-        "player=$(playerctl -l 2>/dev/null | while read p; do " +
-        "  info=$(playerctl -p \"$p\" metadata xesam:url mpris:trackid 2>/dev/null); " +
-        "  echo \"$info\" | grep -qi spotify && echo \"$p\" && break; " +
-        "done); " +
-        "[ -z \"$player\" ] && exit 1; " +
-        "echo \"$player\"; " +
-        "playerctl -p \"$player\" status; " +
-        "playerctl -p \"$player\" metadata --format '{{ title }} - {{ artist }}'; " +
-        "playerctl -p \"$player\" volume"]
-      running: true
-      stdout: SplitParser {
-        property int lineNum: 0
-        onRead: (line) => {
-          if (lineNum === 0) spotifyContent.activePlayerName = line
-          else if (lineNum === 1) spotifyContent.playerStatus = line
-          else if (lineNum === 2) spotifyContent.trackInfo = line
-          else if (lineNum === 3) spotifyContent.volumePercent = Math.round(parseFloat(line) * 100) || 0
-          lineNum++
-        }
-      }
-    }
-
-    Process {
-      id: followMeta
-      command: ["playerctl", "-a", "--follow", "metadata",
-        "--format", "{{playerName}}\t{{status}}\t{{xesam:url}}\t{{title}} - {{artist}}"]
-      running: true
-      stdout: SplitParser {
-        onRead: (line) => {
-          const parts = line.split("\t")
-          if (parts.length < 4) return
-          const [name, status, url, info] = parts
-
-          if (spotifyContent.looksLikeSpotify(name, url)) {
-            spotifyContent.activePlayerName = name
-            spotifyContent.playerStatus = status
-            spotifyContent.trackInfo = info
-          } else if (name === spotifyContent.activePlayerName) {
-            spotifyContent.activePlayerName = ""
-            spotifyContent.trackInfo = ""
-            spotifyContent.playerStatus = ""
-          }
-        }
-      }
-    }
-
-    Process {
-      id: followVol
-      command: ["playerctl", "-a", "--follow", "volume",
-        "--format", "{{playerName}}\t{{volume}}"]
-      running: true
-      stdout: SplitParser {
-        onRead: (line) => {
-          const parts = line.split("\t")
-          if (parts.length < 2) return
-          const [name, vol] = parts
-          if (name === spotifyContent.activePlayerName) {
-            spotifyContent.volumePercent = Math.round(parseFloat(vol) * 100)
           }
         }
       }
