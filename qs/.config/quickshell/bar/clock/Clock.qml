@@ -17,9 +17,9 @@ ModulePill {
     }
     text: Qt.formatDateTime(clock.date, "dd") + "  •  " + Qt.formatDateTime(clock.date, "hh:mm AP")
     color: Theme.text
-    font.family: Theme.fontFamily
+    font.family: Theme.compFamily
     font.pixelSize: Theme.fontSizeNormal
-    font.weight: 500
+    font.weight: Theme.weightNormal
     horizontalAlignment: Text.AlignHCenter
   }
 

@@ -42,7 +42,7 @@ ModulePill {
       anchors.centerIn: parent
       name: micModule.muted ? "mic_off" : "mic"
       size: 14
-      iconColor: micModule.muted ? Colors.palette.maroon : Colors.yellow
+      iconColor: micModule.muted ? Theme.maroon : Theme.yellow
     }
 
     Process {

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import "../../style"
+import "../../core"
 
 Item {
   id: root
@@ -49,7 +50,7 @@ Item {
       Icon {
         name: "chevron_left"
         size: 16
-        iconColor: Colors.subtext
+        iconColor: Theme.subtext
         MouseArea {
           anchors.fill: parent
           anchors.margins: -8
@@ -62,17 +63,17 @@ Item {
         Layout.fillWidth: true
         horizontalAlignment: Text.AlignHCenter
         text: root.monthNames[root.viewDate.getMonth()] + " " + root.viewDate.getFullYear()
-        color: Colors.text
+        color: Theme.text
         font.family: Fonts.display
         font.pixelSize: 16
-        font.weight: 500
+        font.weight: Theme.weightNormal
         font.letterSpacing: 0.5
       }
 
       Icon {
         name: "chevron_right"
         size: 16
-        iconColor: Colors.subtext
+        iconColor: Theme.subtext
         MouseArea {
           anchors.fill: parent
           anchors.margins: -8
@@ -93,11 +94,11 @@ Item {
           Layout.preferredWidth: 1
           horizontalAlignment: Text.AlignHCenter
           text: modelData.toUpperCase()
-          color: Colors.subtext
+          color: Theme.subtext
           font.family: Fonts.display
           font.pixelSize: 11
           font.letterSpacing: 0.8
-          font.weight: 600
+          font.weight: Theme.weightSemibold
         }
       }
     }
@@ -128,7 +129,7 @@ Item {
             width: 30
             height: 30
             radius: 8
-            color: isSelected ? Colors.accent : Colors.surface
+            color: isSelected ? Theme.accent : Theme.surface0
             opacity: isSelected ? 0.25 : (hoverArea.containsMouse ? 0.4 : 0)
             visible: cellData
             Behavior on opacity { NumberAnimation { duration: 120 } }
@@ -142,7 +143,7 @@ Item {
             height: 3
             radius: 1.5
             visible: isToday && !isSelected && cellData
-            color: Colors.accent
+            color: Theme.accent
           }
 
           Rectangle {
@@ -153,7 +154,7 @@ Item {
             height: 4
             radius: 2
             visible: hasEvents && cellData
-            color: isSelected ? Colors.base : Colors.accent
+            color: isSelected ? Theme.base : Theme.accent
           }
 
           Text {
@@ -162,14 +163,14 @@ Item {
             text: cellData ? cellData.getDate() : ""
             color: {
               if (!cellData) return "transparent"
-              if (isSelected) return Colors.accent
-              if (isToday) return Colors.accent
-              if (isWeekend) return Colors.subtext
-              return Colors.text
+              if (isSelected) return Theme.accent
+              if (isToday) return Theme.accent
+              if (isWeekend) return Theme.subtext
+              return Theme.text
             }
             font.family: Fonts.display
             font.pixelSize: 14
-            font.weight: isToday || isSelected ? 700 : 500
+            font.weight: isToday || isSelected ? Theme.weightBold : Theme.weightNormal
           }
 
           MouseArea {

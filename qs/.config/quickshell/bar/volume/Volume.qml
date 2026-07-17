@@ -31,7 +31,7 @@ ModulePill {
       Icon {
         anchors.verticalCenter: parent.verticalCenter
         size: 14
-        iconColor: root.dropdownActive ? Colors.accent : (volModule.muted ? Theme.danger : Colors.palette.yellow)
+        iconColor: root.dropdownActive ? Theme.accent : (volModule.muted ? Theme.red : Theme.yellow)
         name: {
           if (volModule.muted) return "volume_off";
           if (volModule.volumePct < 1) return "volume_mute";
@@ -55,7 +55,7 @@ ModulePill {
           width: parent.width * (volModule.volumePct / 100)
           height: parent.height
           radius: height / 2
-          color: volModule.muted ? Theme.danger : Colors.palette.text
+          color: volModule.muted ? Theme.red : Theme.text
         }
       }
     }

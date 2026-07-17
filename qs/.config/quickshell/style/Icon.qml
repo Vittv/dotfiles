@@ -1,12 +1,13 @@
 import QtQuick
 import "."
+import "../core"
 
 Text {
   id: root
 
   property string name: ""
   property int size: 16
-  property color iconColor: Colors.text
+  property color iconColor: Theme.text
 
   readonly property var _glyphs: ({
     "volume_up":     "\ue050",
@@ -43,7 +44,7 @@ Text {
   text: _glyphs[root.name] || "?"
   font.family: root.name in _nerdIcons ? "FiraCode Nerd Font Mono" : "Material Icons"
   font.pixelSize: root.size
-  font.weight: 500
+  font.weight: Theme.weightNormal
   color: root.iconColor
   verticalAlignment: Text.AlignVCenter
   horizontalAlignment: Text.AlignHCenter

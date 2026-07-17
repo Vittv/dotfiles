@@ -4,12 +4,12 @@ import "../../core"
 
 ModulePill {
   id: root
-  width: logoutIcon.implicitWidth + 8
+  width: powerIcon.implicitWidth + 8
 
   signal clicked()
 
   Item {
-    id: logoutIcon
+    id: powerIcon
     anchors.centerIn: parent
     implicitWidth: icon.implicitWidth
     implicitHeight: icon.implicitHeight

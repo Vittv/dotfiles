@@ -2,8 +2,6 @@ import QtQuick
 import "."
 
 Rectangle {
-  id: root
-
   default property alias content: body.data
 
   property bool active: false
@@ -11,9 +9,9 @@ Rectangle {
   implicitWidth: body.implicitWidth + Theme.pillPadding * 2
   implicitHeight: Theme.moduleHeight
   radius: Theme.moduleRadius
-  color: active ? Qt.rgba(Theme.accent.r, Theme.accent.g, Theme.accent.b, 0.12) : Theme.overlay
+  color: active ? Qt.rgba(Theme.blue.r, Theme.blue.g, Theme.blue.b, 0.12) : Theme.surface0
   border.width: Theme.moduleBorderWidth
-  border.color: Theme.surfaceBorder
+  border.color: Theme.moduleBorder
 
   Item {
     id: body

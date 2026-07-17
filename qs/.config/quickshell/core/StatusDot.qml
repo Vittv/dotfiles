@@ -10,5 +10,5 @@ Rectangle {
   width: 6
   height: 6
   radius: 3
-  color: active ? dotColor : Colors.overlay1
+  color: active ? dotColor : Theme.surface1
 }

@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import "../style/"
+import "../core"
 
 // a reusable item that acts like a Waybar custom JSON module
 Item {
@@ -11,7 +12,7 @@ Item {
   property int intervalMs: 2000
   property string onClickCommand: ""
   property string onClickRightCommand: ""
-  property color textColor: Colors.text
+  property color textColor: Theme.text
   property int fontSize: 11
   property int fontWeight: Font.Bold
   property string fontFamily: ""

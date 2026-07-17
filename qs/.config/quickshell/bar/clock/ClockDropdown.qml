@@ -10,11 +10,12 @@ ClickMenu {
 
   implicitWidth: 500
   implicitHeight: content.implicitHeight + 40
-  backgroundColor: Colors.base
-  radius: 12
+  backgroundColor: Theme.base
+  radius: 6
   centerInWindow: true
   borderWidth: 1
-  borderColor: Colors.palette.surface2
+  gap: 0
+  borderColor: Theme.surface2
 
   SystemClock {
     id: sysClock
@@ -240,7 +241,7 @@ ClickMenu {
           Layout.fillWidth: true
           horizontalAlignment: Text.AlignLeft
           text: Qt.formatTime(root.now, "hh:mm:ss")
-          color: Colors.text
+          color: Theme.text
           font.family: Fonts.display
           font.pixelSize: Theme.fontSizeHeading
           font.weight: 300
@@ -251,7 +252,7 @@ ClickMenu {
           Layout.fillWidth: true
           horizontalAlignment: Text.AlignLeft
           text: Qt.formatDate(root.now, "dddd, MMMM d, yyyy")
-          color: Colors.subtext
+          color: Theme.subtext
           font.family: Fonts.display
           font.pixelSize: Theme.fontSizeNormal
           font.italic: true
@@ -271,7 +272,7 @@ ClickMenu {
     Rectangle {
       Layout.fillHeight: true
       width: 1
-      color: Colors.palette.surface2
+      color: Theme.surface2
     }
 
     // right column: world + upcoming
@@ -302,13 +303,13 @@ ClickMenu {
 
               Rectangle {
                 width: 4; height: 4; radius: 2
-                color: Colors.accent
+                color: Theme.accent
                 opacity: 0.6
               }
 
               Text {
                 text: modelData
-                color: Colors.text
+                color: Theme.text
                 font.family: Fonts.display
                 font.pixelSize: 14
               }
@@ -317,16 +318,16 @@ ClickMenu {
 
               Text {
                 text: worldTimes[modelData] ? worldTimes[modelData].time : "--:--"
-                color: Colors.subtext
+                color: Theme.subtext
                 font.family: Fonts.display
                 font.pixelSize: Theme.fontSizeNormal
-                font.weight: 500
+                font.weight: Theme.weightNormal
               }
             }
 
             Text {
               text: worldTimes[modelData] ? worldTimes[modelData].zone : ""
-              color: Colors.palette
+              color: Theme.subtextDark
               font.family: Fonts.display
               font.pixelSize: 11
               font.italic: true
@@ -348,10 +349,10 @@ ClickMenu {
 
         Text {
           text: root.isBirthdayMode ? "BDAY" : "EVENT"
-          color: Colors.text
+          color: Theme.text
           font.family: Fonts.display
           font.pixelSize: 11
-          font.weight: 600
+          font.weight: Theme.weightSemibold
           font.letterSpacing: 1.2
           MouseArea {
             anchors.fill: parent
@@ -378,7 +379,7 @@ ClickMenu {
 
           Text {
             text: modelData.displayDate
-            color: modelData.type === "birthday" ? Colors.red : Colors.subtext
+            color: modelData.type === "birthday" ? Theme.red : Theme.subtext
             font.family: Fonts.display
             font.pixelSize: 12
           }
@@ -386,7 +387,7 @@ ClickMenu {
           Text {
             Layout.fillWidth: true
             text: modelData.text
-            color: Colors.text
+            color: Theme.text
             font.family: Fonts.display
             font.pixelSize: Theme.fontSizeNormal
             wrapMode: Text.WordWrap
@@ -394,7 +395,7 @@ ClickMenu {
 
           Text {
             text: "×"
-            color: Colors.red
+            color: Theme.red
             font.family: Fonts.display
             font.pixelSize: 14
             MouseArea {
@@ -423,19 +424,19 @@ ClickMenu {
           Layout.fillWidth: true
           Layout.preferredHeight: 30
           radius: 6
-          color: Colors.overlay0
+          color: Theme.surface0
           border.width: 1
-          border.color: Colors.palette.surface2
+          border.color: Theme.surfaceBorder
           clip: true
 
           TextInput {
             anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
             anchors.leftMargin: 8
             text: root.newEventText
-            color: Colors.text
+            color: Theme.text
             font.family: Fonts.display
             font.pixelSize: 14
-            font.weight: 600
+            font.weight: Theme.weightSemibold
             onTextChanged: root.newEventText = text
             onAccepted: root.addItem()
           }
@@ -444,10 +445,10 @@ ClickMenu {
         Text {
           text: "ADD"
           Layout.leftMargin: 8
-          color: Colors.text
+          color: Theme.text
           font.family: Fonts.display
           font.pixelSize: 11
-          font.weight: 600
+          font.weight: Theme.weightSemibold
           font.letterSpacing: 1.2
           MouseArea {
             anchors.fill: parent

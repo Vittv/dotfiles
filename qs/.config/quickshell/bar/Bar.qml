@@ -9,7 +9,7 @@ import "./clock"
 import "./network"
 import "./volume"
 import "./tray"
-import "./logout"
+import "./powermenu"
 import "./spotify"
 import "./workspaces"
 import "./launcher"
@@ -42,7 +42,7 @@ Scope {
           right: parent.right;
         }
         implicitHeight: Theme.barHeight
-        color: Theme.bg
+        color: Theme.base
         border.width: 1
         border.color: Theme.surfaceAlt
 
@@ -62,7 +62,7 @@ Scope {
             anchors.verticalCenter: parent.verticalCenter
             implicitHeight: Theme.pillHeight
             width: leftRow.width + Theme.pillPadding * 2
-            color: Theme.bg
+            color: Theme.base
 
             Row {
               id: leftRow
@@ -131,7 +131,7 @@ Scope {
               anchors.verticalCenter: parent.verticalCenter
             }
 
-            Logout {
+            PowerMenuButton {
               id: logoutModule
               anchors.verticalCenter: parent.verticalCenter
             }
@@ -207,7 +207,7 @@ Scope {
         id: logoutDropdownLoader
         active: false
         sourceComponent: Component {
-          LogoutDropdown { triggerItem: logoutModule }
+          PowerMenu { triggerItem: logoutModule }
         }
         onLoaded: item.open = true
       }

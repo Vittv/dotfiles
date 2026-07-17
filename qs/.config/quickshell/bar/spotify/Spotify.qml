@@ -31,9 +31,9 @@ ModulePill {
         Text {
           id: label
           text: spotifyContent.displayText
-          color: Colors.palette.text
+          color: Theme.text
           font.pixelSize: Theme.fontSizeNormal
-          font.weight: Font.Medium
+          font.weight: Theme.weightNormal
           font.family: Theme.fontFamily
           x: 0
           SequentialAnimation on x {

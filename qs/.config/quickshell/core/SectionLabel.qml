@@ -7,21 +7,13 @@ RowLayout {
 
   required property string text
 
-  spacing: Theme.spacing
-
-  Rectangle {
-    width: 3
-    height: 12
-    radius: 1.5
-    color: Theme.accent
-  }
+  spacing: 0
 
   Text {
     text: root.text
-    color: Theme.textMuted
+    color: Theme.subtext
     font.family: Theme.fontFamily
-    font.pixelSize: Theme.fontSizeSmall
-    font.letterSpacing: 1.2
-    font.weight: 600
+    font.pixelSize: Theme.fontSizeNormal
+    font.weight: Theme.weightNormal
   }
 }

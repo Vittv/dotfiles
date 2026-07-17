@@ -42,7 +42,7 @@ Item {
         Text {
           anchors.centerIn: parent
           text: wsId
-          color: isActive ? Theme.accent : (ws ? Colors.palette.text : Colors.palette.overlay1)
+          color: isActive ? Theme.accent : (ws ? Theme.text : Theme.surface1)
           font { family: Theme.monoFamily; pixelSize: Theme.fontSizeTiny; bold: true }
         }
 

@@ -30,7 +30,7 @@ Singleton {
 
   Process {
     id: checkMudfish
-    command: ["pgrep", "-x", "mudfish"]
+    command: ["pgrep", "-x", "mudrun-headless"]
     stdout: SplitParser {
       onRead: () => { root.mudfishOn = true }
     }

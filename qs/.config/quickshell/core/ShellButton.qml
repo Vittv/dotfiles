@@ -11,8 +11,8 @@ Rectangle {
   implicitWidth: btnLabel.implicitWidth + 18
   implicitHeight: Theme.buttonHeight
   color: btnMouse.containsMouse
-    ? (root.danger ? Theme.danger : Theme.accent)
-    : Theme.surfaceBorder
+    ? (root.danger ? Theme.red : Theme.blue)
+    : Theme.surface2
   radius: Theme.buttonRadius
   opacity: enabled ? 1 : 0.5
 
@@ -23,7 +23,7 @@ Rectangle {
     color: Theme.text
     font.family: Theme.fontFamily
     font.pixelSize: Theme.fontSizeTiny
-    font.weight: 600
+    font.weight: Theme.weightSemibold
   }
 
   MouseArea {

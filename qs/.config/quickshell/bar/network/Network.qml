@@ -24,11 +24,11 @@ ModulePill {
       spacing: Theme.spacingSmall
 
       Text {
-        text: "NET"
+        text: netModule.mudfishOn ? "MUD" : "NET"
         color: Theme.text
         font.family: Theme.fontFamily
         font.pixelSize: 10
-        font.weight: 600
+        font.weight: Theme.weightSemibold
         font.letterSpacing: 1.2
         anchors.verticalCenter: parent.verticalCenter
       }
@@ -39,8 +39,8 @@ ModulePill {
         iconColor: netModule.mudfishOn
         ? Theme.accent
         : netModule.connectionType === "none"
-        ? Theme.danger
-        : Theme.success
+        ? Theme.red
+        : Theme.green
         anchors.verticalCenter: parent.verticalCenter
       }
     }

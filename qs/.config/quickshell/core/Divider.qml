@@ -5,5 +5,5 @@ import "."
 Rectangle {
   Layout.fillWidth: true
   height: 1
-  color: Theme.surfaceBorder
+  color: Theme.surface2
 }

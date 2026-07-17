@@ -12,6 +12,7 @@ DropdownBase {
   property var trayItemMenuHandle: null
 
   implicitWidth: 220
+  gap: 0
   implicitHeight: {
     var h = 0;
     var item = stackView.currentItem;
@@ -19,10 +20,10 @@ DropdownBase {
     return h + 12 + 6;
   }
 
-  backgroundColor: Colors.base
+  backgroundColor: Theme.base
   radius: 6
   borderWidth: 1
-  borderColor: Colors.palette.surface2
+  borderColor: Theme.surface2
 
   HyprlandFocusGrab {
     windows: [root]
@@ -98,23 +99,23 @@ DropdownBase {
           Rectangle {
             anchors.fill: parent
             radius: 4
-            color: itemMouse.containsMouse ? Colors.surface : "transparent"
+            color: itemMouse.containsMouse ? Theme.surface0 : "transparent"
             visible: !isSeparator
           }
 
           Rectangle {
             anchors { left: parent.left; right: parent.right; verticalCenter: parent.verticalCenter }
             height: 1
-            color: Colors.palette.surface2
+            color: Theme.surface2
             visible: isSeparator
           }
 
           Text {
             anchors { left: parent.left; leftMargin: 10; verticalCenter: parent.verticalCenter }
             text: modelData.text || ""
-            color: Colors.text
+            color: Theme.text
             font.family: Fonts.display
-            font.weight: 500
+            font.weight: Theme.weightNormal
             font.pixelSize: 16
             elide: Text.ElideRight
             visible: !isSeparator

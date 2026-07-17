@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import "../style"
 import "../services"
+import "../core"
 
 PopupWindow {
   id: root
@@ -104,10 +105,10 @@ PopupWindow {
   Rectangle {
     id: content
     anchors.fill: parent
-    color: Colors.base
-    radius: 10
-    border.width: 2
-    border.color: Colors.overlay0
+    color: Theme.base
+    radius: 6
+    border.width: 1
+    border.color: Theme.surfaceBorder
 
     opacity: root.open ? 1 : 0
     Behavior on opacity {
@@ -147,7 +148,7 @@ PopupWindow {
             text: "\ue8b6"
             font.family: "Material Symbols Outlined"
             font.pixelSize: 17
-            color: Colors.palette.overlay1
+            color: Theme.surface1
             anchors.verticalCenter: parent.verticalCenter
             font.variableAxes: { "wght": 500, "FILL": 0, "GRAD": 0, "opsz": 24 }
           }
@@ -159,10 +160,10 @@ PopupWindow {
               right: parent.right
               verticalCenter: parent.verticalCenter
             }
-            color: Colors.text
+            color: Theme.text
             font.pixelSize: 20
             font.family: Fonts.display
-            font.weight: 500
+            font.weight: Theme.weightNormal
             clip: true
 
             onTextChanged: {
@@ -201,9 +202,9 @@ PopupWindow {
             }
             visible: searchInput.text.length === 0
             text: "Search..."
-            color: Colors.palette.overlay1
+            color: Theme.surface1
             font.pixelSize: 20
-            font.weight: 500
+            font.weight: Theme.weightNormal
             font.family: Fonts.display
             elide: Text.ElideRight
           }
@@ -212,7 +213,7 @@ PopupWindow {
       Rectangle {
         Layout.fillWidth: true
         Layout.preferredHeight: 1
-        color: Colors.palette.overlay0
+        color: Theme.surface0
       }
       ListView {
         id: resultList
@@ -235,7 +236,7 @@ PopupWindow {
           implicitWidth: ListView.view.width
           implicitHeight: 40
           radius: 6
-          color: (ListView.isCurrentItem || mouse.containsMouse) ? Colors.base : "transparent"
+          color: (ListView.isCurrentItem || mouse.containsMouse) ? Theme.base : "transparent"
 
           RowLayout {
             anchors { fill: parent; leftMargin: 12; rightMargin: 12 }
@@ -251,9 +252,9 @@ PopupWindow {
             Text {
               Layout.fillWidth: true
               text: delegateRoot.modelData.name || ""
-              color: (delegateRoot.ListView.isCurrentItem || mouse.containsMouse) ? Colors.palette.lavender : Colors.text
+              color: (delegateRoot.ListView.isCurrentItem || mouse.containsMouse) ? Theme.lavender : Theme.text
               font.family: Fonts.display
-              font.weight: 500
+              font.weight: Theme.weightNormal
               font.pixelSize: 16
               elide: Text.ElideRight
             }

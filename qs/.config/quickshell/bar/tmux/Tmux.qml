@@ -18,7 +18,7 @@ ModulePill {
     intervalMs: 15000
     onClickCommand: "kitty fish -c t"
 
-    textColor: Colors.palette.text
+    textColor: Theme.text
     fontSize: Theme.fontSizeNormal
     fontWeight: Font.Medium
     fontFamily: Theme.fontFamily

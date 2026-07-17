@@ -3,40 +3,29 @@ import QtQuick.Layouts
 import "../../style"
 import "../../core"
 
-ColumnLayout {
+Item {
   id: root
-  spacing: 4
 
-  property string label: ""
-  property string iconName: "volume_up"
+  property string iconName: ""
   property real value: 0
   property bool muted: false
   property bool percentTabular: false
 
   signal dragged(real value)
-  signal iconClicked()
+  signal toggled()
 
-  Text {
-    visible: root.label.length > 0
-    text: root.label
-    color: Theme.text
-    font.family: Theme.fontFamily
-    font.pixelSize: 15
-    font.weight: 600
-    elide: Text.ElideRight
-    Layout.fillWidth: true
-    Layout.bottomMargin: 8
-  }
+  implicitHeight: 32
 
   RowLayout {
+    anchors.fill: parent
     spacing: 10
-    Layout.fillWidth: true
 
     Rectangle {
+      visible: root.iconName.length > 0
       width: 28
       height: 20
       radius: 4
-      color: iconMouse.containsMouse ? Theme.surface : Theme.overlay
+      color: iconMouse.containsMouse ? Theme.surface1 : Theme.surface0
       border.width: 1
       border.color: Theme.surfaceBorder
 
@@ -44,7 +33,7 @@ ColumnLayout {
         anchors.centerIn: parent
         name: root.iconName
         size: 14
-        iconColor: root.muted ? Theme.danger : Theme.text
+        iconColor: root.muted ? Theme.red : Theme.text
       }
 
       MouseArea {
@@ -52,53 +41,55 @@ ColumnLayout {
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
-        onClicked: root.iconClicked()
+        onClicked: root.toggled()
       }
     }
 
     Item {
-      id: sliderTrack
+      id: sliderArea
       Layout.fillWidth: true
-      Layout.preferredHeight: 16
+      Layout.preferredHeight: 32
 
       Rectangle {
         id: trackBg
         anchors.verticalCenter: parent.verticalCenter
         width: parent.width
-        height: 2
-        radius: height / 2
+        height: 4
         color: Theme.surface
-      }
-
-      Rectangle {
-        anchors.verticalCenter: parent.verticalCenter
-        width: trackBg.width * root.value
-        height: 2
         radius: height / 2
-        color: root.muted ? Theme.danger : Theme.accent
-      }
-
-      Rectangle {
-        width: 12
-        height: 12
-        radius: 6
-        color: root.muted ? Theme.danger : Theme.accent
-        anchors.verticalCenter: parent.verticalCenter
-        x: Math.max(0, Math.min(sliderTrack.width - width, sliderTrack.width * root.value - width / 2))
 
         Rectangle {
-          width: 4
-          height: 4
-          radius: 2
-          color: Colors.palette.crust
+          width: Math.round((root.value) * parent.width)
+          height: parent.height
+          color: root.muted ? Theme.surface1 : Theme.accent
+          radius: parent.radius
+        }
+      }
+
+      Rectangle {
+        width: 14
+        height: 14
+        x: Math.max(0, Math.min(sliderArea.width - width, Math.round(root.value * sliderArea.width) - width / 2))
+        y: sliderArea.height / 2 - height / 2
+        color: root.muted ? Theme.surface1 : Theme.accent
+        radius: height / 2
+
+        Rectangle {
+          width: 8
+          height: 8
           anchors.centerIn: parent
+          color: Theme.base
+          radius: 4
         }
       }
 
       MouseArea {
+        id: sliderMouse
         anchors.fill: parent
-        onPressed: (mouse) => root.dragged(mouse.x / sliderTrack.width)
-        onPositionChanged: (mouse) => { if (pressed) root.dragged(mouse.x / sliderTrack.width) }
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+        onPressed: (mouse) => root.dragged(Math.max(0, Math.min(1, mouse.x / sliderArea.width)))
+        onPositionChanged: (mouse) => { if (pressed) root.dragged(Math.max(0, Math.min(1, mouse.x / sliderArea.width))) }
       }
     }
 
@@ -107,10 +98,11 @@ ColumnLayout {
       color: Theme.text
       font.family: Theme.fontFamily
       font.pixelSize: Theme.fontSizeNormal
-      font.weight: 600
+      font.bold: true
       font.features: root.percentTabular ? { "tnum": 1 } : {}
-      Layout.preferredWidth: 38
+      Layout.preferredWidth: 42
       horizontalAlignment: Text.AlignRight
+      verticalAlignment: Text.AlignVCenter
     }
   }
 }
