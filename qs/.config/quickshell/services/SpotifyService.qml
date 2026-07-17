@@ -43,15 +43,15 @@ Singleton {
   Process {
     id: initProcess
     command: ["bash", "-c",
-      "player=$(playerctl -l 2>/dev/null | while read p; do " +
-      "  info=$(playerctl -p \"$p\" metadata xesam:url mpris:trackid 2>/dev/null); " +
-      "  echo \"$info\" | grep -qi spotify && echo \"$p\" && break; " +
-      "done); " +
-      "[ -z \"$player\" ] && exit 1; " +
-      "echo \"$player\"; " +
-      "playerctl -p \"$player\" status; " +
-      "playerctl -p \"$player\" metadata --format '{{ title }} - {{ artist }}'; " +
-      "playerctl -p \"$player\" volume"]
+    "player=$(playerctl -l 2>/dev/null | while read p; do " +
+    "  info=$(playerctl -p \"$p\" metadata xesam:url mpris:trackid 2>/dev/null); " +
+    "  echo \"$info\" | grep -qi spotify && echo \"$p\" && break; " +
+    "done); " +
+    "[ -z \"$player\" ] && exit 1; " +
+    "echo \"$player\"; " +
+    "playerctl -p \"$player\" status; " +
+    "playerctl -p \"$player\" metadata --format '{{ title }} - {{ artist }}'; " +
+    "playerctl -p \"$player\" volume"]
     running: true
     stdout: SplitParser {
       property int lineNum: 0
@@ -68,7 +68,7 @@ Singleton {
   Process {
     id: followMeta
     command: ["playerctl", "-a", "--follow", "metadata",
-      "--format", "{{playerName}}\t{{status}}\t{{xesam:url}}\t{{title}} - {{artist}}"]
+    "--format", "{{playerName}}\t{{status}}\t{{xesam:url}}\t{{title}} - {{artist}}"]
     running: true
     stdout: SplitParser {
       onRead: (line) => {
@@ -92,7 +92,7 @@ Singleton {
   Process {
     id: followVol
     command: ["playerctl", "-a", "--follow", "volume",
-      "--format", "{{playerName}}\t{{volume}}"]
+    "--format", "{{playerName}}\t{{volume}}"]
     running: true
     stdout: SplitParser {
       onRead: (line) => {

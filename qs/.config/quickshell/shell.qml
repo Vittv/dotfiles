@@ -2,12 +2,7 @@
 //@ pragma IconTheme Nordzy-pink-dark
 import QtQuick
 import Quickshell
-import qs.components.Bar
-import "style"
-import "./services/"
+import qs.bar
 
 Bar {
-  Component.onCompleted: {
-    Qt.application.font.family = "Your Font Name"
-  }
 }
