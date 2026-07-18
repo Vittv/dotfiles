@@ -35,9 +35,6 @@ Singleton {
       onRead: () => { root.mudfishOn = true }
     }
     onExited: (code) => { root.mudfishOn = (code === 0) }
-    onRunningChanged: {
-      if (running) root.mudfishOn = false
-    }
   }
 
   Process {

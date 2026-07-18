@@ -7,6 +7,7 @@ import "../style"
 import "../core"
 import "./clock"
 import "./network"
+import "./bluetooth"
 import "./volume"
 import "./tray"
 import "./powermenu"
@@ -121,6 +122,11 @@ Scope {
               }
             }
 
+            Bluetooth {
+              id: btModule
+              anchors.verticalCenter: parent.verticalCenter
+            }
+
             Network {
               id: netModule
               anchors.verticalCenter: parent.verticalCenter
@@ -185,6 +191,21 @@ Scope {
         target: netModule
         function onClicked() {
           if (!networkDropdownLoader.active) networkDropdownLoader.active = true
+        }
+      }
+
+      Loader {
+        id: bluetoothDropdownLoader
+        active: false
+        sourceComponent: Component {
+          BluetoothDropdown { triggerItem: btModule }
+        }
+        onLoaded: item.open = true
+      }
+      Connections {
+        target: btModule
+        function onClicked() {
+          if (!bluetoothDropdownLoader.active) bluetoothDropdownLoader.active = true
         }
       }
 

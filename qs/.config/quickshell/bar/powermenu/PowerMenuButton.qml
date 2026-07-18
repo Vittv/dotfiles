@@ -18,7 +18,7 @@ ModulePill {
       id: icon
       name: "power"
       size: 12
-      iconColor: Theme.text
+      iconColor: Theme.red
     }
 
     MouseArea {

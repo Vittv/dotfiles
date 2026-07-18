@@ -36,10 +36,12 @@ Text {
     "sleep":         "\uf037",
     "hibernate":     "\uef44",
     "restart":       "\ue5d5",
-    "command":       "\ueae7"
+    "command":       "\ueae7",
+    "network":       "󰤨",
+    "network_off":   "󰤭"
   })
 
-  readonly property var _nerdIcons: (["arch"])
+  readonly property var _nerdIcons: (["arch", "network", "network_off"])
 
   text: _glyphs[root.name] || "?"
   font.family: root.name in _nerdIcons ? "FiraCode Nerd Font Mono" : "Material Icons"

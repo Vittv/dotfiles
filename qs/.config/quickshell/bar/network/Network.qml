@@ -21,24 +21,22 @@ ModulePill {
 
     Row {
       id: row
-      spacing: Theme.spacingSmall
+      spacing: Theme.spacingTight
 
       Text {
         text: netModule.mudfishOn ? "MUD" : "NET"
         color: Theme.text
-        font.family: Theme.fontFamily
-        font.pixelSize: 10
+        font.family: Theme.monoFamily
+        font.pixelSize: 12
         font.weight: Theme.weightSemibold
         font.letterSpacing: 1.2
         anchors.verticalCenter: parent.verticalCenter
       }
 
       Icon {
-        name: netModule.connectionType === "none" ? "wifi" : netModule.connectionType
-        size: 14
-        iconColor: netModule.mudfishOn
-        ? Theme.accent
-        : netModule.connectionType === "none"
+        name: netModule.connectionType === "none" ? "network_off" : "network"
+        size: 8
+        iconColor: netModule.connectionType === "none"
         ? Theme.red
         : Theme.green
         anchors.verticalCenter: parent.verticalCenter

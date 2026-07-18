@@ -9,7 +9,7 @@ ClickMenu {
   triggerItem: netModule
 
   implicitWidth: 320
-  implicitHeight: 480
+  implicitHeight: 540
   backgroundColor: Theme.base
   radius: 10
   borderWidth: 1
@@ -202,7 +202,7 @@ ClickMenu {
         text: "Network"
         color: Theme.text
         font.family: Theme.fontFamily
-        font.pixelSize: Theme.fontSizeLarge
+        font.pixelSize: 16
         font.weight: Theme.weightBold
         elide: Text.ElideRight
       }
@@ -210,7 +210,7 @@ ClickMenu {
       Rectangle {
         visible: !root.busy
         width: scanText.implicitWidth + 14
-        height: 24
+        height: 28
         radius: 4
         color: scanMouse.containsMouse ? Theme.surfaceBorder : Theme.surface0
         border.width: 1
@@ -222,7 +222,7 @@ ClickMenu {
           text: "Scan"
           color: Theme.text
           font.family: Theme.fontFamily
-          font.pixelSize: Theme.fontSizeSmall
+          font.pixelSize: 13
           font.weight: Theme.weightNormal
         }
 
@@ -243,7 +243,7 @@ ClickMenu {
       text: root.message
       color: Theme.subtext
       font.family: Theme.fontFamily
-      font.pixelSize: Theme.fontSizeSmall
+      font.pixelSize: 13
       elide: Text.ElideRight
     }
 
@@ -257,7 +257,7 @@ ClickMenu {
         delegate: Rectangle {
           required property var modelData
           Layout.fillWidth: true
-          Layout.preferredHeight: 36
+          Layout.preferredHeight: 42
           radius: 6
           color: Theme.surface0
 
@@ -276,7 +276,7 @@ ClickMenu {
                 text: modelData.name
                 color: Theme.text
                 font.family: Theme.fontFamily
-                font.pixelSize: Theme.fontSizeNormal
+                font.pixelSize: 14
                 font.weight: Theme.weightNormal
                 elide: Text.ElideRight
               }
@@ -286,14 +286,14 @@ ClickMenu {
                 text: modelData.type + " · " + modelData.device
                 color: Theme.subtext
                 font.family: Theme.fontFamily
-                font.pixelSize: Theme.fontSizeTiny
+                font.pixelSize: 12
                 elide: Text.ElideRight
               }
             }
 
             Rectangle {
               width: disconnectText.implicitWidth + 14
-              height: 22
+              height: 26
               radius: 4
               color: disconnectMouse.containsMouse ? Theme.red : Theme.surface0
               border.width: 1
@@ -305,7 +305,7 @@ ClickMenu {
                 text: "Disconnect"
                 color: disconnectMouse.containsMouse ? Theme.base : Theme.text
                 font.family: Theme.fontFamily
-                font.pixelSize: Theme.fontSizeTiny
+                font.pixelSize: 12
                 font.weight: Theme.weightNormal
               }
 
@@ -326,7 +326,7 @@ ClickMenu {
         text: "No active connections"
         color: Theme.subtextDark
         font.family: Theme.fontFamily
-        font.pixelSize: Theme.fontSizeSmall
+        font.pixelSize: 13
         font.italic: true
       }
     }
@@ -342,7 +342,7 @@ ClickMenu {
           required property var modelData
           required property int index
           Layout.fillWidth: true
-          Layout.preferredHeight: 36
+          Layout.preferredHeight: 42
           radius: 6
           color: root.selectedWifiIndex === index ? Qt.rgba(Theme.accent.r, Theme.accent.g, Theme.accent.b, 0.12) : (wifiRowMouse.containsMouse ? Theme.surface0 : "transparent")
 
@@ -361,7 +361,7 @@ ClickMenu {
                 text: modelData.ssid
                 color: Theme.text
                 font.family: Theme.fontFamily
-                font.pixelSize: Theme.fontSizeNormal
+                font.pixelSize: 14
                 font.weight: Theme.weightNormal
                 elide: Text.ElideRight
               }
@@ -371,14 +371,14 @@ ClickMenu {
                 text: (modelData.security || "Open") + " · " + modelData.signal + "%"
                 color: Theme.subtext
                 font.family: Theme.fontFamily
-                font.pixelSize: Theme.fontSizeTiny
+                font.pixelSize: 12
                 elide: Text.ElideRight
               }
             }
 
             Rectangle {
               width: wifiActionText.implicitWidth + 14
-              height: 22
+              height: 26
               radius: 4
               color: wifiActionMouse.containsMouse && !root.busy ? Theme.accent : Theme.surface0
               border.width: 1
@@ -391,7 +391,7 @@ ClickMenu {
                 text: modelData.active ? "Active" : "Connect"
                 color: wifiActionMouse.containsMouse && !root.busy ? Theme.base : Theme.text
                 font.family: Theme.fontFamily
-                font.pixelSize: Theme.fontSizeTiny
+                font.pixelSize: 12
                 font.weight: Theme.weightNormal
               }
 
@@ -420,7 +420,7 @@ ClickMenu {
         text: "No Wi-Fi networks found"
         color: Theme.subtextDark
         font.family: Theme.fontFamily
-        font.pixelSize: Theme.fontSizeSmall
+        font.pixelSize: 13
         font.italic: true
       }
     }
@@ -428,7 +428,7 @@ ClickMenu {
     // password input
     Rectangle {
       Layout.fillWidth: true
-      Layout.preferredHeight: 36
+      Layout.preferredHeight: 42
       visible: root.selectedWifiNetwork() !== null && root.selectedWifiNetwork().secured
       radius: 6
       color: Theme.surface0
@@ -450,7 +450,7 @@ ClickMenu {
             echoMode: TextInput.Password
             color: Theme.text
             font.family: Theme.fontFamily
-            font.pixelSize: Theme.fontSizeNormal
+            font.pixelSize: 14
             clip: true
             verticalAlignment: TextInput.AlignVCenter
             enabled: !root.busy
@@ -466,13 +466,13 @@ ClickMenu {
             text: "Password"
             color: Theme.subtext
             font.family: Theme.fontFamily
-            font.pixelSize: Theme.fontSizeNormal
+            font.pixelSize: 14
           }
         }
 
         Rectangle {
           width: connectText.implicitWidth + 14
-          height: 22
+          height: 26
           radius: 4
           color: connectMouse.containsMouse && !root.busy ? Theme.accent : Theme.surface0
           border.width: 1
@@ -484,7 +484,7 @@ ClickMenu {
             text: "Connect"
             color: connectMouse.containsMouse && !root.busy ? Theme.base : Theme.text
             font.family: Theme.fontFamily
-            font.pixelSize: Theme.fontSizeTiny
+            font.pixelSize: 12
             font.weight: Theme.weightNormal
           }
 
@@ -510,7 +510,7 @@ ClickMenu {
         delegate: Rectangle {
           required property var modelData
           Layout.fillWidth: true
-          Layout.preferredHeight: 36
+          Layout.preferredHeight: 42
           radius: 6
           color: savedMouse.containsMouse ? Theme.surface0 : "transparent"
 
@@ -525,14 +525,14 @@ ClickMenu {
               text: modelData.name
               color: Theme.text
               font.family: Theme.fontFamily
-              font.pixelSize: Theme.fontSizeNormal
+              font.pixelSize: 14
               font.weight: Theme.weightNormal
               elide: Text.ElideRight
             }
 
             Rectangle {
               width: savedActionText.implicitWidth + 14
-              height: 22
+              height: 26
               radius: 4
               color: savedActionMouse.containsMouse ? Theme.accent : Theme.surface0
               border.width: 1
@@ -544,7 +544,7 @@ ClickMenu {
                 text: "Connect"
                 color: savedActionMouse.containsMouse ? Theme.base : Theme.text
                 font.family: Theme.fontFamily
-                font.pixelSize: Theme.fontSizeTiny
+                font.pixelSize: 12
                 font.weight: Theme.weightNormal
               }
 
@@ -572,7 +572,7 @@ ClickMenu {
         text: "No saved connections"
         color: Theme.subtextDark
         font.family: Theme.fontFamily
-        font.pixelSize: Theme.fontSizeSmall
+        font.pixelSize: 13
         font.italic: true
       }
     }
@@ -580,7 +580,7 @@ ClickMenu {
     // edit connections
     Rectangle {
       Layout.fillWidth: true
-      Layout.preferredHeight: 30
+      Layout.preferredHeight: 34
       visible: root.editorAvailable
       radius: 6
       color: editorMouse.containsMouse ? Theme.surface0 : "transparent"
@@ -592,7 +592,7 @@ ClickMenu {
         text: "Edit Connections"
         color: Theme.subtext
         font.family: Theme.fontFamily
-        font.pixelSize: Theme.fontSizeSmall
+        font.pixelSize: 13
         font.weight: Theme.weightNormal
       }
 
@@ -614,7 +614,7 @@ ClickMenu {
 
     Rectangle {
       Layout.fillWidth: true
-      Layout.preferredHeight: 36
+      Layout.preferredHeight: 42
       radius: 6
       color: Theme.surface0
 
@@ -629,13 +629,13 @@ ClickMenu {
           text: "Mudfish"
           color: Theme.text
           font.family: Theme.fontFamily
-          font.pixelSize: Theme.fontSizeNormal
+          font.pixelSize: 14
           font.weight: Theme.weightNormal
         }
 
         Rectangle {
           width: mudfishActionText.implicitWidth + 14
-          height: 22
+          height: 26
           radius: 4
           color: mudfishBtnMouse.containsMouse ? (root.mudfishOn ? Theme.red : Theme.accent) : Theme.surface0
           border.width: 1
@@ -647,7 +647,7 @@ ClickMenu {
             text: root.mudfishOn ? "Stop" : "Start"
             color: mudfishBtnMouse.containsMouse ? Theme.base : Theme.text
             font.family: Theme.fontFamily
-            font.pixelSize: Theme.fontSizeTiny
+            font.pixelSize: 12
             font.weight: Theme.weightNormal
           }
 
@@ -675,7 +675,7 @@ ClickMenu {
       text: root.mudfishOn ? "VPN is active" : "VPN is inactive"
       color: root.mudfishOn ? Theme.subtext : Theme.subtextDark
       font.family: Theme.fontFamily
-      font.pixelSize: Theme.fontSizeTiny
+      font.pixelSize: 12
     }
   }
 }
