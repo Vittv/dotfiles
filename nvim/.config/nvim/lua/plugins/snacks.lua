@@ -46,8 +46,7 @@ return {
     },
     terminal = {
       win = {
-        position = "float",
-        border = "rounded",
+        position = "bottom",
         interactive = true,
       }
     }
