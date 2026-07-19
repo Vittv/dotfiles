@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+FORMAT="${1:-text}"
+
 player=""
 if playerctl -p spotify status &>/dev/null; then
   player="spotify"
@@ -15,7 +17,7 @@ else
 fi
 
 if [[ -z "$player" ]]; then
-  echo '{"text":""}'
+  [[ "$FORMAT" == "json" ]] && echo '{"text":""}' || echo ""
   exit 1
 fi
 
@@ -38,11 +40,14 @@ VISIBLE_LEN=26
 STATE_FILE="/tmp/waybar-spotify-scroll"
 
 if [[ ${#text} -le $VISIBLE_LEN ]]; then
-  echo "{\"text\":\"$icon $text\",\"tooltip\":\"$vol $status: $info\"}"
+  if [[ "$FORMAT" == "json" ]]; then
+    echo "{\"text\":\"$icon $text\",\"tooltip\":\"$vol $status: $info\"}"
+  else
+    echo "$icon $text"
+  fi
   exit 0
 fi
 
-# Bounce scroll: store "pos dir" in state file
 pos=0
 dir=1
 if [[ -f "$STATE_FILE" ]]; then
@@ -54,7 +59,6 @@ len=${#padded}
 
 pos=$(( pos + dir ))
 
-# Reverse at edges
 if [[ $pos -le 0 ]]; then
   pos=0
   dir=1
@@ -66,4 +70,9 @@ fi
 echo "$pos $dir" > "$STATE_FILE"
 
 display="${padded:$pos:$VISIBLE_LEN}"
-echo "{\"text\":\"$icon $display\",\"tooltip\":\"$vol $status: $info\"}"
+
+if [[ "$FORMAT" == "json" ]]; then
+  echo "{\"text\":\"$icon $display\",\"tooltip\":\"$vol $status: $info\"}"
+else
+  echo "$icon $display"
+fi
