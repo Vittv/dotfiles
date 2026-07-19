@@ -5,7 +5,7 @@
 hl.on("hyprland.start", function()
   hl.exec_cmd("waybar")
   hl.exec_cmd("dunst")
-  hl.exec_cmd("hyprpaper")
+  hl.exec_cmd("bash -c 'swaybg -i \"$(cat ~/.cache/wallpaper-switcher/current)\" -m fill'")
   hl.exec_cmd("hyprsunset")
   hl.exec_cmd("/usr/lib/hyprpolkitagent/hyprpolkitagent")
   hl.exec_cmd("/usr/lib/xdg-desktop-portal-hyprland")

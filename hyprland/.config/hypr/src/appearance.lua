@@ -14,7 +14,7 @@ hl.config({
     allow_tearing    = false,
     layout           = "dwindle",
     col = {
-      active_border   = Colors.text,
+      active_border   = Colors.lavender,
       -- inactive_border = "rgba(595959aa)",
       inactive_border = "rgba(999999aa)",
       -- inactive_border = "0x00000000",

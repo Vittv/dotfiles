@@ -4,5 +4,5 @@
 
 Terminal    = "kitty"
 FileManager = "kitty yazi"
-Menu        = "qs ipc call launcher toggle"
+Menu        = "rofi -show drun"
 Browser     = "zen-browser"

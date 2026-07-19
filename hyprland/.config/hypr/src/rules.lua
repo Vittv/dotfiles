@@ -24,6 +24,20 @@ hl.window_rule({
   no_focus   = true,
 })
 
+-- disable gaps and borders when there is only one tiled window
+-- hl.workspace_rule({
+--   workspace = "w[tv1]",
+--   gaps_out = 0,
+--   gaps_in = 0,
+--   border_size = 1
+-- })
+
+-- ensure floating windows retain a border for clear visibility
+hl.window_rule({
+  match = { float = 1 },
+  border_size = 2
+})
+
 -- hyprland-run float placement
 hl.window_rule({
   name  = "move-hyprland-run",
