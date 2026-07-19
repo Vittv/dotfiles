@@ -1,14 +1,14 @@
 {
   "layer": "top",
   "position": "top",
-  "spacing": 10,
+  "spacing": 4,
     // "margin-top": 4,
     // "margin-left": 4,
     // "margin-right": 4,
     "reload_style_on_change": true,
-    "modules-left": ["custom/microphone", "hyprland/workspaces", "custom/tmux", "custom/devserver", "custom/spotify"],
+    "modules-left": ["custom/menu", "hyprland/workspaces", "custom/microphone", "custom/tmux", "custom/devserver", "custom/spotify"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "group/temps", "custom/mudfish", "network", "pulseaudio", "custom/power"],
+    "modules-right": ["tray", "custom/separator", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/inbox", "custom/power"],
 
     "custom/palette": {
       "format": "",
@@ -17,7 +17,7 @@
 
     "custom/microphone": {
       "format": "{}",
-      "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
+      "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"󱔀\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
       "on-click": "pactl set-source-mute alsa_input.pci-0000_05_00.6.pro-input-0 toggle && pkill -RTMIN+8 waybar",
       "return-type": "json",
       "interval": "once",
@@ -32,7 +32,7 @@
         "active": "󰝤"
       },
       "on-click": "activate",
-      "ignore-hidden": false,
+      "ignore-hidden": true,
       "all-outputs": false,
       "active-only": true,
       "cursor": true
@@ -80,16 +80,16 @@
 
     "group/temps": {
       "orientation": "inherit",
-      "drawer": {
-        "transition-duration": 300,
-        "children-class": "hidden",
-        "transition-left-to-right": false
-      },
-      "modules": ["custom/drawer-icon", "custom/cpu-temp", "custom/gpu-temp"]
+      // "drawer": {
+      //   "transition-duration": 300,
+      //   "children-class": "hidden",
+      //   "transition-left-to-right": false
+      // },
+      "modules": ["custom/cpu-temp", "custom/temp-sep",  "custom/gpu-temp"]
     },
 
-    "custom/drawer-icon": {
-      "format": "",
+    "custom/temp-sep": {
+      "format": "•",
       "tooltip": false
     },
 
@@ -113,8 +113,8 @@
 
     "bluetooth": {
       "format": "󰂯",
-      "format-disabled": "󰂲",
-      "format-connected": "󰂱",
+      // "format-disabled": "󰂲",
+      // "format-connected": "󰂱",
       "tooltip-format": "Bluetooth: {status}",
       "tooltip-format-connected": "Connected to {device_alias}",
       "on-click": "blueman-manager"
@@ -123,8 +123,8 @@
     "network": {
       "format-wifi": "󰤨",
       "format-ethernet": "",
-      "format-linked": "󰈂 rip",
-      "format-disconnected": "󰤮 dc",
+      "format-linked": "linked",
+      "format-disconnected": "disconnected",
       "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
       "tooltip-format-ethernet": "Connected {ipaddr}/{cidr} ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
       "tooltip-format-disconnected": "Disconnected",
@@ -133,7 +133,7 @@
 
     "pulseaudio": {
       "format": "{icon}",
-      "format-muted": "",
+      "format-muted": "muted",
       "format-icons": {
         "default": ["", "", ""]
       },
@@ -154,23 +154,22 @@
           "today": "<span color='#f3be7c'>{}</span>"
         }
       },
-      "cursor": "true",
       "on-click": "gnome-calendar"
     },  
 
     "custom/power": {
-      "format": "⏼",
+      "format": "",
       "on-click": "~/.local/bin/powermenu.sh",
       "tooltip-format": "Power Menu"
     },
 
     "custom/spotify": {
       "format": "{}",
-      "max-length": 26,
+      "min-length": 22,
       "return-type": "json",
       "interval": 1,
       "escape": false,
-      "exec": "~/.local/bin/spotify.sh",
+      "exec": "~/.local/bin/spotify.sh json",
       "exec-if": "~/.local/bin/spotify-detect.sh",
       "on-click": "~/.local/bin/spotify-ctl.sh next",
       "on-click-right": "~/.local/bin/spotify-ctl.sh previous",
@@ -183,14 +182,14 @@
       "format": "|"
     },
 
+    "custom/menu": {
+      "format": "󰘳",
+      "on-click": "rofi -show drun"
+    },
+
     "custom/inbox": {
       "format": "󰂚",
-      "return-type": "json",
-      "exec-if": "which swaync-client",
-      "exec": "swaync-client -swb",
-      "on-click": "swaync-client -t -sw",
-      "on-click-right": "swaync-client -d -sw",
-      "on-click-middle": "swaync-client -C",
+      "on-click": "thunderbird",
       "tooltip-format": "Notifications",
       "escape": true
     }

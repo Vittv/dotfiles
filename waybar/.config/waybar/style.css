@@ -1,8 +1,8 @@
 @import "../colors/schemes/vague/colors.css";
 
 * {
-  font-size: 12px;
-  font-family: "JetBrainsMono Nerd Font Propo";
+  font-size: 13px;
+  font-family: "SF Pro Display";
   font-weight: 500;
 }
 
@@ -13,6 +13,7 @@ window#waybar {
   /* border-radius: 10px; */
   /* background-color: transparent; */
   /* background: transparent; */
+  /* border: 1px solid @overlay0; */
 }
 
 /* .modules-left, */
@@ -24,7 +25,21 @@ window#waybar {
 /* border: 2px solid alpha(@surface0, 0.40); */
 /* } */
 
-#custom-menu,
+.modules-left,
+.modules-right {
+  margin: 0 8px;
+}
+
+#custom-menu {
+  font-family: "FiraCode Nerd Font Propo";
+  font-size: 12px;
+  margin: 4px 0;
+  padding: 0 6px;
+  border-radius: 4px;
+  color: @text;
+  background-color: @overlay0;
+}
+
 #custom-files,
 #custom-work,
 #custom-tasks,
@@ -37,7 +52,6 @@ window#waybar {
 }
 
 #window label:hover,
-#custom-menu:hover,
 #custom-files:hover,
 #custom-work:hover,
 #custom-tasks:hover {
@@ -46,31 +60,27 @@ window#waybar {
 
 #workspaces {
   margin: 0px 0px;
-  /* margin-left: 14px; */
-  padding: 0 0px;
-}
-
-/* #custom-microphone { */
-/*   margin-left: 14px; */
-/* } */
-
-#workspaces button label {
-  font-family: "FiraCode Nerd Font Propo";
-  font-weight: 700;
-  font-size: 13px;
-  padding: 0 0px;
-  color: @overlay2;
-  margin: 0px 0px;
+  padding: 0 2px;
 }
 
 #workspaces button {
   margin: 0px 0px;
-  padding: 2px 0px;
-  border-radius: 0;
+  padding: 0px 0px;
+  border-radius: 4px;
+}
+
+#workspaces button label {
+  font-family: "FiraCode Nerd Font Propo";
+  font-weight: 700;
+  font-size: 12px;
+  padding: 0 0px;
+  color: @overlay2;
+  margin: 0px 0px;
+  margin: 4px 0;
 }
 
 #workspaces button.active label {
-  color: @text;
+  color: @sapphire;
   padding: 0 0px;
   border-radius: 4px;
 }
@@ -87,7 +97,7 @@ window#waybar {
 #clock,
 #custom-power,
 #tray {
-  font-weight: 500;
+  font-weight: 700;
   transition: all 0.3s ease;
   padding: 0 0;
   margin: 0px 2px;
@@ -103,6 +113,11 @@ window#waybar {
 #custom-inbox,
 #custom-power {
   padding: 0 0px;
+  margin: 4px 0;
+  padding: 0 4px;
+  border-radius: 4px;
+  /* background-color: @overlay0; */
+  min-width: 12px;
 }
 
 #custom-microphone:hover,
@@ -118,39 +133,38 @@ window#waybar {
 }
 
 #custom-spotify {
-  font-family: "SF Compact Display", "JetBrainsMono Nerd Font Propo";
+  font-family: "SF Compact Display", "FiraCode Nerd Font Propo";
   font-size: 13px;
   font-weight: 700;
   color: @lavender;
+  border-radius: 6px;
+  margin: 4px 0;
+  padding: 0 4px;
   transition: all 0.3s ease;
 }
 
 #custom-spotify:hover {
-  color: shade(@lavender, 1.2);
-}
-
-#bluetooth {
-  color: @sky;
-  font-size: 11px;
-}
-
-#custom-power {
-  color: @red;
-  font-weight: 700;
-  margin-right: 14px;
+  color: shade(@lavender, 1.1);
 }
 
 #pulseaudio {
-  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  font-family: "JetBrainsMono Nerd Font Propo";
   color: @yellow;
 }
 
+#custom-power {
+  font-family: "FiraCode Nerd Font Propo";
+  /* color: @red; */
+  background-color: @overlay0;
+  font-weight: 700;
+}
+
 #custom-microphone {
-  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
-  color: @text;
-  font-size: 11px;
-  /* margin-left: 6px; */
-  margin-left: 14px;
+  font-family: "FiraCode Nerd Font Propo";
+  color: @overlay2;
+  font-size: 12px;
+  padding: 0 4px;
+  margin-right: 6px;
 }
 
 #custom-microphone:hover {
@@ -162,7 +176,14 @@ window#waybar {
 }
 
 #network {
+  font-family: "JetBrainsMono Nerd Font Propo";
   color: @green;
+}
+
+#bluetooth {
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-size: 14px;
+  color: @blue;
 }
 
 #custom-inbox {
@@ -197,8 +218,8 @@ tooltip label {
 #clock {
   font-family: "SF Compact Display";
   color: @text;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 13px;
 }
 
 #clock:hover {
@@ -206,8 +227,9 @@ tooltip label {
 }
 
 #custom-mudfish {
-  font-family: "SF Pro Display", "JetBrainsMono Nerd Font Propo";
+  font-family: "SF Compact Display", "JetBrainsMono Nerd Font Propo";
   font-weight: 700;
+  font-size: 12px;
 }
 
 #custom-mudfish.on {
@@ -215,7 +237,7 @@ tooltip label {
 }
 
 #custom-mudfish.off {
-  color: @blue;
+  color: @overlay1;
 }
 
 #custom-mudfish.on:hover {
@@ -228,16 +250,20 @@ tooltip label {
 
 #custom-cpu-temp {
   font-family: "FiraCode Nerd Font Propo";
-  color: @lavender;
   font-weight: 700;
-  margin-right: 6px;
+  font-size: 12px;
+}
+
+#custom-temp-sep {
+  color: @text;
+  font-weight: 700;
+  margin: 0 4px;
 }
 
 #custom-gpu-temp {
   font-family: "FiraCode Nerd Font Propo";
-  color: @mauve;
   font-weight: 700;
-  margin-right: 8px;
+  font-size: 12px;
 }
 
 #custom-power:hover {
@@ -256,6 +282,9 @@ tooltip label {
   font-weight: 700;
   font-size: 13px;
   transition: color 0.3s ease;
+  /* background-color: @overlay0; */
+  /* border-radius: 6px; */
+  /* margin: 4px 0; */
 }
 
 #custom-tmux {
@@ -273,13 +302,5 @@ tooltip label {
 }
 
 #custom-devserver:hover {
-  color: @lavender;
-}
-
-#custom-drawer-icon {
-  color: @overlay2;
-}
-
-#custom-drawer-icon:hover {
   color: @lavender;
 }
