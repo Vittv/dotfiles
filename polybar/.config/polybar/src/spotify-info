@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+playerctl -p spotify metadata --format '{{ title }} - {{ artist }}' 2>/dev/null

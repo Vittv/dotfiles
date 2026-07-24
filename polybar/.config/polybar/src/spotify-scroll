@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+SCROLL_LEN=30
+DELAY=0.3
+
+prev=""
+while true; do
+  line=$(playerctl -p spotify metadata --format '{{ title }} — {{ artist }} ' 2>/dev/null)
+  if [ -z "$line" ]; then
+    printf "%${SCROLL_LEN}s\n" ""
+    sleep $DELAY
+    continue
+  fi
+  [ "$line" != "$prev" ] && buf="|  $line" && prev="$line"
+  full="$buf   $buf"
+  printf "%s\n" "${full:0:$SCROLL_LEN}"
+  buf="${buf:1}${buf:0:1}"
+  sleep $DELAY
+done
