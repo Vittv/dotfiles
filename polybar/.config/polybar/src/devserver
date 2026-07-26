@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+servers=''
+ss -tlnp 2>/dev/null | grep -q ':5173 ' && servers="vite:5173"
+ss -tlnp 2>/dev/null | grep -q ':4173 ' && servers="${servers:+$servers, }vite:4173"
+ss -tlnp 2>/dev/null | grep -q ':8080 ' && servers="${servers:+$servers, }webpack:8080"
+ss -tlnp 2>/dev/null | grep -q ':3000 ' && servers="${servers:+$servers, }dev:3000"
+ss -tlnp 2>/dev/null | grep -q ':8081 ' && servers="${servers:+$servers, }dev:8081"
+[ -n "$servers" ] && echo "$servers"

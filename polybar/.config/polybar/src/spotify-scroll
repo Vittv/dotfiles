@@ -10,7 +10,7 @@ while true; do
     sleep $DELAY
     continue
   fi
-  [ "$line" != "$prev" ] && buf="|  $line" && prev="$line"
+  [ "$line" != "$prev" ] && buf="| $line" && prev="$line"
   full="$buf   $buf"
   printf "%s\n" "${full:0:$SCROLL_LEN}"
   buf="${buf:1}${buf:0:1}"
