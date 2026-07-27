@@ -72,7 +72,7 @@ window#waybar {
 #workspaces button label {
   font-family: "FiraCode Nerd Font Propo";
   font-weight: 700;
-  font-size: 12px;
+  font-size: 13px;
   padding: 0 0px;
   color: @overlay2;
   margin: 0px 0px;
@@ -81,8 +81,10 @@ window#waybar {
 
 #workspaces button.active label {
   color: @text;
-  padding: 0 0px;
-  border-radius: 4px;
+}
+
+#workspaces button.urgent label {
+  color: @maroon;
 }
 
 #custom-inbox,
@@ -141,6 +143,7 @@ window#waybar {
   margin: 4px 0;
   padding: 0 4px;
   transition: all 0.3s ease;
+  min-width: 200px;
 }
 
 #custom-spotify:hover {
@@ -155,16 +158,16 @@ window#waybar {
 #custom-power {
   font-family: "FiraCode Nerd Font Propo";
   /* color: @red; */
-  background-color: @overlay0;
+  /* background-color: @overlay0; */
   font-weight: 700;
 }
 
 #custom-microphone {
   font-family: "FiraCode Nerd Font Propo";
-  color: @overlay2;
+  color: @text;
   font-size: 10px;
   padding: 0 4px;
-  margin-right: 6px;
+  /* margin-right: 6px; */
 }
 
 #custom-microphone:hover {
@@ -216,7 +219,7 @@ tooltip label {
 }
 
 #clock {
-  font-family: "SF Compact Display";
+  font-family: "SF Pro Display";
   color: @text;
   font-weight: 700;
   font-size: 13px;
@@ -284,7 +287,7 @@ tooltip label {
   transition: color 0.3s ease;
   /* background-color: @overlay0; */
   /* border-radius: 6px; */
-  /* margin: 4px 0; */
+  margin: 0px 2px;
 }
 
 #custom-tmux {
