@@ -1,0 +1,13 @@
+* {
+  /* Background colors */
+  bg: #2E3440FF;
+  bg-alt: #3B4252;
+  bg-selected: #434C5E;
+
+  /* Foreground colors */
+  fg: #ECEFF4;
+  fg-dim: #4C566A;
+
+  /* Accent color */
+  accent: #88C0D0;
+}

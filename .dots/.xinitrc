@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # env
-export XCURSOR_THEME=mactahoe
+export XCURSOR_THEME=MacOS-Tahoe-Cursor
 export XCURSOR_SIZE=26
 xsetroot -cursor_name left_ptr
 export PATH="$HOME/.local/bin/dwm:$PATH"
