@@ -7,6 +7,7 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
+      transparent = true,
       theme = "dragon",
       background = {
         dark = "dragon",
