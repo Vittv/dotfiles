@@ -35,7 +35,7 @@ hl.window_rule({
 -- ensure floating windows retain a border for clear visibility
 hl.window_rule({
   match = { float = 1 },
-  border_size = 2
+  -- border_size = 2
 })
 
 -- hyprland-run float placement
@@ -85,6 +85,7 @@ hl.window_rule({
 })
 
 -- layer rules
+-- only rofi gets the spring popin; everything else stays on the global fade
 hl.layer_rule({
   name         = "waybar_default",
   match        = { namespace = "waybar" },
@@ -97,6 +98,7 @@ hl.layer_rule({
   match        = { namespace = "rofi" },
   blur         = true,
   ignore_alpha = 0.2,
+  animation    = "popin 85%",
 })
 
 hl.layer_rule({

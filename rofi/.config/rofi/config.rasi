@@ -24,7 +24,7 @@ window {
     background-color: @bg;
     border: 2px;
     border-color: @bg-alt;
-    border-radius: 10px;
+    border-radius: 6px;
     width: 340px;
     padding: 8px;
 
@@ -71,9 +71,9 @@ listview {
 
     // This will make things open with a certain animation
     // With disabled animations, it should probably be commented out
-    dynamic: true;
-    fixed-height: false;
-    expand: true;
+    // dynamic: true;
+    // fixed-height: false;
+    // expand: true;
 }
 
 element {
@@ -122,5 +122,5 @@ scrollbar {
     background-color: @bg-alt;
     handle-width: 2px;
     handle-rounded-corners: true;
-    handle-color: @bg-selected;
+    handle-color: @accent;
 }

@@ -7,17 +7,15 @@ local Colors = require("schemes.vague.colors")
 -- general
 hl.config({
   general = {
-    gaps_in          = 2,
-    gaps_out         = 4,
+    gaps_in          = 3,
+    gaps_out         = 6,
     border_size      = 2,
     resize_on_border = false,
     allow_tearing    = false,
     layout           = "dwindle",
     col = {
-      active_border   = Colors.lavender,
-      -- inactive_border = "rgba(595959aa)",
+      active_border   = Colors.text,
       inactive_border = "rgba(999999aa)",
-      -- inactive_border = "0x00000000",
     },
   },
 })
@@ -25,7 +23,7 @@ hl.config({
 -- decoration
 hl.config({
   decoration = {
-    rounding         = 2,
+    rounding         = 4,
     rounding_power   = 2,
 
     active_opacity   = 1.0,
@@ -56,6 +54,7 @@ hl.curve("linear",         { type = "bezier", points = { {0, 0},       {1, 1}   
 hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1} } })
 hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}  } })
 hl.curve("workspaceCurve", { type = "bezier", points = { {0.45, 0},    {0.1, 1}  } })
+hl.curve("spring",         { type = "bezier", points = { {0.34, 1.56},  {0.64, 1}  } })
 
 -- animations
 hl.animation({
@@ -117,15 +116,15 @@ hl.animation({
 hl.animation({
   leaf    = "layersIn",
   enabled = true,
-  speed   = 4,
-  bezier  = "easeOutQuint",
+  speed   = 2.5,
+  bezier  = "spring",
   style   = "fade",
 })
 hl.animation({
   leaf    = "layersOut",
   enabled = true,
-  speed   = 1.5,
-  bezier  = "linear",
+  speed   = 4,
+  bezier  = "spring",
   style   = "fade",
 })
 hl.animation({
