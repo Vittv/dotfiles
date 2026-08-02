@@ -20,7 +20,17 @@ installYay() {
   makepkg -si --noconfirm
   cd ~ || exit 1
   rm -rf /tmp/yay
-  
+
+  echo -e "${BLUE}:: ${NC}Configuring yay..."
+  mkdir -p "$HOME/.config/yay"
+  cat > "$HOME/.config/yay/config.json" <<'EOF'
+{
+  "cleanAfter": true,
+  "keepSrc": false,
+  "removemake": "ask"
+}
+EOF
+
   echo -e " ${GREEN} ${NC}${BOLD}Successfully installed yay!${NC}"
 }
 
@@ -47,6 +57,16 @@ systemUpdate() {
       exit 1
     fi
   fi
+
+  echo -e "${BLUE}:: ${NC}Ensuring yay config..."
+  mkdir -p "$HOME/.config/yay"
+  cat > "$HOME/.config/yay/config.json" <<'EOF'
+{
+  "cleanAfter": true,
+  "keepSrc": false,
+  "removemake": "ask"
+}
+EOF
 
   echo -n "Checking flatpak installation... "
   if command -v flatpak &> /dev/null; then
@@ -86,6 +106,11 @@ systemUpdate() {
       flatpak update -y
       echo -e " ${GREEN} ${NC}${BOLD}Successfully updated Flatpak packages!${NC}"
     fi
+
+    echo ""
+    echo -e "${BLUE}:: ${NC}Cleaning yay cache..."
+    yay -Sc --noconfirm
+    echo -e " ${GREEN} ${NC}${BOLD}Cleaned yay cache!${NC}"
     
     exit 0
   else

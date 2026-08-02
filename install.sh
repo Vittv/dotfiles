@@ -28,6 +28,16 @@ else
   echo "  yay already installed, skipping"
 fi
 
+echo "==> Configuring yay..."
+mkdir -p "$HOME/.config/yay"
+cat > "$HOME/.config/yay/config.json" <<'EOF'
+{
+  "cleanAfter": true,
+  "keepSrc": false,
+  "removemake": "ask"
+}
+EOF
+
 # pacman packages
 echo "==> Installing packages via pacman..."
 sudo pacman -S --needed --noconfirm \
