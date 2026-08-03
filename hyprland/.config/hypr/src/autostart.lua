@@ -13,6 +13,8 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("wl-paste --type text --watch cliphist store")
   hl.exec_cmd("wl-paste --type image --watch cliphist store")
 
+  hl.exec_cmd("bash -c 'for i in $(seq 1 20); do DISPLAY=:0 xrandr --output DP-1 --primary 2>/dev/null && break; sleep 0.5; done'")
+
   hl.timer(function()
     hl.exec("nvibrant 307 307")
   end, {
