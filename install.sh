@@ -2,6 +2,25 @@
 
 set -e
 
+if [ -z "${BASH_VERSION:-}" ]; then
+  echo "==> Re-running under bash..."
+  curl -fsSL https://raw.githubusercontent.com/Vittv/dotfiles/main/install.sh -o /tmp/install.sh
+  exec bash /tmp/install.sh
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+
+if [ ! -f "$SCRIPT_DIR/install.sh" ]; then
+  echo "==> Bootstrap: installing git..."
+  sudo -v
+  sudo pacman -S --needed --noconfirm git
+  if [ ! -d "$HOME/dotfiles/.git" ]; then
+    echo "==> Bootstrap: cloning dotfiles to ~/dotfiles..."
+    git clone https://github.com/Vittv/dotfiles.git "$HOME/dotfiles"
+  fi
+  exec bash "$HOME/dotfiles/install.sh"
+fi
+
 # prompt for sudo upfront
 sudo -v
 
@@ -176,7 +195,7 @@ fi
 
 # stow dotfiles
 echo "==> Stowing dotfiles..."
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_DIR="$SCRIPT_DIR"
 
 for pkg in colors fish hyprland kitty waybar rofi dunst lazygit nvim scripts starship qs tmux yazi ui; do
   if [ -d "$DOTFILES_DIR/$pkg" ]; then

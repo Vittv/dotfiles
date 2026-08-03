@@ -3,11 +3,17 @@ Here you can find the configs for the tools I use on my dev workflow. This proce
 
 ## Installation
 ### Script (arch only)
-To install and configure everything in one go, you can use the following command and run the install script:
+Install and configure everything in one go with a single command (Arch Linux, requires sudo):
 
 ```bash
-git clone https://github.com/Vittv/dotfiles.git ~/dotfiles && cd ~/dotfiles
-chmod +x install.sh && ./install.sh
+curl -fsSL https://raw.githubusercontent.com/Vittv/dotfiles/main/install.sh | sh
+```
+
+The script bootstraps itself: it re-runs under `bash`, installs git if needed, clones the repo to `~/dotfiles`, and then runs the installer from there. Piping to `bash` works too, as does running the script directly after cloning:
+
+```bash
+git clone https://github.com/Vittv/dotfiles.git ~/dotfiles
+~/dotfiles/install.sh
 ```
 
 ### Manual
