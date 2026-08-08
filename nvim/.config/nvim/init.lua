@@ -22,6 +22,8 @@ vim.opt.rtp:prepend(lazypath)
 -- vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.breakindent = true
+-- vim.opt.scrolloff = 999
+-- vim.opt.scrolloffpad = 999
 
 -- tmux color fix
 vim.opt.termguicolors = true
@@ -29,7 +31,6 @@ vim.opt.termguicolors = true
 -- make all windows rounded
 vim.o.winborder = "rounded"
 require("prefs")
-require("md")
 require("latex")
 require("lazy").setup({
   spec = {

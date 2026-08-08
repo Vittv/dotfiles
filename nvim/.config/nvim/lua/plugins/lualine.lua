@@ -1,6 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
   -- they ruined the lualine for vague with commit f911602 ;w;
+  enabled = true,
   config = function()
     local colors = {
       bg       = "#141415",
@@ -53,7 +54,9 @@ return {
         section_separators = { left = "", right = "" },
       },
       sections = {
-        -- lualine_a = { { "mode", fmt = function(str) return str:sub(1, 1) end } },
+        -- lualine_a = {
+        --   { "mode", fmt = function(str) return " " .. str end },
+        -- },
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = { "filename" },
         lualine_x = { "encoding", "fileformat", "filetype" },
