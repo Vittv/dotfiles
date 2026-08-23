@@ -13,7 +13,7 @@ window#waybar {
   /* border-radius: 10px; */
   /* background-color: transparent; */
   /* background: transparent; */
-  border: 1px solid @overlay0;
+  /* border: 1px solid @surface0; */
 }
 
 /* .modules-left, */
@@ -31,36 +31,36 @@ window#waybar {
 }
 
 #custom-menu {
-  font-family: "FiraCode Nerd Font Propo";
-  font-size: 12px;
-  margin: 4px 0;
+  font-family: "Material Symbols Outlined";
+  /* font-family: "JetBrainsMono Nerd Font Propo"; */
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0px 0;
   padding: 0 6px;
-  border-radius: 4px;
   color: @text;
-  background-color: @overlay0;
+  /* background-color: @overlay0; */
+  /* border-left: 1px solid @surface1; */
+  /* border-right: 1px solid @surface1; */
 }
 
-#custom-files,
-#custom-work,
-#custom-tasks,
 #window label {
   font-family: "SF Compact Display";
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
   color: @text;
   transition: color 0.3s ease;
+  min-width: 140px;
+  margin: 0 4px;
 }
 
-#window label:hover,
-#custom-files:hover,
-#custom-work:hover,
-#custom-tasks:hover {
-  color: @lavender;
+#window label:hover {
+  color: @rosewater;
 }
 
 #workspaces {
   margin: 0px 0px;
-  padding: 0 2px;
+  margin-right: 4px;
+  padding: 0 0px;
 }
 
 #workspaces button {
@@ -72,11 +72,15 @@ window#waybar {
 #workspaces button label {
   font-family: "FiraCode Nerd Font Propo";
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
   padding: 0 0px;
   color: @overlay2;
+  /* color: @blue; */
   margin: 0px 0px;
-  margin: 4px 0;
+}
+
+#workspaces button.empty label {
+  color: @overlay2;
 }
 
 #workspaces button.active label {
@@ -87,9 +91,11 @@ window#waybar {
   color: @maroon;
 }
 
-#custom-inbox,
+/* dot colors handled via inline pango color attributes */
+
 #custom-mudfish,
 #custom-spotify,
+#custom-navidrome,
 #custom-cpu-temp,
 #custom-gpu-temp,
 #custom-system-temp,
@@ -99,7 +105,7 @@ window#waybar {
 #clock,
 #custom-power,
 #tray {
-  font-weight: 700;
+  font-weight: 500;
   transition: all 0.3s ease;
   padding: 0 0;
   margin: 0px 2px;
@@ -115,9 +121,9 @@ window#waybar {
 #custom-inbox,
 #custom-power {
   padding: 0 0px;
-  margin: 4px 0;
+  margin: 2px 0;
   padding: 0 4px;
-  border-radius: 4px;
+  border-radius: 2px;
   /* background-color: @overlay0; */
   min-width: 12px;
 }
@@ -127,47 +133,49 @@ window#waybar {
 #custom-cpu-temp:hover,
 #custom-gpu-temp:hover,
 #custom-system-temp:hover,
-#custom-inbox:hover,
 #bluetooth:hover,
 #network:hover,
 #pulseaudio:hover {
   color: @rosewater;
 }
 
-#custom-spotify {
-  font-family: "SF Compact Display", "FiraCode Nerd Font Propo";
-  font-size: 13px;
+#custom-spotify,
+#custom-navidrome {
+  font-family: "SF Pro Display";
+  /* font-family: "FiraCode Nerd Font Propo"; */
+  font-size: 12px;
   font-weight: 700;
-  color: @lavender;
+  color: @lilac;
   border-radius: 6px;
-  margin: 4px 0;
+  margin: 0 0;
   padding: 0 4px;
   transition: all 0.3s ease;
-  min-width: 200px;
+  /* min-width: 230px; */
 }
 
-#custom-spotify:hover {
+#custom-navidrome:hover {
   color: shade(@lavender, 1.1);
-}
-
-#pulseaudio {
-  font-family: "JetBrainsMono Nerd Font Propo";
-  color: @yellow;
 }
 
 #custom-power {
   font-family: "FiraCode Nerd Font Propo";
   /* color: @red; */
   /* background-color: @overlay0; */
-  font-weight: 700;
+  font-weight: 500;
 }
 
 #custom-microphone {
-  font-family: "FiraCode Nerd Font Propo";
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-weight: 500;
   color: @text;
   font-size: 10px;
   padding: 0 4px;
   /* margin-right: 6px; */
+  /* border-left: 1px solid @surface1; */
+  /* border-right: 1px solid @surface1; */
+  /* border: 1px solid @surface0; */
+  border-radius: 2px;
+  margin: 4px 0;
 }
 
 #custom-microphone:hover {
@@ -178,19 +186,13 @@ window#waybar {
   color: @text;
 }
 
-#network {
-  font-family: "JetBrainsMono Nerd Font Propo";
-  color: @green;
-}
-
-#bluetooth {
-  font-family: "JetBrainsMono Nerd Font Propo";
-  font-size: 14px;
-  color: @blue;
-}
-
-#custom-inbox {
-  color: @maroon;
+#network,
+#bluetooth,
+#pulseaudio {
+  font-family: "SF Pro Display";
+  font-weight: 700;
+  font-size: 12px;
+  color: @text;
 }
 
 #custom-system-temp {
@@ -222,50 +224,32 @@ tooltip label {
   font-family: "SF Pro Display";
   color: @text;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
+  padding: 0 8px;
+  /* min-width: 40px; */
+  /* border-left: 1px solid @surface1; */
+  /* border-right: 1px solid @surface1; */
 }
 
 #clock:hover {
   color: @pink;
 }
 
-#custom-mudfish {
-  font-family: "SF Compact Display", "JetBrainsMono Nerd Font Propo";
-  font-weight: 700;
-  font-size: 12px;
-}
-
-#custom-mudfish.on {
-  color: @sapphire;
-}
-
-#custom-mudfish.off {
-  color: @overlay1;
-}
-
-#custom-mudfish.on:hover {
-  color: @rosewater;
-}
-
-#custom-mudfish.off:hover {
-  color: @rosewater;
-}
-
 #custom-cpu-temp {
   font-family: "FiraCode Nerd Font Propo";
-  font-weight: 700;
+  font-weight: 500;
   font-size: 12px;
 }
 
 #custom-temp-sep {
-  color: @text;
-  font-weight: 700;
+  color: @overlay0;
+  font-weight: 500;
   margin: 0 4px;
 }
 
 #custom-gpu-temp {
   font-family: "FiraCode Nerd Font Propo";
-  font-weight: 700;
+  font-weight: 500;
   font-size: 12px;
 }
 
@@ -275,35 +259,46 @@ tooltip label {
 
 #custom-separator {
   color: @overlay1;
-  font-weight: 700;
+  font-weight: 500;
   margin: 0 2px;
 }
 
 #custom-tmux,
-#custom-devserver {
-  font-family: "SF Compact Display";
+#custom-herdr,
+#custom-devserver,
+#custom-mudfish {
+  font-family: "SF Pro Display";
   font-weight: 700;
   font-size: 13px;
   transition: color 0.3s ease;
-  /* background-color: @overlay0; */
-  /* border-radius: 6px; */
   margin: 0px 2px;
 }
 
-#custom-tmux {
-  /* color: shade(@sapphire, 1.2); */
+#custom-tmux,
+#custom-herdr,
+#custom-mudfish {
+  color: @text;
+}
+
+#custom-tmux:hover,
+#custom-herdr:hover,
+#custom-mudfish:hover {
   color: @rosewater;
 }
 
-#custom-tmux:hover {
-  /* color: shade(@sapphire, 1.4); */
-  color: alpha(@rosewater, 0.9);
-}
-
 #custom-devserver {
-  color: @blue;
+  color: @overlay2;
 }
 
 #custom-devserver:hover {
-  color: @lavender;
+  color: @subtext1;
+}
+
+#custom-power {
+  font-family: "JetBrainsMono Nerd Font Propo";
+  /* font-family: "Material Icons"; */
+  color: @text;
+  font-size: 10px;
+  padding: 0 5px;
+  /* border: 1px solid @surface0; */
 }
