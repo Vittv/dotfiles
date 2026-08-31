@@ -8,7 +8,7 @@
     "reload_style_on_change": true,
     "modules-left": ["custom/microphone", "hyprland/workspaces", "group/dev-tools", "custom/navidrome", "custom/spotify"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "custom/mudfish", "bluetooth", "network", "pulseaudio"],
+    "modules-right": ["tray", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/power"],
 
     "custom/microphone": {
       "format": "{}",
@@ -119,7 +119,7 @@
     },
 
     "bluetooth": {
-      "format": "bt",
+      "format": "",
       "format-connected": "<span foreground='#7fa563'>▪</span> bt",
       "tooltip-format": "Bluetooth: {status}",
       "tooltip-format-connected": "Connected to {device_alias}",
@@ -127,10 +127,10 @@
     },
 
     "network": {
-      "format-wifi": "<span foreground='#7fa563'>▪</span> wfi",
-      "format-ethernet": "<span foreground='#7fa563'>▪</span> eth",
-      "format-linked": "<span foreground='#f3be7c'>▪</span> lnk",
-      "format-disconnected": "<span foreground='#d8647e'>▪</span> net",
+      "format-wifi": "󰤨",
+      "format-ethernet": "",
+      "format-linked": "󰈁",
+      "format-disconnected": "󰌙",
       "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
       "tooltip-format-ethernet": "Connected {ipaddr}/{cidr} ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
       "tooltip-format-disconnected": "Disconnected",
@@ -138,8 +138,11 @@
     },
 
     "pulseaudio": {
-      "format": "vol",
-      "format-muted": "<span foreground='#d8647e'>▪</span> snd",
+      "format": "{icon}",
+      "format-muted": "muted",
+      "format-icons": {
+        "default": ["", "", ""]
+      },
       "tooltip-format": "VOL {volume}%",
       "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
       "on-click-right": "pavucontrol"

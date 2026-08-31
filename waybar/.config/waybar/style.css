@@ -186,13 +186,26 @@ window#waybar {
   color: @text;
 }
 
-#network,
+#network, 
 #bluetooth,
 #pulseaudio {
-  font-family: "SF Pro Display";
+  /* font-family: "SF Pro Display"; */
+  font-family: "JetBrainsMono Nerd Font Propo";
   font-weight: 700;
-  font-size: 12px;
+  font-size: 10px;
   color: @text;
+}
+
+#network {
+  color: @green;
+}
+
+#bluetooth {
+  color: @blue;
+}
+
+#pulseaudio {
+  color: @yellow;
 }
 
 #custom-system-temp {
@@ -265,8 +278,7 @@ tooltip label {
 
 #custom-tmux,
 #custom-herdr,
-#custom-devserver,
-#custom-mudfish {
+#custom-devserver {
   font-family: "SF Pro Display";
   font-weight: 700;
   font-size: 13px;
@@ -294,10 +306,16 @@ tooltip label {
   color: @subtext1;
 }
 
+#custom-mudfish {
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-size: 12px;
+}
+
 #custom-power {
   font-family: "JetBrainsMono Nerd Font Propo";
   /* font-family: "Material Icons"; */
-  color: @text;
+  /* color: @text; */
+  color: @maroon;
   font-size: 10px;
   padding: 0 5px;
   /* border: 1px solid @surface0; */
