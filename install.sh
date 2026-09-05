@@ -63,10 +63,7 @@ sudo pacman -S --needed --noconfirm \
   fish \
   hyprland \
   hyprlock \
-  hyprsunset \
-  waybar \
-  rofi \
-  dunst \
+  noctalia \
   kitty \
   lazygit \
   neovim \
@@ -84,12 +81,15 @@ sudo pacman -S --needed --noconfirm \
   noto-fonts-emoji \
   ripgrep \
   fd \
+  imagemagick \
   jq \
   python \
   python-pip \
   wl-clipboard \
   pavucontrol \
   alsa-utils \
+  brightnessctl \
+  cliphist \
   eza \
   zoxide \
   power-profiles-daemon
@@ -197,7 +197,12 @@ fi
 echo "==> Stowing dotfiles..."
 DOTFILES_DIR="$SCRIPT_DIR"
 
-for pkg in colors fish hyprland kitty waybar rofi dunst lazygit nvim scripts starship qs tmux yazi ui; do
+# ensure these exist as real dirs before stowing, so stow symlinks individual
+# files instead of replacing the whole directory (would redirect app runtime
+# state like noctalia's clipboard history into the repo)
+mkdir -p "$HOME/.config" "$HOME/.local" "$HOME/.local/state/noctalia"
+
+for pkg in colors fish hyprland kitty waybar rofi dunst lazygit nvim noctalia scripts starship qs tmux yazi ui; do
   if [ -d "$DOTFILES_DIR/$pkg" ]; then
     echo "  stowing $pkg..."
     stow --dir="$DOTFILES_DIR" --target="$HOME" "$pkg"
