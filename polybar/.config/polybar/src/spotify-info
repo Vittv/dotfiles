@@ -1,2 +1,13 @@
 #!/usr/bin/env bash
-playerctl -p spotify metadata --format '{{ title }} - {{ artist }}' 2>/dev/null
+line=$(playerctl -p spotify metadata --format '{{ artist }} - {{ title }}' 2>/dev/null)
+if [ -z "$line" ]; then
+  for p in $(playerctl -l 2>/dev/null); do
+    trackid=$(playerctl -p "$p" metadata mpris:trackid 2>/dev/null)
+    url=$(playerctl -p "$p" metadata xesam:url 2>/dev/null)
+    if echo "$trackid$url" | grep -qi spotify; then
+      line=$(playerctl -p "$p" metadata --format '{{ artist }} - {{ title }}' 2>/dev/null)
+      break
+    fi
+  done
+fi
+echo "$line"
