@@ -31,10 +31,10 @@ window#waybar {
 }
 
 #custom-menu {
-  font-family: "Material Symbols Outlined";
-  /* font-family: "JetBrainsMono Nerd Font Propo"; */
+  /* font-family: "Material Symbols Outlined"; */
+  font-family: "JetBrainsMono Nerd Font Propo";
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   margin: 0px 0;
   padding: 0 6px;
   color: @text;
@@ -49,8 +49,9 @@ window#waybar {
   font-weight: 600;
   color: @text;
   transition: color 0.3s ease;
-  min-width: 140px;
-  margin: 0 4px;
+  /* min-width: 140px; */
+  /* margin: 0 4px; */
+  margin-right: 4px;
 }
 
 #window label:hover {
@@ -143,12 +144,12 @@ window#waybar {
 #custom-navidrome {
   font-family: "SF Pro Display";
   /* font-family: "FiraCode Nerd Font Propo"; */
-  font-size: 12px;
-  font-weight: 700;
-  color: @lilac;
+  font-size: 13px;
+  font-weight: 600;
+  color: @text;
   border-radius: 6px;
-  margin: 0 0;
-  padding: 0 4px;
+  margin: 0 4px;
+  /* padding: 0 4px; */
   transition: all 0.3s ease;
   /* min-width: 230px; */
 }
@@ -165,17 +166,18 @@ window#waybar {
 }
 
 #custom-microphone {
-  font-family: "JetBrainsMono Nerd Font Propo";
+  /* font-family: "JetBrainsMono Nerd Font Propo"; */
+  font-family: "Material Symbols Outlined";
   font-weight: 500;
-  color: @text;
-  font-size: 10px;
+  color: @maroon;
+  font-size: 14px;
   padding: 0 4px;
   /* margin-right: 6px; */
   /* border-left: 1px solid @surface1; */
   /* border-right: 1px solid @surface1; */
   /* border: 1px solid @surface0; */
   border-radius: 2px;
-  margin: 4px 0;
+  /* margin: 4px 0; */
 }
 
 #custom-microphone:hover {
@@ -189,24 +191,24 @@ window#waybar {
 #network, 
 #bluetooth,
 #pulseaudio {
-  /* font-family: "SF Pro Display"; */
-  font-family: "JetBrainsMono Nerd Font Propo";
-  font-weight: 700;
-  font-size: 10px;
+  font-family: "SF Pro Display, Material Symbols Outlined";
+  /* font-family: "JetBrainsMono Nerd Font Propo"; */
+  font-weight: 500;
+  font-size: 14px;
   color: @text;
 }
 
-#network {
-  color: @green;
-}
-
-#bluetooth {
-  color: @blue;
-}
-
-#pulseaudio {
-  color: @yellow;
-}
+/* #network { */
+/*   color: @green; */
+/* } */
+/**/
+/* #bluetooth { */
+/*   color: @blue; */
+/* } */
+/**/
+/* #pulseaudio { */
+/*   color: @yellow; */
+/* } */
 
 #custom-system-temp {
   font-size: 20px;
@@ -236,8 +238,8 @@ tooltip label {
 #clock {
   font-family: "SF Pro Display";
   color: @text;
-  font-weight: 700;
-  font-size: 12px;
+  font-weight: 600;
+  font-size: 13px;
   padding: 0 8px;
   /* min-width: 40px; */
   /* border-left: 1px solid @surface1; */
@@ -280,8 +282,8 @@ tooltip label {
 #custom-herdr,
 #custom-devserver {
   font-family: "SF Pro Display";
-  font-weight: 700;
-  font-size: 13px;
+  font-weight: 600;
+  font-size: 14px;
   transition: color 0.3s ease;
   margin: 0px 2px;
 }
@@ -307,16 +309,17 @@ tooltip label {
 }
 
 #custom-mudfish {
-  font-family: "JetBrainsMono Nerd Font Propo";
-  font-size: 12px;
+  font-family: "Material Symbols Outlined";
+  font-size: 14px;
 }
 
 #custom-power {
-  font-family: "JetBrainsMono Nerd Font Propo";
-  /* font-family: "Material Icons"; */
-  /* color: @text; */
-  color: @maroon;
-  font-size: 10px;
-  padding: 0 5px;
+  /* font-family: "JetBrainsMono Nerd Font Propo"; */
+  font-family: "Material Symbols Outlined";
+  font-weight: 500;
+  color: @text;
+  /* color: @maroon; */
+  font-size: 14px;
+  /* padding: 0 5px; */
   /* border: 1px solid @surface0; */
 }
