@@ -2,17 +2,14 @@
   "layer": "top",
   "position": "top",
   "spacing": 0,
-    // "margin-top": 6,
-    // "margin-left": 6,
-    // "margin-right": 6,
     "reload_style_on_change": true,
-    "modules-left": ["custom/menu", "custom/microphone", "hyprland/workspaces", "group/dev-tools"],
+    "modules-left": ["hyprland/workspaces", "custom/microphone", "group/dev-tools"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/navidrome", "tray", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/power"],
+    "modules-right": ["group/media", "tray", "custom/mudfish", "bluetooth", "network", "pulseaudio", "custom/power"],
 
     "custom/microphone": {
       "format": "{}",
-      "exec": "IS_MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | grep -o 'yes'); if [ \"$IS_MUTED\" = \"yes\" ]; then echo '{\"text\":\"\ue02b\",\"class\":\"muted\",\"tooltip\":\"Microphone: Muted\"}'; else echo '{\"text\":\"\ue029\",\"class\":\"unmuted\",\"tooltip\":\"Microphone: Active\"}'; fi",
+      "exec": "~/.config/waybar/src/microphone",
       "on-click": "pactl set-source-mute alsa_input.pci-0000_05_00.6.pro-input-0 toggle && pkill -RTMIN+8 waybar",
       "return-type": "json",
       "interval": "once",
@@ -27,20 +24,10 @@
       "all-outputs": false,
       "active-only": true,
       "cursor": true,
-      // "persistent-workspaces": {
-      //   "DP-1": [1, 2, 3, 4],
-      //   "HDMI-A-1": [5, 6]
-      // }
-    },
-
-    "hyprland/window": {
-      "format": "{initialTitle}",
-      "separate-outputs": true,
-      "align": 0,
-      "rewrite": {
-        "^$": "Apps"
-      },
-      "on-click": "rofi -show drun"
+      "persistent-workspaces": {
+        "DP-1": [1, 2, 3, 4],
+        "HDMI-A-1": [5, 6]
+      }
     },
 
     "group/dev-tools": {
@@ -48,10 +35,42 @@
       "modules": ["custom/herdr", "custom/tmux"]
     },
 
+    "group/media": {
+      "orientation": "horizontal",
+      "modules": [
+        "custom/media-animation",
+        "custom/media-now-playing",
+        "custom/media-time"
+      ]
+    },
+
+    "custom/media-now-playing": {
+      "exec": "~/.config/waybar/src/media-now-playing",
+      "escape": true,
+      "tooltip": false,
+      "on-click": "playerctl previous",
+      "on-click-middle": "playerctl play-pause",
+      "on-click-right": "playerctl next",
+      "on-scroll-up": "playerctl volume 0.05+",
+      "on-scroll-down": "playerctl volume 0.05-"
+    },
+
+    "custom/media-animation": {
+      "exec": "~/.config/waybar/src/media-animation",
+      "escape": false,
+      "tooltip": false
+    },
+
+    "custom/media-time": {
+      "exec": "~/.config/waybar/src/media-time",
+      "escape": true,
+      "interval": 1,
+      "tooltip": false
+    },
+
     "custom/herdr": {
       "exec": "~/.config/waybar/src/herdr",
       "return-type": "json",
-      "interval": 1,
       "format": "{}",
       "escape": false,
       "tooltip": true,
@@ -59,7 +78,7 @@
     },
 
     "custom/tmux": {
-      "exec": "sessions=$(tmux list-sessions -F '#{session_created} #S' 2>/dev/null | sort -n | cut -d' ' -f2- | awk '{n=split($0,a,\"/\"); if(n>2){r=a[1]; for(i=2;i<=2;i++) r=r\"/\"a[i]; print r\"…\"} else print $0}' | awk '{print NR\":\"$0}' | paste -sd ',' - | sed 's/,/, /g'); if [ -n \"$sessions\" ]; then echo \"{\\\"text\\\": \\\"tmux: $sessions\\\", \\\"class\\\": \\\"tmux-active\\\", \\\"tooltip\\\": \\\"Tmux sessions: $sessions\\\"}\"; fi",
+      "exec": "~/.config/waybar/src/tmux",
       "return-type": "json",
       "interval": 2,
       "format": "{}",
@@ -67,12 +86,11 @@
     },
 
     "custom/devserver": {
-      "exec": "servers=''; if ss -tlnp 2>/dev/null | grep -q ':5173 '; then servers='vite:5173'; fi; if ss -tlnp 2>/dev/null | grep -q ':4173 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}vite:4173\"; fi; if ss -tlnp 2>/dev/null | grep -q ':8080 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}webpack:8080\"; fi; if ss -tlnp 2>/dev/null | grep -q ':3000 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}dev:3000\"; fi; if ss -tlnp 2>/dev/null | grep -q ':8081 '; then [ -n \"$servers\" ] && servers=\"$servers, \" || servers=''; servers=\"${servers}dev:8081\"; fi; if [ -n \"$servers\" ]; then echo \"{\\\"text\\\": \\\"<span color='#7e98e8'>▪</span> $servers\\\", \\\"class\\\": \\\"server-active\\\", \\\"tooltip\\\": \\\"Dev servers: $servers\\\", \\\"markup\\\": \\\"pango\\\"}\"; fi",
+      "exec": "~/.config/waybar/src/devserver",
       "return-type": "json",
       "interval": 3,
       "format": "{}",
-      "escape": false,
-      "on-click": "bash -c 'port=$(ss -tlnp 2>/dev/null | grep -oP \":(5173|4173|8080|3000|8081) \" | head -1 | tr -d \": \"); [ -n \"$port\" ] && xdg-open \"http://localhost:$port\"'"
+      "on-click": "~/.config/waybar/src/devserver open"
     },
 
     "custom/mudfish": {
@@ -86,51 +104,23 @@
     },
 
     "tray": {
-      "icon-size": 12,
-      "spacing": 6
-    },
-
-    "group/temps": {
-      "orientation": "inherit",
-      "modules": ["custom/cpu-temp", "custom/temp-sep",  "custom/gpu-temp"]
-    },
-
-    "custom/temp-sep": {
-      "format": "•",
-      "tooltip": false
-    },
-
-    "custom/cpu-temp": {
-      "exec": "sensors | grep 'Tctl:' | awk '{print int($2)}' | tr -d '+°C'",
-      "format": "{}°C",
-      "tooltip-format": "CPU {}°C",
-      "interval": 5,
-      "cursor": true,
-      "on-click": "kitty btop"
-    },
-
-    "custom/gpu-temp": {
-      "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",
-      "format": "{}°C",
-      "tooltip-format": "GPU {}°C",
-      "interval": 5,
-      "cursor": true,
-      "on-click": "kitty btop"
+      "icon-size": 14,
+      "spacing": 12
     },
 
     "bluetooth": {
-      "format": "\ue1a7",
-      "format-connected": "<span foreground='#7fa563'>▪</span> bt",
+      "format": "󰂯",
+      "format-connected": "󰂱",
       "tooltip-format": "Bluetooth: {status}",
       "tooltip-format-connected": "Connected to {device_alias}",
       "on-click": "blueman-manager"
     },
 
     "network": {
-      "format-wifi": "\ue63e",
-      "format-ethernet": "\uf6c1",
-      "format-linked": "󰈁",
-      "format-disconnected": "\uf7b4",
+      "format-wifi": "󰤨",
+      "format-ethernet": "󰛳",
+      "format-linked": "",
+      "format-disconnected": "",
       "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
       "tooltip-format-ethernet": "Connected {ipaddr}/{cidr} ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
       "tooltip-format-disconnected": "Disconnected",
@@ -138,18 +128,15 @@
     },
 
     "pulseaudio": {
-      "format": "\ue050",
-      "format-muted": "\ue04f",
-      "format-icons": {
-        "default": ["", "", ""]
-      },
+      "format": "",
+      "format-muted": "",
       "tooltip-format": "VOL {volume}%",
       "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
       "on-click-right": "pavucontrol"
     },
 
     "clock": {
-      "format": "{:%I:%M %p}",
+      "format": "{:%d • %I:%M %p}",
       "tooltip-format": "<span font='JetBrainsMono Nerd Font Medium 10' size='14000'>{calendar}</span>",
       "calendar": {
         "mode": "month",
@@ -159,53 +146,16 @@
           "days": "<span color='#cdcdcd'>{}</span>",
           "today": "<span color='#f3be7c'>{}</span>"
         }
-      },
-      "on-click": "gnome-calendar"
+      }
     },
 
     "custom/power": {
-      "format": "\ue8ac",
+      "format": "󰍃",
       "on-click": "~/.local/bin/powermenu.sh",
       "tooltip-format": "Power Menu"
     },
 
-    "custom/spotify": {
-      "format": "{}",
-      "align": 1,
-      "return-type": "json",
-      "interval": 1,
-      "escape": false,
-      "exec": "~/.config/waybar/src/spotify",
-      "on-click": "~/.config/waybar/src/spotify-ctl next",
-      "on-click-right": "~/.config/waybar/src/spotify-ctl previous",
-      "on-click-middle": "~/.config/waybar/src/spotify-ctl play-pause",
-      "on-scroll-up": "~/.config/waybar/src/spotify-ctl volume 0.01+",
-      "on-scroll-down": "~/.config/waybar/src/spotify-ctl volume 0.01-"
-    },
-
-    "custom/navidrome": {
-      "format": "{}",
-      "align": 1,
-      "min-length": 30,
-      "return-type": "json",
-      "interval": 1,
-      "escape": false,
-      "exec": "~/.config/waybar/src/navidrome",
-      "on-click": "~/.config/waybar/src/navidrome-ctl next",
-      "on-click-right": "~/.config/waybar/src/navidrome-ctl previous",
-      "on-click-middle": "~/.config/waybar/src/navidrome-ctl play-pause",
-      "on-scroll-up": "~/.config/waybar/src/navidrome-ctl volume 5%+",
-      "on-scroll-down": "~/.config/waybar/src/navidrome-ctl volume 5%-"
-    },
-
     "custom/separator": {
       "format": "|"
-    },
-
-    "custom/menu": {
-      // "format": "\ueae7",
-      "format": "",
-      // "format": "",
-      "on-click": "rofi -show drun"
     }
 }

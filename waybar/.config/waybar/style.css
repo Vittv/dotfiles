@@ -1,61 +1,17 @@
 @import "../colors/schemes/vague/colors.css";
 
 * {
-  font-size: 13px;
-  font-family: "SF Pro Display";
+  font-size: 14px;
   font-weight: 500;
 }
 
 window#waybar {
-  /* background-color: alpha(@base, 0.95); */
-  /* background-color: shade(@base, 1.2); */
   background-color: @base;
-  /* border-radius: 10px; */
-  /* background-color: transparent; */
-  /* background: transparent; */
-  /* border: 1px solid @surface0; */
 }
-
-/* .modules-left, */
-/* .modules-center, */
-/* .modules-right { */
-/*   background-color: alpha(@base, 0.90); */
-/*   border-radius: 10px; */
-/*   padding: 0 14px; */
-/* border: 2px solid alpha(@surface0, 0.40); */
-/* } */
 
 .modules-left,
 .modules-right {
   margin: 0 8px;
-}
-
-#custom-menu {
-  /* font-family: "Material Symbols Outlined"; */
-  font-family: "JetBrainsMono Nerd Font Propo";
-  font-size: 14px;
-  font-weight: 700;
-  margin: 0px 0;
-  padding: 0 6px;
-  color: @text;
-  /* background-color: @overlay0; */
-  /* border-left: 1px solid @surface1; */
-  /* border-right: 1px solid @surface1; */
-}
-
-#window label {
-  font-family: "SF Compact Display";
-  font-size: 13px;
-  font-weight: 600;
-  color: @text;
-  transition: color 0.3s ease;
-  /* min-width: 140px; */
-  /* margin: 0 4px; */
-  margin-right: 4px;
-}
-
-#window label:hover {
-  color: @rosewater;
 }
 
 #workspaces {
@@ -72,8 +28,8 @@ window#waybar {
 
 #workspaces button label {
   font-family: "FiraCode Nerd Font Propo";
-  font-weight: 700;
-  font-size: 12px;
+  font-weight: 600;
+  font-size: 14px;
   padding: 0 0px;
   color: @overlay2;
   /* color: @blue; */
@@ -92,132 +48,88 @@ window#waybar {
   color: @maroon;
 }
 
-/* dot colors handled via inline pango color attributes */
-
-#custom-mudfish,
-#custom-spotify,
-#custom-navidrome,
-#custom-cpu-temp,
-#custom-gpu-temp,
-#custom-system-temp,
-#bluetooth,
-#network,
-#pulseaudio,
-#clock,
-#custom-power,
-#tray {
-  font-weight: 500;
-  transition: all 0.3s ease;
-  padding: 0 0;
-  margin: 0px 2px;
-  font-size: 11px;
-}
-
-#custom-cpu-temp,
-#custom-gpu-temp,
-#custom-mudfish,
-#bluetooth,
-#network,
-#pulseaudio,
-#custom-inbox,
-#custom-power {
-  padding: 0 0px;
-  margin: 2px 0;
-  padding: 0 4px;
-  border-radius: 2px;
-  /* background-color: @overlay0; */
-  min-width: 12px;
-}
-
-#custom-microphone:hover,
-#custom-mudfish:hover,
-#custom-cpu-temp:hover,
-#custom-gpu-temp:hover,
-#custom-system-temp:hover,
-#bluetooth:hover,
-#network:hover,
-#pulseaudio:hover {
-  color: @rosewater;
-}
-
-#custom-spotify,
-#custom-navidrome {
-  font-family: "SF Pro Display";
-  /* font-family: "FiraCode Nerd Font Propo"; */
-  font-size: 13px;
-  font-weight: 600;
-  color: @text;
-  border-radius: 6px;
-  margin: 0 4px;
-  /* padding: 0 4px; */
-  transition: all 0.3s ease;
-  /* min-width: 230px; */
-}
-
-#custom-navidrome:hover {
-  color: shade(@lavender, 1.1);
-}
-
-#custom-power {
-  font-family: "FiraCode Nerd Font Propo";
-  /* color: @red; */
-  /* background-color: @overlay0; */
-  font-weight: 500;
-}
-
 #custom-microphone {
-  /* font-family: "JetBrainsMono Nerd Font Propo"; */
   font-family: "Material Symbols Outlined";
-  font-weight: 500;
+  /* font-family: "FiraCode Nerd Font Propo"; */
+  font-weight: 700;
+  font-size: 12px;
+  color: @text;
+  margin: 0 4px;
+}
+
+#custom-microphone.muted {
   color: @maroon;
-  font-size: 14px;
-  padding: 0 4px;
-  /* margin-right: 6px; */
-  /* border-left: 1px solid @surface1; */
-  /* border-right: 1px solid @surface1; */
-  /* border: 1px solid @surface0; */
-  border-radius: 2px;
-  /* margin: 4px 0; */
 }
 
-#custom-microphone:hover {
-  color: @pink;
-}
-
-#custom-microphone.unmuted {
+#custom-tmux,
+#custom-herdr, 
+#custom-devserver {
+  font-family: "SF Compact Display";
+  font-weight: 600;
+  margin: 0 10px;
   color: @text;
 }
 
-#network, 
+#custom-devserver.server-active {
+  color: @blue;
+}
+
+#clock {
+  font-family: "SF Pro Display";
+  font-weight: 600;
+  font-size: 13px;
+  color: @text;
+}
+
+#group-media {
+  margin: 0 6px;
+}
+
+#custom-media-animation {
+  font-family: "FiraCode Nerd Font Propo";
+  font-size: 12px;
+  margin-right: 10px;
+  color: @green;
+}
+
+#custom-media-now-playing {
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 10px;
+  color: @text;
+}
+
+#custom-media-time {
+  font-family: "FiraCode Nerd Font Propo";
+  font-size: 12px;
+  color: @overlay2;
+}
+
+#tray {
+  margin-left: 10px;
+  margin-right: 2px;
+}
+
+#tray label {
+  font-family: "SF Pro Display";
+  font-size: 16px;
+}
+
+#custom-mudfish,
 #bluetooth,
-#pulseaudio {
-  font-family: "SF Pro Display, Material Symbols Outlined";
-  /* font-family: "JetBrainsMono Nerd Font Propo"; */
-  font-weight: 500;
-  font-size: 14px;
-  color: @text;
-}
-
-/* #network { */
-/*   color: @green; */
-/* } */
-/**/
-/* #bluetooth { */
-/*   color: @blue; */
-/* } */
-/**/
-/* #pulseaudio { */
-/*   color: @yellow; */
-/* } */
-
-#custom-system-temp {
-  font-size: 20px;
-  color: @red;
+#network,
+#pulseaudio, 
+#custom-power {
+  /* font-family: "Material Symbols Outlined"; */
+  font-family: "FiraCode Nerd Font Propo";
+  font-size: 12px;
+  margin: 0 8px;
 }
 
 tooltip {
   background-color: @base;
-  border: 2px solid @surface0;
+  border: 1px solid @surface0;
   border-radius: 4px;
   padding: 8px;
   transition: all 0.3s ease;
@@ -227,99 +139,5 @@ tooltip label {
   font-family: "SF Pro Display";
   color: @text;
   padding: 8px;
-  font-size: 14px;
-}
-
-#tray label {
-  font-family: "SF Pro Display";
   font-size: 16px;
-}
-
-#clock {
-  font-family: "SF Pro Display";
-  color: @text;
-  font-weight: 600;
-  font-size: 13px;
-  padding: 0 8px;
-  /* min-width: 40px; */
-  /* border-left: 1px solid @surface1; */
-  /* border-right: 1px solid @surface1; */
-}
-
-#clock:hover {
-  color: @pink;
-}
-
-#custom-cpu-temp {
-  font-family: "FiraCode Nerd Font Propo";
-  font-weight: 500;
-  font-size: 12px;
-}
-
-#custom-temp-sep {
-  color: @overlay0;
-  font-weight: 500;
-  margin: 0 4px;
-}
-
-#custom-gpu-temp {
-  font-family: "FiraCode Nerd Font Propo";
-  font-weight: 500;
-  font-size: 12px;
-}
-
-#custom-power:hover {
-  color: @pink;
-}
-
-#custom-separator {
-  color: @overlay1;
-  font-weight: 500;
-  margin: 0 2px;
-}
-
-#custom-tmux,
-#custom-herdr,
-#custom-devserver {
-  font-family: "SF Pro Display";
-  font-weight: 600;
-  font-size: 14px;
-  transition: color 0.3s ease;
-  margin: 0px 2px;
-}
-
-#custom-tmux,
-#custom-herdr,
-#custom-mudfish {
-  color: @text;
-}
-
-#custom-tmux:hover,
-#custom-herdr:hover,
-#custom-mudfish:hover {
-  color: @rosewater;
-}
-
-#custom-devserver {
-  color: @overlay2;
-}
-
-#custom-devserver:hover {
-  color: @subtext1;
-}
-
-#custom-mudfish {
-  font-family: "Material Symbols Outlined";
-  font-size: 14px;
-}
-
-#custom-power {
-  /* font-family: "JetBrainsMono Nerd Font Propo"; */
-  font-family: "Material Symbols Outlined";
-  font-weight: 500;
-  color: @text;
-  /* color: @maroon; */
-  font-size: 14px;
-  /* padding: 0 5px; */
-  /* border: 1px solid @surface0; */
 }

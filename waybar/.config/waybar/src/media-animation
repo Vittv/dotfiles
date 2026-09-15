@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+animation_frames=("▂▄▆" "▄▂▆" "▄▆▂" "▆▄▂" "▆▂▄")
+while :; do
+  for frame in "${animation_frames[@]}"; do
+    status=$(playerctl metadata --format '{{status}}' 2>/dev/null)
+
+    if [ "$status" == "Playing" ]; then
+      echo "<span color='#bb9dbd'>${frame:0:1}</span><span color='#bb9dbd'>${frame:1:1}</span><span color='#bb9dbd'>${frame:2:1}</span>"
+    elif [ "$status" == "Paused" ]; then
+      echo "<span color='#bb9dbd'></span>"
+    else
+      echo ""
+    fi
+    sleep 0.1
+  done
+done

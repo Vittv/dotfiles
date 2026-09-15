@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+if pactl get-source-mute @DEFAULT_SOURCE@ | grep -q 'yes'; then
+  echo '{"text":"\ue02b","class":"muted","tooltip":"Microphone: Muted"}'
+else
+  echo '{"text":"\ue029","class":"unmuted","tooltip":"Microphone: Active"}'
+fi

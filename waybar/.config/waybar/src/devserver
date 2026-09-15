@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Usage: devserver [open]
+
+markers='vite|webpack|next|nuxt|nest|tsx|nodemon|astro|remix|svelte|parcel|craco|react-scripts|ng serve|django|rails'
+
+find_dev() {
+	local -A name
+	local cmdline matched port pid
+	while read -r port pid; do
+		[[ -n $pid ]] || continue
+		if [[ -z ${name[$pid]+x} ]]; then
+			cmdline=$(tr '\0' ' ' </proc/$pid/cmdline 2>/dev/null)
+			matched=$(grep -oiE "\b($markers)\b" <<<"$cmdline" | head -1)
+			name[$pid]=${matched,,}
+		fi
+		[[ -n ${name[$pid]} ]] || continue
+		printf '%s %s\n' "${name[$pid]}" "$port"
+	done < <(ss -tlnp 2>/dev/null | grep -oE ':[0-9]+ .*pid=[0-9]+' | sed -E 's/:([0-9]+) .*pid=([0-9]+).*/\1 \2/')
+}
+
+if [[ ${1:-} == open ]]; then
+	read -r _ port <<<"$(find_dev | head -1)"
+	[[ -n $port ]] && xdg-open "http://localhost:$port" &
+	exit 0
+fi
+
+servers=""
+while read -r name port; do
+	[[ -n $servers ]] && servers="$servers, "
+	servers+="${name}:${port}"
+done < <(find_dev)
+
+if [[ -n $servers ]]; then
+	printf '{"text":"%s","class":"server-active","tooltip":"Dev servers: %s · click to open"}\n' "$servers" "$servers"
+fi
