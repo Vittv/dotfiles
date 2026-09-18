@@ -21,12 +21,13 @@
       "format": "{name}",
       "on-click": "activate",
       "ignore-hidden": true,
-      "all-outputs": false,
+      "all-outputs": true,
       "active-only": true,
       "cursor": true,
       "persistent-workspaces": {
-        "DP-1": [1, 2, 3, 4],
-        "HDMI-A-1": [5, 6]
+        // "DP-1": [1, 2, 3, 4],
+        // "HDMI-A-1": [5, 6]
+        "*": [1, 2, 3, 4, 5, 6]
       }
     },
 
@@ -109,18 +110,18 @@
     },
 
     "bluetooth": {
-      "format": "󰂯",
-      "format-connected": "󰂱",
+      "format": "\ue1a7",
+      "format-connected": "\ue1a8",
       "tooltip-format": "Bluetooth: {status}",
       "tooltip-format-connected": "Connected to {device_alias}",
       "on-click": "blueman-manager"
     },
 
     "network": {
-      "format-wifi": "󰤨",
-      "format-ethernet": "󰛳",
-      "format-linked": "",
-      "format-disconnected": "",
+      "format-wifi": "\uef02",
+      "format-ethernet": "\uefe6",
+      "format-linked": "\ue9e0",
+      "format-disconnected": "\ue16f",
       "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
       "tooltip-format-ethernet": "Connected {ipaddr}/{cidr} ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
       "tooltip-format-disconnected": "Disconnected",
@@ -128,8 +129,8 @@
     },
 
     "pulseaudio": {
-      "format": "",
-      "format-muted": "",
+      "format": "\ue050",
+      "format-muted": "\ue04f",
       "tooltip-format": "VOL {volume}%",
       "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
       "on-click-right": "pavucontrol"
@@ -150,7 +151,7 @@
     },
 
     "custom/power": {
-      "format": "󰍃",
+      "format": "\ue9ba",
       "on-click": "~/.local/bin/powermenu.sh",
       "tooltip-format": "Power Menu"
     },
