@@ -13,7 +13,7 @@ hl.bind(mainMod .. " + V",         hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + space",     hl.dsp.exec_cmd("~/.local/bin/dev.sh"))
 hl.bind(mainMod .. " + P",         hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + R",         hl.dsp.exec_cmd("pkill waybar && sleep 0.1 && waybar & disown"))
-hl.bind(mainMod .. " + N",         hl.dsp.exec_cmd("~/.local/bin/wallswitch.sh"))
+hl.bind(mainMod .. " + N",         hl.dsp.exec_cmd("~/.local/bin/wallswitch"))
 hl.bind("ALT + space",             hl.dsp.exec_cmd(Menu))
 hl.bind("Control_R",               hl.dsp.exec_cmd("pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+8 waybar"))
 

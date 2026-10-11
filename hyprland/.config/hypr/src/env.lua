@@ -6,6 +6,7 @@
 -- hl.env("XCURSOR_THEME", "Adwaita")
 -- hl.env("XCURSOR_THEME", "mactahoe")
 hl.env("XCURSOR_THEME", "MacOS-Tahoe-Cursor")
+-- hl.env("XCURSOR_THEME", "Remus-Black")
 hl.env("XCURSOR_SIZE",  "26")
 
 hl.config({

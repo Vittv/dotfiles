@@ -56,6 +56,13 @@ hl.window_rule({
 --   tile  = true,
 -- })
 
+-- keep ffxiv rendering while on a hidden workspace
+hl.window_rule({
+  name             = "keep-ffxiv-rendering",
+  match            = { class = "^ffxiv_dx11\\.exe$" },
+  render_unfocused = true,
+})
+
 -- tile minecraft
 hl.window_rule({
   name  = "tile-minecraft",
