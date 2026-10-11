@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
-zscroll -l 20 \
-    --delay 0.3 \
-    --update-check true \
-    "playerctl metadata --format '{{ artist }} — {{ title }}'" 2>/dev/null
+# plain track line, reprinted only when it changes
+prev=""
+while :; do
+	text=$(playerctl metadata --format '{{ artist }} — {{ title }}' 2>/dev/null)
 
-wait
+	if [ "$text" != "$prev" ]; then
+		printf '%s\n' "$text"
+		prev=$text
+	fi
+
+	sleep 1.0
+done

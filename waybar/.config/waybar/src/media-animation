@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
 
-animation_frames=("▂▄▆" "▄▂▆" "▄▆▂" "▆▄▂" "▆▂▄")
-while :; do
-  for frame in "${animation_frames[@]}"; do
-    status=$(playerctl metadata --format '{{status}}' 2>/dev/null)
+frames=("/" "—" "\\")
 
-    if [ "$status" == "Playing" ]; then
-      echo "<span color='#bb9dbd'>${frame:0:1}</span><span color='#bb9dbd'>${frame:1:1}</span><span color='#bb9dbd'>${frame:2:1}</span>"
-    elif [ "$status" == "Paused" ]; then
-      echo "<span color='#bb9dbd'></span>"
-    else
-      echo ""
-    fi
-    sleep 0.1
-  done
+prev=""
+while :; do
+	for frame in "${frames[@]}"; do
+		status=$(playerctl metadata --format '{{status}}' 2>/dev/null)
+
+		if [ "$status" = Playing ]; then
+			text=$frame
+		elif [ "$status" = Paused ]; then
+			text=$(printf '')
+		else
+			text=""
+		fi
+
+		if [ "$text" != "$prev" ]; then
+			printf '%s\n' "$text"
+			prev=$text
+		fi
+
+		sleep 0.5
+	done
 done

@@ -21,13 +21,13 @@
       "format": "{name}",
       "on-click": "activate",
       "ignore-hidden": true,
-      "all-outputs": true,
+      "all-outputs": false,
       "active-only": true,
       "cursor": true,
       "persistent-workspaces": {
-        // "DP-1": [1, 2, 3, 4],
-        // "HDMI-A-1": [5, 6]
-        "*": [1, 2, 3, 4, 5, 6]
+        "DP-1": [1, 2, 3, 4],
+        "HDMI-A-1": [5, 6]
+        // "*": [1, 2, 3, 4, 5, 6]
       }
     },
 
@@ -40,8 +40,8 @@
       "orientation": "horizontal",
       "modules": [
         "custom/media-animation",
-        "custom/media-now-playing",
-        "custom/media-time"
+        "custom/media-now-playing"
+        // "custom/media-time"
       ]
     },
 
@@ -106,22 +106,22 @@
 
     "tray": {
       "icon-size": 14,
-      "spacing": 12
+      "spacing": 8
     },
 
     "bluetooth": {
-      "format": "\ue1a7",
-      "format-connected": "\ue1a8",
+      "format": "\ue0da",
+      "format-connected": "\ue0dc",
       "tooltip-format": "Bluetooth: {status}",
       "tooltip-format-connected": "Connected to {device_alias}",
       "on-click": "blueman-manager"
     },
 
     "network": {
-      "format-wifi": "\uef02",
-      "format-ethernet": "\uefe6",
-      "format-linked": "\ue9e0",
-      "format-disconnected": "\ue16f",
+      "format-wifi": "\ue4ea",
+      "format-ethernet": "\ueb5a",
+      "format-linked": "\ue2e2",
+      "format-disconnected": "\ue4f2",
       "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
       "tooltip-format-ethernet": "Connected {ipaddr}/{cidr} ↓{bandwidthDownBytes} ↑{bandwidthUpBytes}",
       "tooltip-format-disconnected": "Disconnected",
@@ -129,8 +129,8 @@
     },
 
     "pulseaudio": {
-      "format": "\ue050",
-      "format-muted": "\ue04f",
+      "format": "\ue44a",
+      "format-muted": "\ue45a",
       "tooltip-format": "VOL {volume}%",
       "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
       "on-click-right": "pavucontrol"
@@ -151,7 +151,7 @@
     },
 
     "custom/power": {
-      "format": "\ue9ba",
+      "format": "\ue3da",
       "on-click": "~/.local/bin/powermenu.sh",
       "tooltip-format": "Power Menu"
     },

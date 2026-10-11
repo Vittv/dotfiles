@@ -7,7 +7,6 @@
 
 window#waybar {
   background-color: @base;
-  border: 1px solid @surface0;
 }
 
 .modules-left,
@@ -50,15 +49,11 @@ window#waybar {
 }
 
 #custom-microphone {
-  font-family: "Material Symbols Outlined";
-  /* font-family: "FiraCode Nerd Font Propo"; */
-  font-weight: 700;
-  font-size: 12px;
+  font-family: "Phosphor-Bold";
+  /* font-weight: 700; */
+  font-size: 14px;
   color: @text;
   margin: 0 4px;
-  border-right: 1px solid @surface0;
-  border-left: 1px solid @surface0;
-  padding: 0 6px;
 }
 
 #custom-microphone.muted {
@@ -92,27 +87,27 @@ window#waybar {
 #custom-media-animation {
   font-family: "FiraCode Nerd Font Propo";
   font-size: 12px;
+  font-weight: 700;
   margin-right: 10px;
-  color: @green;
+  color: @mauve;
 }
 
 #custom-media-now-playing {
-  font-family: "FiraCode Nerd Font Propo";
+  font-family: "SF Compact Display";
   font-size: 12px;
   font-weight: 700;
-  margin-right: 10px;
   color: @text;
 }
 
 #custom-media-time {
   font-family: "FiraCode Nerd Font Propo";
-  font-size: 12px;
+  font-size: 10px;
   color: @overlay2;
 }
 
 #tray {
   margin-left: 10px;
-  margin-right: 8px;
+  margin-right: 6px;
 }
 
 #tray label {
@@ -125,10 +120,11 @@ window#waybar {
 #network,
 #pulseaudio, 
 #custom-power {
-  font-family: "Material Symbols Outlined";
-  /* font-family: "FiraCode Nerd Font Propo"; */
+  font-family: "Phosphor-Bold";
+  /* font-weight: 700; */
   font-size: 14px;
-  margin: 0 6px;
+  color: @text;
+  margin: 0 4px;
 }
 
 tooltip {

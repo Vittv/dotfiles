@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 cache="${XDG_RUNTIME_DIR:-/tmp}/herdr-waybar.status"
-yellow='#f3be7c'
-blue='#7e98e8'
-red='#d8647e'
-green='#7fa563'
+yellow='#D9B363'
+blue='#8FA3E0'
+red='#F26B93'
+green='#93AE6B'
 frames=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
 
 i=0
