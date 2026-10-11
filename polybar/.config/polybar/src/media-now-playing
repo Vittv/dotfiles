@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# plain track line, reprinted only when it changes
+prev=""
+while :; do
+	text=$(playerctl metadata --format '{{ artist }} — {{ title }}' 2>/dev/null)
+
+	if [ "$text" != "$prev" ]; then
+		printf '%s\n' "$text"
+		prev=$text
+	fi
+
+	sleep 1.0
+done

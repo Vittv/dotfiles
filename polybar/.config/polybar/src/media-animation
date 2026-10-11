@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+frames=("/" "-" "\\")
+
+prev=""
+while :; do
+	for frame in "${frames[@]}"; do
+		status=$(playerctl metadata --format '{{status}}' 2>/dev/null)
+
+		if [ "$status" = Playing ]; then
+			text=$frame
+		elif [ "$status" = Paused ]; then
+			text=$(printf '')
+		else
+			text=""
+		fi
+
+		# only print on change so an idle bar gets no redraws
+		if [ "$text" != "$prev" ]; then
+			printf '%s\n' "$text"
+			prev=$text
+		fi
+
+		sleep 0.5
+	done
+done

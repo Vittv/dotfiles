@@ -1,11 +1,36 @@
 #!/usr/bin/env bash
 
-# check if the default source is muted
-# returns "yes" or "no"
-MUTED=$(pactl get-source-mute @DEFAULT_SOURCE@ | awk '{print $2}')
+# usage: mic <active|muted|toggle>
+wanted=${1:-}
 
-if [ "$MUTED" = "yes" ]; then
-  echo ""
-else
-  echo ""
-fi
+case "$wanted" in
+	toggle)
+		pactl set-source-mute @DEFAULT_SOURCE@ toggle
+		exit 0
+		;;
+esac
+
+# each module only prints its glyph while the mic is in the state it asks for,
+# the other one prints an empty line, which is what makes it leave the bar
+# (no output at all would leave the old text up)
+show() {
+	state=$(pactl get-source-mute @DEFAULT_SOURCE@ 2>/dev/null | awk '{print $2}')
+
+	if [ "$wanted" = active ] && [ "$state" != yes ]; then
+		printf '\ue326\n'
+	elif [ "$wanted" = muted ] && [ "$state" = yes ]; then
+		printf '\ue328\n'
+	else
+		printf '\n'
+	fi
+}
+
+show
+
+# follow pulseaudio instead of polling, so the icon reacts as soon as the mic
+# changes, no matter if it was toggled by a click, a keybind or something else
+pactl subscribe 2>/dev/null | while read -r event; do
+	case "$event" in
+		*"on source"*) show ;;
+	esac
+done

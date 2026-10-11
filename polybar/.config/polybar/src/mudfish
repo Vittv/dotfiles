@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# usage: mudfish <on|off>
+# prints the icon only while the vpn is in the state it was asked for, the
+# other module prints an empty line so it leaves the bar
+if pgrep -u root mudrun-headless >/dev/null 2>&1; then
+	state=on
+else
+	state=off
+fi
+
+if [ "${1:-}" = "$state" ]; then
+	printf '\ue40c\n'
+else
+	printf '\n'
+fi
