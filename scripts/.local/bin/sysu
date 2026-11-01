@@ -42,6 +42,33 @@ installFlatpak() {
   echo -e "${YELLOW}Note: You may need to restart your session for Flatpak to work properly.${NC}"
 }
 
+checkRebuilds() {
+  if ! command -v checkrebuild &> /dev/null; then
+    echo -e "${YELLOW}rebuild-detector not found. Installing...${NC}"
+    echo -e "${BLUE}:: ${NC}Requesting elevated privileges..."
+    sudo pacman -S --needed --noconfirm rebuild-detector
+  fi
+
+  echo -e "${BLUE}:: ${NC}Checking for packages that need a rebuild..."
+  # only AUR/foreign packages are rebuildable by you; repo ones are the maintainers' job
+  mapfile -t stale < <(checkrebuild | awk '$1 == "foreign" && $2 !~ /-bin$/ {print $2}')
+
+  if [ "${#stale[@]}" -eq 0 ]; then
+    echo -e " ${GREEN} ${NC}${BOLD}No rebuilds needed!${NC}"
+    return
+  fi
+
+  echo -e "${YELLOW}These packages need a rebuild:${NC} ${stale[*]}"
+  echo -ne "${LAVENDER}❯ ${NC}${BOLD}Rebuild them now? [Y/n] ${NC}"
+  read -r rb
+  if [[ "$rb" =~ ^[Yy]$ || -z "$rb" ]]; then
+    yay -S --rebuild "${stale[@]}"
+    echo -e " ${GREEN} ${NC}${BOLD}Rebuilt packages!${NC}"
+  else
+    echo -e "${YELLOW}Skipping. Run ${BOLD}checkrebuild${NC}${YELLOW} later to see them again.${NC}"
+  fi
+}
+
 systemUpdate() {
   echo -n "Checking yay installation... "
   if command -v yay &> /dev/null; then
@@ -99,6 +126,9 @@ EOF
     echo -e "${BLUE}:: ${NC}Requesting elevated privileges..."
     yay -Syu
     echo -e " ${GREEN} ${NC}${BOLD}Successfully updated system packages!${NC}"
+
+    echo ""
+    checkRebuilds
     
     if [ "$FLATPAK_INSTALLED" = true ]; then
       echo ""
@@ -109,6 +139,7 @@ EOF
 
     echo ""
     echo -e "${BLUE}:: ${NC}Cleaning yay cache..."
+    sudo find /var/cache/pacman/pkg -maxdepth 1 -name 'download-*' -exec rm -rf {} + 2>/dev/null
     yay -Sc --noconfirm
     echo -e " ${GREEN} ${NC}${BOLD}Cleaned yay cache!${NC}"
     
